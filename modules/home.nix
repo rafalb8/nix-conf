@@ -53,7 +53,7 @@
         fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
 
         # NixOS aliases
-        nix-update = "sudo nixos-rebuild switch";
+        nix-apply = "sudo nixos-rebuild switch";
         nix-upgrade = "sudo nixos-rebuild boot --upgrade";
         nix-garbage = "sudo nix-collect-garbage -d";
 
