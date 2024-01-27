@@ -64,6 +64,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # Tools
+    appimage-run
     ripgrep
     xclip
     lsof
