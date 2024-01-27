@@ -66,6 +66,7 @@ in
           };
         };
 
+        # Custom desktop entries
         desktopEntries = {
           steam = {
             name = "Steam";
@@ -88,17 +89,28 @@ in
         };
       };
 
-      # Configure alacritty
-      programs.alacritty = {
-        enable = true;
-        settings = {
-          window = {
-            opacity = 0.9;
-            dimensions = {
-              columns = 140;
-              lines = 40;
+      programs = {
+        # Configure alacritty
+        alacritty = {
+          enable = true;
+          settings = {
+            window = {
+              opacity = 0.9;
+              dimensions = {
+                columns = 140;
+                lines = 40;
+              };
             };
           };
+        };
+
+        # SSH config
+        ssh = {
+          enable = true;
+          extraConfig = ''
+            Host server
+              HostName 192.168.0.100
+          '';
         };
       };
     };
