@@ -31,6 +31,25 @@ in
         adw-gtk3
       ]);
 
+    # Setup home for gnome desktop
+    home-manager.users.rafalb8 = {
+      dconf = {
+        enable = true;
+        settings = {
+          "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+          "org/gnome/shell".enabled-extensions = [
+            "dash-to-panel@jderose9.github.com"
+            "arcmenu@arcmenu.com"
+            "tiling-assistant@leleat-on-github"
+            "gsconnect@andyholmes.github.io"
+            "quicksettings-audio-devices-hider@marcinjahn.com"
+            "appindicatorsupport@rgcjonas.gmail.com"
+            "caffeine@patapon.info"
+          ];
+        };
+      };
+    };
+
     # Fix gnome media inspection
     environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
       pkgs.gst_all_1.gst-plugins-good
