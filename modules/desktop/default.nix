@@ -69,29 +69,24 @@ in
       };
     };
 
-    networking = {
-      firewall = {
-        allowedTCPPorts = [
+    # Firewall
+    networking.firewall =
+      let
+        ports = [
           # Barrier
           24800
         ];
-
-        allowedUDPPorts = [
-          # Barrier
-          24800
-        ];
-
-        allowedTCPPortRanges = [
+        portRanges = [
           # KDE Connect
           { from = 1714; to = 1764; }
         ];
-
-        allowedUDPPortRanges = [
-          # KDE Connect
-          { from = 1714; to = 1764; }
-        ];
+      in
+      {
+        allowedTCPPorts = ports;
+        allowedUDPPorts = ports;
+        allowedTCPPortRanges = portRanges;
+        allowedUDPPortRanges = portRanges;
       };
-    };
 
     # Setup desktop services
     services = {
