@@ -18,7 +18,8 @@ in
   # Common desktop configuration
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # Media tools
+      # Media
+      jellyfin-media-player
       easyeffects
       calibre
       mpv
@@ -28,11 +29,23 @@ in
       alacritty
       vscode
 
-      # Other
-      ventoy
+      # Tools
+      # obsidian
+      anydesk
       barrier
       szyszka
+      ventoy
+
+      # Gaming
+      protontricks
+      mangohud
+      bottles
+      steam
+
+      # Web
       qbittorrent
+      firefox
+      discord
     ];
 
     # Setup home for desktop
@@ -50,6 +63,27 @@ in
           "solaar" = {
             source = ../../dotfiles/solaar;
             recursive = true;
+          };
+        };
+
+        desktopEntries = {
+          steam = {
+            name = "Steam";
+            icon = "steam";
+            exec = "env MANGOHUD=1 steam -silent %U";
+            terminal = false;
+            categories = [ "Network" "FileTransfer" "Game" ];
+            mimeType = [ "x-scheme-handler/steam" "x-scheme-handler/steamlink" ];
+            actions = {
+              "Store" = { exec = "steam steam://store"; };
+              "Library" = { exec = "steam steam://open/games"; };
+              "Friends" = { exec = "steam steam://open/friends"; };
+              "Settings" = { exec = "steam steam://open/settings"; };
+              "BigPicture" = {
+                name = "Big Picture";
+                exec = "steam steam://open/bigpicture";
+              };
+            };
           };
         };
       };
