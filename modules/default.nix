@@ -67,6 +67,7 @@
     appimage-run
     ripgrep
     xclip
+    file
     lsof
     bat
     eza
