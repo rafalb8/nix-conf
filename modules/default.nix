@@ -4,7 +4,8 @@
   imports = [
     ./desktop
     ./graphics
-    ./home.nix
+    ./home
+    ./neovim
   ];
 
   # Base
@@ -106,12 +107,6 @@
   programs = {
     git.enable = true;
     zsh.enable = true;
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      withRuby = false;
-    };
   };
 
   # List services that you want to enable:
