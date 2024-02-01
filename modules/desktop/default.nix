@@ -87,6 +87,22 @@ in
               };
             };
           };
+
+          solaar = {
+            name = "Solaar";
+            icon = "solaar";
+            exec = "solaar -w hide";
+            terminal = false;
+            categories = [ "Utility" "GTK" ];
+          };
+
+          "com.github.wwmm.easyeffects" = {
+            name = "Easy Effects";
+            icon = "com.github.wwmm.easyeffects";
+            exec = "easyeffects -w";
+            terminal = false;
+            categories = [ "GTK" "AudioVideo" "Audio" ];
+          };
         };
       };
 
@@ -95,7 +111,7 @@ in
         pkgs.steam
         pkgs.discord
         pkgs.solaar
-        (pkgs.easyeffects // { source = "com.github.wwmm.easyeffects.desktop"; })
+        (pkgs.easyeffects // { pname = "com.github.wwmm.easyeffects"; })
       ];
 
       programs = {
