@@ -98,7 +98,6 @@
     yt-dlp
 
     # Development
-    rnix-lsp
     gnumake
     gcc
     jq
