@@ -2,7 +2,7 @@
 {
   # Modules
   imports = [
-    ../extensions/options.nix
+    ../extensions
 
     ./desktop
     ./graphics
@@ -108,7 +108,7 @@
   programs = {
     git.enable = true;
     zsh.enable = true;
-    
+
     helix = {
       enable = true;
       config = {
