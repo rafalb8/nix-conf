@@ -2,7 +2,7 @@
 config: packages: builtins.listToAttrs (map
   (pkg:
     let
-      home = config.home-manager.users.rafalb8.home.homeDirectory;
+      home = config.home-manager.users.${config.username}.home.homeDirectory;
       customPath = home + "/.nix-profile/share/applications/" + pkg.pname + ".desktop";
     in
     {

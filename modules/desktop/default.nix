@@ -50,7 +50,7 @@ in
     ];
 
     # Setup home for desktop
-    home-manager.users.rafalb8 = {
+    home-manager.users.${config.username} = {
       xdg = {
         enable = true;
         configFile = {

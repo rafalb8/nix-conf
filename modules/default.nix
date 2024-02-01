@@ -2,8 +2,11 @@
 {
   # Modules
   imports = [
+    ./options.nix
+
     ./desktop
     ./graphics
+    ./helix
     ./home
   ];
 
@@ -53,7 +56,7 @@
   console.keyMap = "pl2";
 
   # Define a user account.
-  users.users.rafalb8 = {
+  users.users.${config.username} = {
     isNormalUser = true;
     description = "Rafal Babinski";
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
@@ -98,7 +101,6 @@
     # Development
     rnix-lsp
     gnumake
-    helix
     gcc
     jq
     go

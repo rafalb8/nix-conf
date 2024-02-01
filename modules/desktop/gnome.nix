@@ -32,7 +32,7 @@ in
       ]);
 
     # Setup home for gnome desktop
-    home-manager.users.rafalb8 = {
+    home-manager.users.${config.username} = {
       dconf = {
         enable = true;
         settings = {
