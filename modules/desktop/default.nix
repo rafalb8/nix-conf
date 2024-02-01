@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.modules.desktop;
-  autostart = import ../functions/autostart.nix config;
+  autostart = import ../../extensions/functions/autostart.nix config;
 in
 {
   imports = [

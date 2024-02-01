@@ -2,11 +2,10 @@
 {
   # Modules
   imports = [
-    ./options.nix
+    ../extensions/options.nix
 
     ./desktop
     ./graphics
-    ./helix
     ./home
   ];
 

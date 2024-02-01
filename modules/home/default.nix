@@ -4,7 +4,7 @@
     <home-manager/nixos>
   ];
 
-  home-manager.users.rafalb8 = {
+  home-manager.users.${config.username} = {
     # The state version is required and should stay at the version you
     # originally installed.
     home.stateVersion = "23.11";
