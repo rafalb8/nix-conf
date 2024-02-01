@@ -5,7 +5,6 @@
     ./desktop
     ./graphics
     ./home
-    ./neovim
   ];
 
   # Base
@@ -99,6 +98,7 @@
     # Development
     rnix-lsp
     gnumake
+    helix
     gcc
     jq
     go
