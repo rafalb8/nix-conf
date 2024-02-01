@@ -111,6 +111,8 @@
 
     helix = {
       enable = true;
+      addons = with pkgs; [ gopls delve nil rust-analyzer ];
+
       config = {
         theme = "edge";
 
