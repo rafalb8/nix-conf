@@ -108,6 +108,28 @@
   programs = {
     git.enable = true;
     zsh.enable = true;
+    
+    helix = {
+      enable = true;
+      config = {
+        theme = "edge";
+
+        editor = {
+          line-number = "relative";
+          mouse = true;
+
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+
+          file-picker = {
+            hidden = false;
+          };
+        };
+      };
+    };
   };
 
   # List services that you want to enable:
