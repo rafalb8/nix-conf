@@ -50,7 +50,7 @@ in
     ];
 
     # Setup home for desktop
-    home-manager.users.${config.username} = {
+    home-manager.users.${config.user.name} = {
       xdg = {
         enable = true;
         configFile = {

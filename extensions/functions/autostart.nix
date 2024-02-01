@@ -2,7 +2,7 @@
 config: packages: builtins.listToAttrs (map
   (pkg:
     let
-      home = config.home-manager.users.${config.username}.home.homeDirectory;
+      home = config.home-manager.users.${config.user.name}.home.homeDirectory;
       customPath = home + "/.nix-profile/share/applications/" + pkg.pname + ".desktop";
     in
     {

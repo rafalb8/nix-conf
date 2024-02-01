@@ -55,9 +55,9 @@
   console.keyMap = "pl2";
 
   # Define a user account.
-  users.users.${config.username} = {
+  users.users.${config.user.name} = {
     isNormalUser = true;
-    description = "Rafal Babinski";
+    description = config.user.description;
     extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
     shell = pkgs.zsh;
   };

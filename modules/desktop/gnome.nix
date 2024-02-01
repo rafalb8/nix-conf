@@ -32,7 +32,7 @@ in
       ]);
 
     # Setup home for gnome desktop
-    home-manager.users.${config.username} = {
+    home-manager.users.${config.user.name} = {
       dconf = {
         enable = true;
         settings = {

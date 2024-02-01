@@ -44,7 +44,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
 
-    home-manager.users.${config.username}.xdg.configFile = {
+    home-manager.users.${config.user.name}.xdg.configFile = {
       # Install all themes
       "helix/themes" = {
         source = ./themes;
