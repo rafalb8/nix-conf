@@ -21,7 +21,6 @@ in
     environment.systemPackages = with pkgs; [
       # Media
       jellyfin-media-player
-      easyeffects
       calibre
       mpv
 
@@ -95,23 +94,17 @@ in
             terminal = false;
             categories = [ "Utility" "GTK" ];
           };
-
-          "com.github.wwmm.easyeffects" = {
-            name = "Easy Effects";
-            icon = "com.github.wwmm.easyeffects";
-            exec = "easyeffects -w";
-            terminal = false;
-            categories = [ "GTK" "AudioVideo" "Audio" ];
-          };
         };
       };
+
+      # Easyeffects service
+      services.easyeffects.enable = true;
 
       # Autostart
       home.file = autostart [
         pkgs.steam
         pkgs.discord
         pkgs.solaar
-        (pkgs.easyeffects // { pname = "com.github.wwmm.easyeffects"; })
       ];
 
       programs = {
