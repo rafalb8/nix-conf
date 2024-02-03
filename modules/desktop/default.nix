@@ -64,6 +64,12 @@ in
             source = ../../dotfiles/solaar;
             recursive = true;
           };
+
+          # Easyeffects
+          "easyeffects" = {
+            source = ../../dotfiles/easyeffects;
+            recursive = true;
+          };
         };
 
         # Custom desktop entries
