@@ -112,5 +112,56 @@
         sps = "!git stash && git pull && git stash pop";
       };
     };
+
+    xdg.configFile."helix" = {
+      source = ../../dotfiles/helix;
+      recursive = true;
+    };
+
+    programs.helix = {
+      enable = true;
+      defaultEditor = true;
+
+      languages.language = [
+        {
+          name = "rust";
+          auto-format = true;
+        }
+        {
+          name = "go";
+          auto-format = true;
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = { command = "nixpkgs-fmt"; };
+        }
+      ];
+
+      settings = {
+        theme = "edge";
+
+        keys.normal = {
+          space.space = ":format";
+          # esc = [ "collapse_selection" "keep_primary_selection" ];
+        };
+
+        editor = {
+          mouse = true;
+          line-number = "relative";
+          lsp.display-messages = true;
+
+          cursor-shape = {
+            insert = "bar";
+            normal = "block";
+            select = "underline";
+          };
+
+          file-picker = {
+            hidden = false;
+          };
+        };
+      };
+    };
   };
 }

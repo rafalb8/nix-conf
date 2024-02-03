@@ -101,36 +101,24 @@
     gnumake
     gcc
     jq
+
+    # Golang
     go
+    gopls
+    delve
+
+    # Nix
+    nil
+    nixpkgs-fmt
+
+    # Rust
+    rustup
+    rust-analyzer
   ];
 
   programs = {
     git.enable = true;
     zsh.enable = true;
-
-    helix = {
-      enable = true;
-      addons = with pkgs; [ gopls delve nil nixpkgs-fmt rust-analyzer ];
-
-      config = {
-        theme = "edge";
-
-        editor = {
-          line-number = "relative";
-          mouse = true;
-
-          cursor-shape = {
-            insert = "bar";
-            normal = "block";
-            select = "underline";
-          };
-
-          file-picker = {
-            hidden = false;
-          };
-        };
-      };
-    };
   };
 
   # List services that you want to enable:
