@@ -158,8 +158,10 @@ in
         enable = true;
 
         # Configure keymap in X11
-        layout = "pl";
-        xkbVariant = "";
+        xkb = {
+          layout = "pl";
+          variant = "";
+        };
       };
 
       flatpak.enable = true;
