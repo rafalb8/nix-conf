@@ -27,6 +27,7 @@ in
         # Essentials
         # gnome.gnome-terminal
         gnome.gnome-tweaks
+        gnome.ghex
         mission-center
         adw-gtk3
       ]);
