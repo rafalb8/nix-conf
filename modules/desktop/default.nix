@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 let
   cfg = config.modules.desktop;
-  autostart = import ../../extensions/functions/autostart.nix config;
 in
 {
   imports = [
@@ -50,6 +49,10 @@ in
 
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
+      imports = [
+        ../home/autostart.nix
+      ];
+
       xdg = {
         enable = true;
         configFile = {
@@ -107,11 +110,14 @@ in
       services.easyeffects.enable = true;
 
       # Autostart
-      home.file = autostart [
-        pkgs.steam
-        pkgs.discord
-        pkgs.solaar
-      ];
+      autostart = {
+        enable = true;
+        packages = [
+          pkgs.steam
+          pkgs.solaar
+          pkgs.discord
+        ];
+      };
 
       programs = {
         # Configure alacritty

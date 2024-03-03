@@ -113,6 +113,10 @@
       };
     };
 
+    # Enable xdg, required for xdg.configFile
+    xdg.enable = true;
+
+    # Helix
     xdg.configFile."helix" = {
       source = ../../dotfiles/helix;
       recursive = true;
