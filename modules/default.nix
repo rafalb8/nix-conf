@@ -77,6 +77,8 @@
 
     # System
     efibootmgr
+    dmidecode
+    pciutils
     usbutils
     btop
 
