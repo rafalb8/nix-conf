@@ -55,7 +55,7 @@
         # NixOS aliases
         nix-apply = "sudo nixos-rebuild switch";
         nix-upgrade = "sudo nixos-rebuild boot --upgrade";
-        nix-garbage = "sudo nix-collect-garbage -d";
+        nix-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
 
         # Replacements
         cat = "bat";
