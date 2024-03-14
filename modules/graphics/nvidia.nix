@@ -1,6 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.modules.graphics;
+  toOptions = set: builtins.replaceStrings [ ''"'' ":" ] [ "" "=" ] (builtins.toJSON set);
+  nvidia-settings = set: "nvidia-settings --assign CurrentMetaMode='DP-4:2560x1080_75${toOptions set}'";
 in
 {
   config = lib.mkIf cfg.nvidia {
@@ -38,6 +40,19 @@ in
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
       package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+
+    # Shell aliases
+    environment.shellAliases = {
+      nvidia-gsync-off = nvidia-settings {
+        ForceCompositionPipeline = "On";
+        AllowGSYNCCompatible = "On";
+      };
+
+      nvidia-gsync-on = nvidia-settings {
+        ForceCompositionPipeline = "Off";
+        AllowGSYNCCompatible = "On";
+      };
     };
   };
 }
