@@ -1,8 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.modules.graphics;
-  toOptions = set: builtins.replaceStrings [ ''"'' ":" ] [ "" "=" ] (builtins.toJSON set);
-  nvidia-settings = set: "nvidia-settings --assign CurrentMetaMode='DP-4:2560x1080_75${toOptions set}'";
+  nvidia-settings = set: "nvidia-settings --assign CurrentMetaMode='2560x1080_75 +0+0 ${set}'";
 in
 {
   config = lib.mkIf cfg.nvidia {
@@ -14,7 +13,13 @@ in
     };
 
     # Load nvidia driver for Xorg and Wayland
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      screenSection = ''
+        Option  "metamodes" "2560x1080_75 +0+0 {ForceCompositionPipeline=On,AllowGSYNCCompatible=On}"
+      '';
+    };
 
     hardware.nvidia = {
       # Modesetting is required.
@@ -44,15 +49,8 @@ in
 
     # Shell aliases
     environment.shellAliases = {
-      nvidia-gsync-off = nvidia-settings {
-        ForceCompositionPipeline = "On";
-        AllowGSYNCCompatible = "On";
-      };
-
-      nvidia-gsync-on = nvidia-settings {
-        ForceCompositionPipeline = "Off";
-        AllowGSYNCCompatible = "On";
-      };
+      nvidia-gsync-off = nvidia-settings "{ForceCompositionPipeline=On,AllowGSYNCCompatible=On}";
+      nvidia-gsync-on = nvidia-settings "{ForceCompositionPipeline=Off,AllowGSYNCCompatible=On}";
     };
   };
 }
