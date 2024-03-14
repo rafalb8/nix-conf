@@ -203,14 +203,15 @@ in
 
     # Fonts
     fonts = {
-      fontDir.enable = true;
+      enableDefaultPackages = true;
       packages = with pkgs; [
         noto-fonts
         noto-fonts-cjk
-        noto-fonts-emoji
-        liberation_ttf
+        noto-fonts-color-emoji
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
+      fontDir.enable = true;
+      fontconfig.enable = true;
     };
 
     # Fix fonts for flatpaks
