@@ -177,6 +177,7 @@ in
         };
       };
 
+      udisks2.enable = true;
       flatpak.enable = true;
       printing.enable = true;
     };
