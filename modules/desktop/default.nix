@@ -30,6 +30,7 @@ in
       vscode
 
       # Tools
+      imagemagick_light
       obsidian
       anydesk
       barrier
@@ -177,9 +178,13 @@ in
         };
       };
 
+      printing = {
+        enable = true;
+        drivers = with pkgs; [ samsung-unified-linux-driver ];
+      };
+
       udisks2.enable = true;
       flatpak.enable = true;
-      printing.enable = true;
     };
 
     # Add solaar
