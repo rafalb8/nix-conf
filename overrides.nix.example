@@ -1,0 +1,11 @@
+{ config, pkgs, ... }:
+{
+  home.username = "username";
+  home.homeDirectory = "/home/username";
+
+  # Git
+  programs.git = {
+    userName = "First LastName";
+    userEmail = "e@mail.com";
+  };
+}
