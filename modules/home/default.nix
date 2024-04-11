@@ -13,6 +13,8 @@
       CGO_ENABLED = 0;
       DOCKER_BUILDKIT = 1;
 
+      PATH = "$HOME/go/bin:$PATH";
+
       # Use bat for man
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       MANROFFOPT = "-c";
