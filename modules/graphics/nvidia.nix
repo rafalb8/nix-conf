@@ -17,7 +17,7 @@ in
       enable = true;
       videoDrivers = [ "nvidia" ];
       screenSection = ''
-        Option  "metamodes" "2560x1080_75 +0+0 {ForceCompositionPipeline=On,AllowGSYNCCompatible=On}"
+        Option  "metamodes" "2560x1080_75 +0+0 {ForceCompositionPipeline=Off,AllowGSYNCCompatible=On}"
       '';
     };
 
