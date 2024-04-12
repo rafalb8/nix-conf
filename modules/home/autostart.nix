@@ -26,6 +26,8 @@ in
     xdg.configFile = builtins.listToAttrs (map
       (pkg:
         let
+          # TODO: Find a better way of supporting custom entries.
+          # Currently, if a custom entry is generated, it requires a subsequent execution of nixos-rebuild to take effect.
           customPath = config.home.homeDirectory + "/.nix-profile/share/applications/" + pkg.pname + ".desktop";
         in
         {

@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ./gaming.nix
     ./gnome.nix
   ];
 
@@ -12,6 +13,10 @@ in
 
     enviroment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
+    };
+
+    gaming = {
+      enable = lib.mkEnableOption "Gaming";
     };
   };
 
@@ -37,12 +42,6 @@ in
       szyszka
       ventoy
 
-      # Gaming
-      protontricks
-      mangohud
-      bottles
-      steam
-
       # Web
       qbittorrent
       firefox
@@ -58,12 +57,6 @@ in
       xdg = {
         enable = true;
         configFile = {
-          # Configure MangoHud
-          "MangoHud" = {
-            source = ../../dotfiles/MangoHud;
-            recursive = true;
-          };
-
           # Solaar (Logitech)
           "solaar" = {
             source = ../../dotfiles/solaar;
@@ -79,25 +72,6 @@ in
 
         # Custom desktop entries
         desktopEntries = {
-          steam = {
-            name = "Steam";
-            icon = "steam";
-            exec = "env MANGOHUD=1 steam -silent %U";
-            terminal = false;
-            categories = [ "Network" "FileTransfer" "Game" ];
-            mimeType = [ "x-scheme-handler/steam" "x-scheme-handler/steamlink" ];
-            actions = {
-              "Store" = { exec = "steam steam://store"; };
-              "Library" = { exec = "steam steam://open/games"; };
-              "Friends" = { exec = "steam steam://open/friends"; };
-              "Settings" = { exec = "steam steam://open/settings"; };
-              "BigPicture" = {
-                name = "Big Picture";
-                exec = "steam steam://open/bigpicture";
-              };
-            };
-          };
-
           solaar = {
             name = "Solaar";
             icon = "solaar";
@@ -115,7 +89,6 @@ in
       autostart = {
         enable = true;
         packages = [
-          pkgs.steam
           pkgs.solaar
           pkgs.discord
         ];
