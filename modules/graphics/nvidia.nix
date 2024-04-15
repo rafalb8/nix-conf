@@ -1,7 +1,11 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
-  nvidia-settings = set: "nvidia-settings --assign CurrentMetaMode='2560x1080_75 +0+0 ${set}'";
+
+  nvidia-vrr = pkgs.writeScriptBin "nvidia-vrr" ''
+    #!/bin/sh
+    nvidia-settings -a ShowVRRVisualIndicator=$( [[ "$1" == true || "$1" == 1 ]] && echo 1 || echo 0 )
+  '';
 in
 {
   config = lib.mkIf cfg.nvidia {
@@ -47,10 +51,7 @@ in
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
-    # Shell aliases
-    environment.shellAliases = {
-      nvidia-gsync-off = nvidia-settings "{ForceCompositionPipeline=On,AllowGSYNCCompatible=On}";
-      nvidia-gsync-on = nvidia-settings "{ForceCompositionPipeline=Off,AllowGSYNCCompatible=On}";
-    };
+    # Add scripts
+    environment.systemPackages = [ nvidia-vrr ];
   };
 }
