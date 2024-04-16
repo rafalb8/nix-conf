@@ -42,15 +42,18 @@ in
         enable = true;
         settings = {
           "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-          "org/gnome/shell".enabled-extensions = [
-            "dash-to-panel@jderose9.github.com"
-            "arcmenu@arcmenu.com"
-            "tiling-assistant@leleat-on-github"
-            "gsconnect@andyholmes.github.io"
-            "quicksettings-audio-devices-hider@marcinjahn.com"
-            "appindicatorsupport@rgcjonas.gmail.com"
-            "caffeine@patapon.info"
-          ];
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = [
+              "arcmenu@arcmenu.com"
+              "caffeine@patapon.info"
+              "gsconnect@andyholmes.github.io"
+              "appindicatorsupport@rgcjonas.gmail.com"
+              "dash-to-panel@jderose9.github.com"
+              "tiling-assistant@leleat-on-github"
+              "quicksettings-audio-devices-hider@marcinjahn.com"
+            ];
+          };
         };
       };
 
