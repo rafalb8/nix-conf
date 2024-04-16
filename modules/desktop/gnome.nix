@@ -16,8 +16,8 @@ in
 
     # Add Gnome packages
     environment.systemPackages =
+      # Gnome Extensions
       (with pkgs.gnomeExtensions; [
-        # Gnome Extensions
         arcmenu
         caffeine
         gsconnect
@@ -27,8 +27,8 @@ in
         quick-settings-audio-devices-hider
       ])
       ++
+      # Essentials
       (with pkgs; [
-        # Essentials
         # gnome.gnome-terminal
         gnome.gnome-tweaks
         gnome.ghex
@@ -52,6 +52,21 @@ in
             "caffeine@patapon.info"
           ];
         };
+      };
+
+      home.file = {
+        # 
+        ".hidden".text = ''
+          Desktop
+          Documents
+          Downloads
+          Music
+          Pictures
+          Public
+          Templates
+          Videos
+          go
+        '';
       };
     };
 
