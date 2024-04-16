@@ -56,7 +56,7 @@
 
         # NixOS aliases
         nix-apply = "sudo nixos-rebuild switch";
-        nix-upgrade = "sudo nixos-rebuild boot --upgrade";
+        nix-upgrade = "sudo -s eval 'nix-channel --update && nixos-rebuild boot --upgrade'";
         nix-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
 
         # Replacements
