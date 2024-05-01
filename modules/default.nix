@@ -38,6 +38,7 @@
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
+    supportedLocales = [ "en_US.UTF-8/UTF-8" "pl_PL.UTF-8/UTF-8" ];
     extraLocaleSettings = {
       LC_ADDRESS = "pl_PL.UTF-8";
       LC_IDENTIFICATION = "pl_PL.UTF-8";
@@ -108,6 +109,7 @@
     go
     gopls
     delve
+    air
 
     # Nix
     nil
