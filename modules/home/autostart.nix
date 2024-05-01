@@ -26,12 +26,13 @@ in
     xdg.configFile = builtins.listToAttrs (map
       (pkg:
         let
+          name = if pkg ? pname then pkg.pname else pkg.name;
           # TODO: Find a better way of supporting custom entries.
           # Currently, if a custom entry is generated, it requires a subsequent execution of nixos-rebuild to take effect.
-          customPath = config.home.homeDirectory + "/.nix-profile/share/applications/" + pkg.pname + ".desktop";
+          customPath = config.home.homeDirectory + "/.nix-profile/share/applications/" + name + ".desktop";
         in
         {
-          name = "autostart/" + pkg.pname + ".desktop";
+          name = "autostart/" + name + ".desktop";
           value =
             if builtins.pathExists customPath then {
               # Use custom desktop entry
@@ -44,7 +45,7 @@ in
               source = pkg + "/share/applications/" + pkg.source;
             } else {
               # Others
-              source = pkg + "/share/applications/" + pkg.pname + ".desktop";
+              source = pkg + "/share/applications/" + name + ".desktop";
             };
         }
       )
