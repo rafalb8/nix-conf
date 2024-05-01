@@ -10,8 +10,9 @@ in
       protontricks
       mangohud
       bottles
-      steam
     ];
+
+    programs.steam.enable = true;
 
     home-manager.users.${config.user.name} = {
       imports = [
