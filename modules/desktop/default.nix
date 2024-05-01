@@ -121,23 +121,17 @@ in
     };
 
     # Firewall
-    networking.firewall =
-      let
-        ports = [
-          # Barrier
-          24800
-        ];
-        portRanges = [
-          # KDE Connect
-          { from = 1714; to = 1764; }
-        ];
-      in
-      {
-        allowedTCPPorts = ports;
-        allowedUDPPorts = ports;
-        allowedTCPPortRanges = portRanges;
-        allowedUDPPortRanges = portRanges;
-      };
+    networking.firewall = {
+      enable = true;
+      ports = [
+        # Barrier
+        "24800"
+        # Wireguard
+        "51820/udp"
+        # KDE Connect
+        "1714-1764"
+      ];
+    };
 
     # Setup desktop services
     services = {
