@@ -68,7 +68,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.ports != null) {
+  config = lib.mkIf (cfg.enable && builtins.length cfg.ports > 0) {
     networking.firewall =
       let
         result = splitPorts (map parsePort cfg.ports);
