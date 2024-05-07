@@ -48,6 +48,9 @@ in
       discord
     ];
 
+    # Run non-nix executables
+    programs.nix-ld.enable = true;
+
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       imports = [
