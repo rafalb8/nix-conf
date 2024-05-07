@@ -2,8 +2,7 @@
 let
   cfg = config.modules.graphics;
 
-  nvidia-vrr = pkgs.writeScriptBin "nvidia-vrr" ''
-    #!/bin/sh
+  nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     nvidia-settings -a ShowVRRVisualIndicator=$( [[ "$1" == true || "$1" == 1 ]] && echo 1 || echo 0 )
   '';
 in
