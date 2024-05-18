@@ -193,8 +193,9 @@ in
       enableDefaultPackages = true;
       packages = with pkgs; [
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-color-emoji
+        noto-fonts-monochrome-emoji
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
       fontDir.enable = true;
