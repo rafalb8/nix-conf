@@ -3,7 +3,15 @@ let
   cfg = config.modules.graphics;
 
   nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
-    nvidia-settings -a ShowVRRVisualIndicator=$( [[ "$1" == true || "$1" == 1 ]] && echo 1 || echo 0 )
+    [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }
+
+    g() { nvidia-settings --assign CurrentMetaMode="DP-4: 2560x1080_75 {ForceCompositionPipeline=$1, AllowGSYNCCompatible=On}"; }
+    i() { nvidia-settings -a "ShowVRRVisualIndicator=$1"; }
+
+    # Enable GSync
+    [[ "$*" =~ [Tt1] ]] && g Off || g On
+    # Enable Indicator
+    [[ "$*" =~ (-i|--indicator) ]] && i 1 || i 0
   '';
 in
 {
