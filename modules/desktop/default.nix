@@ -160,7 +160,7 @@ in
 
       printing = {
         enable = true;
-        drivers = with pkgs; [ samsung-unified-linux-driver ];
+        drivers = with pkgs; [ splix ];
       };
 
       udisks2.enable = true;
