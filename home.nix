@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./editors
-
     ./git.nix
     ./zsh.nix
     ./overrides.nix
@@ -16,6 +14,7 @@
     eza
     nmap
     xclip
+    micro
     kubectl
 
     # Development
@@ -56,9 +55,6 @@
       set-option -g default-shell ${pkgs.zsh}/bin/zsh
     '';
   };
-
-  # Enable helix editor
-  editors.helix.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

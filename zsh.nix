@@ -1,4 +1,8 @@
 { config, pkgs, ... }:
+let
+  custom-zsh = pkgs.writeTextDir "zsh/themes/custom.zsh-theme"
+    (builtins.readFile ./zsh/custom.zsh);
+in
 {
   home.sessionVariables = {
     PATH = "$PATH:${config.home.homeDirectory}/go/bin";
@@ -15,8 +19,20 @@
     enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "docker-compose" "sudo" "history" "dirhistory" "kubectl"];
-      theme = "agnoster";
+      theme = "custom";
+      plugins = [
+        "git"
+        "sudo"
+
+        "docker"
+        "docker-compose"
+
+        "history"
+        "dirhistory"
+
+        "kubectl"
+      ];
+      custom = "${custom-zsh}/zsh";
     };
 
     plugins = [
@@ -61,7 +77,7 @@
       la = "ls -lah"; # all files list
 
       # misc
-      github-dns = ''sudo sed "/github.com/s/.*/$(dig +short github.com @8.8.8.8) github.com/g" -i /etc/hosts'';
+      github-dns = ''sudo sed "/github.com/s/.*/$(dig +short github.com @8.8.8.8)\tgithub.com/g" -i /etc/hosts'';
     };
 
     initExtra = ''
