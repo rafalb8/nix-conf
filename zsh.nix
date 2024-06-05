@@ -67,6 +67,7 @@ in
       nix-apply = "home-manager switch";
       nix-upgrade = "nix-channel --update && home-manager switch";
       nix-garbage = "nix-collect-garbage -d";
+      nix-edit = "code ~/.config/home-manager";
 
       # kubectl
       kube-merge = "kube-merge(){KUBECONFIG=$1:$2 kubectl config view --flatten}; kube-merge";
@@ -75,9 +76,6 @@ in
       ls = "eza";
       ll = "ls -lh"; # list
       la = "ls -lah"; # all files list
-
-      # misc
-      github-dns = ''sudo sed "/github.com/s/.*/$(dig +short github.com @8.8.8.8)\tgithub.com/g" -i /etc/hosts'';
     };
 
     initExtra = ''

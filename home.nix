@@ -25,8 +25,12 @@
     clang-tools
 
     # Go
-    go_1_22
+    go
+    # go_1_22
     air
+
+    # Deps
+    graphviz-nox
 
     # Nix
     nil
