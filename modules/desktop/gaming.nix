@@ -9,7 +9,8 @@ in
       prismlauncher
       protontricks
       mangohud
-      bottles
+      # bottles
+      lutris
     ];
 
     programs.steam.enable = true;

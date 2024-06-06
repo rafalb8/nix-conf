@@ -30,7 +30,20 @@
   networking.networkmanager.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    # packageOverrides = pkgs: {
+    #   stable = import
+    #     (builtins.fetchTarball {
+    #       name = "nixos-stable";
+    #       url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-23.11.zip";
+    #     })
+    #     { config = config.nixpkgs.config; };
+    # };
+  };
+
+  # Enable nix-command 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -87,6 +100,7 @@
     nmap
     wget
     rsync
+    rclone
     arp-scan
 
     # Filesystems
@@ -125,8 +139,10 @@
     zsh.enable = true;
   };
 
-  # List services that you want to enable:
-  services.zerotierone.enable = true;
+  services.zerotierone = {
+    enable = true;
+    # package = pkgs.stable.zerotierone;
+  };
 
   # Docker
   virtualisation.docker.enable = true;

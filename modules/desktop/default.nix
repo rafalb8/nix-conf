@@ -36,6 +36,7 @@ in
 
       # Tools
       imagemagick_light
+      impression
       obsidian
       anydesk
       barrier
@@ -47,6 +48,9 @@ in
       firefox
       discord
     ];
+
+    # Add support for running aarch64 binaries on x86_64
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     # Run non-nix executables
     programs.nix-ld.enable = true;
