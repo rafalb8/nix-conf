@@ -45,27 +45,13 @@
       };
 
       shellAliases = {
-        du = "du -h";
-        df = "df -h";
         mkdir = "mkdir -p";
         dmesg = "sudo dmesg";
-        certcat = "openssl x509 -text -in";
-        xclip = "xclip -selection clipboard";
-        rsync-cp = "rsync -a --info=progress2 --no-i-r";
-        fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
 
         # NixOS aliases
         nix-apply = "sudo nixos-rebuild switch";
         nix-upgrade = "sudo -s eval 'nix-channel --update && nixos-rebuild boot --upgrade'";
         nix-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
-
-        # Replacements
-        cat = "bat";
-        ls = "eza";
-
-        # ls
-        ll = "ls -lh"; # list
-        la = "ls -lah"; # all files list
       };
 
       initExtra = ''
@@ -114,12 +100,5 @@
         sps = "!git stash && git pull && git stash pop";
       };
     };
-
-    # Micro
-    programs.micro = {
-      enable = true;
-      # settings = { };
-    };
-
   };
 }

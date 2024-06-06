@@ -76,6 +76,33 @@
     shell = pkgs.zsh;
   };
 
+  environment.shellAliases = {
+    # Enable sudo with aliases
+    sudo = "sudo ";
+
+    # Main
+    du = "du -h";
+    df = "df -h";
+    xclip = "xclip -selection clipboard";
+    fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
+    certcat = "openssl x509 -text -in";
+    rsync-cp = "rsync -a --info=progress2 --no-i-r";
+
+    # NixOS aliases
+    nix-apply = "nixos-rebuild switch";
+    nix-upgrade = "eval 'nix-channel --update && nixos-rebuild boot --upgrade'";
+    nix-garbage = "nix-collect-garbage -d";
+    nix-edit = "code /etc/nixos";
+
+    # Replacements
+    cat = "bat";
+    ls = "eza";
+
+    # ls
+    ll = "ls -lh"; # list
+    la = "ls -lah"; # all files list
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -87,6 +114,7 @@
     lsof
     bat
     eza
+    vim
     fd
 
     # System
