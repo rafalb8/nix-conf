@@ -11,9 +11,17 @@ in
       mangohud
       # bottles
       lutris
+      mesa-demos
     ];
 
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+    };
+
+    programs.gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
 
     home-manager.users.${config.user.name} = {
       imports = [
