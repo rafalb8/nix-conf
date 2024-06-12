@@ -14,7 +14,7 @@
     eza
     nmap
     xclip
-    micro
+    ripgrep
     kubectl
 
     # Development
@@ -25,8 +25,8 @@
     clang-tools
 
     # Go
-    go
     # go_1_22
+    go
     air
 
     # Deps
