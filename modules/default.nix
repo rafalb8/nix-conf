@@ -139,7 +139,7 @@
     lz4
 
     # Media
-    ffmpeg
+    ffmpeg-full
     yt-dlp
 
     # Development

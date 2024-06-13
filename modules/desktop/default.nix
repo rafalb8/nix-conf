@@ -25,6 +25,7 @@ in
     environment.systemPackages = with pkgs; [
       # Media
       jellyfin-media-player
+      obs-studio
       audacity
       calibre
       mpv
