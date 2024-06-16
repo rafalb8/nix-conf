@@ -58,7 +58,13 @@ in
       package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
+    # Enable docker gpu support
+    virtualisation.docker.enableNvidia = true;
+    hardware.nvidia-container-toolkit.enable = true;
+
     # Add scripts
-    environment.systemPackages = [ nvidia-vrr ];
+    environment.systemPackages = [
+      nvidia-vrr
+    ];
   };
 }
