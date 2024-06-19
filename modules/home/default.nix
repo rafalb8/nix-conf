@@ -99,6 +99,10 @@
         log-graph = "log --graph --all --oneline --decorate";
         sps = "!git stash && git pull && git stash pop";
       };
+
+      extraConfig = {
+        pull.rebase = true;
+      };
     };
   };
 }
