@@ -8,10 +8,10 @@ in
     environment.systemPackages = with pkgs; [
       prismlauncher
       protontricks
+      mesa-demos
       mangohud
       # bottles
       lutris
-      mesa-demos
     ];
 
     programs.steam = {
@@ -21,6 +21,14 @@ in
     programs.gamescope = {
       enable = true;
       capSysNice = true;
+    };
+
+    services.sunshine = {
+      enable = true;
+      autoStart = false;
+      openFirewall = true;
+
+      package = (pkgs.sunshine.override { cudaSupport = true; });
     };
 
     home-manager.users.${config.user.name} = {
