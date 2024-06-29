@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   imports = [
+    ../../modules
+
     # Include the hardware scan.
     ./hardware-configuration.nix
-    ./modules
   ];
 
   user = {
@@ -25,22 +26,21 @@
   # Hostname
   networking.hostName = "Nix-Rafal";
 
-  # Temporary system packages
-  environment.systemPackages = with pkgs; [
-    hello
-  ];
-
   # Home module settings
   home-manager.users.${config.user.name} = {
-    # Enviroment variables
-    home.sessionVariables = {
-      # VARIABLE = "VALUE";
-    };
-
     # Git config
     programs.git = {
       userName = "Rafalb8";
       userEmail = "rafalb8@hotmail.com";
+    };
+
+    programs.ssh = {
+      extraConfig = ''
+        Host AMDC4857
+          HostName 106.120.84.201
+          User r.babinski
+          ProxyCommand nc -X 5 -x 192.168.0.68:1080 %h %p
+      '';
     };
   };
 

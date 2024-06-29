@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    <home-manager/nixos>
-  ];
-
   home-manager.users.${config.user.name} = {
     # The state version is required and should stay at the version you
     # originally installed.
@@ -50,7 +46,7 @@
 
         # NixOS aliases
         nix-apply = "sudo nixos-rebuild switch";
-        nix-upgrade = "sudo -s eval 'nix-channel --update && nixos-rebuild boot --upgrade'";
+        nix-upgrade = "sudo -s eval 'nix flake update && nixos-rebuild boot'";
         nix-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       };
 

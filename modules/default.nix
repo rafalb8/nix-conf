@@ -32,14 +32,6 @@
   # Allow unfree packages
   nixpkgs.config = {
     allowUnfree = true;
-    # packageOverrides = pkgs: {
-    #   stable = import
-    #     (builtins.fetchTarball {
-    #       name = "nixos-stable";
-    #       url = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-23.11.zip";
-    #     })
-    #     { config = config.nixpkgs.config; };
-    # };
   };
 
   # Enable nix-command 
@@ -90,7 +82,7 @@
 
     # NixOS aliases
     nix-apply = "nixos-rebuild switch";
-    nix-upgrade = "eval 'nix-channel --update && nixos-rebuild boot --upgrade'";
+    nix-upgrade = "eval 'nix flake update && nixos-rebuild boot'";
     nix-garbage = "nix-collect-garbage -d";
     nix-edit = "code /etc/nixos";
 
@@ -169,7 +161,7 @@
 
   services.zerotierone = {
     enable = true;
-    # package = pkgs.stable.zerotierone;
+    joinNetworks = [ "c7c8172af1cac563" ];
   };
 
   # Docker
