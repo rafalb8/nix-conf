@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Include the hardware scan.
@@ -18,11 +18,17 @@
     desktop = {
       enable = true;
       enviroment.gnome = true;
+      gaming.enable = true;
     };
   };
 
   # Hostname
   networking.hostName = "Nix-Rafal";
+
+  # Temporary system packages
+  environment.systemPackages = with pkgs; [
+    hello
+  ];
 
   # Home module settings
   home-manager.users.${config.user.name} = {
