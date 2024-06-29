@@ -64,7 +64,7 @@
   users.users.${config.user.name} = {
     isNormalUser = true;
     description = config.user.description;
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "input" ];
     shell = pkgs.zsh;
   };
 
