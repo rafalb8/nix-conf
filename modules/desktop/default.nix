@@ -26,6 +26,7 @@ in
       # Media
       jellyfin-media-player
       obs-studio
+      kdenlive
       audacity
       calibre
       mpv
