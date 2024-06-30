@@ -45,9 +45,8 @@
         dmesg = "sudo dmesg";
 
         # NixOS aliases
-        nix-apply = "sudo nixos-rebuild switch --show-trace -L -v";
-        nix-upgrade = "sudo -s eval 'nix flake update && nixos-rebuild boot --show-trace -L -v'";
-        nix-garbage = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
+        nix-apply = "sudo " + config.environment.shellAliases.nix-apply;
+        nix-upgrade = "sudo -s " + config.environment.shellAliases.nix-upgrade;
       };
 
       initExtra = ''

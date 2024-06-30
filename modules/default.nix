@@ -34,8 +34,21 @@
     allowUnfree = true;
   };
 
-  # Enable nix-command 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    # Enable nix-command and flakes
+    settings.experimental-features = [ "nix-command" "flakes" ];
+
+    # Perform garbage collection weekly to maintain low disk usage
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
+
+    # Nix automatically detects files in the store that have identical contents,
+    # and replaces them with hard links to a single copy.
+    settings.auto-optimise-store = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -81,9 +94,8 @@
     rsync-cp = "rsync -a --info=progress2 --no-i-r";
 
     # NixOS aliases
-    nix-apply = "nixos-rebuild switch";
-    nix-upgrade = "eval 'nix flake update && nixos-rebuild boot'";
-    nix-garbage = "nix-collect-garbage -d";
+    nix-apply = "nixos-rebuild switch --show-trace -L -v";
+    nix-upgrade = "eval 'nix flake update && nixos-rebuild boot --show-trace -L -v'";
     nix-edit = "code /etc/nixos";
 
     # Replacements
