@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
 
@@ -31,9 +31,6 @@ in
       '';
     };
 
-    # Add nvidia-patch overlay (enabling NvFBC and disabling limits on NVENC)
-    nixpkgs.overlays = [ inputs.nvidia-patch.overlays.default ];
-
     hardware.nvidia = {
       # Modesetting is required.
       modesetting.enable = true;
@@ -57,7 +54,10 @@ in
       nvidiaSettings = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = pkgs.nvidia-patch.patch-fbc config.boot.kernelPackages.nvidiaPackages.stable;
+      package = import ./nvidia-patch.nix {
+        inherit pkgs;
+        nvPackage = config.boot.kernelPackages.nvidiaPackages.stable;
+      };
     };
 
     # Enable docker gpu support
