@@ -56,7 +56,7 @@ in
       # Patch nvidia driver to enable NvFBC
       package = import ./nvidia-patch.nix {
         inherit pkgs;
-        nvPackage = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
     };
 

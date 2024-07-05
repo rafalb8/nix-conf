@@ -1,4 +1,4 @@
-{ pkgs, nvPackage }:
+{ pkgs, package }:
 let
   nvidia-patch = pkgs.fetchFromGitHub {
     owner = "keylase";
@@ -7,7 +7,7 @@ let
     sha256 = "sha256-cPrl/kXXgnIMDm5Phesj+eDXGIsjlhoA1dPOivqSnoM=";
   };
 in
-nvPackage.overrideAttrs (
+package.overrideAttrs (
   { version, preFixup ? "", nativeBuildInputs, ... }:
   {
     nativeBuildInputs = [ pkgs.jq ] ++ nativeBuildInputs;
