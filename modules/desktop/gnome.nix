@@ -30,8 +30,8 @@ in
       # Essentials
       (with pkgs; [
         # gnome.gnome-terminal
-        gnome.gnome-tweaks
-        gnome.ghex
+        gnome-tweaks
+        ghex
         mission-center
         adw-gtk3
       ]);
@@ -84,22 +84,21 @@ in
     # Exclude gnome default packages
     environment.gnome.excludePackages = (with pkgs.gnome; [
       gnome-shell-extensions # default ext
-
       gnome-contacts
-      gnome-calendar
+
       gnome-logs
       gnome-maps
       gnome-music
+    ]) ++ (with pkgs; [
+      gnome-calendar
+      gnome-console # replaced with alacritty
+      gnome-tour
 
+      snapshot # camera app
       epiphany # web browser
       geary # email client
       totem # video player
       yelp # help viewer
-
-    ]) ++ (with pkgs; [
-      gnome-console # replaced with gnome-terminal
-      gnome-tour
-      snapshot
     ]);
   };
 }
