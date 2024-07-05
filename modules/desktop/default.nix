@@ -67,7 +67,7 @@ in
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       imports = [
-        ../home/autostart.nix
+        ../../extensions/autostart.nix
       ];
 
       xdg = {

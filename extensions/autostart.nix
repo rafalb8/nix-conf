@@ -27,25 +27,24 @@ in
       (pkg:
         let
           name = if pkg ? pname then pkg.pname else pkg.name;
-          # TODO: Find a better way of supporting custom entries.
-          # Currently, if a custom entry is generated, it requires a subsequent execution of nixos-rebuild to take effect.
-          customPath = config.home.homeDirectory + "/.nix-profile/share/applications/" + name + ".desktop";
+          # Find custom desktop entry
+          custom = lib.findFirst (p: p.name == "${name}.desktop") null config.home.packages;
         in
         {
           name = "autostart/" + name + ".desktop";
           value =
-            if builtins.pathExists customPath then {
+            if custom != null then {
               # Use custom desktop entry
-              source = customPath;
+              text = custom.text;
             } else if pkg ? desktopItem then {
-              # If pkg contains text attribute
+              # Use desktopItem value
               text = pkg.desktopItem.text;
-            } else if pkg ? source then {
-              # Custom source name
-              source = pkg + "/share/applications/" + pkg.source;
             } else {
-              # Others
-              source = pkg + "/share/applications/" + name + ".desktop";
+              # Find desktop file in standard location
+              source = lib.findFirst
+                (x: lib.hasSuffix ".desktop" x)
+                null
+                (lib.filesystem.listFilesRecursive "${pkg}/share/applications/");
             };
         }
       )
