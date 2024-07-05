@@ -173,6 +173,9 @@ in
       flatpak.enable = true;
     };
 
+    # Enable scanners
+    hardware.sane.enable = true;
+
     # Add solaar
     hardware.logitech.wireless = {
       enable = true;
