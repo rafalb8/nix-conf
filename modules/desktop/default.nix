@@ -8,6 +8,7 @@ in
     ./gnome.nix
   ];
 
+
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
 
@@ -57,6 +58,12 @@ in
     # Run non-nix executables
     programs.nix-ld.enable = true;
 
+    # Add reminder for jellyfin
+    warnings =
+      if pkgs.jellyfin-media-player.version > "1.11.1" then
+        [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ]
+      else [ ];
+
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       imports = [
@@ -85,8 +92,17 @@ in
             name = "Solaar";
             icon = "solaar";
             exec = "solaar -w hide";
-            terminal = false;
             categories = [ "Utility" "GTK" ];
+          };
+
+          "com.github.iwalton3.jellyfin-media-player" = {
+            name = "Jellyfin Media Player";
+            icon = "com.github.iwalton3.jellyfin-media-player";
+            exec = "jellyfinmediaplayer";
+            settings = {
+              StartupWMClass = "jellyfinmediaplayer";
+            };
+            categories = [ "AudioVideo" "Video" "Player" "TV" ];
           };
         };
       };
