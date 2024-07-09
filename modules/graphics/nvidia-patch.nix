@@ -1,12 +1,4 @@
-{ pkgs, package }:
-let
-  nvidia-patch = pkgs.fetchFromGitHub {
-    owner = "keylase";
-    repo = "nvidia-patch";
-    rev = "refs/heads/master";
-    sha256 = "sha256-cPrl/kXXgnIMDm5Phesj+eDXGIsjlhoA1dPOivqSnoM=";
-  };
-in
+{ pkgs, package, nvidia-patch }:
 package.overrideAttrs (
   { version, preFixup ? "", nativeBuildInputs, ... }:
   {

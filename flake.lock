@@ -36,10 +36,27 @@
         "type": "github"
       }
     },
+    "nvidia-patch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720169578,
+        "narHash": "sha256-cPrl/kXXgnIMDm5Phesj+eDXGIsjlhoA1dPOivqSnoM=",
+        "owner": "keylase",
+        "repo": "nvidia-patch",
+        "rev": "87fe7b874b3db1489d7313c667130ef22c445bd7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "keylase",
+        "repo": "nvidia-patch",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nvidia-patch": "nvidia-patch"
       }
     }
   },
