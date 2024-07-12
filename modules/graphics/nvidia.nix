@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, attrs, ... }:
 let
   cfg = config.modules.graphics;
 
@@ -57,7 +57,7 @@ in
       package = import ./nvidia-patch.nix {
         inherit pkgs;
         package = config.boot.kernelPackages.nvidiaPackages.stable;
-        nvidia-patch = inputs.nvidia-patch;
+        nvidia-patch = attrs.nvidia-patch;
       };
     };
 

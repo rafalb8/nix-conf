@@ -16,11 +16,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nvidia-patch, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nvidia-patch, ... }@attrs: {
     nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       specialArgs = {
-        inherit inputs;
+        inherit attrs;
 
         pkgs-stable = import nixpkgs-stable {
           inherit system;
