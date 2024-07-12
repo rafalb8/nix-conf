@@ -24,6 +24,9 @@ in
   # Common desktop configuration
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      # Terminal
+      alacritty
+
       # Media
       jellyfin-media-player
       obs-studio
@@ -34,7 +37,7 @@ in
 
       # Development
       temurin-jre-bin
-      alacritty
+      zed-editor
       vscode
 
       # Tools

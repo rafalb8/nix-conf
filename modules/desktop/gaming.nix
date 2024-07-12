@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgs-stable, lib, ... }:
 let
   cfg = config.modules.desktop;
 in
@@ -28,7 +28,7 @@ in
       autoStart = false;
       openFirewall = true;
 
-      package = (pkgs.sunshine.override { cudaSupport = true; });
+      package = (pkgs.sunshine.override { cudaSupport = true; miniupnpc = pkgs-stable.miniupnpc;});
     };
 
     home-manager.users.${config.user.name} = {
