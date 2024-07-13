@@ -2,6 +2,8 @@
 let
   cfg = config.modules.graphics;
 
+  nvidia-patch = import ./patch.nix { inherit lib pkgs attrs; };
+
   nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }
 
@@ -45,7 +47,7 @@ in
       # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
       # Only available from driver 515.43.04+
       # Currently alpha-quality/buggy, so false is currently the recommended setting.
-      open = true;
+      open = false;
 
       # Enable the Nvidia settings menu accessible via `nvidia-settings`.
       nvidiaSettings = true;
@@ -54,11 +56,7 @@ in
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = import ./nvidia-patch.nix {
-        inherit pkgs;
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
-        nvidia-patch = attrs.nvidia-patch;
-      };
+      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     # Enable docker gpu support
