@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,16 +16,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nvidia-patch, ... }@attrs: {
-    nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem rec {
+  outputs = { self, nixpkgs, home-manager, nvidia-patch, ... }@attrs: {
+    nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
         inherit attrs;
 
-        pkgs-stable = import nixpkgs-stable {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        # pkgs-stable = import nixpkgs-stable {
+        #   inherit system;
+        #   config.allowUnfree = true;
+        # };
       };
 
       modules = [

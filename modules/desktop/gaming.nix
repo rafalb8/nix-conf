@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
   cfg = config.modules.desktop;
 in
@@ -23,13 +23,13 @@ in
       capSysNice = true;
     };
 
-    services.sunshine = {
-      enable = true;
-      autoStart = false;
-      openFirewall = true;
+    # services.sunshine = {
+    #   enable = true;
+    #   autoStart = false;
+    #   openFirewall = true;
 
-      package = (pkgs.sunshine.override { cudaSupport = true; miniupnpc = pkgs-stable.miniupnpc;});
-    };
+    #   package = (pkgs.sunshine.override { cudaSupport = true; });
+    # };
 
     home-manager.users.${config.user.name} = {
       imports = [
