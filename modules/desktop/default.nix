@@ -189,7 +189,6 @@ in
       };
 
       udisks2.enable = true;
-      flatpak.enable = true;
     };
 
     # Enable scanners
@@ -228,37 +227,6 @@ in
       fontDir.enable = true;
       fontconfig.enable = true;
     };
-
-    # Fix fonts for flatpaks
-    # https://nixos.wiki/wiki/Fonts#Using_bindfs_for_font_support
-    system.fsPackages = [ pkgs.bindfs ];
-    fileSystems =
-      let
-        mkRoSymBind = path: {
-          device = path;
-          fsType = "fuse.bindfs";
-          options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
-        };
-        aggregatedIcons = pkgs.buildEnv
-          {
-            name = "system-icons";
-            paths = with pkgs; [
-              #libsForQt5.breeze-qt5  # for plasma
-              gnome-themes-extra
-            ];
-            pathsToLink = [ "/share/icons" ];
-          };
-        aggregatedFonts = pkgs.buildEnv
-          {
-            name = "system-fonts";
-            paths = config.fonts.packages;
-            pathsToLink = [ "/share/fonts" ];
-          };
-      in
-      {
-        "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
-        "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
-      };
 
     # Enable KVM
     virtualisation = {
