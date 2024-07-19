@@ -191,6 +191,13 @@ in
       udisks2.enable = true;
     };
 
+    # Add zram
+    # TODO: https://wiki.archlinux.org/title/Zram#Optimizing_swap_on_zram
+    zramSwap = {
+      enable = true;
+      memoryPercent = 20;
+    };
+
     # Enable scanners
     hardware.sane.enable = true;
 
