@@ -30,6 +30,7 @@ in
       # Essentials
       (with pkgs; [
         # gnome.gnome-terminal
+        adwaita-icon-theme
         gnome-tweaks
         ghex
         mission-center
