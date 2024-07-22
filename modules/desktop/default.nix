@@ -151,15 +151,6 @@ in
             };
           };
         };
-
-        # SSH config
-        ssh = {
-          enable = true;
-          extraConfig = ''
-            Host server
-              HostName 192.168.0.100
-          '';
-        };
       };
     };
 
