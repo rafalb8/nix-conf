@@ -2,8 +2,8 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-edge.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,16 +16,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nvidia-patch, ... }@attrs: {
-    nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@attrs: {
+    nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       specialArgs = {
         inherit attrs;
 
-        # pkgs-stable = import nixpkgs-stable {
-        #   inherit system;
-        #   config.allowUnfree = true;
-        # };
+        pkgs-edge = import nixpkgs-edge {
+          inherit system;
+          config.allowUnfree = true;
+        };
       };
 
       modules = [

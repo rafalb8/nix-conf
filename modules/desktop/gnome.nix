@@ -30,9 +30,9 @@ in
       # Essentials
       (with pkgs; [
         # gnome.gnome-terminal
-        adwaita-icon-theme
-        gnome-tweaks
-        ghex
+        gnome.adwaita-icon-theme
+        gnome.gnome-tweaks
+        gnome.ghex
         mission-center
         adw-gtk3
       ]);
@@ -71,19 +71,19 @@ in
     environment.gnome.excludePackages = (with pkgs.gnome; [
       gnome-shell-extensions # default ext
       gnome-contacts
-
+      gnome-calendar
       gnome-logs
       gnome-maps
       gnome-music
+
+      geary # email client
+      totem # video player
     ]) ++ (with pkgs; [
-      gnome-calendar
       gnome-console # replaced with alacritty
       gnome-tour
 
       snapshot # camera app
       epiphany # web browser
-      geary # email client
-      totem # video player
       yelp # help viewer
     ]);
   };
