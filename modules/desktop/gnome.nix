@@ -57,21 +57,6 @@ in
           };
         };
       };
-
-      home.file = {
-        # 
-        ".hidden".text = ''
-          Desktop
-          Documents
-          Downloads
-          Music
-          Pictures
-          Public
-          Templates
-          Videos
-          go
-        '';
-      };
     };
 
     # Fix gnome media inspection

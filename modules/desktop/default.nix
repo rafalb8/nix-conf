@@ -73,6 +73,21 @@ in
         ../../extensions/autostart.nix
       ];
 
+      # Hide folders in home
+      home.file = {
+        ".hidden".text = ''
+          Desktop
+          Documents
+          Downloads
+          Music
+          Pictures
+          Public
+          Templates
+          Videos
+          go
+        '';
+      };
+
       xdg = {
         enable = true;
         configFile = {
