@@ -3,7 +3,7 @@ let
   cfg = config.modules.desktop;
 in
 {
-  config = lib.mkIf cfg.enviroment.gnome {
+  config = lib.mkIf cfg.environment.gnome {
     # Enable the GNOME Desktop Environment.
     services = {
       xserver = {

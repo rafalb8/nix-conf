@@ -18,7 +18,7 @@
 
     desktop = {
       enable = true;
-      enviroment.gnome = true;
+      environment.gnome = true;
       gaming.enable = true;
     };
   };

@@ -12,7 +12,7 @@ in
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
 
-    enviroment = {
+    environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
     };
 
