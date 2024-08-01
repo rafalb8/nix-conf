@@ -35,10 +35,11 @@
     };
 
     programs.ssh = {
+      enable = true;
       extraConfig = ''
         Host server
           HostName 192.168.0.100
-          
+
         Host AMDC4857
           HostName 106.120.84.201
           User r.babinski
