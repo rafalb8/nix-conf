@@ -56,7 +56,6 @@ in
     };
 
     # Enable docker gpu support
-    virtualisation.docker.enableNvidia = true;
     hardware.nvidia-container-toolkit.enable = true;
 
     # Add scripts

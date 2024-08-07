@@ -19,21 +19,23 @@
   outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@attrs: {
     nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
-      specialArgs = {
-        inherit attrs;
-
-        pkgs-edge = import nixpkgs-edge {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
+      specialArgs = { inherit attrs; };
 
       modules = [
-        ({ ... }: { nix.registry.nixpkgs.flake = nixpkgs; })
         ./hosts/Nix-Rafal
-
         home-manager.nixosModules.home-manager
         {
+          # Add unstable overlay as pkgs.edge
+          nixpkgs.overlays = [
+            (final: prev: {
+              edge = import nixpkgs-edge {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            })
+          ];
+
+          nix.registry.nixpkgs.flake = nixpkgs;
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
         }

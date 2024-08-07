@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-edge, ... }:
+{ config, lib, pkgs, ... }:
 {
   # Modules
   imports = [
@@ -13,7 +13,7 @@
 
   boot = {
     # Use latest kernel
-    kernelPackages = pkgs-edge.linuxPackages_latest;
+    kernelPackages = pkgs.edge.linuxPackages_latest;
 
     # Bootloader
     loader = {
