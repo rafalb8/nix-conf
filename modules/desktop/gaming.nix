@@ -28,7 +28,7 @@ in
     #   autoStart = false;
     #   openFirewall = true;
 
-    #   package = (pkgs.sunshine.override { cudaSupport = true; });
+    #   package = (pkgs.edge.sunshine.override { cudaSupport = true; });
     # };
 
     home-manager.users.${config.user.name} = {
