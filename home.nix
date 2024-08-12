@@ -28,6 +28,7 @@
     # go_1_22
     go
     air
+    gofumpt
 
     # Deps
     graphviz-nox
