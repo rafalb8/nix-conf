@@ -171,9 +171,9 @@
     zsh.enable = true;
   };
 
-  services.zerotierone = {
+  services.tailscale = {
     enable = true;
-    joinNetworks = [ "c7c8172af1cac563" ];
+    package = pkgs.edge.tailscale;
   };
 
   # Docker
