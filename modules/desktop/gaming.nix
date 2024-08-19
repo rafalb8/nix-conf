@@ -12,6 +12,7 @@ in
       mangohud
       # bottles
       lutris
+      sgdboop
     ];
 
     programs.steam = {

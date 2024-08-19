@@ -1,8 +1,8 @@
-{ config, lib, pkgs, attrs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   cfg = config.modules.graphics;
 
-  nvidia-patch = import ./patch.nix { inherit lib pkgs attrs; };
+  nvidia-patch = import ./patch.nix { inherit lib pkgs inputs; };
 
   nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }

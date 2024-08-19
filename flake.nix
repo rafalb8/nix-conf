@@ -16,30 +16,52 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@attrs: {
-    nixosConfigurations."Nix-Rafal" = nixpkgs.lib.nixosSystem rec {
+  outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@inputs:
+    let
       system = "x86_64-linux";
-      specialArgs = { inherit attrs; };
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      # Custom Packages
+      packages.${system} = {
+        sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
+      };
 
-      modules = [
-        ./hosts/Nix-Rafal
-        home-manager.nixosModules.home-manager
-        {
-          # Add unstable overlay as pkgs.edge
-          nixpkgs.overlays = [
-            (final: prev: {
-              edge = import nixpkgs-edge {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            })
+      # Overlays
+      overlays = {
+        # NixOS unsable overlay
+        edge = final: prev: {
+          edge = import nixpkgs-edge {
+            inherit (final) system;
+            config.allowUnfree = true;
+          };
+        };
+
+        # Custom packages overlay
+        custom = final: prev: {
+          inherit (self.packages.${final.system}) sgdboop;
+        };
+      };
+
+      # NixOS configurations
+      nixosConfigurations = {
+        # Main PC
+        "Nix-Rafal" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+
+          modules = [
+            ./hosts/Nix-Rafal
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
+
+              nix.registry.nixpkgs.flake = nixpkgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
           ];
-
-          nix.registry.nixpkgs.flake = nixpkgs;
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
+        };
+      };
     };
-  };
 }
