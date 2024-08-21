@@ -1,7 +1,6 @@
 { stdenv
 , fetchurl
 , autoPatchelfHook
-, makeDesktopItem
 , openssl
 , curl
 , gtk3
@@ -10,17 +9,6 @@
 , cairo
 , glib
 }:
-let
-  desktopItem = makeDesktopItem {
-    name = "SGDBoop";
-    desktopName = "SGDBoop";
-    comment = "Apply Steam assets from SteamGridDB";
-    icon = "SGDBoop";
-    exec = "SGDBoop %U";
-    categories = [ "Utility" ];
-    mimeTypes = [ "x-scheme-handler/sgdb" ];
-  };
-in
 stdenv.mkDerivation rec {
   pname = "sgdboop";
   version = "1.2.8";
@@ -40,7 +28,7 @@ stdenv.mkDerivation rec {
     runHook preInstall
     install -m755 -D SGDBoop $out/bin/SGDBoop
     install -m444 -D libiup.so $out/lib/libiup.so
-    install -m444 -D "${desktopItem}/share/applications/"* -t $out/share/applications/
+    install -m444 -D com.steamgriddb.SGDBoop.desktop -t $out/share/applications/
     runHook postInstall
   '';
 }

@@ -229,12 +229,15 @@ in
 
     # Fonts
     fonts = {
-      enableDefaultPackages = true;
       packages = with pkgs; [
         noto-fonts
-        noto-fonts-cjk-sans
+        noto-fonts-cjk
         noto-fonts-color-emoji
         noto-fonts-monochrome-emoji
+        source-code-pro
+        source-han-mono
+        source-han-sans
+        source-han-serif
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
       fontDir.enable = true;

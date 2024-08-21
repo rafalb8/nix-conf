@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-edge.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-edge.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -19,7 +19,7 @@
   outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = nixpkgs.legacyPackages.${system};
     in
     {
       # Custom Packages
