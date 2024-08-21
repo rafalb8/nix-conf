@@ -37,12 +37,14 @@ in
         adw-gtk3
       ]);
 
-    # Setup home for gnome desktop
     home-manager.users.${config.user.name} = {
       dconf = {
         enable = true;
         settings = {
+          # Dark mode
           "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+          # Enable gnome extensions
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = [
@@ -59,13 +61,21 @@ in
       };
     };
 
-    # Fix gnome media inspection
-    environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
-      pkgs.gst_all_1.gst-plugins-good
-      pkgs.gst_all_1.gst-plugins-bad
-      pkgs.gst_all_1.gst-plugins-ugly
-      pkgs.gst_all_1.gst-libav
-    ];
+    # Fix nautilus shortcut
+    programs.nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "alacritty";
+    };
+
+    environment.sessionVariables = {
+      # Fix gnome media inspection
+      GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
+        pkgs.gst_all_1.gst-plugins-good
+        pkgs.gst_all_1.gst-plugins-bad
+        pkgs.gst_all_1.gst-plugins-ugly
+        pkgs.gst_all_1.gst-libav
+      ];
+    };
 
     # Exclude gnome default packages
     environment.gnome.excludePackages = (with pkgs.gnome; [
