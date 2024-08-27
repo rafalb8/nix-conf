@@ -6,12 +6,12 @@ in
   config = lib.mkIf cfg.gaming.enable {
 
     environment.systemPackages = with pkgs; [
-      prismlauncher
-      protontricks
+      edge.prismlauncher
+      edge.protontricks
       mesa-demos
-      mangohud
-      # bottles
-      lutris
+      edge.mangohud
+      # edge.bottles
+      edge.lutris
       sgdboop
     ];
 
