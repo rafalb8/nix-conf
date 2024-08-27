@@ -37,7 +37,6 @@ in
 
       # Development
       temurin-jre-bin
-      zed-editor
       vscode
 
       # Tools
