@@ -1,8 +1,4 @@
 { config, pkgs, ... }:
-let
-  custom-zsh = pkgs.writeTextDir "zsh/themes/custom.zsh-theme"
-    (builtins.readFile ./zsh/custom.zsh);
-in
 {
   home.sessionVariables = {
     PATH = "$PATH:${config.home.homeDirectory}/go/bin";
@@ -13,6 +9,18 @@ in
     # Use bat for man
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     MANROFFOPT = "-c";
+  };
+
+  xdg = {
+    enable = true;
+
+    configFile = {
+      # Add zsh theme
+      "zsh" = {
+        source = ../../dotfiles/zsh;
+        recursive = true;
+      };
+    };
   };
 
   programs.zsh = {
@@ -32,7 +40,7 @@ in
 
         "kubectl"
       ];
-      custom = "${custom-zsh}/zsh";
+      custom = "${config.home.homeDirectory}/.config/zsh";
     };
 
     plugins = [
@@ -65,12 +73,14 @@ in
 
       # nix
       nix-apply = "home-manager switch";
-      nix-upgrade = "nix-channel --update && home-manager switch";
+      nix-upgrade = "nix flake update --flake ~/.config/home-manager && home-manager switch";
       nix-garbage = "nix-collect-garbage -d";
       nix-edit = "code ~/.config/home-manager";
 
       # kubectl
       kube-merge = "kube-merge(){KUBECONFIG=$1:$2 kubectl config view --flatten}; kube-merge";
+
+      srubuntu = ''sudo -s eval "apt update && apt upgrade -y"'';
 
       # ls
       ls = "eza";
