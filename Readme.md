@@ -1,5 +1,9 @@
 # DotFiles
 
+## Hiding overrides
+```sh
+git add --intent-to-add overrides/default.nix
+```
 
 ## Dependencies
 
