@@ -20,7 +20,7 @@
         inherit pkgs;
         # extraSpecialArgs = {};
 
-        modules = [ ./hosts/AMDC4857 ];
+        modules = [ ./hosts/AMDC4857 ./overrides ];
       };
     };
 }
