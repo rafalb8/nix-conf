@@ -11,6 +11,7 @@ in
       mesa-demos
       edge.mangohud
       # edge.bottles
+      edge.heroic
       edge.lutris
       sgdboop
     ];
