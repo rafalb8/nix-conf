@@ -52,17 +52,32 @@ in
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
           };
+          "org/gnome/mutter/wayland/keybindings" = {
+            restore-shortcuts = [ ];
+          };
 
           # Custom
           "org/gnome/settings-daemon/plugins/media-keys" = {
             custom-keybindings = [
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             ];
           };
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Terminal";
             command = "alacritty";
             binding = "<Super>t";
+          };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+            name = "Suspend";
+            command = "systemctl suspend";
+            binding = "<Super>Escape";
+          };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+            name = "Mission Center";
+            command = "missioncenter";
+            binding = "<Shift><Ctrl>Escape";
           };
 
           # Enable gnome extensions
