@@ -44,6 +44,27 @@ in
           # Dark mode
           "org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
+          # Shortcuts
+          "org/gnome/desktop/wm/keybindings" = {
+            close = [ "<Super>w" ];
+            switch-applications = [ "<Super>Tab" ];
+            switch-applications-backward = [ "<Shift><Super>Tab" ];
+            switch-windows = [ "<Alt>Tab" ];
+            switch-windows-backward = [ "<Shift><Alt>Tab" ];
+          };
+
+          # Custom
+          "org/gnome/settings-daemon/plugins/media-keys" = {
+            custom-keybindings = [
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+            ];
+          };
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+            name = "Terminal";
+            command = "alacritty";
+            binding = "<Super>t";
+          };
+
           # Enable gnome extensions
           "org/gnome/shell" = {
             disable-user-extensions = false;

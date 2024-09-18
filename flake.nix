@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-edge.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -16,7 +17,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-edge, nixos-hardware, home-manager, nvidia-patch, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -52,6 +53,23 @@
 
           modules = [
             ./hosts/Nix-Rafal
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
+
+              nix.registry.nixpkgs.flake = nixpkgs;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+          ];
+        };
+        "T14-gen3" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+
+          modules = [
+            ./hosts/T14-gen3
+            nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen3
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
