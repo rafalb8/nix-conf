@@ -49,7 +49,20 @@
           ProxyCommand nc -X 5 -x 192.168.0.68:1080 %h %p
       '';
     };
+
+    xdg = {
+      enable = true;
+      configFile = {
+        # Easyeffects config
+        "easyeffects" = {
+          source = ../../dotfiles/easyeffects;
+          recursive = true;
+        };
+      };
+    };
   };
+
+
 
   # The state version is required and should stay at the version you
   # originally installed.

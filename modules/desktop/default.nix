@@ -89,13 +89,6 @@ in
 
       xdg = {
         enable = true;
-        configFile = {
-          # Easyeffects
-          "easyeffects" = {
-            source = ../../dotfiles/easyeffects;
-            recursive = true;
-          };
-        };
 
         # Custom desktop entries
         desktopEntries = {
