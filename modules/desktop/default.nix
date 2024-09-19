@@ -37,7 +37,7 @@ in
 
       # Development
       temurin-jre-bin
-      vscode
+      edge.vscode
 
       # Tools
       imagemagick_light
