@@ -62,11 +62,27 @@
   # https://github.com/NixOS/nixos-hardware/tree/master/lenovo/thinkpad/t14/amd/gen3
   # https://wiki.archlinux.org/title/Lenovo_ThinkPad_T14_(AMD)_Gen_3
 
-  boot.kernelParams = [
-    "acpi_backlight=native"
-    "psmouse.synaptics_intertouch=0"
-    "amd_pstate=active"
-  ];
+  boot = {
+    kernelParams = [
+      "acpi_backlight=native"
+      "psmouse.synaptics_intertouch=0"
+      "amd_pstate=active"
+    ];
+
+    # Required for tlp
+    kernelModules = [ "acpi_call" ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+  };
+
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      #Optional helps save long term battery health
+      START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+    };
+  };
 
   hardware.firmware = with pkgs; [ sof-firmware ];
 
@@ -76,7 +92,7 @@
     enable = true;
     tod = {
       enable = true;
-      driver = pkgs.libfprint-2-tod1-goodix-550a;
+      driver = pkgs.libfprint-2-tod1-vfs0090;
     };
   };
 
