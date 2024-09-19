@@ -14,7 +14,7 @@
 
   # Enable modules
   modules = {
-    graphics.nvidia = false;
+    graphics.amd = true;
 
     desktop = {
       enable = true;
