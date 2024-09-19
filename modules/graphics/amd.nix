@@ -10,5 +10,12 @@ in
       driSupport = true;
       driSupport32Bit = true;
     };
+
+    services.xserver = {
+      enable = true;
+      videoDrivers = [ "modesetting" ];
+    };
+
+    hardware.amdgpu.initrd.enable = true;
   };
 }

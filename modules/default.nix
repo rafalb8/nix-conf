@@ -179,4 +179,7 @@
   # Docker
   virtualisation.docker.enable = true;
   systemd.services.docker.wantedBy = lib.mkForce [ ];
+
+  # Enable fstrim for SSD
+  services.fstrim.enable = true;
 }

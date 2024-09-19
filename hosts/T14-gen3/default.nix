@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../../modules
@@ -40,6 +40,28 @@
         Host server
           HostName 192.168.0.100
       '';
+    };
+  };
+
+  # More info:
+  # https://github.com/NixOS/nixos-hardware/tree/master/lenovo/thinkpad/t14/amd/gen3
+  # https://wiki.archlinux.org/title/Lenovo_ThinkPad_T14_(AMD)_Gen_3
+
+  boot.kernelParams = [
+    "acpi_backlight=native"
+    "psmouse.synaptics_intertouch=0"
+    "amd_pstate=active"
+  ];
+
+  hardware.firmware = with pkgs; [ sof-firmware ];
+
+  # Fingerprint
+  # Use fprint-enroll to enroll a fingerprint
+  services.fprintd = {
+    enable = true;
+    tod = {
+      enable = true;
+      driver = pkgs.libfprint-2-tod1-goodix;
     };
   };
 
