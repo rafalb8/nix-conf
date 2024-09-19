@@ -60,6 +60,22 @@
         };
       };
     };
+
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/shell"."favorite-apps" = [
+          "org.gnome.Nautilus.desktop"
+          "firefox.desktop"
+          "Alacritty.desktop"
+          "code.desktop"
+          "obsidian.desktop"
+          "steam.desktop"
+          "discord.desktop"
+          "com.github.iwalton3.jellyfin-media-player.desktop"
+        ];
+      };
+    };
   };
 
   # The state version is required and should stay at the version you

@@ -41,6 +41,21 @@
           HostName 192.168.0.100
       '';
     };
+
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/shell"."favorite-apps" = [
+          "org.gnome.Nautilus.desktop"
+          "firefox.desktop"
+          "Alacritty.desktop"
+          "code.desktop"
+          "obsidian.desktop"
+          "discord.desktop"
+          "com.github.iwalton3.jellyfin-media-player.desktop"
+        ];
+      };
+    };
   };
 
   # More info:
