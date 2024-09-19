@@ -3,6 +3,9 @@
   imports = [
     ../../modules
 
+    # Logitech keyboard and mouse support
+    ./solaar.nix
+
     # Include the hardware scan.
     ./hardware-configuration.nix
   ];

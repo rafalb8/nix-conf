@@ -90,12 +90,6 @@ in
       xdg = {
         enable = true;
         configFile = {
-          # Solaar (Logitech)
-          "solaar" = {
-            source = ../../dotfiles/solaar;
-            recursive = true;
-          };
-
           # Easyeffects
           "easyeffects" = {
             source = ../../dotfiles/easyeffects;
@@ -105,13 +99,6 @@ in
 
         # Custom desktop entries
         desktopEntries = {
-          solaar = {
-            name = "Solaar";
-            icon = "solaar";
-            exec = "solaar -w hide";
-            categories = [ "Utility" "GTK" ];
-          };
-
           "com.github.iwalton3.jellyfin-media-player" = {
             name = "Jellyfin Media Player";
             icon = "com.github.iwalton3.jellyfin-media-player";
@@ -131,7 +118,6 @@ in
       autostart = {
         enable = true;
         packages = [
-          pkgs.solaar
           pkgs.discord
         ];
       };
@@ -205,12 +191,6 @@ in
 
     # Enable scanners
     hardware.sane.enable = true;
-
-    # Add solaar
-    hardware.logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
 
     # Enable sound with pipewire.
     hardware.pulseaudio.enable = false;
