@@ -1,5 +1,4 @@
 # Home-Manager autostart module for managing desktop applications
-# Import inside home-manager.users.${config.user.name}
 { config, lib, ... }:
 let
   cfg = config.autostart;

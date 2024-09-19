@@ -68,10 +68,6 @@ in
 
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
-      imports = [
-        ../../extensions/autostart.nix
-      ];
-
       # Hide folders in home
       home.file = {
         ".hidden".text = ''

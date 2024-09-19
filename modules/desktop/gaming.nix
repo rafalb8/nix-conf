@@ -4,7 +4,6 @@ let
 in
 {
   config = lib.mkIf cfg.gaming.enable {
-
     environment.systemPackages = with pkgs; [
       edge.prismlauncher
       edge.protontricks
@@ -34,10 +33,6 @@ in
     # };
 
     home-manager.users.${config.user.name} = {
-      imports = [
-        ../../extensions/autostart.nix
-      ];
-
       xdg = {
         enable = true;
 

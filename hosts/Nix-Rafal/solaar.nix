@@ -7,10 +7,6 @@
   };
 
   home-manager.users.${config.user.name} = {
-    imports = [
-      ../../extensions/autostart.nix
-    ];
-
     xdg = {
       enable = true;
 
@@ -29,11 +25,11 @@
           categories = [ "Utility" "GTK" ];
         };
       };
+    };
 
-      autostart = {
-        enable = true;
-        packages = [ pkgs.solaar ];
-      };
+    autostart = {
+      enable = true;
+      packages = [ pkgs.solaar ];
     };
   };
 }

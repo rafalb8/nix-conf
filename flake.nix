@@ -52,6 +52,7 @@
 
           modules = [
             ./hosts/Nix-Rafal
+            ./extensions/home-manager
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
@@ -68,6 +69,7 @@
 
           modules = [
             ./hosts/T14-gen3
+            ./extensions/home-manager
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
