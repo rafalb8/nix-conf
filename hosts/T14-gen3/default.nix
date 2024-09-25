@@ -38,7 +38,7 @@
       enable = true;
       extraConfig = ''
         Host server
-          HostName 192.168.0.100
+          HostName 100.64.0.1
       '';
     };
 
@@ -83,7 +83,7 @@
 
       CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      
+
       # Charge tresholds. (Lenovo defaults)
       START_CHARGE_THRESH_BAT0 = 75;
       STOP_CHARGE_THRESH_BAT0 = 80;
