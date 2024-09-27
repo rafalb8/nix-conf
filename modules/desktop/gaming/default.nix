@@ -3,7 +3,10 @@ let
   cfg = config.modules.desktop;
 in
 {
+  imports = [ ./streaming.nix ];
+
   config = lib.mkIf cfg.gaming.enable {
+
     environment.systemPackages = with pkgs; [
       edge.prismlauncher
       edge.protontricks
@@ -24,13 +27,6 @@ in
       capSysNice = true;
     };
 
-    # services.sunshine = {
-    #   enable = true;
-    #   autoStart = false;
-    #   openFirewall = true;
-
-    #   package = (pkgs.edge.sunshine.override { cudaSupport = true; });
-    # };
 
     home-manager.users.${config.user.name} = {
       xdg = {
@@ -38,7 +34,7 @@ in
 
         # Configure MangoHud
         configFile."MangoHud" = {
-          source = ../../dotfiles/MangoHud;
+          source = ../../../dotfiles/MangoHud;
           recursive = true;
         };
 

@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./gaming.nix
+    ./gaming
     ./gnome.nix
   ];
 
@@ -18,6 +18,7 @@ in
 
     gaming = {
       enable = lib.mkEnableOption "Gaming";
+      streaming = lib.mkEnableOption "Enable streaming with Sunshine";
     };
   };
 

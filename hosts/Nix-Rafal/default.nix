@@ -22,7 +22,10 @@
     desktop = {
       enable = true;
       environment.gnome = true;
-      gaming.enable = true;
+      gaming = {
+        enable = true;
+        streaming = false;
+      };
     };
   };
 
