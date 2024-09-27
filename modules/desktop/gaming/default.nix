@@ -15,7 +15,7 @@ in
       # edge.bottles
       edge.heroic
       edge.lutris
-      sgdboop
+      custom.sgdboop
     ];
 
     programs.steam = {

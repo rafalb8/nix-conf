@@ -19,7 +19,10 @@
   outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs-edge {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       # Custom Packages
@@ -39,7 +42,9 @@
 
         # Custom packages overlay
         custom = final: prev: {
-          inherit (self.packages.${final.system}) sgdboop;
+          custom = {
+            inherit (self.packages.${final.system}) sgdboop sunshine;
+          };
         };
       };
 

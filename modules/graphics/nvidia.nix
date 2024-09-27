@@ -52,7 +52,7 @@ in
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = /* nvidia-patch.nvfbc */ config.boot.kernelPackages.nvidiaPackages.stable;
+      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     # Enable docker gpu support
