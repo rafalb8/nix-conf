@@ -58,8 +58,10 @@ in
     # Enable docker gpu support
     hardware.nvidia-container-toolkit.enable = true;
 
-    # Add scripts
     environment.systemPackages = [
+      # rigaya/NVEnc
+      (pkgs.custom.nvencc.override { nvidia = config.hardware.nvidia.package; })
+      # Add scripts
       nvidia-vrr
     ];
   };

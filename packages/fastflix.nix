@@ -26,6 +26,7 @@ let
       hash = "sha256-teH7pM6sevpoSfPx9zUDUbFCCFJnQ5HOGMIIskJ/BMM=";
     };
 
+    # Run once, to generate mappings
     postInstall = ''
       pushd $out/lib/python3.11/site-packages/
       python3 -c 'import iso639;'

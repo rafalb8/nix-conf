@@ -35,7 +35,6 @@ in
       audacity
       calibre
       mpv
-      custom.nvencc
       custom.fastflix
 
       # Development

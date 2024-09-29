@@ -1,17 +1,14 @@
-{ cudaPackages
-, linuxPackages_latest
+{ stdenv
 , dpkg
 , fetchurl
 , autoPatchelfHook
-, autoAddDriverRunpath
 , libstdcxx5
 , ffmpeg
 , libass
 , libgcc
+  # Nvidia Driver, set using (nvencc.override { nvidia = config.hardware.nvidia.package; })
+, nvidia ? null
 }:
-let
-  stdenv = cudaPackages.backendStdenv;
-in
 stdenv.mkDerivation rec {
   pname = "NVEnc";
   version = "7.69";
@@ -21,12 +18,9 @@ stdenv.mkDerivation rec {
     hash = "sha256-ixXlaMC1faIRYsJgo/72inpnXL15AGuzUpLXiHh16y8=";
   };
 
-  unpackPhase = "dpkg-deb -x $src .";
-
   nativeBuildInputs = [
     dpkg
     autoPatchelfHook
-    autoAddDriverRunpath
   ];
 
   buildInputs = [
@@ -34,8 +28,8 @@ stdenv.mkDerivation rec {
     ffmpeg
     libass
     libgcc
-    cudaPackages.cudatoolkit
-    linuxPackages_latest.nvidia_x11
+    # Nvidia Driver
+    nvidia
   ];
 
   installPhase = ''
