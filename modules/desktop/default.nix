@@ -35,6 +35,8 @@ in
       audacity
       calibre
       mpv
+      custom.nvencc
+      custom.fastflix
 
       # Development
       temurin-jre-bin

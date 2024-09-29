@@ -28,6 +28,8 @@
       # Custom Packages
       packages.${system} = {
         sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
+        nvencc = pkgs.callPackage ./packages/nvencc.nix { };
+        fastflix = nixpkgs.legacyPackages.${system}.callPackage ./packages/fastflix.nix { };
       };
 
       # Overlays
@@ -42,9 +44,7 @@
 
         # Custom packages overlay
         custom = final: prev: {
-          custom = {
-            inherit (self.packages.${final.system}) sgdboop sunshine;
-          };
+          custom = self.packages.${final.system};
         };
       };
 
