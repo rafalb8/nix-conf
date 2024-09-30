@@ -19,7 +19,8 @@
   outputs = { self, nixpkgs, nixpkgs-edge, home-manager, nvidia-patch, ... }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs-edge {
+      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-edge = import nixpkgs-edge {
         inherit system;
         config.allowUnfree = true;
       };
@@ -27,9 +28,9 @@
     {
       # Custom Packages
       packages.${system} = {
-        sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
-        nvencc = pkgs.callPackage ./packages/nvencc.nix { };
-        fastflix = nixpkgs.legacyPackages.${system}.callPackage ./packages/fastflix.nix { };
+        sgdboop = pkgs-edge.callPackage ./packages/sgdboop.nix { };
+        nvencc = pkgs-edge.callPackage ./packages/nvencc.nix { };
+        fastflix = pkgs.callPackage ./packages/fastflix.nix { };
       };
 
       # Overlays

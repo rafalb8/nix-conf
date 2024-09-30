@@ -1,6 +1,7 @@
 { python3Packages
 , fetchFromGitHub
 , fetchPypi
+, makeDesktopItem
 }:
 let
   # Missing
@@ -112,4 +113,16 @@ python3Packages.buildPythonPackage rec {
   ];
 
   doCheck = false;
+
+  desktopItem = makeDesktopItem {
+    name = "FastFlix";
+    exec = pname;
+    desktopName = "FastFlix";
+    categories = [ "AudioVideo" "Video" "TV" ];
+  };
+
+  postInstall = ''
+    mkdir -p $out/share/applications
+    cp ${desktopItem}/share/applications/*.desktop $out/share/applications
+  '';
 }
