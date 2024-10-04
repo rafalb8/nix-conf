@@ -28,9 +28,10 @@
     {
       # Custom Packages
       packages.${system} = {
-        sgdboop = pkgs-edge.callPackage ./packages/sgdboop.nix { };
-        nvencc = pkgs-edge.callPackage ./packages/nvencc.nix { };
         fastflix = pkgs.callPackage ./packages/fastflix.nix { };
+        nvencc = pkgs-edge.callPackage ./packages/nvencc.nix { };
+        sgdboop = pkgs-edge.callPackage ./packages/sgdboop.nix { };
+        sunshine = pkgs-edge.callPackage ./packages/sunshine.nix { };
       };
 
       # Overlays
