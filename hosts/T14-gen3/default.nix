@@ -92,14 +92,9 @@
 
   hardware.firmware = with pkgs; [ sof-firmware ];
 
-  # Fingerprint
-  # Use fprint-enroll to enroll a fingerprint
+  # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd = {
     enable = true;
-    tod = {
-      enable = true;
-      driver = pkgs.libfprint-2-tod1-vfs0090;
-    };
   };
 
   # The state version is required and should stay at the version you
