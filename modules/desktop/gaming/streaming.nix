@@ -24,12 +24,6 @@ in
       package = pkgs.custom.sunshine;
     };
 
-    # Fix PS5 controller
-    services.udev.extraRules = ''
-      KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
-      KERNEL=="uhid", TAG+="uaccess"
-    '';
-
     # Settings
     services.sunshine.settings = {
       capture = "nvfbc";
