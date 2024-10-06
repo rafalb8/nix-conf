@@ -7,10 +7,17 @@ let
     HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
     FPS=''${SUNSHINE_CLIENT_FPS:-75}
 
-    PROFILE="''${WIDTH}x''${HEIGHT}_''${FPS}"
-    if [ "$1" == "reset" ]; then
+    # Turn off easyeffects
+    easyeffects -q
+
+    if [ "$1" != "reset" ]; then
+      # Generate profile
+      PROFILE="''${WIDTH}x''${HEIGHT}_''${FPS}"
+    else
+      # Reset profile
       PROFILE="2560x1080_75"
     fi
+
     nvidia-settings --assign CurrentMetaMode="DP-0: ''${PROFILE} {ForceCompositionPipeline=Off, AllowGSYNCCompatible=Off}"
   '';
 in
