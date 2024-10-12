@@ -25,11 +25,11 @@
 }:
 appimageTools.wrapType2 rec {
   pname = "sunshine";
-  version = "2024.1005.14704";
+  version = "2024.1012.35905";
 
   src = fetchurl {
     url = "https://github.com/LizardByte/Sunshine/releases/download/v${version}/sunshine.AppImage";
-    hash = "sha256-TGyAJALAPFwdcKnj0Bhm7yk7XBbWJ+q8eYvVRFxgIxg=";
+    hash = "sha256-W3kFeWZjol1AZBG/w7radK/NH1IkfVNR/vETCFo/tuY=";
   };
 
   extraPkgs = pkgs: [
