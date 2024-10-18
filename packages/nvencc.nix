@@ -3,7 +3,7 @@
 , fetchurl
 , autoPatchelfHook
 , libstdcxx5
-, ffmpeg
+, ffmpeg_6
 , libass
 , libgcc
   # Nvidia Driver, set using (nvencc.override { nvidia = config.hardware.nvidia.package; })
@@ -11,11 +11,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "NVEnc";
-  version = "7.69";
+  version = "7.70";
 
   src = fetchurl {
     url = "https://github.com/rigaya/NVEnc/releases/download/${version}/nvencc_${version}_Ubuntu24.04_amd64.deb";
-    hash = "sha256-ixXlaMC1faIRYsJgo/72inpnXL15AGuzUpLXiHh16y8=";
+    hash = "sha256-Fms9Cx1MDuMIU0QJ3YvnZwWoEpsfyxcjFqAnbifomXQ=";
   };
 
   nativeBuildInputs = [
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 
   buildInputs = [
     libstdcxx5
-    ffmpeg
+    ffmpeg_6
     libass
     libgcc
     # Nvidia Driver
