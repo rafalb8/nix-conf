@@ -8,14 +8,17 @@ in
   config = lib.mkIf cfg.gaming.enable {
 
     environment.systemPackages = with pkgs; [
+      # Tools
       edge.prismlauncher
       edge.protontricks
       mesa-demos
       edge.mangohud
-      # edge.bottles
-      edge.heroic
-      edge.lutris
       custom.sgdboop
+
+      # Wine guis
+      edge.bottles
+      edge.heroic
+      # edge.lutris
     ];
 
     programs.steam = {
