@@ -46,7 +46,7 @@ in
       open = true;
 
       # Enable the Nvidia settings menu accessible via `nvidia-settings`.
-      nvidiaSettings = false;
+      nvidiaSettings = true;
 
       # https://wiki.nixos.org/wiki/Nvidia#Screen_tearing_issues
       forceFullCompositionPipeline = true;
