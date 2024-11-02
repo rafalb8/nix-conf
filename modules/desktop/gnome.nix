@@ -35,6 +35,7 @@ in
         gnome.ghex
         mission-center
         adw-gtk3
+        drawing
       ]);
 
     home-manager.users.${config.user.name} = {
