@@ -92,6 +92,11 @@
 
   hardware.firmware = with pkgs; [ sof-firmware ];
 
+  services.fwupd = {
+    enable = true;
+    package = pkgs.edge.fwupd;
+  };
+
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd = {
     enable = true;
