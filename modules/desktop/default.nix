@@ -198,6 +198,15 @@ in
       #jack.enable = true;
     };
 
+    hardware.bluetooth = {
+      enable = true;
+    };
+
+    services.fwupd = {
+      enable = true;
+      package = pkgs.edge.fwupd;
+    };
+
     # Fonts
     fonts = {
       packages = with pkgs; [
