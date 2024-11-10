@@ -51,7 +51,7 @@ in
       ventoy
 
       # Web
-      qbittorrent
+      edge.qbittorrent
       firefox
       discord
     ];
