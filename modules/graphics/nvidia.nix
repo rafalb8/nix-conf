@@ -52,11 +52,24 @@ in
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.stable;
+      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.beta;
     };
+
+    # Enable fbdev (might be added by default in the future)
+    boot.kernelParams = [ "nvidia-drm.fbdev=1" ];
 
     # Enable docker gpu support
     hardware.nvidia-container-toolkit.enable = true;
+
+    # Enable experimental Gnome VRR support
+    home-manager.users.${config.user.name} = lib.mkIf config.modules.desktop.environment.gnome {
+      dconf = {
+        enable = true;
+        settings = {
+          "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
+        };
+      };
+    };
 
     environment.systemPackages = [
       # rigaya/NVEnc

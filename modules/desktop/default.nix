@@ -43,12 +43,13 @@ in
 
       # Tools
       imagemagick_light
+      edge.input-leap
       impression
       obsidian
       anydesk
-      barrier
       szyszka
       ventoy
+
 
       # Web
       edge.qbittorrent
@@ -134,7 +135,7 @@ in
     networking.firewall = {
       enable = true;
       ports = [
-        # Barrier
+        # Barrier / Input-Leap
         "24800"
         # Wireguard
         "51820/udp"
