@@ -11,11 +11,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "NVEnc";
-  version = "7.70";
+  version = "7.75";
 
   src = fetchurl {
     url = "https://github.com/rigaya/NVEnc/releases/download/${version}/nvencc_${version}_Ubuntu24.04_amd64.deb";
-    hash = "sha256-Fms9Cx1MDuMIU0QJ3YvnZwWoEpsfyxcjFqAnbifomXQ=";
+    sha256 = "1m6hfkkb9a7chja2kck6yyknay384fyqfcs6wz4qwnix2hwh5m5d";
   };
 
   nativeBuildInputs = [

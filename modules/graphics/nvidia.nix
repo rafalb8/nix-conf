@@ -52,7 +52,7 @@ in
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.beta;
+      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     # Enable fbdev (might be added by default in the future)

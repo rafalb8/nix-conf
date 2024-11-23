@@ -79,14 +79,14 @@ let
 in
 python3Packages.buildPythonPackage rec {
   pname = "fastflix";
-  version = "5.8.1";
+  version = "5.8.2";
   format = "pyproject";
 
   src = fetchFromGitHub {
     owner = "cdgriffith";
     repo = "FastFlix";
     rev = version;
-    sha256 = "sha256-vEP/2NQvRoxYz2CR9JZCH4Ey3tjwc6nBfokR1UfQ1GI=";
+    sha256 = "sha256-M8vjim5ZX1jTRAi69E2tZE/5BMTxfGztwH2CCYv3TUs=";
   };
 
   propagatedBuildInputs = with python3Packages; [
