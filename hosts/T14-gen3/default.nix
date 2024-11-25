@@ -95,6 +95,7 @@
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd = {
     enable = true;
+    package = pkgs.fprintd-tod;
   };
 
   # The state version is required and should stay at the version you
