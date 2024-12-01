@@ -30,12 +30,12 @@ in
       # Essentials
       (with pkgs; [
         # gnome.gnome-terminal
-        gnome.adwaita-icon-theme
-        gnome.gnome-tweaks
-        gnome.ghex
+        adwaita-icon-theme
         mission-center
+        gnome-tweaks
         adw-gtk3
         drawing
+        ghex
       ]);
 
     home-manager.users.${config.user.name} = {
@@ -115,7 +115,7 @@ in
     };
 
     # Exclude gnome default packages
-    environment.gnome.excludePackages = (with pkgs.gnome; [
+    environment.gnome.excludePackages = (with pkgs; [
       gnome-shell-extensions # default ext
       gnome-contacts
       gnome-calendar

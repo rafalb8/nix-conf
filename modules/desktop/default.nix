@@ -185,9 +185,7 @@ in
     hardware.sane.enable = true;
 
     # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
-    sound.enable = true;
     services.pipewire = {
       enable = true;
       alsa = {
@@ -212,7 +210,7 @@ in
     fonts = {
       packages = with pkgs; [
         noto-fonts
-        noto-fonts-cjk
+        noto-fonts-cjk-sans
         noto-fonts-color-emoji
         noto-fonts-monochrome-emoji
         source-code-pro

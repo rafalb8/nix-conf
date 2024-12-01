@@ -4,11 +4,9 @@ let
 in
 {
   config = lib.mkIf cfg.amd {
-    # Enable OpenGL
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     services.xserver = {
@@ -16,6 +14,9 @@ in
       videoDrivers = [ "modesetting" ];
     };
 
-    hardware.amdgpu.initrd.enable = true;
+    hardware.amdgpu = {
+      initrd.enable = true;
+      # amdvlk.enable = true;
+    };
   };
 }
