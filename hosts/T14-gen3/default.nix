@@ -74,7 +74,11 @@
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
+  # Charge tresholds might be implemented
+  # in Gnome 48 (NixOS 25.04 or higher)
   services.power-profiles-daemon.enable = false;
+
+  # For now, use tlp
   services.tlp = {
     enable = true;
     settings = {
@@ -95,7 +99,6 @@
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd = {
     enable = true;
-    package = pkgs.fprintd-tod;
   };
 
   # The state version is required and should stay at the version you
