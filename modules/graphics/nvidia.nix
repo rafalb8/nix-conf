@@ -1,10 +1,8 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
-
-  nvidia-patch = import ./patch.nix { inherit lib pkgs inputs; };
-
-  nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
+  /*
+    nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }
 
     g() { nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceCompositionPipeline=$1, AllowGSYNCCompatible=On}"; }
@@ -14,15 +12,14 @@ let
     [[ "$*" =~ [Tt1] ]] && g Off || g On
     # Enable Indicator
     [[ "$*" =~ (-i|--indicator) ]] && i 1 || i 0
-  '';
+    '';
+  */
 in
 {
   config = lib.mkIf cfg.nvidia {
-    # Enable OpenGL
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     # Load nvidia driver for Xorg and Wayland
@@ -36,7 +33,7 @@ in
       modesetting.enable = true;
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = false;
+      powerManagement.enable = true;
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
       powerManagement.finegrained = false;
@@ -46,13 +43,13 @@ in
       open = true;
 
       # Enable the Nvidia settings menu accessible via `nvidia-settings`.
-      nvidiaSettings = true;
+      nvidiaSettings = false;
 
       # https://wiki.nixos.org/wiki/Nvidia#Screen_tearing_issues
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = nvidia-patch.nvfbc config.boot.kernelPackages.nvidiaPackages.stable;
+      package = pkgs.custom.nvidia.nvfbc config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     # Enable fbdev (might be added by default in the future)
@@ -61,7 +58,15 @@ in
     # Enable docker gpu support
     hardware.nvidia-container-toolkit.enable = true;
 
-    # Enable experimental Gnome VRR support
+    environment.systemPackages = [
+      # rigaya/NVEnc
+      (pkgs.custom.nvencc.override { nvidia = config.hardware.nvidia.package; })
+      # nvidia-vrr
+    ];
+
+    ## GNOME
+
+    # Enable experimental VRR support
     home-manager.users.${config.user.name} = lib.mkIf config.modules.desktop.environment.gnome {
       dconf = {
         enable = true;
@@ -71,11 +76,42 @@ in
       };
     };
 
-    environment.systemPackages = [
-      # rigaya/NVEnc
-      (pkgs.custom.nvencc.override { nvidia = config.hardware.nvidia.package; })
-      # Add scripts
-      nvidia-vrr
-    ];
+    # Fix Sleep (might be not needed in the future)
+    systemd.services = {
+      "gnome-suspend" = {
+        description = "suspend gnome shell";
+        before = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "nvidia-suspend.service"
+          "nvidia-hibernate.service"
+        ];
+        wantedBy = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+        };
+      };
+
+      "gnome-resume" = {
+        description = "resume gnome shell";
+        after = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "nvidia-resume.service"
+        ];
+        wantedBy = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+        };
+      };
+    };
   };
 }

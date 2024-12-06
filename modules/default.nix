@@ -2,8 +2,6 @@
 {
   # Modules
   imports = [
-    ../extensions
-
     ./desktop
     ./graphics
     ./home

@@ -1,7 +1,9 @@
 { ... }:
 {
   imports = [
-    ./options.nix
+    ./home-manager
+
     ./firewall.nix
+    ./options.nix
   ];
 }

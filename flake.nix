@@ -38,9 +38,11 @@
       # Custom Packages
       packages.${system} = {
         fastflix = pkgs-old.callPackage ./packages/fastflix.nix { };
-        nvencc = pkgs.callPackage ./packages/nvencc.nix { };
+        nvencc = pkgs-old.callPackage ./packages/nvencc.nix { };
         sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
         sunshine = pkgs.callPackage ./packages/sunshine.nix { };
+
+        nvidia = pkgs.callPackage ./packages/nvidia-patch.nix { inherit inputs; };
       };
 
       # Overlays
@@ -68,7 +70,7 @@
 
           modules = [
             ./hosts/${hostname}
-            ./extensions/home-manager
+            ./extensions
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
