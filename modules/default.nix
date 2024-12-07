@@ -93,7 +93,7 @@
 
     # NixOS aliases
     nix-apply = "nixos-rebuild switch --show-trace -L -v";
-    nix-upgrade = "eval 'nix flake update /etc/nixos && nixos-rebuild boot --show-trace -L -v'";
+    nix-upgrade = "eval 'nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v'";
     nix-edit = "code /etc/nixos";
 
     # Replacements
@@ -106,7 +106,7 @@
   };
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     # Tools
     appimage-run
