@@ -30,12 +30,12 @@ in
 
       # Media
       jellyfin-media-player
+      custom.fastflix
       obs-studio
       kdenlive
       audacity
       calibre
       mpv
-      custom.fastflix
 
       # Development
       temurin-jre-bin
@@ -49,7 +49,6 @@ in
       anydesk
       szyszka
       ventoy
-
 
       # Web
       edge.qbittorrent
