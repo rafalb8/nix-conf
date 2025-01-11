@@ -24,7 +24,7 @@
       environment.gnome = true;
       gaming = {
         enable = true;
-        streaming = true;
+        streaming = false;
       };
     };
   };
