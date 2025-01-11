@@ -39,6 +39,7 @@ in
 
       # Development
       temurin-jre-bin
+      android-tools
       edge.vscode
 
       # Tools
