@@ -12,7 +12,7 @@ in
       edge.prismlauncher
       edge.protontricks
       mesa-demos
-      edge.mangohud
+      mangohud
       custom.sgdboop
 
       # Wine guis
@@ -20,6 +20,13 @@ in
       edge.heroic
       # edge.lutris
     ];
+
+    # VR
+    # programs.alvr = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   package = pkgs.edge.alvr;
+    # };
 
     programs.steam = {
       enable = true;
@@ -29,7 +36,6 @@ in
       enable = true;
       capSysNice = true;
     };
-
 
     home-manager.users.${config.user.name} = {
       xdg = {
