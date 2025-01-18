@@ -11,7 +11,7 @@
 
   boot = {
     # Use latest kernel
-    kernelPackages = pkgs.edge.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.edge.linuxPackages_latest;
 
     # Bootloader
     loader = {

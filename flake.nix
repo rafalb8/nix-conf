@@ -6,6 +6,8 @@
     nixpkgs-edge.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +24,7 @@
     , nixpkgs
     , nixpkgs-edge
     , nixpkgs-old
+    , chaotic
     , home-manager
     , nvidia-patch
     , ...
@@ -71,6 +74,12 @@
           modules = [
             ./hosts/${hostname}
             ./extensions
+
+            # Chaotic
+            chaotic.nixosModules.nyx-cache
+            chaotic.nixosModules.nyx-overlay
+            chaotic.nixosModules.nyx-registry
+
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.edge self.overlays.custom ];
