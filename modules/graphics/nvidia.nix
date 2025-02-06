@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
-  /*
-    nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
+
+  nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }
 
     g() { nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceCompositionPipeline=$1, AllowGSYNCCompatible=On}"; }
@@ -12,8 +12,7 @@ let
     [[ "$*" =~ [Tt1] ]] && g Off || g On
     # Enable Indicator
     [[ "$*" =~ (-i|--indicator) ]] && i 1 || i 0
-    '';
-  */
+  '';
 in
 {
   config = lib.mkIf cfg.nvidia {
@@ -43,13 +42,13 @@ in
       open = true;
 
       # Enable the Nvidia settings menu accessible via `nvidia-settings`.
-      nvidiaSettings = false;
+      nvidiaSettings = true;
 
       # https://wiki.nixos.org/wiki/Nvidia#Screen_tearing_issues
       forceFullCompositionPipeline = true;
 
       # Patch nvidia driver to enable NvFBC
-      package = /* pkgs.custom.nvidia.nvfbc */ config.boot.kernelPackages.nvidiaPackages.beta;
+      package = pkgs.custom.nvidia.nvfbc config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     # Enable fbdev (might be added by default in the future)
@@ -61,7 +60,7 @@ in
     environment.systemPackages = [
       # rigaya/NVEnc
       (pkgs.custom.nvencc.override { nvidia = config.hardware.nvidia.package; })
-      # nvidia-vrr
+      nvidia-vrr
     ];
 
     ## GNOME
