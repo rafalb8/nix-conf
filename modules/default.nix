@@ -112,6 +112,7 @@
     appimage-run
     ripgrep
     xclip
+    micro
     file
     lsof
     bat
