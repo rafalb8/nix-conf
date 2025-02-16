@@ -3,7 +3,7 @@
   home-manager.users.${config.user.name} = {
     # The state version is required and should stay at the version you
     # originally installed.
-    home.stateVersion = "23.11";
+    home.stateVersion = config.system.stateVersion;
 
     home.sessionVariables = {
       CGO_ENABLED = 0;
@@ -12,8 +12,8 @@
       PATH = "$HOME/go/bin:$PATH";
 
       # Use bat for man
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-      MANROFFOPT = "-c";
+      # https://github.com/sharkdp/bat?tab=readme-ov-file#man
+      MANPAGER = ''sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman' '';
     };
 
     programs.zsh = {
@@ -50,32 +50,12 @@
       };
 
       initExtra = ''
+        alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
         # Functions
         function localip() {
             echo $(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
         }
-
-        # Better help formatting with ? or --help
-        function help {
-            # Replace ? with --help flag
-            if [[ "$BUFFER" =~ '^(-?\w\s?)+\?$' ]]; then
-                BUFFER="''${BUFFER::-1} --help"
-            fi
-    
-            # If --help flag found, pipe output through bat
-            if [[ "$BUFFER" =~ '^(-?\w\s?)+ --help$' ]]; then
-                BUFFER="$BUFFER | bat -p -l help"
-            fi
-    
-            # press enter
-            zle accept-line
-        }
-
-        # Define new widget in Zsh Line Editor
-        zle -N help
-        # Bind widget to enter key
-        bindkey '^J' help
-        bindkey '^M' help
       '';
     };
 
