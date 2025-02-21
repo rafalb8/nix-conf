@@ -10,7 +10,12 @@ let
 
   driverMod = patch: target: driver:
     driver.overrideAttrs ({ version, preFixup ? "", ... }:
-      {
+      let
+        hasPatch = lib.warnIfNot (builtins.hasAttr version patch)
+          ''Patch for driver ${version} not found.''
+          false;
+      in
+      lib.mkIf hasPatch {
         preFixup = preFixup + ''
           sed -i '${patch.${version}}' $out/lib/${target}.${version}
         '';
