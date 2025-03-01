@@ -5,7 +5,7 @@ let
   nvidia-vrr = pkgs.writeShellScriptBin "nvidia-vrr" ''
     [[ $# -eq 0 ]] && { echo "Usage: $0 [true|false] [-i|--indicator]"; exit 1; }
 
-    g() { nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceCompositionPipeline=$1, AllowGSYNCCompatible=On}"; }
+    g() { nvidia-settings -a CurrentMetaMode="2560x1080_75 +0+0 {ForceCompositionPipeline=$1, AllowGSYNCCompatible=On}"; }
     i() { nvidia-settings -a "ShowVRRVisualIndicator=$1"; }
 
     # Enable GSync
@@ -19,6 +19,7 @@ in
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [ nvidia-vaapi-driver ];
     };
 
     # Load nvidia driver for Xorg and Wayland
