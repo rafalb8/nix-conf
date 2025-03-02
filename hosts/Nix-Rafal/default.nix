@@ -73,6 +73,7 @@
         "org/gnome/shell"."favorite-apps" = [
           "org.gnome.Nautilus.desktop"
           "firefox.desktop"
+          "brave-browser.desktop"
           "Alacritty.desktop"
           "code.desktop"
           "obsidian.desktop"
