@@ -118,7 +118,6 @@ in
       "vm.page-cluster" = 0;
     };
 
-
     # Enable sound with pipewire.
     security.rtkit.enable = true;
     services.pipewire = {
@@ -164,68 +163,64 @@ in
       spiceUSBRedirection.enable = true;
     };
     programs.virt-manager.enable = true;
-  };
 
-  # Add reminder for jellyfin
-  warnings =
-    if pkgs.jellyfin-media-player.version > "1.11.1" then
-      [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ]
-    else [ ];
+    # Add reminder for jellyfin
+    warnings =
+      if pkgs.jellyfin-media-player.version > "1.11.1" then
+        [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ]
+      else [ ];
 
-  # Setup home for desktop
-  home-manager.users.${config.user.name} = {
-    # Hide folders in home
-    home.file = {
-      ".hidden".text = ''
-        Desktop
-        Public
-        Templates
-        go
-      '';
-    };
-
-    xdg = {
-      enable = true;
-
-      # Custom desktop entries
-      desktopEntries = {
-        "com.github.iwalton3.jellyfin-media-player" = {
-          name = "Jellyfin Media Player";
-          icon = "com.github.iwalton3.jellyfin-media-player";
-          exec = "jellyfinmediaplayer";
-          settings = {
-            StartupWMClass = "jellyfinmediaplayer";
-          };
-          categories = [ "AudioVideo" "Video" "Player" "TV" ];
-        };
+    # Setup home for desktop
+    home-manager.users.${config.user.name} = {
+      # Hide folders in home
+      home.file = {
+        ".hidden".text = ''
+          Desktop
+          Public
+          Templates
+          go
+        '';
       };
-    };
 
-    # Easyeffects service
-    services.easyeffects.enable = true;
-
-    # Autostart
-    autostart = {
-      enable = true;
-      packages = [
-        pkgs.discord
-      ];
-    };
-
-    programs = {
-      # Configure alacritty
-      alacritty = {
+      xdg = {
         enable = true;
-        settings = {
-          window = {
-            opacity = 0.9;
-            dimensions = {
-              columns = 140;
-              lines = 40;
+
+        # Custom desktop entries
+        desktopEntries = {
+          # Fix for jellyfin
+          "com.github.iwalton3.jellyfin-media-player" = {
+            name = "Jellyfin Media Player";
+            icon = "com.github.iwalton3.jellyfin-media-player";
+            exec = "jellyfinmediaplayer";
+            settings = {
+              StartupWMClass = "jellyfinmediaplayer";
             };
+            categories = [ "AudioVideo" "Video" "Player" "TV" ];
+          };
+        };
+      };
+
+      # Easyeffects service
+      services.easyeffects.enable = true;
+
+      # Autostart
+      autostart = {
+        enable = true;
+        packages = [ pkgs.discord ];
+      };
+
+      # Configure alacritty
+      programs.alacritty = {
+        enable = true;
+        settings.window = {
+          opacity = 0.9;
+          dimensions = {
+            columns = 140;
+            lines = 40;
           };
         };
       };
     };
+
   };
 }
