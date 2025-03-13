@@ -164,6 +164,23 @@ in
     };
     programs.virt-manager.enable = true;
 
+    # Policies for chromium browsers
+    programs.chromium = {
+      enable = true;
+      extensions = [
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+      ];
+      extraOpts = {
+        "PasswordManagerEnabled" = false;
+        "SpellcheckEnabled" = true;
+        "SpellcheckLanguage" = [
+          "pl"
+          "en-US"
+        ];
+      };
+    };
+
     # Add reminder for jellyfin
     warnings =
       if pkgs.jellyfin-media-player.version > "1.11.1" then
