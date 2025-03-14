@@ -18,5 +18,17 @@ in
       initrd.enable = true;
       # amdvlk.enable = true;
     };
+
+    ## GNOME
+
+    # Enable experimental VRR support
+    home-manager.users.${config.user.name} = lib.mkIf config.modules.desktop.environment.gnome {
+      dconf = {
+        enable = true;
+        settings = {
+          "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
+        };
+      };
+    };
   };
 }

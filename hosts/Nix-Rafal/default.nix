@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -15,7 +15,7 @@
 
   # Enable modules
   modules = {
-    graphics.nvidia = true;
+    graphics.amd = true;
 
     desktop = {
       enable = true;
@@ -26,6 +26,29 @@
       };
     };
   };
+
+  # TODO: Remove when mesa 25.0.1 is released
+  hardware.graphics = with lib; {
+    package = mkForce pkgs.edge.mesa.drivers;
+    package32 = mkForce pkgs.edge.driversi686Linux.mesa.drivers;
+  };
+
+  # Requires `--impure`
+  system.replaceRuntimeDependencies = [
+    { original = pkgs.mesa.out; replacement = pkgs.edge.mesa.out; }
+    { original = pkgs.driversi686Linux.mesa.out; replacement = pkgs.edge.driversi686Linux.mesa.out; }
+  ];
+
+  # TODO: Remove when firmware 20250311 is released
+  hardware.firmware = with pkgs; [
+    (linux-firmware.overrideAttrs (old: {
+      version = "20250311";
+      src = builtins.fetchGit {
+        url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
+        rev = "b4cb02b2dc3330c6e5d69e84a616b1ca5faecf12";
+      };
+    }))
+  ];
 
   # Hostname
   networking.hostName = "Nix-Rafal";
