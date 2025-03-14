@@ -13,7 +13,6 @@ let
 
   generate = data: builtins.concatStringsSep "\n" (mapSet
     (k: v:
-      # If value is set, it's a preset 
       if builtins.isAttrs v then
         "[preset ${k}]\n${generate v}\n"
       else
