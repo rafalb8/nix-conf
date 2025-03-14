@@ -33,8 +33,7 @@
     package32 = mkForce pkgs.edge.driversi686Linux.mesa.drivers;
   };
 
-  # Requires `--impure`
-  system.replaceRuntimeDependencies = [
+  system.replaceDependencies.replacements = [
     { original = pkgs.mesa.out; replacement = pkgs.edge.mesa.out; }
     { original = pkgs.driversi686Linux.mesa.out; replacement = pkgs.edge.driversi686Linux.mesa.out; }
   ];

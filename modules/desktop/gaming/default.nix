@@ -29,6 +29,17 @@ in
 
     programs.steam = {
       enable = true;
+      remotePlay.openFirewall = true;
+      gamescopeSession = {
+        enable = true;
+        args = [
+          "--adaptive-sync"
+          "--hdr-enabled"
+          "--mangoapp"
+          "--rt"
+          "-r 75"
+        ];
+      };
     };
 
     programs.gamescope = {
