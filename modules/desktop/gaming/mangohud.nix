@@ -1,24 +1,17 @@
 { config, pkgs, ... }:
 let
-  # mapSet {} -> [ "string" ] Apply f to each key in set, return list. f = (k: v: ...)
-  mapSet = with builtins; f: set: map (key: f key (getAttr key set)) (attrNames set);
+  configLine = key: value:
+    if value == true then "${key}"
+    else if value == false then "# ${key}"
+    else "${key}=${builtins.toString value}";
 
-  generateLine = key: value:
-    if value == true then
-      "${key}"
-    else if value == false then
-      "# ${key}"
-    else
-      "${key}=${builtins.toString value}";
-
-  generate = data: builtins.concatStringsSep "\n" (mapSet
-    (k: v:
-      if builtins.isAttrs v then
-        "[preset ${k}]\n${generate v}\n"
-      else
-        generateLine k v
+  toConfig = with builtins; data: concatStringsSep "\n" (map
+    (k:
+      let v = getAttr k data; in
+      if isAttrs v then "${k}\n${toConfig v}\n"
+      else configLine k v
     )
-    data
+    (attrNames data)
   );
 
   MangoHud = {
@@ -45,9 +38,9 @@ in
     enable = true;
     configFile = {
       # Presets
-      "MangoHud/presets.conf".text = generate {
-        # Custom [preset 5]
-        "5" = {
+      "MangoHud/presets.conf".text = toConfig {
+        # Custom 
+        "[preset 5]" = {
           table_columns = 3;
           # CPU
           ram = true;
@@ -67,10 +60,10 @@ in
       };
 
       # Default config
-      "MangoHud/MangoHud.conf".text = generate MangoHud;
+      "MangoHud/MangoHud.conf".text = toConfig MangoHud;
 
       # App overrides
-      "MangoHud/cs2.conf".text = generate (MangoHud // { fps_limit = "73,0"; });
+      "MangoHud/cs2.conf".text = toConfig (MangoHud // { fps_limit = "73,0"; });
     };
   };
 }
