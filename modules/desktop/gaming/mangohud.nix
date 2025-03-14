@@ -29,7 +29,7 @@ let
     toggle_hud_position = "";
     toggle_logging = "";
 
-    # Enabled presets (No Display, FPS Only, Horizontal, Custom)
+    # Enabled presets (No Display, FPS Only, Horizontal, Custom, Detailed)
     preset = "0,1,2,5,4";
 
     # FPS limit
