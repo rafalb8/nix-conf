@@ -72,8 +72,9 @@
           specialArgs = { inherit inputs; };
 
           modules = [
-            ./hosts/${hostname}
+            ./modules
             ./extensions
+            ./hosts/${hostname}
 
             # Chaotic
             chaotic.nixosModules.nyx-cache

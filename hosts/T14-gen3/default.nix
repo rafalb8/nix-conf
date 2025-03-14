@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../modules
-
     # Include the hardware scan.
     ./hardware-configuration.nix
   ];

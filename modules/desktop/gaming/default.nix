@@ -3,7 +3,7 @@ let
   cfg = config.modules.desktop;
 in
 {
-  imports = [ ./streaming.nix ];
+  imports = [ ./streaming.nix ./mangohud.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
 
@@ -11,8 +11,7 @@ in
       # Tools
       edge.prismlauncher
       edge.protontricks
-      mesa-demos
-      mangohud
+      edge.mesa-demos
       custom.sgdboop
 
       # Wine guis
@@ -40,12 +39,6 @@ in
     home-manager.users.${config.user.name} = {
       xdg = {
         enable = true;
-
-        # Configure MangoHud
-        configFile."MangoHud" = {
-          source = ../../../dotfiles/MangoHud;
-          recursive = true;
-        };
 
         # Steam custom desktop entry
         desktopEntries.steam = {

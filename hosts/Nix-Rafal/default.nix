@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../modules
-
     # Logitech keyboard and mouse support
     ./solaar.nix
 
