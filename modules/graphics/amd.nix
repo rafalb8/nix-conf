@@ -19,9 +19,12 @@ in
       # amdvlk.enable = true;
     };
 
-    ## GNOME
+    # environment.systemPackages = [ pkgs.edge.lact ];
+    # systemd.packages = [ pkgs.edge.lact ];
+    # systemd.services.lactd.wantedBy = [ "multi-user.target" ];
+    # environment.systemPackages = [ pkgs.corectrl ];
 
-    # Enable experimental VRR support
+    # GNOME: Enable experimental VRR support
     home-manager.users.${config.user.name} = lib.mkIf config.modules.desktop.environment.gnome {
       dconf = {
         enable = true;

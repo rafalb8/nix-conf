@@ -10,7 +10,6 @@ in
     environment.systemPackages = with pkgs; [
       # Tools
       edge.prismlauncher
-      edge.protontricks
       edge.mesa-demos
       custom.sgdboop
 
@@ -30,6 +29,12 @@ in
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
+
+      protontricks = {
+        enable = true;
+        package = pkgs.edge.protontricks;
+      };
+
       gamescopeSession = {
         enable = true;
         args = [
