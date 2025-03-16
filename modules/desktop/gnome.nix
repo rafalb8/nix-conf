@@ -52,19 +52,20 @@ in
             switch-applications-backward = [ "<Shift><Super>Tab" ];
             switch-windows = [ "<Alt>Tab" ];
             switch-windows-backward = [ "<Shift><Alt>Tab" ];
-          };
-          "org/gnome/mutter/wayland/keybindings" = {
-            restore-shortcuts = [ ];
+            toggle-fullscreen = [ "<Shift><Super>Return" ];
           };
 
-          # Custom
           "org/gnome/settings-daemon/plugins/media-keys" = {
+            mic-mute = [ "<Super>v" ];
+
+            # Enable custom keybindings
             custom-keybindings = [
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             ];
           };
+          # Custom
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Terminal";
             command = "alacritty";
@@ -79,6 +80,14 @@ in
             name = "Mission Center";
             command = "missioncenter";
             binding = "<Shift><Ctrl>Escape";
+          };
+
+          # Disable keybindings
+          "org/gnome/mutter/wayland/keybindings" = {
+            restore-shortcuts = [ ];
+          };
+          "org/gnome/shell/keybindings" = {
+            toggle-message-tray = [ ];
           };
 
           # Enable gnome extensions
