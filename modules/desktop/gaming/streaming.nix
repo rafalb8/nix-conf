@@ -3,22 +3,19 @@ let
   cfg = config.modules.desktop;
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
-    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-2560}
+    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
     HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
-    FPS=''${SUNSHINE_CLIENT_FPS:-75}
+    FPS=''${SUNSHINE_CLIENT_FPS:-60}.000
 
-    # Turn off easyeffects
-    easyeffects -q
-
-    if [ "$1" != "reset" ]; then
-      # Generate profile
-      PROFILE="''${WIDTH}x''${HEIGHT}_''${FPS}"
-    else
+    if [ "$1" == "reset" ]; then
       # Reset profile
-      PROFILE="2560x1080_75"
+      PROFILE="2560x1080@74.991+vrr"
+    else
+      # Generate profile
+      PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
     fi
 
-    nvidia-settings --assign CurrentMetaMode="DP-0: ''${PROFILE} {ForceCompositionPipeline=Off, AllowGSYNCCompatible=Off}"
+    ${pkgs.gnome-monitor-config}/bin/gnome-monitor-config set -LpM DP-3 -m ''${PROFILE}
   '';
 in
 {
@@ -26,15 +23,10 @@ in
     services.sunshine = {
       enable = true;
       autoStart = false;
+      capSysAdmin = true;
       openFirewall = true;
 
-      package = pkgs.custom.sunshine;
-    };
-
-    # Settings
-    services.sunshine.settings = {
-      capture = "nvfbc";
-      encoder = "nvenc";
+      package = pkgs.edge.sunshine;
     };
 
     # Apps
