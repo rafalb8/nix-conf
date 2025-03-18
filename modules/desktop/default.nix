@@ -32,7 +32,7 @@ in
       jellyfin-media-player
       custom.fastflix
       obs-studio
-      kdenlive
+      kdePackages.kdenlive
       audacity
       calibre
       mpv
@@ -40,11 +40,11 @@ in
       # Development
       temurin-jre-bin
       android-tools
-      edge.vscode
+      vscode
 
       # Tools
       imagemagick_light
-      edge.input-leap
+      input-leap
       impression
       obsidian
       anydesk
@@ -135,10 +135,7 @@ in
       sane.enable = true;
     };
 
-    services.fwupd = {
-      enable = true;
-      package = pkgs.edge.fwupd;
-    };
+    services.fwupd.enable = true;
 
     # Fonts
     fonts = {
@@ -151,7 +148,7 @@ in
         source-han-mono
         source-han-sans
         source-han-serif
-        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        nerd-fonts.jetbrains-mono
       ];
       fontDir.enable = true;
       fontconfig.enable = true;

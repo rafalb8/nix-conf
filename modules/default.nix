@@ -11,14 +11,14 @@
 
   boot = {
     # Use latest kernel
-    kernelPackages = lib.mkDefault pkgs.edge.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     # Bootloader
     loader = {
       timeout = 0;
       systemd-boot = {
         enable = true;
-        configurationLimit = 3;
+        configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };
@@ -170,10 +170,7 @@
     zsh.enable = true;
   };
 
-  services.tailscale = {
-    enable = true;
-    package = pkgs.edge.tailscale;
-  };
+  services.tailscale.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;

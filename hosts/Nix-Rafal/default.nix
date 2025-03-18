@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -27,24 +27,18 @@
     };
   };
 
-  # TODO: Remove when mesa 25.0.1 is released
-  hardware.graphics = with lib; {
-    package = mkForce pkgs.edge.mesa.drivers;
-    package32 = mkForce pkgs.edge.driversi686Linux.mesa.drivers;
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = true;
+    replaceBasePackage = true;
   };
 
-  system.replaceDependencies.replacements = [
-    { original = pkgs.mesa.out; replacement = pkgs.edge.mesa.out; }
-    { original = pkgs.driversi686Linux.mesa.out; replacement = pkgs.edge.driversi686Linux.mesa.out; }
-  ];
-
-  # TODO: Remove when firmware 20250311 is released
   hardware.firmware = with pkgs; [
     (linux-firmware.overrideAttrs (old: {
-      version = "20250311";
+      version = "git";
       src = builtins.fetchGit {
         url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "b4cb02b2dc3330c6e5d69e84a616b1ca5faecf12";
+        rev = "588505068c48fe07b1cfa32c5f3acd4395ec9482";
       };
     }))
   ];

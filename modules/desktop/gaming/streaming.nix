@@ -25,8 +25,6 @@ in
       autoStart = false;
       capSysAdmin = true;
       openFirewall = true;
-
-      package = pkgs.edge.sunshine;
     };
 
     # Apps

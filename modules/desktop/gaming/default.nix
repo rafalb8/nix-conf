@@ -9,31 +9,27 @@ in
 
     environment.systemPackages = with pkgs; [
       # Tools
-      edge.prismlauncher
-      edge.mesa-demos
+      prismlauncher
+      mesa-demos
       custom.sgdboop
 
       # Wine guis
-      edge.bottles
-      edge.heroic
-      # edge.lutris
+      bottles
+      heroic
+      # lutris
     ];
 
     # VR
     # programs.alvr = {
     #   enable = true;
     #   openFirewall = true;
-    #   package = pkgs.edge.alvr;
     # };
 
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
 
-      protontricks = {
-        enable = true;
-        package = pkgs.edge.protontricks;
-      };
+      protontricks.enable = true;
 
       gamescopeSession = {
         enable = true;

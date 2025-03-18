@@ -19,8 +19,8 @@ in
       # amdvlk.enable = true;
     };
 
-    # environment.systemPackages = [ pkgs.edge.lact ];
-    # systemd.packages = [ pkgs.edge.lact ];
+    # environment.systemPackages = [ pkgs.lact ];
+    # systemd.packages = [ pkgs.lact ];
     # systemd.services.lactd.wantedBy = [ "multi-user.target" ];
     # environment.systemPackages = [ pkgs.corectrl ];
 

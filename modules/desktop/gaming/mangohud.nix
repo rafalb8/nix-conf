@@ -31,7 +31,7 @@ let
 in
 {
   # Add package
-  environment.systemPackages = [ pkgs.edge.mangohud ];
+  environment.systemPackages = [ pkgs.mangohud ];
 
   # Config
   home-manager.users.${config.user.name}.xdg = {
