@@ -128,6 +128,8 @@ in
         support32Bit = true;
       };
     };
+    # Fix alsamixer changes not persisting
+    hardware.alsa.enablePersistence = true;
 
     hardware = {
       bluetooth.enable = true;
