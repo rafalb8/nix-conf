@@ -93,6 +93,7 @@
           "steam.desktop"
           "discord.desktop"
           "com.github.iwalton3.jellyfin-media-player.desktop"
+          "com.github.wwmm.easyeffects.desktop"
         ];
       };
     };
