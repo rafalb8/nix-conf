@@ -79,31 +79,41 @@
     shell = pkgs.zsh;
   };
 
-  environment.shellAliases = {
-    # Enable sudo with aliases
-    sudo = "sudo ";
+  environment.shellAliases =
+    let
+      nix-alias = pkgs.writeShellScriptBin "nix-alias" ''
+        case "$1" in
+          switch) nixos-rebuild switch --show-trace -L -v;;
+          boot) nixos-rebuild boot --show-trace -L -v;;
+          upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v';;
+          code) code /etc/nixos;;
+          *) \nix "$@";;
+        esac
+      '';
+    in
+    {
+      # Enable sudo with aliases
+      sudo = "sudo ";
 
-    # Main
-    du = "du -h";
-    df = "df -h";
-    xclip = "xclip -selection clipboard";
-    fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
-    certcat = "openssl x509 -text -in";
-    rsync-cp = "rsync -a --info=progress2 --no-i-r";
+      # Main
+      du = "du -h";
+      df = "df -h";
+      xclip = "xclip -selection clipboard";
+      fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
+      certcat = "openssl x509 -text -in";
+      rsync-cp = "rsync -a --info=progress2 --no-i-r";
 
-    # NixOS aliases
-    nix-apply = "nixos-rebuild switch --show-trace -L -v";
-    nix-upgrade = "eval 'nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v'";
-    nix-edit = "code /etc/nixos";
+      # NixOS aliases
+      nix = "${nix-alias}/bin/nix-alias";
 
-    # Replacements
-    cat = "bat";
-    ls = "eza";
+      # Replacements
+      cat = "bat";
+      ls = "eza";
 
-    # ls
-    ll = "ls -lh"; # list
-    la = "ls -lah"; # all files list
-  };
+      # ls
+      ll = "ls -lh"; # list
+      la = "ls -lah"; # all files list
+    };
 
   # List packages installed in system profile. To search, run:
   # $ nix search nixpkgs wget

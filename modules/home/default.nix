@@ -43,13 +43,13 @@
       shellAliases = {
         mkdir = "mkdir -p";
         dmesg = "sudo dmesg";
-
-        # NixOS aliases
-        nix-apply = "sudo " + config.environment.shellAliases.nix-apply;
-        nix-upgrade = "sudo -s " + config.environment.shellAliases.nix-upgrade;
       };
 
       initExtra = ''
+        # Fix autocomplete for nix alias
+        compdef _nix ${config.environment.shellAliases.nix}
+
+        # Catch '--help' and pass it to bat
         alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
         # Functions
