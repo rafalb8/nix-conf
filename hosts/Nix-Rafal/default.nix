@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -35,9 +35,6 @@
 
   # Hostname
   networking.hostName = "Nix-Rafal";
-
-  # Use cachyos kernel
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # Home module settings
   home-manager.users.${config.user.name} = {
