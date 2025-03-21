@@ -60,17 +60,6 @@
       '';
     };
 
-    xdg = {
-      enable = true;
-      configFile = {
-        # Easyeffects config
-        "easyeffects" = {
-          source = ../../dotfiles/easyeffects;
-          recursive = true;
-        };
-      };
-    };
-
     dconf = {
       enable = true;
       settings = {

@@ -196,26 +196,29 @@ in
         '';
       };
 
-      xdg = {
-        enable = true;
+      # Required
+      xdg.enable = true;
 
-        # Custom desktop entries
-        desktopEntries = {
-          # Fix for jellyfin
-          "com.github.iwalton3.jellyfin-media-player" = {
-            name = "Jellyfin Media Player";
-            icon = "com.github.iwalton3.jellyfin-media-player";
-            exec = "jellyfinmediaplayer";
-            settings = {
-              StartupWMClass = "jellyfinmediaplayer";
-            };
-            categories = [ "AudioVideo" "Video" "Player" "TV" ];
+      # Custom desktop entries
+      xdg.desktopEntries = {
+        # Fix for jellyfin
+        "com.github.iwalton3.jellyfin-media-player" = {
+          name = "Jellyfin Media Player";
+          icon = "com.github.iwalton3.jellyfin-media-player";
+          exec = "jellyfinmediaplayer";
+          settings = {
+            StartupWMClass = "jellyfinmediaplayer";
           };
+          categories = [ "AudioVideo" "Video" "Player" "TV" ];
         };
       };
 
       # Easyeffects service
       services.easyeffects.enable = true;
+      xdg.configFile."easyeffects" = {
+        source = ../../dotfiles/easyeffects;
+        recursive = true;
+      };
 
       # Autostart
       autostart = {
