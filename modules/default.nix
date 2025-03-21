@@ -83,7 +83,7 @@
     let
       nix-alias = pkgs.writeShellScriptBin "nix-alias" ''
         case "$1" in
-          switch) nixos-rebuild switch --show-trace -L -v;;
+          apply) nixos-rebuild switch --show-trace -L -v;;
           boot) nixos-rebuild boot --show-trace -L -v;;
           upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v';;
           code) code /etc/nixos;;
