@@ -29,7 +29,7 @@
 
   chaotic.mesa-git = {
     enable = true;
-    fallbackSpecialisation = true;
+    fallbackSpecialisation = false;
     replaceBasePackage = true;
   };
 

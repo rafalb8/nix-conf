@@ -39,8 +39,8 @@
     # Perform garbage collection weekly to maintain low disk usage
     gc = {
       automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
+      dates = "daily";
+      options = "--delete-older-than 7d";
     };
 
     # Nix automatically detects files in the store that have identical contents,
