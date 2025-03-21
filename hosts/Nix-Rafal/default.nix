@@ -33,16 +33,6 @@
     replaceBasePackage = true;
   };
 
-  hardware.firmware = with pkgs; [
-    (linux-firmware.overrideAttrs (old: {
-      version = "git";
-      src = builtins.fetchGit {
-        url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "588505068c48fe07b1cfa32c5f3acd4395ec9482";
-      };
-    }))
-  ];
-
   # Hostname
   networking.hostName = "Nix-Rafal";
 
