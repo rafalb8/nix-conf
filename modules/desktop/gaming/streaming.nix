@@ -15,7 +15,8 @@ let
       PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
     fi
 
-    ${pkgs.gnome-monitor-config}/bin/gnome-monitor-config set -LpM DP-3 -m ''${PROFILE}
+    MONITOR=''$(${pkgs.gnome-monitor-config}/bin/gnome-monitor-config list | grep 'Monitor' | awk '{print $3}')
+    ${pkgs.gnome-monitor-config}/bin/gnome-monitor-config set -LpM ''${MONITOR} -m ''${PROFILE}
   '';
 in
 {
