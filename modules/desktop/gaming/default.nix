@@ -9,9 +9,9 @@ in
 
     environment.systemPackages = with pkgs; [
       # Tools
-      prismlauncher
-      mesa-demos
+      prismlauncher # Minecraft launcher
       custom.sgdboop
+      protonup-qt
 
       # Wine guis
       bottles
@@ -30,17 +30,6 @@ in
       remotePlay.openFirewall = true;
 
       protontricks.enable = true;
-
-      gamescopeSession = {
-        enable = true;
-        args = [
-          "--adaptive-sync"
-          "--hdr-enabled"
-          "--mangoapp"
-          "--rt"
-          "-r 75"
-        ];
-      };
     };
 
     programs.gamescope = {
@@ -76,11 +65,8 @@ in
       # Autostart
       autostart = {
         enable = true;
-        packages = [
-          pkgs.steam
-        ];
+        packages = [ pkgs.steam ];
       };
-
     };
 
   };
