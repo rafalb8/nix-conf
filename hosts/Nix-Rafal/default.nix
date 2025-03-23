@@ -13,6 +13,9 @@
     description = "Rafal Babinski";
   };
 
+  # Hostname
+  networking.hostName = "Nix-Rafal";
+
   # Enable modules
   modules = {
     graphics.amd = true;
@@ -33,8 +36,6 @@
     replaceBasePackage = true;
   };
 
-  # Hostname
-  networking.hostName = "Nix-Rafal";
 
   # Home module settings
   home-manager.users.${config.user.name} = {

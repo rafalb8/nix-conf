@@ -6,6 +6,7 @@ in
   imports = [ ./streaming.nix ./mangohud.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
+    boot.kernelParams = [ "split_lock_detect=off" ];
 
     environment.systemPackages = with pkgs; [
       # Tools
