@@ -23,7 +23,13 @@ in
     # systemd.packages = [ pkgs.lact ];
     # systemd.services.lactd.wantedBy = [ "multi-user.target" ];
 
-    # GNOME: Enable experimental VRR support
+    # VRR
+    # Xorg
+    services.xserver.deviceSection = ''
+      Option "VariableRefresh" "on"
+    '';
+
+    # Wayland GNOME (experimental)
     home-manager.users.${config.user.name} = lib.mkIf config.modules.desktop.environment.gnome {
       dconf = {
         enable = true;

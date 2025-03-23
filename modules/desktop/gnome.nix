@@ -32,7 +32,7 @@ in
         # gnome.gnome-terminal
         adwaita-icon-theme
         mission-center
-        gnome-tweaks
+        # gnome-tweaks
         adw-gtk3
         drawing
         ghex
