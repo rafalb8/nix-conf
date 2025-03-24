@@ -52,6 +52,12 @@
           "discord.desktop"
           "com.github.iwalton3.jellyfin-media-player.desktop"
         ];
+
+        # Enable fractional scaling
+        "org/gnome/mutter"."experimental-features" = [
+          "scale-monitor-framebuffer"
+          "xwayland-native-scaling"
+        ];
       };
     };
   };
