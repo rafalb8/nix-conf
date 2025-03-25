@@ -20,22 +20,24 @@ in
       # lutris
     ];
 
-    # VR
-    # programs.alvr = {
-    #   enable = true;
-    #   openFirewall = true;
-    # };
+    programs = {
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        protontricks.enable = true;
+      };
 
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
+      gamescope.enable = true;
+      gamescope.capSysNice = true;
 
-      protontricks.enable = true;
-    };
+      gamemode.enable = true;
+      gamemode.enableRenice = true;
 
-    programs.gamescope = {
-      enable = true;
-      capSysNice = true;
+      # VR
+      # alvr = {
+      #   enable = true;
+      #   openFirewall = true;
+      # };
     };
 
     home-manager.users.${config.user.name} = {
