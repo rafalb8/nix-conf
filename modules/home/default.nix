@@ -76,7 +76,47 @@
       };
 
       extraConfig = {
-        # pull.rebase = true;
+        extraConfig = {
+          column.ui = "auto";
+          init.defaultBranch = "main";
+          help.autocorrect = "prompt";
+          commit.verbose = true;
+
+          branch.sort = "-committerdate";
+          tag.sort = "version:refname";
+
+          diff = {
+            algorithm = "histogram";
+            colorMoved = "plain";
+            mnemonicPrefix = true;
+            renames = true;
+          };
+
+          push = {
+            default = "simple";
+            autoSetupRemote = true;
+            followTags = true;
+          };
+
+          fetch = {
+            prune = true;
+            pruneTags = true;
+            all = true;
+          };
+
+          rerere = {
+            enabled = true;
+            autoupdate = true;
+          };
+
+          rebase = {
+            autoSquash = true;
+            autoStash = true;
+            updateRefs = true;
+          };
+
+          # pull.rebase = true;
+        };
       };
     };
   };
