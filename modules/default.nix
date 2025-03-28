@@ -164,6 +164,7 @@
 
     # Golang
     go
+    gofumpt
     gopls
     delve
     air

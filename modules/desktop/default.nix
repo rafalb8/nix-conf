@@ -30,11 +30,12 @@ in
 
       # Media
       jellyfin-media-player
+      kdePackages.kdenlive
       custom.fastflix
       obs-studio
-      kdePackages.kdenlive
       audacity
       calibre
+      gimp
       mpv
 
       # Development

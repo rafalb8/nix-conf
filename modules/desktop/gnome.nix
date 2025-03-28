@@ -34,7 +34,6 @@ in
         mission-center
         # gnome-tweaks
         adw-gtk3
-        drawing
         ghex
       ]);
 
