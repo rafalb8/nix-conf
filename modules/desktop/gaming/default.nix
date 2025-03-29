@@ -3,7 +3,7 @@ let
   cfg = config.modules.desktop;
 in
 {
-  imports = [ ./streaming.nix ./mangohud.nix ];
+  imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
     boot.kernelParams = [ "split_lock_detect=off" ];
@@ -27,17 +27,8 @@ in
         protontricks.enable = true;
       };
 
-      gamescope.enable = true;
-      gamescope.capSysNice = true;
-
       gamemode.enable = true;
       gamemode.enableRenice = true;
-
-      # VR
-      # alvr = {
-      #   enable = true;
-      #   openFirewall = true;
-      # };
     };
 
     home-manager.users.${config.user.name} = {
