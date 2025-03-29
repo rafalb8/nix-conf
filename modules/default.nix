@@ -85,11 +85,11 @@
         cmd="$1"
         shift
         case $cmd in
-          apply) nixos-rebuild switch --show-trace -L -v $@;;
-          boot) nixos-rebuild boot --show-trace -L -v $@;;
-          upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v $@';;
-          code) code /etc/nixos $@;;
-          *) \nix $cmd $@;;
+          apply) nixos-rebuild switch --show-trace -L -v "$@";;
+          boot) nixos-rebuild boot --show-trace -L -v "$@";;
+          upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v "$@"';;
+          code) code /etc/nixos "$@";;
+          *) \nix $cmd "$@";;
         esac
       '';
     in
