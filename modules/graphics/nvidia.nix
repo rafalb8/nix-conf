@@ -59,8 +59,6 @@ in
     hardware.nvidia-container-toolkit.enable = true;
 
     environment.systemPackages = [
-      # rigaya/NVEnc
-      (pkgs.custom.nvencc.override { nvidia = config.hardware.nvidia.package; })
       nvidia-vrr
     ];
 

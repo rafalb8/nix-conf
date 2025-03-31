@@ -1,8 +1,8 @@
-{ lib, pkgs, inputs }:
+{ lib, pkgs, nvidia-patch }:
 let
   patcher = script:
     lib.importJSON (pkgs.runCommandLocal "patch" { nativeBuildInputs = with pkgs; [ jq gnused ]; } ''
-      bash ${inputs.nvidia-patch}/${script} -j > $out
+      bash ${nvidia-patch}/${script} -j > $out
     '');
 
   patch = patcher "patch.sh";

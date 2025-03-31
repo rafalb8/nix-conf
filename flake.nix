@@ -38,11 +38,10 @@
       # Custom Packages
       packages.${system} = {
         fastflix = pkgs-old.callPackage ./packages/fastflix.nix { };
-        nvencc = pkgs-old.callPackage ./packages/nvencc.nix { };
-        sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
-        sunshine = pkgs.callPackage ./packages/sunshine.nix { };
+        vceencc = pkgs.callPackage ./packages/vceencc.nix { };
 
-        nvidia = pkgs.callPackage ./packages/nvidia-patch.nix { inherit inputs; };
+        sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
+        nvidia = pkgs.callPackage ./packages/nvidia-patch.nix { inherit nvidia-patch; };
       };
 
       # Overlays
