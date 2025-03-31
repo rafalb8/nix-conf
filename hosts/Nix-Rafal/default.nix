@@ -18,7 +18,10 @@
 
   # Enable modules
   modules = {
-    graphics.amd = true;
+    graphics = {
+      amd = true;
+      overcloking = true;
+    };
 
     desktop = {
       enable = true;

@@ -11,6 +11,7 @@ in
   options.modules.graphics = {
     nvidia = lib.mkEnableOption "Nvidia graphics module";
     amd = lib.mkEnableOption "AMD graphics module";
+    overcloking = lib.mkEnableOption "Overclocking";
   };
 
   config = lib.mkIf (cfg.nvidia || cfg.amd) {
