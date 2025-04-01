@@ -31,7 +31,7 @@ in
       # Media
       jellyfin-media-player
       kdePackages.kdenlive
-      custom.fastflix
+      youtube-music
       obs-studio
       audacity
       calibre

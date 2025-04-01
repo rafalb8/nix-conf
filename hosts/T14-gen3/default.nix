@@ -51,6 +51,7 @@
           "obsidian.desktop"
           "discord.desktop"
           "com.github.iwalton3.jellyfin-media-player.desktop"
+          "youtube-music.desktop"
         ];
 
         # Enable fractional scaling
