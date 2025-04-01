@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   cfg = config.modules.graphics;
   desktopEnv = config.modules.desktop.environment;
@@ -37,7 +37,5 @@ in
       enable = true;
       gpuOverclock.enable = true;
     };
-
-    environment.systemPackages = with pkgs;[ custom.vceencc ];
   };
 }

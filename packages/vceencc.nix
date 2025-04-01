@@ -29,6 +29,6 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp usr/bin/vceencc $out/bin/vceencc
+    mv usr/bin/vceencc $out/bin/VCEEncC
   '';
 }

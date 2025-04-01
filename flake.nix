@@ -19,7 +19,6 @@
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-old
     , chaotic
     , home-manager
     , nvidia-patch

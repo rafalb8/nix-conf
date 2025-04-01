@@ -59,6 +59,9 @@ in
       discord
     ];
 
+    # FastFlix
+    programs.fastflix.enable = true;
+
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
