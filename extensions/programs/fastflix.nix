@@ -3,7 +3,6 @@ let
   cfg = config.programs.fastflix;
 in
 {
-  # https://github.com/cdgriffith/FastFlix
   options.programs.fastflix = {
     enable = lib.mkEnableOption "FastFlix - free GUI for H.264, HEVC and AV1 hardware and software encoding";
 
