@@ -1,6 +1,8 @@
 { stdenv
 , fetchzip
 , makeWrapper
+, makeDesktopItem
+, copyDesktopItems
 , autoPatchelfHook
 , libz
 , libGL
@@ -17,24 +19,37 @@ stdenv.mkDerivation rec {
     stripRoot = false;
   };
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
+  # Required. Without this fastflix won't run
+  dontStrip = true;
+
+  nativeBuildInputs = [ autoPatchelfHook makeWrapper copyDesktopItems ];
+
   buildInputs = [
     libz
     libGL
     libxcb
     libxkbcommon
   ];
-  dontStrip = true;
+
+  desktopItems = [
+    (makeDesktopItem {
+      name = "fastflix";
+      desktopName = pname;
+      exec = "fastflix";
+      categories = [ "AudioVideo" "Video" "TV" ];
+    })
+  ];
+
   installPhase = ''
-    install -Dm755 ${pname} $out/bin/${pname}
+    install -Dm755 ${pname} $out/bin/fastflix
     patchelf \
       --add-needed "${libGL}/lib/libGL.so.1" \
       --add-needed "${libGL}/lib/libEGL.so.1" \
       --add-needed "${libxcb}/lib/libxcb.so.1" \
       --add-needed "${libxkbcommon}/lib/libxkbcommon.so.0" \
       --add-needed "${libxkbcommon}/lib/libxkbcommon-x11.so.0" \
-      "$out/bin/${pname}"
+      "$out/bin/fastflix"
 
-    wrapProgram $out/bin/${pname} --set QT_QPA_PLATFORM xcb
+    wrapProgram $out/bin/fastflix --set QT_QPA_PLATFORM xcb
   '';
 }
