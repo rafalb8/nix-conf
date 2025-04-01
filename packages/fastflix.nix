@@ -33,6 +33,8 @@ stdenv.mkDerivation (final: {
   ];
 
   installPhase = ''
+    runHook preInstall
+    
     install -Dm755 FastFlix $out/bin/${final.pname}
     patchelf \
       --add-needed "${libGL}/lib/libGL.so.1" \
@@ -41,6 +43,8 @@ stdenv.mkDerivation (final: {
       --add-needed "${libxkbcommon}/lib/libxkbcommon.so.0" \
       --add-needed "${libxkbcommon}/lib/libxkbcommon-x11.so.0" \
       "$out/bin/${final.pname}"
+
+    runHook postInstall
   '';
 
   postFixup = ''
