@@ -38,6 +38,6 @@ in
       gpuOverclock.enable = true;
     };
 
-    environment.systemPackages = with pkgs;[ custom.vceenc ];
+    environment.systemPackages = with pkgs;[ custom.vceencc ];
   };
 }

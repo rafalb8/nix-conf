@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-old.url = "github:nixos/nixpkgs/nixos-24.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager = {
@@ -28,7 +27,6 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs-old = nixpkgs-old.legacyPackages.${system};
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -37,7 +35,7 @@
     {
       # Custom Packages
       packages.${system} = {
-        fastflix = pkgs-old.callPackage ./packages/fastflix.nix { };
+        fastflix = pkgs.callPackage ./packages/fastflix.nix { };
         vceencc = pkgs.callPackage ./packages/vceencc.nix { };
 
         sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
