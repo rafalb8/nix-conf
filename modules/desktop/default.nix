@@ -217,10 +217,8 @@ in
 
       # Easyeffects service
       services.easyeffects.enable = true;
-      xdg.configFile."easyeffects" = {
-        source = ../../dotfiles/easyeffects;
-        recursive = true;
-      };
+      xdg.configFile."easyeffects/output/Clean.json" = { source = ../../dotfiles/easyeffects/output/Clean.json; };
+      xdg.configFile."easyeffects/output/Normalize.json" = { source = ../../dotfiles/easyeffects/output/Normalize.json; };
 
       # Autostart
       autostart = {
