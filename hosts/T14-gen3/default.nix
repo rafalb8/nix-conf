@@ -40,13 +40,7 @@
       '';
     };
 
-    xdg = {
-      enable = true;
-      configFile = {
-        "easyeffects/irs/impulse-dynamic.irs" = { source = ./easyeffects/irs/impulse-dynamic.irs; };
-        "easyeffects/output/Dolby Dynamic.json" = { source = ./. + "/easyeffects/output/Dolby Dynamic.json"; };
-      };
-    };
+    services.easyeffects.presets = [ "Dolby Dynamic" ];
 
     dconf = {
       enable = true;
