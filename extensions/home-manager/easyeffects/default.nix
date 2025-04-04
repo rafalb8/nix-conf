@@ -2,7 +2,8 @@
 let
   cfg = config.services.easyeffects;
   presetOptions = {
-    "Dolby Dynamic" = { irs = "impulse-dynamic.irs"; output = "Dolby Dynamic.json"; };
+    "Dolby Dynamic" = { irs = "dolby-dynamic.irs"; output = "Dolby Dynamic.json"; };
+    "Dolby Headphones" = { irs = "dolby-headphones.irs"; output = "Dolby Headphones.json"; };
     "Normalize" = { output = "Normalize.json"; };
     "Clean" = { output = "Clean.json"; };
   };

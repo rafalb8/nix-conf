@@ -40,7 +40,7 @@
       '';
     };
 
-    services.easyeffects.presets = [ "Dolby Dynamic" ];
+    services.easyeffects.presets = [ "Dolby Dynamic" "Dolby Headphones" ];
 
     dconf = {
       enable = true;
