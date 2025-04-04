@@ -20,6 +20,28 @@ let
       };
     in
     irs // output; # Merge
+
+  # Generate autoload files for a preset
+  mkAutoload = preset:
+    let
+      devices = cfg.autoload.${preset};
+    in
+    lib.foldl'
+      (acc: device: acc // {
+        "easyeffects/autoload/output/${device}.json" =
+          let
+            split = lib.splitString ":" device;
+          in
+          {
+            text = builtins.toJSON {
+              device = builtins.elemAt split 0;
+              device-profile = builtins.elemAt split 1;
+              preset-name = preset;
+            };
+          };
+      })
+      { }
+      devices;
 in
 {
   options.services.easyeffects = {
@@ -29,12 +51,28 @@ in
       example = [ "Clean" "Normalize" ];
       description = "List of EasyEffects presets to be included";
     };
+
+    autoload = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+      default = { };
+      description = "List of EasyEffects presets to be autoloaded for each device";
+      example = {
+        "Dolby Dynamic" = [
+          # Device_name:Profile 
+          "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:[Out] Speaker"
+        ];
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
     xdg = {
       enable = true;
-      configFile = lib.foldl' (acc: name: acc // mkPreset name) { } cfg.presets;
+      configFile =
+        # services.easyeffects.presets
+        (lib.foldl' (acc: name: acc // mkPreset name) { } cfg.presets)
+        // # services.easyeffects.autoload
+        (lib.foldl' (acc: preset: acc // mkAutoload preset) { } (builtins.attrNames cfg.autoload));
     };
   };
 }
