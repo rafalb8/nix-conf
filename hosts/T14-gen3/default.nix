@@ -41,7 +41,7 @@
     };
 
     services.easyeffects = {
-      presets = [ "Dolby Dynamic" "Dolby Headphones" ];
+      presets = [ "Dolby Dynamic" ];
       autoload = {
         "Dolby Headphones" = [ "alsa_output.pci-0000_04_00.6.HiFi__Headphones__sink:[Out] Headphones" ];
         "Dolby Dynamic" = [ "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:[Out] Speaker" ];

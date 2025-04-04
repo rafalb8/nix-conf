@@ -218,7 +218,7 @@ in
       # Easyeffects service
       services.easyeffects = {
         enable = true;
-        presets = [ "Clean" "Normalize" ];
+        presets = [ "Clean" "Normalize" "Dolby Headphones" ];
       };
 
       # Autostart

@@ -60,6 +60,15 @@
       '';
     };
 
+    services.easyeffects = {
+      autoload = {
+        "Clean" = [ "alsa_output.pci-0000_00_1f.3.analog-stereo:analog-output-lineout" ];
+        "Dolby Headphones" = [
+          "alsa_output.usb-SteelSeries_SteelSeries_Arctis_1_Wireless-00.analog-stereo:analog-output"
+        ];
+      };
+    };
+
     dconf = {
       enable = true;
       settings = {
