@@ -11,7 +11,7 @@
 
   boot = {
     # Use latest kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
     # Bootloader
     loader = {
