@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
   desktopEnv = config.modules.desktop.environment;
@@ -23,19 +23,26 @@ in
       '';
     };
 
-    # Wayland GNOME VRR (experimental)
-    home-manager.users.${config.user.name}.dconf = lib.mkIf desktopEnv.gnome {
-      enable = true;
-      settings = {
-        "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
-      };
-    };
-
     # Overcloking
     users.users.${config.user.name}.extraGroups = lib.mkIf cfg.overcloking [ "corectrl" ];
     programs.corectrl = lib.mkIf cfg.overcloking {
       enable = true;
       gpuOverclock.enable = true;
+    };
+
+    home-manager.users.${config.user.name} = {
+      autostart = lib.mkIf cfg.overcloking {
+        enable = true;
+        packages = [ pkgs.corectrl ];
+      };
+
+      # Wayland GNOME VRR (experimental)
+      dconf = lib.mkIf desktopEnv.gnome {
+        enable = true;
+        settings = {
+          "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
+        };
+      };
     };
   };
 }

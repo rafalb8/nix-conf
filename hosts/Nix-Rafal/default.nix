@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -20,7 +20,7 @@
   modules = {
     graphics = {
       amd = true;
-      overcloking = true;
+      overcloking = false;
     };
 
     desktop = {
@@ -33,11 +33,21 @@
     };
   };
 
-  # chaotic.mesa-git = {
-  #   enable = true;
-  #   fallbackSpecialisation = false;
-  #   replaceBasePackage = true;
-  # };
+  chaotic.mesa-git = {
+    enable = true;
+    fallbackSpecialisation = false;
+    replaceBasePackage = true;
+  };
+
+  hardware.firmware = [
+    (pkgs.linux-firmware.overrideAttrs (old: {
+      version = "git";
+      src = builtins.fetchGit {
+        url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
+        rev = "d864697fd38a94092b636c8030843343f265fe69";
+      };
+    }))
+  ];
 
   # Home module settings
   home-manager.users.${config.user.name} = {
