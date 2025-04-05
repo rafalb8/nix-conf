@@ -75,7 +75,16 @@
   users.users.${config.user.name} = {
     isNormalUser = true;
     description = config.user.description;
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "input" ];
+    extraGroups =
+      [
+        "wheel"
+        "networkmanager"
+        "libvirtd"
+        "docker"
+        "input"
+      ]
+      ++ lib.optional config.programs.gamemode.enable "gamemode"
+      ++ lib.optional config.modules.graphics.overcloking "corectrl";
     shell = pkgs.zsh;
   };
 

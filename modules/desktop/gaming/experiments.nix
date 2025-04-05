@@ -1,23 +1,26 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
-  playscope = with builtins;
+  playscope =
     let
       env = {
+        "MANGOHUD" = "0";
         "MANGOHUD_CONFIGFILE" = "/home/${config.user.name}/.config/MangoHud/MangoHud.conf";
+        "LD_PRELOAD" = ""; # Disable Steam OVerlay (--steam breaks gamescope)
       };
       args = [
-        "--steam"
+        # "--steam"
         "--adaptive-sync"
         "--immediate-flips"
         "--force-grab-cursor"
+        "--mangoapp"
         "-w 3440 -h 1440"
         "-W 2560 -H 1080"
         "-r 75"
       ];
     in
     pkgs.writeShellScriptBin "playscope" ''
-      ${concatStringsSep "\n" (attrValues (mapAttrs (n: v: "export ${n}='${v}'") env))}
-      gamescope ${toString args} "$@"
+      ${lib.toShellVars env}
+      gamemoderun gamescope ${builtins.toString args} "$@"
     '';
 in
 {
@@ -40,7 +43,7 @@ in
     # };
 
     gamescope.enable = true;
-    # gamescope.capSysNice = true;
+    gamescope.capSysNice = false;
 
     # VR
     # alvr = {

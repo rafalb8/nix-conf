@@ -24,7 +24,6 @@ in
     };
 
     # Overcloking
-    users.users.${config.user.name}.extraGroups = lib.mkIf cfg.overcloking [ "corectrl" ];
     programs.corectrl = lib.mkIf cfg.overcloking {
       enable = true;
       gpuOverclock.enable = true;
