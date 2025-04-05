@@ -3,7 +3,6 @@
 , fetchzip
 , makeWrapper
 , makeDesktopItem
-, copyDesktopItems
 , autoPatchelfHook
 , libz
 , libGL
@@ -23,7 +22,7 @@ stdenv.mkDerivation (final: {
   # Required. Without this fastflix won't run
   dontStrip = true;
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper copyDesktopItems ];
+  nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
 
   buildInputs = [
     libz
@@ -31,6 +30,15 @@ stdenv.mkDerivation (final: {
     libxcb
     libxkbcommon
   ];
+
+  desktopItem = makeDesktopItem {
+    name = final.pname;
+    desktopName = "FastFlix";
+    exec = "${final.pname} %u";
+    terminal = false;
+    keywords = [ "fastflix" "ffmpeg" "vceenc" "nvenc" ];
+    categories = [ "AudioVideo" "Video" "TV" ];
+  };
 
   installPhase = ''
     runHook preInstall
@@ -44,22 +52,15 @@ stdenv.mkDerivation (final: {
       --add-needed "${libxkbcommon}/lib/libxkbcommon-x11.so.0" \
       "$out/bin/${final.pname}"
 
+    mkdir -p $out/share/applications
+    cp ${final.desktopItem}/share/applications/*.desktop $out/share/applications
+
     runHook postInstall
   '';
 
   postFixup = ''
     wrapProgram $out/bin/${final.pname} --set-default QT_QPA_PLATFORM xcb
   '';
-
-  desktopItems = [
-    (makeDesktopItem {
-      name = final.pname;
-      exec = "${final.pname} %u";
-      desktopName = "FastFlix";
-      startupWMClass = "FastFlix";
-      categories = [ "AudioVideo" "Video" "TV" ];
-    })
-  ];
 
   meta = {
     description = "Free GUI for H.264, HEVC and AV1 hardware and software encoding";

@@ -20,7 +20,7 @@
   modules = {
     graphics = {
       amd = true;
-      overcloking = false;
+      overcloking = true;
     };
 
     desktop = {
