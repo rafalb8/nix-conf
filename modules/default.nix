@@ -69,7 +69,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "pl2";
+  console.keyMap = "pl";
 
   # Define a user account.
   users.users.${config.user.name} = {
