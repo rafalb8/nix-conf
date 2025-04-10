@@ -86,6 +86,40 @@
           "com.github.wwmm.easyeffects.desktop"
           "youtube-music.desktop"
         ];
+
+        "org/gnome/shell/extensions/dash-to-panel" =
+          let
+            panel = "GSM-0x000231e1";
+          in
+          {
+            panel-postions = ''{"${panel}":"LEFT"}'';
+            appicon-margin = 4;
+            trans-use-custom-opacity = true;
+            trans-use-dynamic-opacity = true;
+            trans-panel-opacity = 0.40000000000000002;
+            stockgs-keep-top-panel = true;
+            panel-element-positions = builtins.toJSON {
+              "${panel}" = [
+                { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
+                { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
+                { "element" = "leftBox"; "visible" = false; "position" = "stackedTL"; }
+                { "element" = "taskbar"; "visible" = true; "position" = "stackedTL"; }
+                { "element" = "centerBox"; "visible" = false; "position" = "stackedBR"; }
+                { "element" = "rightBox"; "visible" = false; "position" = "stackedBR"; }
+                { "element" = "dateMenu"; "visible" = false; "position" = "stackedBR"; }
+                { "element" = "systemMenu"; "visible" = false; "position" = "stackedBR"; }
+                { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
+              ];
+            };
+          };
+
+        "org/gnome/shell/extensions/arcmenu" = {
+          dash-to-panel-standalone = true;
+          arcmenu-hotkey = [ ];
+          menu-button-icon = "'Distro_Icon'";
+          distro-icon = 22;
+          custom-menu-button-icon-size = 24;
+        };
       };
     };
   };

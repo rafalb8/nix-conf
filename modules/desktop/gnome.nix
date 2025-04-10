@@ -102,6 +102,12 @@ in
               "quicksettings-audio-devices-hider@marcinjahn.com"
             ];
           };
+
+          # TextEditor
+          "org/gnome/TextEditor" = {
+            restore-session = false;
+            style-scheme = "builder-dark";
+          };
         };
       };
     };
