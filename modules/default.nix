@@ -23,6 +23,7 @@
       efi.canTouchEfiVariables = true;
     };
   };
+  hardware.enableRedistributableFirmware = true;
 
   # Enable networking
   networking.networkmanager.enable = true;

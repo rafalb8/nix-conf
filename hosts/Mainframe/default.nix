@@ -39,8 +39,6 @@
   #   replaceBasePackage = true;
   # };
 
-  hardware.enableRedistributableFirmware = true;
-
   # Home module settings
   home-manager.users.${config.user.name} = {
     # Git config

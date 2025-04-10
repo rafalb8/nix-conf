@@ -107,8 +107,6 @@
     };
   };
 
-  hardware.firmware = with pkgs; [ sof-firmware ];
-
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd = {
     enable = true;
