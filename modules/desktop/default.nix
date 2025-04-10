@@ -54,13 +54,31 @@ in
 
       # Web
       qbittorrent
-      firefox
       brave
       discord
     ];
 
     # FastFlix
     programs.fastflix.enable = true;
+
+    # Firefox
+    programs.firefox = {
+      enable = true;
+      policies = {
+        ExtensionSettings = {
+          "uBlock0@raymondhill.net" = {
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+            private_browsing = true;
+          }; 
+          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+            installation_mode = "force_installed";
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+            private_browsing = true;
+          }; 
+        };
+      };
+    };
 
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

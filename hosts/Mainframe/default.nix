@@ -116,7 +116,7 @@
         "org/gnome/shell/extensions/arcmenu" = {
           dash-to-panel-standalone = true;
           arcmenu-hotkey = [ ];
-          menu-button-icon = "'Distro_Icon'";
+          menu-button-icon = "Distro_Icon";
           distro-icon = 22;
           custom-menu-button-icon-size = 24;
         };
