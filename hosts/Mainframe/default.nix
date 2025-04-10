@@ -2,7 +2,7 @@
 {
   imports = [
     # Logitech keyboard and mouse support
-    ./solaar.nix
+    ./solaar
 
     # Include the hardware scan.
     ./hardware-configuration.nix
