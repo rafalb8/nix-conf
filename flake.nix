@@ -51,7 +51,7 @@
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs
-        [ "Nix-Rafal" "T14-gen3" ]
+        [ "Mainframe" "T14-gen3" ]
         (hostname: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -14,7 +14,7 @@
   };
 
   # Hostname
-  networking.hostName = "Nix-Rafal";
+  networking.hostName = "Mainframe";
 
   # Enable modules
   modules = {
@@ -33,21 +33,13 @@
     };
   };
 
-  chaotic.mesa-git = {
-    enable = true;
-    fallbackSpecialisation = false;
-    replaceBasePackage = true;
-  };
+  # chaotic.mesa-git = {
+  #   enable = true;
+  #   fallbackSpecialisation = false;
+  #   replaceBasePackage = true;
+  # };
 
-  hardware.firmware = [
-    (pkgs.linux-firmware.overrideAttrs (old: {
-      version = "git";
-      src = builtins.fetchGit {
-        url = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git";
-        rev = "d864697fd38a94092b636c8030843343f265fe69";
-      };
-    }))
-  ];
+  hardware.enableRedistributableFirmware = true;
 
   # Home module settings
   home-manager.users.${config.user.name} = {
@@ -72,8 +64,8 @@
 
     services.easyeffects = {
       autoload = {
-        "Clean" = [ "alsa_output.pci-0000_00_1f.3.analog-stereo:analog-output-lineout" ];
         "Dolby Headphones" = [
+          "alsa_output.pci-0000_0e_00.6.analog-stereo:analog-output-lineout"
           "alsa_output.usb-SteelSeries_SteelSeries_Arctis_1_Wireless-00.analog-stereo:analog-output"
         ];
       };
@@ -100,5 +92,5 @@
 
   # The state version is required and should stay at the version you
   # originally installed.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }
