@@ -96,7 +96,7 @@
             appicon-margin = 4;
             trans-use-custom-opacity = true;
             trans-use-dynamic-opacity = true;
-            trans-panel-opacity = 0.40000000000000002;
+            trans-panel-opacity = 0.40;
             stockgs-keep-top-panel = true;
             panel-element-positions = builtins.toJSON {
               "${panel}" = [

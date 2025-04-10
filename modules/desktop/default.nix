@@ -70,12 +70,12 @@ in
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             private_browsing = true;
-          }; 
+          };
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             installation_mode = "force_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
             private_browsing = true;
-          }; 
+          };
         };
       };
     };
@@ -200,7 +200,7 @@ in
 
     # Add reminder for jellyfin
     warnings =
-      if pkgs.jellyfin-media-player.version > "1.11.1" then
+      if pkgs.jellyfin-media-player.version > "1.12.0" then
         [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ]
       else [ ];
 
