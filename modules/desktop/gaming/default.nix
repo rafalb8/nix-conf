@@ -18,6 +18,10 @@ in
       bottles
       heroic
       # lutris
+
+      # Emulators
+      rpcs3
+      torzu
     ];
 
     programs = {

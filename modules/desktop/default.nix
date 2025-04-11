@@ -157,6 +157,22 @@ in
 
     services.fwupd.enable = true;
 
+    # Raise memlock limits
+    security.pam.loginLimits = [
+      {
+        domain = "*";
+        type = "soft";
+        item = "memlock";
+        value = "unlimited";
+      }
+      {
+        domain = "*";
+        type = "hard";
+        item = "memlock";
+        value = "unlimited";
+      }
+    ];
+
     # Fonts
     fonts = {
       packages = with pkgs; [
