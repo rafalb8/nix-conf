@@ -2,7 +2,7 @@
 let
   configLine = key: value:
     if value == true then "${key}"
-    else if value == false then "# ${key}"
+    else if value == false then "${key}=0"
     else "${key}=${builtins.toString value}";
 
   toConfig = with builtins; data: concatStringsSep "\n" (map
@@ -18,9 +18,11 @@ let
     # Keybinds
     toggle_preset = "Shift_R+F12";
     toggle_fps_limit = "Shift_R+F11";
-    toggle_hud = "";
-    toggle_hud_position = "";
-    toggle_logging = "";
+
+    # Disable Keybinds (Setting to "" causes bug with flickering hud and logging)
+    toggle_hud = "Shift_R+F13";
+    toggle_hud_position = "Shift_R+F13";
+    toggle_logging = "Shift_R+F13";
 
     # Enabled presets (No Display, FPS Only, Horizontal, Custom, Detailed)
     preset = "0,1,2,5,4";
