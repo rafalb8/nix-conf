@@ -36,7 +36,23 @@ in
         ghex
       ]);
 
+    # Set dark mode in Qt applications
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita-dark";
+    };
+
     home-manager.users.${config.user.name} = {
+      # Set dark mode in GTK applications
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+        };
+      };
+
       dconf = {
         enable = true;
         settings = {
