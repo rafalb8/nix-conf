@@ -23,7 +23,6 @@ in
         gsconnect
         appindicator
         dash-to-panel
-        tiling-assistant
         quick-settings-audio-devices-hider
       ])
       ++
@@ -41,6 +40,9 @@ in
       dconf = {
         enable = true;
         settings = {
+          "org/gnome/mutter".edge-tiling = true;
+          "org/gnome/desktop/interface".enable-hot-corners = false;
+
           # Dark mode
           "org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
@@ -98,7 +100,6 @@ in
               "gsconnect@andyholmes.github.io"
               "appindicatorsupport@rgcjonas.gmail.com"
               "dash-to-panel@jderose9.github.com"
-              "tiling-assistant@leleat-on-github"
               "quicksettings-audio-devices-hider@marcinjahn.com"
             ];
           };
