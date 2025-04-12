@@ -28,7 +28,7 @@ let
     preset = "0,1,2,5,4";
 
     # FPS limit
-    fps_limit = "73,60,0";
+    fps_limit = "75,73,0";
   };
 in
 {
