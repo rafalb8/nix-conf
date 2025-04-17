@@ -56,13 +56,25 @@ in
       dconf = {
         enable = true;
         settings = {
+          # Enable gnome extensions
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = [
+              "arcmenu@arcmenu.com"
+              "caffeine@patapon.info"
+              "gsconnect@andyholmes.github.io"
+              "appindicatorsupport@rgcjonas.gmail.com"
+              "dash-to-panel@jderose9.github.com"
+              "quicksettings-audio-devices-hider@marcinjahn.com"
+            ];
+          };
+
+          # Customize gnome
           "org/gnome/mutter".edge-tiling = true;
           "org/gnome/desktop/interface".enable-hot-corners = false;
+          "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
 
-          # Dark mode
-          "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-
-          # Shortcuts
+          # Shortcuts / Keybinds
           "org/gnome/desktop/wm/keybindings" = {
             close = [ "<Super>w" ];
             switch-applications = [ "<Super>Tab" ];
@@ -82,7 +94,7 @@ in
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             ];
           };
-          # Custom
+          # Custom keybinds definitions
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Terminal";
             command = "alacritty";
@@ -100,25 +112,11 @@ in
           };
 
           # Disable keybindings
-          "org/gnome/mutter/wayland/keybindings" = {
-            restore-shortcuts = [ ];
-          };
-          "org/gnome/shell/keybindings" = {
-            toggle-message-tray = [ ];
-          };
+          "org/gnome/mutter/wayland/keybindings".restore-shortcuts = [ ];
+          "org/gnome/shell/keybindings".toggle-message-tray = [ ];
 
-          # Enable gnome extensions
-          "org/gnome/shell" = {
-            disable-user-extensions = false;
-            enabled-extensions = [
-              "arcmenu@arcmenu.com"
-              "caffeine@patapon.info"
-              "gsconnect@andyholmes.github.io"
-              "appindicatorsupport@rgcjonas.gmail.com"
-              "dash-to-panel@jderose9.github.com"
-              "quicksettings-audio-devices-hider@marcinjahn.com"
-            ];
-          };
+          # Disable mouse acceleration
+          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
 
           # TextEditor
           "org/gnome/TextEditor" = {
