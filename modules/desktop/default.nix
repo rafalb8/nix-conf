@@ -45,7 +45,7 @@ in
 
       # Tools
       imagemagick_light
-      input-leap
+      stable.input-leap
       impression
       obsidian
       anydesk
