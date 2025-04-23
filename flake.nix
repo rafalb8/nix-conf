@@ -10,11 +10,6 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvidia-patch = {
-      url = "github:keylase/nvidia-patch";
-      flake = false;
-    };
   };
 
   outputs =
@@ -23,7 +18,6 @@
     , nixpkgs-stable
     , chaotic
     , home-manager
-    , nvidia-patch
     , ...
     }@inputs:
     let
@@ -38,9 +32,7 @@
       packages.${system} = {
         fastflix = pkgs.callPackage ./packages/fastflix.nix { };
         vceencc = pkgs.callPackage ./packages/vceencc.nix { };
-
         sgdboop = pkgs.callPackage ./packages/sgdboop.nix { };
-        nvidia = pkgs.callPackage ./packages/nvidia-patch.nix { inherit nvidia-patch; };
       };
 
       # Overlays

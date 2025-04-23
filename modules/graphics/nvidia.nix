@@ -48,8 +48,7 @@ in
       # https://wiki.nixos.org/wiki/Nvidia#Screen_tearing_issues
       forceFullCompositionPipeline = true;
 
-      # Patch nvidia driver to enable NvFBC
-      package = pkgs.custom.nvidia.nvfbc config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     # Enable fbdev (might be added by default in the future)
