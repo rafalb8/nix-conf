@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = {
+    gaming = config.modules.desktop.gaming;
+    graphics = config.modules.graphics;
+  };
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
     WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
@@ -26,6 +29,28 @@ in
       autoStart = false;
       capSysAdmin = true;
       openFirewall = true;
+    };
+
+    # Settings
+    # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
+    services.sunshine.settings = lib.mkIf cfg.graphics.amd {
+      capture = "kms";
+      encoder = "vaapi";
+    };
+
+    home-manager.users.${config.user.name} = {
+      xdg = {
+        enable = true;
+
+        # Custom sunshine desktop entry
+        desktopEntries.sunshine = {
+          name = "Sunshine";
+          icon = "sunshine";
+          exec = "systemctl restart --user sunshine.service";
+          comment = "Self-hosted game stream host for Moonlight";
+          categories = [ "AudioVideo" "Network" "RemoteAccess" "Game" ];
+        };
+      };
     };
 
     # Apps
