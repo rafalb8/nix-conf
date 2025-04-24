@@ -132,6 +132,7 @@
   environment.systemPackages = with pkgs; [
     # Tools
     appimage-run
+    hydra-check
     ripgrep
     xclip
     micro

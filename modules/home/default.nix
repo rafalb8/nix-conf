@@ -45,7 +45,7 @@
         dmesg = "sudo dmesg";
       };
 
-      initExtra = ''
+      initContent = ''
         # Fix autocomplete for nix alias
         compdef _nix ${config.environment.shellAliases.nix}
 
