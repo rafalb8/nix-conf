@@ -47,17 +47,10 @@
       userEmail = "rafalb8@hotmail.com";
     };
 
-    programs.ssh = {
-      enable = true;
-      extraConfig = ''
-        Host server
-          HostName 192.168.0.100
-
-        Host AMDC4857
-          HostName 106.120.84.201
-          User r.babinski
-          ProxyCommand nc -X 5 -x 192.168.0.68:1080 %h %p
-      '';
+    programs.ssh. matchBlocks."AMDC4857" = {
+      hostname = "106.120.84.201";
+      user = "r.babinski";
+      proxyCommand = "nc -X 5 -x 192.168.0.68:1080 %h %p";
     };
 
     services.easyeffects = {

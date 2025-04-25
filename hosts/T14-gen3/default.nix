@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   imports = [
     # Include the hardware scan.
@@ -30,14 +30,6 @@
     programs.git = {
       userName = "Rafalb8";
       userEmail = "rafalb8@hotmail.com";
-    };
-
-    programs.ssh = {
-      enable = true;
-      extraConfig = ''
-        Host server
-          HostName 100.64.0.1
-      '';
     };
 
     services.easyeffects = {
@@ -108,9 +100,7 @@
   };
 
   # Fingerprint (Synaptics [06cb:00f9])
-  services.fprintd = {
-    enable = true;
-  };
+  services.fprintd.enable = true;
 
   # The state version is required and should stay at the version you
   # originally installed.
