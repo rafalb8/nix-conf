@@ -62,12 +62,6 @@ in
         {
           name = "Desktop";
           image-path = "desktop.png";
-          prep-cmd = [
-            {
-              do = "${sunscreen}/bin/sunscreen";
-              undo = "${sunscreen}/bin/sunscreen reset";
-            }
-          ];
           exclude-global-prep-cmd = "";
           auto-detach = "true";
           wait-all = "true";
@@ -82,7 +76,7 @@ in
               undo = "${sunscreen}/bin/sunscreen reset";
             }
           ];
-          detached = [ "steam steam://open/bigpicture" ];
+          detached = [ "setsid steam steam://open/bigpicture" ];
           exclude-global-prep-cmd = "";
           auto-detach = "true";
           wait-all = "true";
