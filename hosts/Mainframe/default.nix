@@ -109,7 +109,7 @@
           arcmenu-hotkey = [ ];
           menu-button-icon = "Distro_Icon";
           distro-icon = 22;
-          custom-menu-button-icon-size = 24;
+          custom-menu-button-icon-size = 24.0;
         };
       };
     };

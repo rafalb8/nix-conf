@@ -54,6 +54,47 @@
           "youtube-music.desktop"
         ];
 
+        "org/gnome/shell/extensions/dash-to-panel" =
+          let
+            panel = "LEN-0x00000000";
+          in
+          {
+            panel-postions = "{}";
+            panel-anchors = ''{"${panel}":"MIDDLE"}'';
+            panel-lengths = ''{"${panel}":100}'';
+            panel-sizes = ''{"${panel}":48}'';
+            intellihide = false;
+            appicon-margin = 8;
+            appicon-padding = 4;
+            trans-use-custom-opacity = true;
+            trans-use-dynamic-opacity = false;
+            trans-use-custom-gradient = false;
+            stockgs-keep-top-panel = false;
+            stockgs-keep-dash = false;
+            show-window-previews = true;
+            panel-element-positions = builtins.toJSON {
+              "${panel}" = [
+                { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
+                { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
+                { "element" = "leftBox"; "visible" = true; "position" = "stackedTL"; }
+                { "element" = "taskbar"; "visible" = true; "position" = "centerMonitor"; }
+                { "element" = "centerBox"; "visible" = true; "position" = "stackedBR"; }
+                { "element" = "rightBox"; "visible" = true; "position" = "stackedBR"; }
+                { "element" = "dateMenu"; "visible" = true; "position" = "stackedBR"; }
+                { "element" = "systemMenu"; "visible" = true; "position" = "stackedBR"; }
+                { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
+              ];
+            };
+          };
+
+        "org/gnome/shell/extensions/arcmenu" = {
+          arcmenu-hotkey = [ ];
+          custom-menu-button-icon-size = 42.0;
+          menu-button-icon = "Distro_Icon";
+          distro-icon = 22;
+          menu-layout = "Elementary";
+        };
+
         # Enable fractional scaling
         "org/gnome/mutter"."experimental-features" = [
           "scale-monitor-framebuffer"
