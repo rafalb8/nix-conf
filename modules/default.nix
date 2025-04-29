@@ -1,53 +1,33 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # Modules
   imports = [
     ./desktop
     ./graphics
-    ./home
+    ./user
+
+    ./packages.nix
   ];
 
-  # Base
-
-  boot = {
-    # Use latest kernel
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-
-    # Bootloader
-    loader = {
-      timeout = 0;
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-  };
+  # Use latest kernel
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
   hardware.enableRedistributableFirmware = true;
+
+  # Bootloader
+  boot.loader = {
+    timeout = 0;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
-  nix = {
-    # Enable nix-command and flakes
-    settings.experimental-features = [ "nix-command" "flakes" ];
-
-    # Perform garbage collection weekly to maintain low disk usage
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 7d";
-    };
-
-    # Nix automatically detects files in the store that have identical contents,
-    # and replaces them with hard links to a single copy.
-    settings.auto-optimise-store = true;
-  };
+  # Enable fstrim for SSD
+  services.fstrim.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
@@ -71,23 +51,6 @@
 
   # Configure console keymap
   console.keyMap = "pl";
-
-  # Define a user account.
-  users.users.${config.user.name} = {
-    isNormalUser = true;
-    description = config.user.description;
-    extraGroups =
-      [
-        "wheel"
-        "networkmanager"
-        "libvirtd"
-        "docker"
-        "input"
-      ]
-      ++ lib.optional config.programs.gamemode.enable "gamemode"
-      ++ lib.optional config.modules.graphics.overcloking "corectrl";
-    shell = pkgs.zsh;
-  };
 
   environment.shellAliases =
     let
@@ -127,79 +90,20 @@
       la = "ls -lah"; # all files list
     };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search nixpkgs wget
-  environment.systemPackages = with pkgs; [
-    # Tools
-    appimage-run
-    hydra-check
-    ripgrep
-    xclip
-    micro
-    file
-    lsof
-    bat
-    eza
-    vim
-    fd
+  # Nix config
+  nix = {
+    # Enable nix-command and flakes
+    settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # System
-    efibootmgr
-    dmidecode
-    pciutils
-    usbutils
-    btop
+    # Perform garbage collection weekly to maintain low disk usage
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 7d";
+    };
 
-    # Networking
-    nmap
-    wget
-    rsync
-    rclone
-    arp-scan
-
-    # Filesystems
-    exfatprogs
-
-    # Archivers
-    p7zip
-    lz4
-
-    # Media
-    ffmpeg-full
-    yt-dlp
-
-    # Development
-    gnumake
-    gcc
-    jq
-
-    # Golang
-    go
-    gofumpt
-    gopls
-    delve
-    air
-
-    # Nix
-    nil
-    nixpkgs-fmt
-
-    # Rust
-    rustup
-    rust-analyzer
-  ];
-
-  programs = {
-    git.enable = true;
-    zsh.enable = true;
+    # Nix automatically detects files in the store that have identical contents,
+    # and replaces them with hard links to a single copy.
+    settings.auto-optimise-store = true;
   };
-
-  services.tailscale.enable = true;
-
-  # Docker
-  virtualisation.docker.enable = true;
-  systemd.services.docker.wantedBy = lib.mkForce [ ];
-
-  # Enable fstrim for SSD
-  services.fstrim.enable = true;
 }
