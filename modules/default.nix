@@ -61,7 +61,7 @@
           apply) nixos-rebuild switch --show-trace -L -v "$@";;
           boot) nixos-rebuild boot --show-trace -L -v "$@";;
           upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v "$@"';;
-          code) code /etc/nixos "$@";;
+          config) code /etc/nixos "$@";;
           *) \nix $cmd "$@";;
         esac
       '';
