@@ -20,7 +20,7 @@
   modules = {
     graphics = {
       amd = true;
-      overcloking = false;
+      overcloking = true;
     };
 
     desktop = {
@@ -47,7 +47,7 @@
       userEmail = "rafalb8@hotmail.com";
     };
 
-    programs.ssh. matchBlocks."AMDC4857" = {
+    programs.ssh.matchBlocks."AMDC4857" = {
       hostname = "106.120.84.201";
       user = "r.babinski";
       proxyCommand = "nc -X 5 -x 192.168.0.68:1080 %h %p";
@@ -83,12 +83,14 @@
             panel = "GSM-0x000231e1";
           in
           {
-            panel-postions = ''{"${panel}":"LEFT"}'';
             appicon-margin = 4;
             trans-use-custom-opacity = true;
             trans-use-dynamic-opacity = true;
             trans-panel-opacity = 0.40;
             stockgs-keep-top-panel = true;
+            show-window-previews = true;
+            isolate-workspaces = true;
+            panel-postions = ''{"${panel}":"LEFT"}'';
             panel-element-positions = builtins.toJSON {
               "${panel}" = [
                 { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }

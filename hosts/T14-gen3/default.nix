@@ -59,10 +59,6 @@
             panel = "LEN-0x00000000";
           in
           {
-            panel-postions = "{}";
-            panel-anchors = ''{"${panel}":"MIDDLE"}'';
-            panel-lengths = ''{"${panel}":100}'';
-            panel-sizes = ''{"${panel}":48}'';
             intellihide = false;
             appicon-margin = 8;
             appicon-padding = 4;
@@ -72,6 +68,11 @@
             stockgs-keep-top-panel = false;
             stockgs-keep-dash = false;
             show-window-previews = true;
+            isolate-workspaces = true;
+            panel-postions = "{}";
+            panel-anchors = ''{"${panel}":"MIDDLE"}'';
+            panel-lengths = ''{"${panel}":100}'';
+            panel-sizes = ''{"${panel}":48}'';
             panel-element-positions = builtins.toJSON {
               "${panel}" = [
                 { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
