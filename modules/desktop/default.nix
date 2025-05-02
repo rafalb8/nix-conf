@@ -6,8 +6,9 @@ in
   imports = [
     ./gaming
     ./gnome.nix
-  ];
 
+    ./browsers.nix
+  ];
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
@@ -24,67 +25,11 @@ in
 
   # Common desktop configuration
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      # Terminal
-      alacritty
-
-      # Media
-      jellyfin-media-player
-      kdePackages.kdenlive
-      youtube-music
-      obs-studio
-      audacity
-      calibre
-      gimp
-      mpv
-
-      # Development
-      temurin-jre-bin
-      android-tools
-      vscode
-
-      # Tools
-      imagemagick_light
-      stable.input-leap
-      impression
-      obsidian
-      anydesk
-      szyszka
-      ventoy
-
-      # Web
-      qbittorrent
-      brave
-      discord
-    ];
-
-    # FastFlix
-    programs.fastflix.enable = true;
-
-    # Firefox
-    programs.firefox = {
-      enable = true;
-      policies = {
-        ExtensionSettings = {
-          "uBlock0@raymondhill.net" = {
-            installation_mode = "force_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-            private_browsing = true;
-          };
-          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-            installation_mode = "force_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-            private_browsing = true;
-          };
-        };
-      };
-    };
+    # Run non-nix executables
+    programs.nix-ld.enable = true;
 
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-    # Run non-nix executables
-    programs.nix-ld.enable = true;
 
     # Firewall
     networking.firewall = {
@@ -127,6 +72,12 @@ in
       udisks2.enable = true;
     };
 
+    services.fwupd.enable = true;
+    hardware = {
+      bluetooth.enable = true;
+      sane.enable = true; # Scanners
+    };
+
     # Enable zram
     zramSwap = {
       enable = true;
@@ -148,14 +99,6 @@ in
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-
-    hardware = {
-      bluetooth.enable = true;
-      # Scanners
-      sane.enable = true;
-    };
-
-    services.fwupd.enable = true;
 
     # Raise memlock limits
     security.pam.loginLimits = [
@@ -197,56 +140,28 @@ in
     };
     programs.virt-manager.enable = true;
 
-    # Policies for chromium browsers
-    programs.chromium = {
-      enable = true;
-      extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      ];
-      extraOpts = {
-        "PasswordManagerEnabled" = false;
-        "SpellcheckEnabled" = true;
-        "SpellcheckLanguage" = [
-          "pl"
-          "en-US"
-        ];
-      };
-    };
-
-    # Add reminder for jellyfin
-    warnings =
-      if pkgs.jellyfin-media-player.version > "1.12.0" then
-        [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ]
-      else [ ];
-
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       # Hide folders in home
-      home.file = {
-        ".hidden".text = ''
-          Desktop
-          Public
-          Templates
-          go
-        '';
-      };
+      home.file.".hidden".text = ''
+        Desktop
+        Public
+        Templates
+        go
+      '';
 
       # Required
       xdg.enable = true;
 
-      # Custom desktop entries
-      xdg.desktopEntries = {
-        # Fix for jellyfin
-        "com.github.iwalton3.jellyfin-media-player" = {
-          name = "Jellyfin Media Player";
-          icon = "com.github.iwalton3.jellyfin-media-player";
-          exec = "jellyfinmediaplayer";
-          settings = {
-            StartupWMClass = "jellyfinmediaplayer";
-          };
-          categories = [ "AudioVideo" "Video" "Player" "TV" ];
+      # Fix for jellyfin
+      xdg.desktopEntries."com.github.iwalton3.jellyfin-media-player" = {
+        name = "Jellyfin Media Player";
+        icon = "com.github.iwalton3.jellyfin-media-player";
+        exec = "jellyfinmediaplayer";
+        settings = {
+          StartupWMClass = "jellyfinmediaplayer";
         };
+        categories = [ "AudioVideo" "Video" "Player" "TV" ];
       };
 
       # Easyeffects service
