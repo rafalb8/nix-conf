@@ -8,10 +8,14 @@ in
     ./gnome.nix
 
     ./browsers.nix
+    ./packages.nix
+    ./graphical-boot.nix
   ];
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
+
+    graphicalBoot = lib.mkEnableOption "Enable graphical boot";
 
     environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
@@ -133,13 +137,6 @@ in
       fontconfig.enable = true;
     };
 
-    # Enable KVM
-    virtualisation = {
-      libvirtd.enable = true;
-      spiceUSBRedirection.enable = true;
-    };
-    programs.virt-manager.enable = true;
-
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       # Hide folders in home
@@ -189,5 +186,11 @@ in
       };
     };
 
+    # Enable KVM
+    virtualisation = {
+      libvirtd.enable = true;
+      spiceUSBRedirection.enable = true;
+    };
+    programs.virt-manager.enable = true;
   };
 }

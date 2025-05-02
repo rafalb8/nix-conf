@@ -25,6 +25,7 @@
 
     desktop = {
       enable = true;
+      graphicalBoot = true;
       environment.gnome = true;
       gaming = {
         enable = true;
