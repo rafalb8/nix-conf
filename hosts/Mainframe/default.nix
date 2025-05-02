@@ -75,7 +75,7 @@
           "discord.desktop"
           "com.github.iwalton3.jellyfin-media-player.desktop"
           "com.github.wwmm.easyeffects.desktop"
-          "youtube-music.desktop"
+          "com.github.th_ch.youtube_music.desktop"
         ];
 
         "org/gnome/shell/extensions/dash-to-panel" =
