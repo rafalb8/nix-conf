@@ -133,6 +133,11 @@ in
       terminal = "alacritty";
     };
 
+    # Fix Gnome crash when logging in too quickly xD
+    # https://discourse.nixos.org/t/gnome-display-manager-fails-to-login-until-wi-fi-connection-is-established/50513/10
+    systemd.services."getty@tty1".enable = false;
+    systemd.services."autovt@tty1".enable = false;
+
     environment.sessionVariables = {
       # Fix gnome media inspection
       GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
