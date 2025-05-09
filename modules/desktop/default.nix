@@ -10,12 +10,15 @@ in
     ./browsers.nix
     ./packages.nix
     ./graphical-boot.nix
+    ./waydroid.nix
   ];
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
 
     graphicalBoot = lib.mkEnableOption "Enable graphical boot";
+
+    waydroid = lib.mkEnableOption "Waydroid support";
 
     environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";

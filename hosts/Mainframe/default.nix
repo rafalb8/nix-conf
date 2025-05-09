@@ -27,10 +27,13 @@
       enable = true;
       graphicalBoot = true;
       environment.gnome = true;
+
       gaming = {
         enable = true;
         streaming = true;
       };
+
+      waydroid = true;
     };
   };
 

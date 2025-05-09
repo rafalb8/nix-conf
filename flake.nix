@@ -6,6 +6,11 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,6 +22,7 @@
     , nixpkgs
     , nixpkgs-stable
     , chaotic
+    , nur
     , home-manager
     , ...
     }@inputs:
@@ -68,7 +74,7 @@
 
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ self.overlays.custom self.overlays.stable ];
+              nixpkgs.overlays = [ self.overlays.custom self.overlays.stable nur.overlays.default ];
 
               nix.registry.nixpkgs.flake = nixpkgs;
               home-manager.useGlobalPkgs = true;
