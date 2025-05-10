@@ -81,7 +81,7 @@
 
         "org/gnome/shell/extensions/dash-to-panel" =
           let
-            panel = "GSM-0x000231e1";
+            monitor = "GSM-0x000231e1";
           in
           {
             appicon-margin = 4;
@@ -91,9 +91,9 @@
             stockgs-keep-top-panel = true;
             show-window-previews = true;
             isolate-workspaces = true;
-            panel-postions = ''{"${panel}":"LEFT"}'';
+            panel-postions = ''{"${monitor}":"LEFT"}'';
             panel-element-positions = builtins.toJSON {
-              "${panel}" = [
+              "${monitor}" = [
                 { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
                 { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
                 { "element" = "leftBox"; "visible" = false; "position" = "stackedTL"; }
