@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Include the hardware scan.
@@ -24,6 +24,9 @@
 
   # Hostname
   networking.hostName = "T14-gen3";
+
+  # Additional packages 
+  environment.systemPackages = with pkgs; [ moonlight-qt ];
 
   # Home module settings
   home-manager.users.${config.user.name} = {
