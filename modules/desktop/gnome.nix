@@ -56,6 +56,11 @@ in
       dconf = {
         enable = true;
         settings = {
+          # Customize gnome
+          "org/gnome/mutter".edge-tiling = true;
+          "org/gnome/desktop/interface".enable-hot-corners = false;
+          "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
+
           # Enable gnome extensions
           "org/gnome/shell" = {
             disable-user-extensions = false;
@@ -69,10 +74,14 @@ in
             ];
           };
 
-          # Customize gnome
-          "org/gnome/mutter".edge-tiling = true;
-          "org/gnome/desktop/interface".enable-hot-corners = false;
-          "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
+          # Customize arcmenu
+          "org/gnome/shell/extensions/arcmenu" = {
+            arcmenu-hotkey = [ ];
+            recently-installed-apps = [ ];
+            menu-button-icon = "Distro_Icon";
+            distro-icon = 22;
+            menu-layout = "Sleek";
+          };
 
           # Shortcuts / Keybinds
           "org/gnome/desktop/wm/keybindings" = {
