@@ -18,7 +18,6 @@ in
     environment.systemPackages =
       # Gnome Extensions
       (with pkgs.gnomeExtensions; [
-        arcmenu
         caffeine
         gsconnect
         pip-on-top
@@ -66,7 +65,6 @@ in
           "org/gnome/shell" = {
             disable-user-extensions = false;
             enabled-extensions = [
-              "arcmenu@arcmenu.com"
               "caffeine@patapon.info"
               "gsconnect@andyholmes.github.io"
               "pip-on-top@rafostar.github.com"
@@ -77,14 +75,6 @@ in
           };
 
           # Customize extensions
-          # ArcMenu
-          "org/gnome/shell/extensions/arcmenu" = {
-            arcmenu-hotkey = [ ];
-            recently-installed-apps = [ ];
-            menu-button-icon = "Distro_Icon";
-            distro-icon = 22;
-            menu-layout = "Sleek";
-          };
           # PiP on top
           "org/gnome/shell/extensions/pip-on-top".stick = true;
 
@@ -131,6 +121,12 @@ in
 
           # Disable mouse acceleration
           "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+
+          # Enable fractional scaling
+          "org/gnome/mutter"."experimental-features" = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+          ];
 
           # TextEditor
           "org/gnome/TextEditor" = {

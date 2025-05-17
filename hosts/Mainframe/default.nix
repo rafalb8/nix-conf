@@ -74,9 +74,12 @@
           "firefox.desktop"
           "Alacritty.desktop"
           "code.desktop"
+          "obsidian.desktop"
           "steam.desktop"
           "discord.desktop"
+          "com.github.wwmm.easyeffects.desktop"
           "com.github.iwalton3.jellyfin-media-player.desktop"
+          "com.github.th_ch.youtube_music.desktop"
         ];
 
         "org/gnome/shell/extensions/dash-to-panel" =
@@ -106,16 +109,6 @@
               ];
             };
           };
-
-        "org/gnome/shell/extensions/arcmenu" = {
-          dash-to-panel-standalone = true;
-          custom-menu-button-icon-size = 24.0;
-          pinned-apps = with lib.hm.gvariant; [
-            [ (mkDictionaryEntry [ "id" "com.github.th_ch.youtube_music.desktop" ]) ]
-            [ (mkDictionaryEntry [ "id" "com.github.wwmm.easyeffects.desktop" ]) ]
-            [ (mkDictionaryEntry [ "id" "obsidian.desktop" ]) ]
-          ];
-        };
 
       };
     };

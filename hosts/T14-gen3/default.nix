@@ -101,21 +101,6 @@
             panel-element-positions-monitors-sync = true;
             panel-positions = ''{}'';
           } // (mkConfig [ monitor tv ]);
-
-        "org/gnome/shell/extensions/arcmenu" = {
-          custom-menu-button-icon-size = 42.0;
-          pinned-apps = with lib.hm.gvariant; [
-            [ (mkDictionaryEntry [ "id" "com.github.th_ch.youtube_music.desktop" ]) ]
-            [ (mkDictionaryEntry [ "id" "com.github.wwmm.easyeffects.desktop" ]) ]
-            [ (mkDictionaryEntry [ "id" "obsidian.desktop" ]) ]
-          ];
-        };
-
-        # Enable fractional scaling
-        "org/gnome/mutter"."experimental-features" = [
-          "scale-monitor-framebuffer"
-          "xwayland-native-scaling"
-        ];
       };
     };
   };
