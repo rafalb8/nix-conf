@@ -21,7 +21,6 @@ in
 
       # Emulators
       rpcs3
-      torzu
     ];
 
     programs = {

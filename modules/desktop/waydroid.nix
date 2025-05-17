@@ -5,7 +5,7 @@ in
 {
   # https://wiki.nixos.org/wiki/Waydroid
   # ---
-  
+
   # To initialize the Waydroid container, run:
   #   sudo waydroid init -s GAPPS -f
 
@@ -21,7 +21,7 @@ in
     virtualisation.waydroid.enable = true;
 
     # Disable waydroid-container.service
-    systemd.services.waydroid-container.wantedBy = lib.mkForce [ ];
+    systemd.services.waydroid-container.enable = false;
 
     # Run arm64 binaries on x86_64
     # sudo waydroid-script -> Android 11 >> Install >> libhoudini

@@ -34,7 +34,6 @@ in
       obsidian
       anydesk
       szyszka
-      ventoy
 
       # Web
       qbittorrent

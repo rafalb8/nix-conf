@@ -21,6 +21,7 @@ in
         arcmenu
         caffeine
         gsconnect
+        pip-on-top
         appindicator
         dash-to-panel
         quick-settings-audio-devices-hider
@@ -68,13 +69,15 @@ in
               "arcmenu@arcmenu.com"
               "caffeine@patapon.info"
               "gsconnect@andyholmes.github.io"
+              "pip-on-top@rafostar.github.com"
               "appindicatorsupport@rgcjonas.gmail.com"
               "dash-to-panel@jderose9.github.com"
               "quicksettings-audio-devices-hider@marcinjahn.com"
             ];
           };
 
-          # Customize arcmenu
+          # Customize extensions
+          # ArcMenu
           "org/gnome/shell/extensions/arcmenu" = {
             arcmenu-hotkey = [ ];
             recently-installed-apps = [ ];
@@ -82,6 +85,8 @@ in
             distro-icon = 22;
             menu-layout = "Sleek";
           };
+          # PiP on top
+          "org/gnome/shell/extensions/pip-on-top".stick = true;
 
           # Shortcuts / Keybinds
           "org/gnome/desktop/wm/keybindings" = {
