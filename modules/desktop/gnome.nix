@@ -31,6 +31,7 @@ in
         # gnome.gnome-terminal
         adwaita-icon-theme
         mission-center
+        gnome-firmware
         # gnome-tweaks
         adw-gtk3
         ghex

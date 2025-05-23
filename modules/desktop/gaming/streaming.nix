@@ -18,6 +18,7 @@ let
       PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
     fi
 
+    ${pkgs.easyeffects}/bin/easyeffects -r
     MONITOR=''$(${pkgs.gnome-monitor-config}/bin/gnome-monitor-config list | grep 'Monitor' | awk '{print $3}')
     ${pkgs.gnome-monitor-config}/bin/gnome-monitor-config set -LpM ''${MONITOR} -m ''${PROFILE}
   '';
