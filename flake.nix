@@ -59,7 +59,7 @@
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs
-        [ "Mainframe" "T14-gen3" ]
+        [ "Mainframe" "T14-gen3" "Nexus" ]
         (hostname: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
@@ -69,9 +69,7 @@
             ./extensions
             ./hosts/${hostname}
 
-            # Chaotic
             chaotic.nixosModules.default
-
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.custom self.overlays.stable nur.overlays.default ];

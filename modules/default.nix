@@ -4,6 +4,7 @@
   imports = [
     ./desktop
     ./graphics
+    ./server
     ./user
 
     ./packages.nix
@@ -106,4 +107,7 @@
     # and replaces them with hard links to a single copy.
     settings.auto-optimise-store = true;
   };
+
+  # Run non-nix executables
+  programs.nix-ld.enable = true;
 }

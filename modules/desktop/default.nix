@@ -32,9 +32,6 @@ in
 
   # Common desktop configuration
   config = lib.mkIf cfg.enable {
-    # Run non-nix executables
-    programs.nix-ld.enable = true;
-
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -198,5 +195,8 @@ in
       spiceUSBRedirection.enable = true;
     };
     programs.virt-manager.enable = true;
+
+    # Disable Docker on boot
+    systemd.services.docker.wantedBy = lib.mkForce [ ];
   };
 }

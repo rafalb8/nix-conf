@@ -59,10 +59,6 @@
     # Nix
     nil
     nixpkgs-fmt
-
-    # Rust
-    rustup
-    rust-analyzer
   ];
 
   programs = {
@@ -71,8 +67,5 @@
   };
 
   services.tailscale.enable = true;
-
-  # Docker
   virtualisation.docker.enable = true;
-  systemd.services.docker.wantedBy = lib.mkForce [ ];
 }
