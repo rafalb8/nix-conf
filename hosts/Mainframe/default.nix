@@ -84,32 +84,59 @@
 
         "org/gnome/shell/extensions/dash-to-panel" =
           let
-            monitor = "GSM-0x000231e1";
+            mkPanelConfig = screen: {
+              panel-sizes = { "${screen}" = 48; };
+              panel-lengths = { "${screen}" = -1; };
+              panel-anchors = { "${screen}" = "MIDDLE"; };
+              panel-positions = { "${screen}" = "BOTTOM"; };
+              panel-element-positions = {
+                "${screen}" = [
+                  { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
+                  { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
+                  { "element" = "leftBox"; "visible" = false; "position" = "stackedTL"; }
+                  { "element" = "taskbar"; "visible" = true; "position" = "centerMonitor"; }
+                  { "element" = "centerBox"; "visible" = false; "position" = "stackedBR"; }
+                  { "element" = "rightBox"; "visible" = false; "position" = "stackedBR"; }
+                  { "element" = "dateMenu"; "visible" = false; "position" = "stackedBR"; }
+                  { "element" = "systemMenu"; "visible" = false; "position" = "stackedBR"; }
+                  { "element" = "desktopButton"; "visible" = false; "position" = "stackedBR"; }
+                ];
+              };
+            };
+
+            mkConfig = cfgs: with builtins; {
+              panel-sizes = toJSON (foldl' (acc: cfg: acc // cfg.panel-sizes) { } cfgs);
+              panel-lengths = toJSON (foldl' (acc: cfg: acc // cfg.panel-lengths) { } cfgs);
+              panel-anchors = toJSON (foldl' (acc: cfg: acc // cfg.panel-anchors) { } cfgs);
+              panel-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-positions) { } cfgs);
+              panel-element-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-element-positions) { } cfgs);
+            };
+
+            monitor = mkPanelConfig "GSM-0x000231e1";
           in
           {
-            appicon-margin = 4;
-            trans-use-custom-opacity = true;
-            trans-use-dynamic-opacity = true;
-            trans-panel-opacity = 0.40;
-            stockgs-keep-top-panel = true;
-            show-window-previews = true;
+            intellihide = true;
+            global-border-radius = 1;
             isolate-workspaces = true;
-            panel-postions = ''{"${monitor}":"LEFT"}'';
-            panel-element-positions = builtins.toJSON {
-              "${monitor}" = [
-                { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
-                { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
-                { "element" = "leftBox"; "visible" = false; "position" = "stackedTL"; }
-                { "element" = "taskbar"; "visible" = true; "position" = "stackedTL"; }
-                { "element" = "centerBox"; "visible" = false; "position" = "stackedBR"; }
-                { "element" = "rightBox"; "visible" = false; "position" = "stackedBR"; }
-                { "element" = "dateMenu"; "visible" = false; "position" = "stackedBR"; }
-                { "element" = "systemMenu"; "visible" = false; "position" = "stackedBR"; }
-                { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
-              ];
-            };
-          };
+            show-window-previews = true;
 
+            appicon-margin = 4;
+            appicon-padding = 4;
+
+            stockgs-keep-dash = false;
+            stockgs-keep-top-panel = true;
+
+            dot-color-dominant = true;
+            dot-style-focused = "METRO";
+            dot-style-unfocused = "DASHES";
+
+            trans-panel-opacity = 0.40;
+            trans-use-custom-opacity = true;
+            trans-use-dynamic-opacity = false;
+            trans-use-custom-gradient = false;
+
+            panel-element-positions-monitors-sync = true;
+          } // (mkConfig [ monitor ]);
       };
     };
   };
