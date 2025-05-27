@@ -115,7 +115,6 @@
             monitor = mkPanelConfig "GSM-0x000231e1";
           in
           {
-            intellihide = true;
             global-border-radius = 1;
             isolate-workspaces = true;
             show-window-previews = true;
@@ -134,6 +133,14 @@
             trans-use-custom-opacity = true;
             trans-use-dynamic-opacity = false;
             trans-use-custom-gradient = false;
+
+            intellihide = true;
+            intellihide-use-pressure = true;
+            intellihide-pressure-time = 1000;
+            intellihide-pressure-threshold = 100;
+            intellihide-hide-from-windows = true;
+            intellihide-show-in-fullscreen = false;
+            intellihide-behaviour = "FOCUSED_WINDOWS";
 
             panel-element-positions-monitors-sync = true;
           } // (mkConfig [ monitor ]);
