@@ -60,6 +60,7 @@
     services.easyeffects = {
       autoload = {
         "Dolby Headphones" = [
+          "alsa_output.pci-0000_03_00.1.hdmi-stereo-extra2:hdmi-output-2"
           "alsa_output.pci-0000_0e_00.6.analog-stereo:analog-output-lineout"
           "alsa_output.usb-SteelSeries_SteelSeries_Arctis_1_Wireless-00.analog-stereo:analog-output"
         ];
@@ -112,7 +113,7 @@
               panel-element-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-element-positions) { } cfgs);
             };
 
-            monitor = mkPanelConfig "GSM-0x000231e1";
+            monitor = mkPanelConfig "DEL-1CDG2S3";
           in
           {
             global-border-radius = 1;
