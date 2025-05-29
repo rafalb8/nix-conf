@@ -21,6 +21,7 @@ in
         caffeine
         gsconnect
         pip-on-top
+        tiling-shell
         appindicator
         dash-to-panel
         quick-settings-audio-devices-hider
@@ -44,7 +45,7 @@ in
       style = "adwaita-dark";
     };
 
-    home-manager.users.${config.user.name} = {
+    home-manager.users.${config.user.name} = { lib, ... }: {
       # Set dark mode in GTK applications
       gtk = {
         enable = true;
@@ -58,7 +59,7 @@ in
         enable = true;
         settings = {
           # Customize gnome
-          "org/gnome/mutter".edge-tiling = true;
+          "org/gnome/mutter".edge-tiling = false; # Controlled by tiling-shell
           "org/gnome/desktop/interface".enable-hot-corners = false;
           "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
 
@@ -69,6 +70,7 @@ in
               "caffeine@patapon.info"
               "gsconnect@andyholmes.github.io"
               "pip-on-top@rafostar.github.com"
+              "tilingshell@ferrarodomenico.com"
               "appindicatorsupport@rgcjonas.gmail.com"
               "dash-to-panel@jderose9.github.com"
               "quicksettings-audio-devices-hider@marcinjahn.com"
@@ -76,8 +78,17 @@ in
           };
 
           # Customize extensions
-          # PiP on top
+          ## PiP on top
           "org/gnome/shell/extensions/pip-on-top".stick = true;
+
+          ## Tiling shell
+          "org/gnome/shell/extensions/tilingshell".inner-gaps = lib.hm.gvariant.mkUint32 0;
+          "org/gnome/shell/extensions/tilingshell".outer-gaps = lib.hm.gvariant.mkUint32 0;
+          ### Disable default keybindings
+          "org/gnome/desktop/wm/keybindings".maximize = [ ]; # Super+Up
+          "org/gnome/desktop/wm/keybindings".unmaximize = [ ]; # Super+Down
+          "org/gnome/mutter/keybindings".toggle-tiled-left = [ ]; # Super+Left
+          "org/gnome/mutter/keybindings".toggle-tiled-right = [ ]; # Super+Right
 
           # Shortcuts / Keybinds
           "org/gnome/desktop/wm/keybindings" = {
@@ -119,6 +130,8 @@ in
           # Disable keybindings
           "org/gnome/mutter/wayland/keybindings".restore-shortcuts = [ ];
           "org/gnome/shell/keybindings".toggle-message-tray = [ ];
+
+
 
           # Disable mouse acceleration
           "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
