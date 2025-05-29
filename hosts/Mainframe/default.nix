@@ -100,7 +100,7 @@
                   { "element" = "rightBox"; "visible" = false; "position" = "stackedBR"; }
                   { "element" = "dateMenu"; "visible" = false; "position" = "stackedBR"; }
                   { "element" = "systemMenu"; "visible" = false; "position" = "stackedBR"; }
-                  { "element" = "desktopButton"; "visible" = false; "position" = "stackedBR"; }
+                  { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
                 ];
               };
             };

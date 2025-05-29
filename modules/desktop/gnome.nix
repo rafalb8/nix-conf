@@ -62,6 +62,7 @@ in
           "org/gnome/mutter".edge-tiling = false; # Controlled by tiling-shell
           "org/gnome/desktop/interface".enable-hot-corners = false;
           "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
+          "org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close"; # Button layout
 
           # Enable gnome extensions
           "org/gnome/shell" = {
@@ -75,6 +76,21 @@ in
               "dash-to-panel@jderose9.github.com"
               "quicksettings-audio-devices-hider@marcinjahn.com"
             ];
+          };
+
+          # Disable mouse acceleration
+          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+
+          # Enable fractional scaling
+          "org/gnome/mutter"."experimental-features" = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+          ];
+
+          # TextEditor
+          "org/gnome/TextEditor" = {
+            restore-session = false;
+            style-scheme = "builder-dark";
           };
 
           # Customize extensions
@@ -103,14 +119,14 @@ in
           "org/gnome/settings-daemon/plugins/media-keys" = {
             mic-mute = [ "<Super>v" ];
 
-            # Enable custom keybindings
+            ## Enable custom keybindings
             custom-keybindings = [
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
             ];
           };
-          # Custom keybinds definitions
+          ## Custom keybinds definitions
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Terminal";
             command = "alacritty";
@@ -127,26 +143,9 @@ in
             binding = "<Shift><Ctrl>Escape";
           };
 
-          # Disable keybindings
+          ## Disable keybindings
           "org/gnome/mutter/wayland/keybindings".restore-shortcuts = [ ];
           "org/gnome/shell/keybindings".toggle-message-tray = [ ];
-
-
-
-          # Disable mouse acceleration
-          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
-
-          # Enable fractional scaling
-          "org/gnome/mutter"."experimental-features" = [
-            "scale-monitor-framebuffer"
-            "xwayland-native-scaling"
-          ];
-
-          # TextEditor
-          "org/gnome/TextEditor" = {
-            restore-session = false;
-            style-scheme = "builder-dark";
-          };
         };
       };
     };
