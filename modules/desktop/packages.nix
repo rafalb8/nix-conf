@@ -15,6 +15,7 @@ in
       # Media
       jellyfin-media-player
       kdePackages.kdenlive
+      jellyfin-mpv-shim
       youtube-music
       obs-studio
       audacity
