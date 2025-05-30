@@ -18,5 +18,12 @@ in
 
     # Enable Tailscale `--advertise-exit-node` feature
     services.tailscale.useRoutingFeatures = "server";
+
+    # Add "motd" with ZFS status
+    home-manager.users.${config.user.name} = {
+      programs.zsh.initContent = ''
+        zpool status
+      '';
+    };
   };
 }

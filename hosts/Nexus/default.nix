@@ -15,8 +15,15 @@
     server.enable = true;
   };
 
-  # Hostname
+  # System settings
   networking.hostName = "Nexus";
+  networking.hostId = "b14aa9a5";
+
+  # Zfs settings
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "storage" ];
+  boot.zfs.forceImportRoot = false;
+  services.zfs.autoScrub.enable = true;
 
   # Home module settings
   home-manager.users.${config.user.name} = { lib, ... }: {
