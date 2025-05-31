@@ -122,7 +122,6 @@
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "server" = { hostname = "192.168.0.100"; };
       "dell-7050" = { hostname = "dell-7050"; user = "core"; };
     };
   };
