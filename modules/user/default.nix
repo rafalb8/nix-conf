@@ -5,9 +5,6 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = config.user.description;
-    openssh.authorizedKeys.keys = [
-    	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMR8zRRtw+n3cYr2dNixiElLzgNLU+RQdhXf/WwA/B4N rafalb8@Mainframe"
-    ];
     extraGroups =
       [
         "wheel"
