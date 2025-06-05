@@ -164,8 +164,11 @@ in
         categories = [ "AudioVideo" "Video" "Player" "TV" ];
       };
 
-      # Enable Wayland HDR for Jellyfin MPV Shim
-      xdg.configFile."jellyfin-mpv-shim/mpv.conf".text = ''vo=dmabuf-wayland'';
+      # Enable Wayland HDR for Jellyfin MPV Shim and MPV
+      xdg.configFile = {
+        "mpv/mpv.conf".text = ''vo=dmabuf-wayland'';
+        "jellyfin-mpv-shim/mpv.conf".text = ''vo=dmabuf-wayland'';
+      };
 
       # Easyeffects service
       services.easyeffects = {
