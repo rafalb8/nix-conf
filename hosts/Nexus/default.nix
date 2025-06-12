@@ -13,6 +13,7 @@
   # Enable modules
   modules = {
     server.enable = true;
+    graphics.intel = true;
   };
 
   # System settings
