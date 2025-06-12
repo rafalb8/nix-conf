@@ -12,7 +12,7 @@ in
       # Tools
       prismlauncher # Minecraft launcher
       custom.sgdboop
-      protonup-qt
+      # protonup-qt
 
       # Wine guis
       bottles
@@ -28,6 +28,10 @@ in
         enable = true;
         remotePlay.openFirewall = true;
         protontricks.enable = true;
+        extraCompatPackages = with pkgs; [
+          steamtinkerlaunch
+          proton-ge-bin
+        ];
       };
 
       gamemode.enable = true;
