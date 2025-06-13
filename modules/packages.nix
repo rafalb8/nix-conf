@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -7,7 +7,7 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     # Tools
-    appimage-run
+    # appimage-run
     hydra-check
     ripgrep
     xclip
@@ -64,6 +64,10 @@
   programs = {
     git.enable = true;
     zsh.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   services.tailscale.enable = true;
