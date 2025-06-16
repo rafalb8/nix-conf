@@ -61,6 +61,16 @@ in
             };
           };
         };
+
+        # Enable steamtinkerlaunch to use nix's proton packages
+        configFile."steamtinkerlaunch/protonlist.txt".text = lib.concatMapStringsSep ""
+          (pkg:
+            let
+              protonPath = "${pkg.steamcompattool.outPath}/proton";
+            in
+            lib.optionalString (builtins.pathExists protonPath) "${protonPath}\n"
+          )
+          config.programs.steam.extraCompatPackages;
       };
 
       # Autostart

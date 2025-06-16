@@ -17,21 +17,14 @@
       enabled-extensions = [ "solaar-extension@sidevesh" ];
     };
 
-    xdg = {
-      enable = true;
-
-      # Add config
-      configFile."solaar/config.yaml" = { source = ./config.yaml; };
-      configFile."solaar/rules.yaml" = { source = ./rules.yaml; };
-
-      # Custom desktop entry
-      desktopEntries = {
-        solaar = {
-          name = "Solaar";
-          icon = "solaar";
-          exec = "solaar -w hide";
-          categories = [ "Utility" "GTK" ];
-        };
+    # Custom desktop entry
+    xdg.enable = true;
+    xdg.desktopEntries = {
+      solaar = {
+        name = "Solaar";
+        icon = "solaar";
+        exec = "solaar -w hide";
+        categories = [ "Utility" "GTK" ];
       };
     };
 
