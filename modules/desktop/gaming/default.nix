@@ -8,9 +8,11 @@ in
   config = lib.mkIf cfg.gaming.enable {
     boot.kernelParams = [ "split_lock_detect=off" ];
 
+    warnings = lib.mkIf (pkgs.vintagestory.version > "1.20.11")
+      [ "Vintage Story override not required" ];
+
     environment.systemPackages = with pkgs; [
       # Tools
-      prismlauncher # Minecraft launcher
       custom.sgdboop
       # protonup-qt
 
@@ -21,7 +23,19 @@ in
 
       # Emulators
       rpcs3
+
+      # Games
+      prismlauncher # Minecraft launcher
+      (vintagestory.overrideAttrs (prev: rec{
+        version = "1.20.12";
+        src = builtins.fetchurl {
+          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${version}.tar.gz";
+          sha256 = "sha256:1hd9xw3wf2h7fjbpjd0mi0kfzm6wb6pv8859p145ym8mk88ig9l7";
+        };
+      }))
     ];
+    # Vintage Story dep
+    nixpkgs.config.permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
 
     programs = {
       steam = {
