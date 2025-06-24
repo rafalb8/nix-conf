@@ -26,10 +26,10 @@ in
 
       # Games
       prismlauncher # Minecraft launcher
-      (vintagestory.overrideAttrs (prev: rec{
+      (vintagestory.overrideAttrs (final: prev: {
         version = "1.20.12";
         src = builtins.fetchurl {
-          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${version}.tar.gz";
+          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${final.version}.tar.gz";
           sha256 = "sha256:1hd9xw3wf2h7fjbpjd0mi0kfzm6wb6pv8859p145ym8mk88ig9l7";
         };
       }))

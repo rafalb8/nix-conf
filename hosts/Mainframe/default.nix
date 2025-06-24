@@ -43,6 +43,11 @@
   #   replaceBasePackage = true;
   # };
 
+  # Fix MediaTek wifi crashes
+  boot.extraModprobeConfig = ''
+    options mt7921e disable_aspm=1
+  '';
+
   # Home module settings
   home-manager.users.${config.user.name} = { lib, ... }: {
     # Git config
