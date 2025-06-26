@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Logitech keyboard and mouse support
@@ -42,6 +42,18 @@
   #   fallbackSpecialisation = false;
   #   replaceBasePackage = true;
   # };
+
+  hardware.firmware = with pkgs; [
+    (linux-firmware.overrideAttrs (final: prev: {
+      version = "20250624";
+      src = pkgs.fetchFromGitLab {
+        owner = "kernel-firmware";
+        repo = "linux-firmware";
+        rev = "b05fabcd6f2a16d50b5f86c389dde7a33f00bb81";
+        hash = "sha256-AvSsyfKP57Uhb3qMrf6PpNHKbXhD9IvFT1kcz5J7khM=";
+      };
+    }))
+  ];
 
   # Fix MediaTek wifi crashes
   boot.extraModprobeConfig = ''

@@ -5,8 +5,10 @@ in
 {
   config = lib.mkIf cfg.enable {
     # Add reminder for jellyfin
-    warnings = lib.mkIf (pkgs.jellyfin-media-player.version > "1.12.0")
-      [ "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649" ];
+    warnings =
+      lib.optional (pkgs.jellyfin-media-player.version > "1.12.0")
+        "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649"
+      ++ lib.optional (pkgs.input-leap.version > "3.0.2") "Input Leap builds might be fixed";
 
     environment.systemPackages = with pkgs; [
       # Terminal
@@ -30,7 +32,7 @@ in
 
       # Tools
       imagemagick_light
-      stable.input-leap
+      # input-leap
       impression
       obsidian
       anydesk
