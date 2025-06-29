@@ -29,6 +29,7 @@ in
     # Set authorized keys for SSH
     users.users.${config.user.name}.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMR8zRRtw+n3cYr2dNixiElLzgNLU+RQdhXf/WwA/B4N rafalb8@Mainframe"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGH3v2xaa15Z6+qCwC32zezwYybR3+cxYNLL/bRcDa8 T14-gen3"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQ1AZR49tTS0jKf5EBXLUXkIQHolj1/+tQweqmwlzXQ u0_a447@localhost"
     ];
 
