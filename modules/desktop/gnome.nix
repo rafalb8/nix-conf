@@ -95,9 +95,78 @@ in
           ## PiP on top
           "org/gnome/shell/extensions/pip-on-top".stick = true;
 
+          ## Dash to Panel
+          "org/gnome/shell/extensions/dash-to-panel" =
+            let
+              mkPanelConfig = screen: {
+                panel-sizes = { "${screen}" = 48; };
+                panel-lengths = { "${screen}" = -1; };
+                panel-anchors = { "${screen}" = "MIDDLE"; };
+                panel-positions = { "${screen}" = "BOTTOM"; };
+                panel-element-positions = {
+                  "${screen}" = [
+                    { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
+                    { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
+                    { "element" = "leftBox"; "visible" = false; "position" = "stackedTL"; }
+                    { "element" = "taskbar"; "visible" = true; "position" = "centerMonitor"; }
+                    { "element" = "centerBox"; "visible" = false; "position" = "stackedBR"; }
+                    { "element" = "rightBox"; "visible" = false; "position" = "stackedBR"; }
+                    { "element" = "dateMenu"; "visible" = false; "position" = "stackedBR"; }
+                    { "element" = "systemMenu"; "visible" = false; "position" = "stackedBR"; }
+                    { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
+                  ];
+                };
+              };
+
+              mkConfig = cfgs: with builtins; {
+                panel-sizes = toJSON (foldl' (acc: cfg: acc // cfg.panel-sizes) { } cfgs);
+                panel-lengths = toJSON (foldl' (acc: cfg: acc // cfg.panel-lengths) { } cfgs);
+                panel-anchors = toJSON (foldl' (acc: cfg: acc // cfg.panel-anchors) { } cfgs);
+                panel-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-positions) { } cfgs);
+                panel-element-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-element-positions) { } cfgs);
+              };
+
+              monitor = mkPanelConfig "DEL-1CDG2S3";
+              tv = mkPanelConfig "XXX-0x00010000";
+              laptop = mkPanelConfig "LEN-0x00000000";
+            in
+            {
+              global-border-radius = 1;
+              isolate-workspaces = true;
+              show-window-previews = true;
+
+              appicon-margin = 4;
+              appicon-padding = 4;
+
+              stockgs-keep-dash = false;
+              stockgs-keep-top-panel = true;
+
+              dot-color-dominant = true;
+              dot-style-focused = "METRO";
+              dot-style-unfocused = "DASHES";
+
+              trans-panel-opacity = 0.40;
+              trans-use-custom-opacity = true;
+              trans-use-dynamic-opacity = false;
+              trans-use-custom-gradient = false;
+
+              intellihide = true;
+              intellihide-use-pressure = true;
+              intellihide-pressure-time = 1000;
+              intellihide-pressure-threshold = 100;
+              intellihide-hide-from-windows = true;
+              intellihide-show-in-fullscreen = false;
+              intellihide-behaviour = "FOCUSED_WINDOWS";
+
+              panel-element-positions-monitors-sync = true;
+            } // (mkConfig [ monitor laptop tv ]);
+
           ## Tiling shell
-          "org/gnome/shell/extensions/tilingshell".inner-gaps = lib.hm.gvariant.mkUint32 0;
-          "org/gnome/shell/extensions/tilingshell".outer-gaps = lib.hm.gvariant.mkUint32 0;
+          "org/gnome/shell/extensions/tilingshell" = {
+            inner-gaps = lib.hm.gvariant.mkUint32 0;
+            outer-gaps = lib.hm.gvariant.mkUint32 0;
+            show-indicator = false;
+          };
           ### Disable default keybindings
           "org/gnome/desktop/wm/keybindings".maximize = [ ]; # Super+Up
           "org/gnome/desktop/wm/keybindings".unmaximize = [ ]; # Super+Down

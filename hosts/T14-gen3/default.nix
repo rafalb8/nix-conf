@@ -44,65 +44,15 @@
       };
     };
 
-    dconf = {
-      enable = true;
-      settings = {
-        "org/gnome/shell"."favorite-apps" = [
-          "org.gnome.Nautilus.desktop"
-          "firefox.desktop"
-          "Alacritty.desktop"
-          "code.desktop"
-          "discord.desktop"
-          "com.github.iwalton3.jellyfin-media-player.desktop"
-        ];
-
-        "org/gnome/shell/extensions/dash-to-panel" =
-          let
-            mkPanelConfig = screen: {
-              panel-anchors = { "${screen}" = "MIDDLE"; };
-              panel-lengths = { "${screen}" = 100; };
-              panel-sizes = { "${screen}" = 48; };
-              panel-element-positions = {
-                "${screen}" = [
-                  { "element" = "showAppsButton"; "visible" = false; "position" = "stackedTL"; }
-                  { "element" = "activitiesButton"; "visible" = false; "position" = "stackedTL"; }
-                  { "element" = "leftBox"; "visible" = true; "position" = "stackedTL"; }
-                  { "element" = "taskbar"; "visible" = true; "position" = "centerMonitor"; }
-                  { "element" = "centerBox"; "visible" = true; "position" = "stackedBR"; }
-                  { "element" = "rightBox"; "visible" = true; "position" = "stackedBR"; }
-                  { "element" = "dateMenu"; "visible" = true; "position" = "stackedBR"; }
-                  { "element" = "systemMenu"; "visible" = true; "position" = "stackedBR"; }
-                  { "element" = "desktopButton"; "visible" = true; "position" = "stackedBR"; }
-                ];
-              };
-            };
-
-            tv = mkPanelConfig "XXX-0x00010000";
-            monitor = mkPanelConfig "LEN-0x00000000";
-
-            mkConfig = cfgs: with builtins; {
-              panel-anchors = toJSON (foldl' (acc: cfg: acc // cfg.panel-anchors) { } cfgs);
-              panel-lengths = toJSON (foldl' (acc: cfg: acc // cfg.panel-lengths) { } cfgs);
-              panel-sizes = toJSON (foldl' (acc: cfg: acc // cfg.panel-sizes) { } cfgs);
-              panel-element-positions = toJSON (foldl' (acc: cfg: acc // cfg.panel-element-positions) { } cfgs);
-            };
-          in
-          {
-            intellihide = false;
-            appicon-margin = 8;
-            appicon-padding = 4;
-            trans-use-custom-opacity = true;
-            trans-use-dynamic-opacity = false;
-            trans-use-custom-gradient = false;
-            stockgs-keep-top-panel = false;
-            stockgs-keep-dash = false;
-            show-window-previews = true;
-            isolate-workspaces = true;
-            panel-element-positions-monitors-sync = true;
-            panel-positions = ''{}'';
-          } // (mkConfig [ monitor tv ]);
-      };
-    };
+    dconf.enable = true;
+    dconf.settings."org/gnome/shell"."favorite-apps" = [
+      "org.gnome.Nautilus.desktop"
+      "firefox.desktop"
+      "Alacritty.desktop"
+      "code.desktop"
+      "discord.desktop"
+      "com.github.iwalton3.jellyfin-media-player.desktop"
+    ];
   };
 
   # More info:
