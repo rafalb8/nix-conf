@@ -59,37 +59,11 @@
   # https://github.com/NixOS/nixos-hardware/tree/master/lenovo/thinkpad/t14/amd/gen3
   # https://wiki.archlinux.org/title/Lenovo_ThinkPad_T14_(AMD)_Gen_3
 
-  boot = {
-    kernelParams = [
-      "acpi_backlight=native"
-      "psmouse.synaptics_intertouch=0"
-      "amd_pstate=active"
-    ];
-
-    # Required for tlp
-    kernelModules = [ "acpi_call" ];
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-  };
-
-  # Charge tresholds might be implemented
-  # in Gnome 48 (NixOS 25.04 or higher)
-  services.power-profiles-daemon.enable = false;
-
-  # For now, use tlp
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      # Charge tresholds. (Lenovo defaults)
-      START_CHARGE_THRESH_BAT0 = 75;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-  };
+  boot.kernelParams = [
+    "acpi_backlight=native"
+    "psmouse.synaptics_intertouch=0"
+    "amd_pstate=active"
+  ];
 
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd.enable = true;
