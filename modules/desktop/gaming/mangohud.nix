@@ -28,7 +28,7 @@ let
     preset = "0,1,2,5,4";
 
     # FPS limit
-    fps_limit = "120,90,60,0";
+    fps_limit = "144,90,60,0";
   };
 in
 {
@@ -65,7 +65,7 @@ in
       "MangoHud/MangoHud.conf".text = toConfig MangoHud;
 
       # App overrides
-      "MangoHud/cs2.conf".text = toConfig (MangoHud // { fps_limit = "164,90,0"; });
+      "MangoHud/cs2.conf".text = toConfig (MangoHud // { fps_limit = "164,0"; });
     };
   };
 }
