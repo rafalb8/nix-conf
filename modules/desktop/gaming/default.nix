@@ -6,10 +6,11 @@ in
   imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
-    boot.kernelParams = [ "split_lock_detect=off" ];
-
     warnings = lib.mkIf (pkgs.vintagestory.version > "1.20.11")
       [ "Vintage Story override not required" ];
+
+    # Vintage Story dep
+    nixpkgs.config.permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
 
     environment.systemPackages = with pkgs; [
       # Tools
@@ -34,8 +35,6 @@ in
         };
       }))
     ];
-    # Vintage Story dep
-    nixpkgs.config.permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
 
     programs = {
       steam = {
@@ -82,6 +81,26 @@ in
         enable = true;
         packages = [ pkgs.steam ];
       };
+    };
+
+    # Use CachyOS kernel
+    boot.kernelPackages = pkgs.linuxPackages_cachyos;
+
+    # SteamOS Linux optimizations
+    # https://github.com/fufexan/nix-gaming/blob/master/modules/platformOptimizations.nix
+    boot.kernel.sysctl = {
+      # 20-net-timeout.conf
+      # This is required due to some games being unable to reuse their TCP ports
+      # if they're killed and restarted quickly - the default timeout is too large.
+      "net.ipv4.tcp_fin_timeout" = 5;
+      # 30-splitlock.conf
+      # Prevents intentional slowdowns in case games experience split locks
+      # This is valid for kernels v6.0+
+      "kernel.split_lock_mitigate" = 0;
+      # 30-vm.conf
+      # USE MAX_INT - MAPCOUNT_ELF_CORE_MARGIN.
+      # see comment in include/linux/mm.h in the kernel tree.
+      "vm.max_map_count" = 2147483642;
     };
 
   };

@@ -7,8 +7,7 @@ in
     # Add reminder for jellyfin
     warnings =
       lib.optional (pkgs.jellyfin-media-player.version > "1.12.0")
-        "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649"
-      ++ lib.optional (pkgs.input-leap.version > "3.0.2") "Input Leap builds might be fixed";
+        "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649";
 
     environment.systemPackages = with pkgs; [
       # Terminal
@@ -32,7 +31,6 @@ in
 
       # Tools
       imagemagick_light
-      # input-leap
       impression
       obsidian
       anydesk
