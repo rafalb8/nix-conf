@@ -38,6 +38,10 @@ in
     # Disable NetworkManager-wait-online.service 
     systemd.services.NetworkManager-wait-online.enable = false;
 
+    # Use iwd as NetworkManager backend
+    networking.wireless.iwd.enable = true;
+    networking.networkmanager.wifi.backend = "iwd";
+
     # Firewall
     networking.firewall = {
       enable = true;
