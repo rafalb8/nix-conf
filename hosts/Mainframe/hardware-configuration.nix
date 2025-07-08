@@ -20,7 +20,7 @@
       options = [ "subvol=@" "compress=zstd" "noatime" ];
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/CDBD-4FFC";
+      device = "/dev/disk/by-uuid/0AFC-9D35";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
