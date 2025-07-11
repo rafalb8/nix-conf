@@ -6,8 +6,8 @@ in
   imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
-    warnings = lib.mkIf (pkgs.vintagestory.version > "1.20.11")
-      [ "Vintage Story override not required" ];
+    warnings = lib.mkIf (pkgs.vintagestory.version > "1.20.12")
+      [ "Vintage Story permittedInsecurePackages might be not required" ];
 
     # Vintage Story dep
     nixpkgs.config.permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
@@ -27,13 +27,7 @@ in
 
       # Games
       prismlauncher # Minecraft launcher
-      (vintagestory.overrideAttrs (final: prev: {
-        version = "1.20.12";
-        src = builtins.fetchurl {
-          url = "https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${final.version}.tar.gz";
-          sha256 = "sha256:1hd9xw3wf2h7fjbpjd0mi0kfzm6wb6pv8859p145ym8mk88ig9l7";
-        };
-      }))
+      vintagestory
     ];
 
     programs = {
