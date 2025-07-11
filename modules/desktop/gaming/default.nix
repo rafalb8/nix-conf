@@ -77,9 +77,6 @@ in
       };
     };
 
-    # Use CachyOS kernel
-    boot.kernelPackages = pkgs.linuxPackages_cachyos;
-
     # SteamOS Linux optimizations
     # https://github.com/fufexan/nix-gaming/blob/master/modules/platformOptimizations.nix
     boot.kernel.sysctl = {
