@@ -76,14 +76,13 @@
 
     services.easyeffects = {
       autoload = {
-        "Dolby Headphones" = [
-          "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:analog-output"
-          "alsa_output.pci-0000_0e_00.6.analog-stereo:analog-output-lineout"
-        ];
-        "Dolby Dynamic" = [
+        "Clean" = [
           # Monitor outputs
           "alsa_output.pci-0000_03_00.1.hdmi-stereo:hdmi-output-0"
           "alsa_output.pci-0000_03_00.1.hdmi-stereo-extra2:hdmi-output-2"
+        ];
+        "Dolby Headphones" = [
+          "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:analog-output"
         ];
       };
     };
