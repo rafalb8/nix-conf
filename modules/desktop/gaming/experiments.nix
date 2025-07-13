@@ -5,13 +5,14 @@ let
       env = {
         "MANGOHUD" = "0";
         "MANGOHUD_CONFIGFILE" = "/home/${config.user.name}/.config/MangoHud/MangoHud.conf";
-        "LD_PRELOAD" = ""; # Disable Steam Overlay (--steam breaks gamescope)
+        "LD_PRELOAD" = ""; # Disable Steam Overlay (--steam/-e breaks gamescope)
       };
       args = [
         "--adaptive-sync"
         "--immediate-flips"
         # "--force-grab-cursor"
         "--mangoapp"
+        "--backend sdl"
       ];
     in
     pkgs.writeShellScriptBin "playscope" ''

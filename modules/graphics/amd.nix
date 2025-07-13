@@ -13,8 +13,14 @@ in
 
     hardware.amdgpu = {
       initrd.enable = true;
-      # amdvlk.enable = true;
+      # amdvlk = {
+      #   enable = true;
+      #   support32Bit.enable = true;
+      # };
     };
+
+    # Force RADV
+    environment.variables.AMD_VULKAN_ICD = "RADV";
 
     services.xserver = {
       enable = true;
