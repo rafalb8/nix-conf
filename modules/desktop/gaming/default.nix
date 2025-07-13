@@ -14,7 +14,7 @@ in
 
     environment.systemPackages = with pkgs; [
       # Tools
-      custom.sgdboop
+      sgdboop
       # protonup-qt
 
       # Wine guis
