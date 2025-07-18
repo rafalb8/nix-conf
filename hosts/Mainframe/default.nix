@@ -33,7 +33,7 @@
         streaming = true;
       };
 
-      waydroid = false;
+      waydroid = true;
     };
   };
 
