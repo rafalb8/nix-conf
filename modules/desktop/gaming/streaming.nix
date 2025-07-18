@@ -34,17 +34,17 @@ in
 
     # Settings
     # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
-    services.sunshine.settings = lib.mkIf cfg.graphics.amd {
-      capture = "kms";
-      encoder = "vaapi";
-    };
+    # services.sunshine.settings = lib.mkIf cfg.graphics.amd {
+    #   capture = "kms";
+    #   encoder = "vaapi";
+    # };
 
     home-manager.users.${config.user.name} = {
       xdg = {
         enable = true;
 
         # Custom sunshine desktop entry
-        desktopEntries.sunshine = {
+        desktopEntries."dev.lizardbyte.app.Sunshine" = {
           name = "Sunshine";
           icon = "sunshine";
           exec = "systemctl restart --user sunshine.service";
