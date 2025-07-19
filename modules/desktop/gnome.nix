@@ -47,12 +47,29 @@ in
     };
 
     home-manager.users.${config.user.name} = { lib, ... }: {
+      home.pointerCursor = {
+        gtk.enable = true;
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
+        size = 24;
+      };
+
       # Set dark mode in GTK applications
       gtk = {
         enable = true;
         theme = {
           name = "Adwaita-dark";
           package = pkgs.gnome-themes-extra;
+        };
+
+        iconTheme = {
+          name = "Adwaita";
+          package = pkgs.adwaita-icon-theme;
+        };
+
+        font = {
+          name = "Sans";
+          size = 11;
         };
       };
 
