@@ -8,19 +8,13 @@ let
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
     WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
     HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
-    FPS=''${SUNSHINE_CLIENT_FPS:-60}.000
+    FPS=''${SUNSHINE_CLIENT_FPS:-60}
 
-    if [ "$1" == "reset" ]; then
-      # Reset profile
-      PROFILE="2560x1080@74.991+vrr"
-    else
-      # Generate profile
-      PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
-    fi
+    # Generate profile
+    PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
     ${pkgs.easyeffects}/bin/easyeffects -r
-    MONITOR=''$(${pkgs.gnome-monitor-config}/bin/gnome-monitor-config list | grep 'Monitor' | awk '{print $3}')
-    ${pkgs.gnome-monitor-config}/bin/gnome-monitor-config set -LpM ''${MONITOR} -m ''${PROFILE}
+    hyprctl keyword monitor HEADLESS-2,''$PROFILE,auto,auto
   '';
 in
 {

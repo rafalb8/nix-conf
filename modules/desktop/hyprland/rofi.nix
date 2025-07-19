@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.modules.desktop;
+in
 {
-  home-manager.users.${config.user.name} = { config, lib, ... }: {
-    # programs.pywal.enable = true;
-
-    programs.rofi = {
+  config = lib.mkIf cfg.environment.hyprland {
+    home-manager.users.${config.user.name}.programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
       modes = [ "drun" "run" "window" ];
