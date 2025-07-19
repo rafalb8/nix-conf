@@ -5,12 +5,14 @@ in
 {
   imports = [
     ./gaming
+
     ./gnome.nix
+    ./hyprland
 
     ./browsers.nix
     ./packages.nix
-    ./graphical-boot.nix
     ./waydroid.nix
+    ./graphical-boot.nix
   ];
 
   options.modules.desktop = {
@@ -22,6 +24,7 @@ in
 
     environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
+      hyprland = lib.mkEnableOption "Hyprland desktop module";
     };
 
     gaming = {

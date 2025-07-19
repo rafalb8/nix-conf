@@ -26,7 +26,7 @@
     desktop = {
       enable = true;
       graphicalBoot = true;
-      environment.gnome = true;
+      environment.hyprland = true;
 
       gaming = {
         enable = true;
