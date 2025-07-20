@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 let
   playscope =
     let
@@ -26,9 +26,6 @@ in
   environment.systemPackages = [ playscope ];
 
   programs = {
-    gamescope.enable = true;
-    gamescope.capSysNice = false;
-
     # VR
     # alvr = {
     #   enable = true;

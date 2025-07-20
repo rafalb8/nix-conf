@@ -6,22 +6,18 @@ let
   };
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
-    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-1920}
-    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-1080}
-    FPS=''${SUNSHINE_CLIENT_FPS:-60}
+    MON="hyprctl monitors -j"
+
+    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$($MON | jq ".[0].width")}
+    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$($MON | jq ".[0].height")}
+    FPS=''${SUNSHINE_CLIENT_FPS:-$($MON | jq ".[0].refreshRate | tonumber")}
     PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
-    export WAYLAND_DISPLAY=wayland-1
-
     case $1 in
-      "reset") pkill gamescope ;;
+      "reset") pkill --signal SIGTERM gamescope ;;
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
-      *) gamescope --backend=sdl -e -f -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} -- steam -gamepadui
+      *) pkill --signal SIGTERM steam; sleep 3; gamescope --backend=sdl -e -f -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} -- steam -gamepadui
     esac
-  '';
-
-  hyprspace = pkgs.writeShellScriptBin "hyprspace" ''
-    systemd-run --user --scope Hyprland
   '';
 in
 {
@@ -33,7 +29,7 @@ in
       openFirewall = true;
     };
 
-    environment.systemPackages = [ pkgs.hyprland hyprspace sunscreen ];
+    environment.systemPackages = [ pkgs.hyprland sunscreen ];
 
     # Settings
     # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
@@ -72,6 +68,7 @@ in
           bind = SUPER, W, killactive
           bind = CTRL ALT, Delete, exit
           bind = SUPER, T, exec, alacritty
+          bind = SUPER, S, exec, sunscreen # Start Gamescope Steam
 
           binde = SUPER, Tab, cyclenext
           binde = SUPER, Tab, bringactivetotop
@@ -105,7 +102,7 @@ in
               undo = "${sunscreen}/bin/sunscreen reset";
             }
           ];
-          detached = [ "alacritty" ];
+          detached = [ "${sunscreen}/bin/sunscreen" ];
           exclude-global-prep-cmd = "";
           auto-detach = "true";
           wait-all = "true";
