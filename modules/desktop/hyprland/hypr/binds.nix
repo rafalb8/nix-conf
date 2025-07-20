@@ -14,7 +14,7 @@
       "$mod SHIFT, F, workspaceopt, allfloat"
       "$mod ALT, Enter, fullscreen, 0"
       "ALT, SPACE, exec, rofi -show drun"
-      "$CTRL ALT, DELETE, exec, wlogout"
+      "CTRL ALT, DELETE, exec, wlogout"
 
       # Screenshots
       ", Print, exec, hyprshot -m output"
