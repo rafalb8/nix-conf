@@ -6,17 +6,26 @@ let
   };
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
-    MON="hyprctl monitors -j"
+    # Restart current script without CAP_SYS_ADMIN
+    if getpcaps $$ | grep -q "cap_sys_admin"; then
+      exec setpriv --inh-caps -sys_admin "$0" "$@"
+    fi
 
-    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$($MON | jq ".[0].width")}
-    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$($MON | jq ".[0].height")}
-    FPS=''${SUNSHINE_CLIENT_FPS:-$($MON | jq ".[0].refreshRate | tonumber")}
+    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(hyprctl monitors -j | jq ".[0].width")}
+    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(hyprctl monitors -j | jq ".[0].height")}
+    FPS=''${SUNSHINE_CLIENT_FPS:-$(hyprctl monitors -j | jq ".[0].refreshRate | tonumber")}
     PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
     case $1 in
-      "reset") pkill --signal SIGTERM gamescope ;;
+      "reset") pkill -TERM gamescope ;;
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
-      *) pkill --signal SIGTERM steam; sleep 3; gamescope --backend=sdl -e -f -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} -- steam -gamepadui
+      "steam")
+        pkill -TERM steam
+        pidwait steam
+        exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
+            --immediate-flips --force-grab-cursor \
+            -e -f -- steam -gamepadui ;;
+      *) exec "$@"
     esac
   '';
 in
@@ -75,6 +84,9 @@ in
 
           bindm = SUPER, mouse:272, movewindow
           bindm = SUPER, mouse:273, resizewindow
+
+          # Gamescope fix
+          debug:full_cm_proto = true
         '';
       };
     };
@@ -88,6 +100,13 @@ in
         {
           name = "Desktop";
           image-path = "desktop.png";
+          prep-cmd = [
+            {
+              do = ''${sunscreen}/bin/sunscreen mode'';
+              undo = "${sunscreen}/bin/sunscreen reset";
+            }
+          ];
+          detached = [ "alacritty" ];
           exclude-global-prep-cmd = "";
           auto-detach = "true";
           wait-all = "true";
@@ -102,7 +121,7 @@ in
               undo = "${sunscreen}/bin/sunscreen reset";
             }
           ];
-          detached = [ "${sunscreen}/bin/sunscreen" ];
+          detached = [ "${sunscreen}/bin/sunscreen steam" ];
           exclude-global-prep-cmd = "";
           auto-detach = "true";
           wait-all = "true";
