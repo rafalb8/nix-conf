@@ -81,6 +81,9 @@ in
           "org/gnome/desktop/interface".enable-hot-corners = false;
           "org/gnome/desktop/interface".color-scheme = "prefer-dark"; # Dark mode
           "org/gnome/desktop/wm/preferences".button-layout = "appmenu:minimize,maximize,close"; # Button layout
+          ## Resize with right click
+          "org/gnome/desktop/wm/preferences".resize-with-right-button = true;
+          "org/gnome/desktop/wm/preferences".mouse-button-modifier = "<Super>";
 
           # Enable gnome extensions
           "org/gnome/shell" = {
