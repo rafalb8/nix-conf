@@ -61,14 +61,14 @@ in
         };
 
         configFile."hypr/hyprland.conf".text = ''
-          monitor = WAYLAND-1, preferred, auto, auto
           monitor = HEADLESS-2, 1920x1080@60, auto, 1
-          monitor = , disabled
-          # monitor = , preferred, auto, auto
+          monitor = WAYLAND-1, disabled
+          monitor = , preferred, auto, auto
+          # monitor = , disabled
 
           # Create Headless monitor and disable the WAYLAND-1
           exec-once = hyprctl output create headless HEADLESS-2
-          exec-once = hyprctl keyword monitor WAYLAND-1, disabled
+          exec-once = hyprctl keyword monitor DP-1, disabled
 
           # Start programs
           # exec-once = systemctl restart --user sunshine.service
