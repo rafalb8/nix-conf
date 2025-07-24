@@ -48,14 +48,6 @@ in
       gamescope.capSysNice = false;
     };
 
-    services.ananicy = {
-      enable = true;
-      package = pkgs.ananicy-cpp;
-      rulesProvider = pkgs.ananicy-rules-cachyos;
-      # CachyOS rules provide gamescope niceness
-      # extraRules = [{ "name" = "gamescope"; "nice" = -20; }];
-    };
-
     home-manager.users.${config.user.name} = {
       xdg = {
         enable = true;

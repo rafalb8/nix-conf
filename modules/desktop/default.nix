@@ -84,6 +84,13 @@ in
       };
 
       udisks2.enable = true;
+
+      # Auto nice deamon
+      ananicy = {
+        enable = true;
+        package = pkgs.ananicy-cpp;
+        rulesProvider = pkgs.ananicy-rules-cachyos;
+      };
     };
 
     services.fwupd.enable = true;

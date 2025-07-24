@@ -3,23 +3,23 @@ let
   playscope =
     let
       env = {
-        # "MANGOHUD" = "0";
-        # "MANGOHUD_CONFIGFILE" = "/home/${config.user.name}/.config/MangoHud/MangoHud.conf";
-        # "LD_PRELOAD" = ""; # Disable Steam Overlay (--steam/-e breaks gamescope)
+        "SDL_VIDEODRIVER" = "x11";
+        "MANGOHUD_CONFIGFILE" = "~/.config/MangoHud/MangoHud.conf";
       };
       args = [
-        # "--adaptive-sync"
-        # "--immediate-flips"
-        # "--force-grab-cursor"
-        "--steam"
-        # "--mangoapp"
+        "--adaptive-sync"
+        "--immediate-flips"
+        "--mangoapp"
         "--backend sdl"
+        "-b"
+        "-W 2305"
+        "-H 1408"
       ];
       toExportShellVars = vars: lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "export ${k}=${v}") vars);
     in
     pkgs.writeShellScriptBin "playscope" ''
       ${toExportShellVars env}
-      gamemoderun gamescope ${builtins.toString args} "$@"
+      gamescope ${builtins.toString args} "$@"
     '';
 in
 {
