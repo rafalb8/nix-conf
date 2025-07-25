@@ -8,11 +8,12 @@
     extraGroups =
       [
         "wheel"
-        "networkmanager"
-        "libvirtd"
-        "docker"
+        "cdrom"
         "input"
       ]
+      ++ lib.optional config.networking.networkmanager.enable "networkmanager"
+      ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"
+      ++ lib.optional config.virtualisation.docker.enable "docker"
       ++ lib.optional config.programs.gamemode.enable "gamemode"
       ++ lib.optional config.modules.graphics.overcloking "corectrl";
   };
