@@ -40,6 +40,9 @@ in
 
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
 
+    # Fix for DS4/DS5 gamepads
+    boot.kernelModules = [ "uhid" ];
+
     # Settings
     # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
     # services.sunshine.settings = lib.mkIf cfg.graphics.amd {
