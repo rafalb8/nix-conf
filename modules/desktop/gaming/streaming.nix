@@ -20,8 +20,7 @@ let
       "reset") pkill -TERM gamescope ;;
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
       "steam")
-        pkill -TERM steam
-        pidwait steam
+        pkill -TERM steam && pidwait steam && sleep 3
         exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
             --immediate-flips --force-grab-cursor \
             -e -f -- steam -gamepadui ;;
