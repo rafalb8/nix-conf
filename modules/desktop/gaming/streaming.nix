@@ -22,7 +22,7 @@ let
       "steam")
         pkill -TERM steam && pidwait steam && sleep 3
         exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
-            --immediate-flips --force-grab-cursor \
+            --immediate-flips --force-grab-cursor --disable-color-management \
             -e -f -- steam -gamepadui ;;
       *) exec "$@"
     esac
@@ -37,30 +37,62 @@ in
       openFirewall = true;
     };
 
-    environment.systemPackages = [ pkgs.hyprland sunscreen ];
+
+    services.sunshine = {
+      # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
+      settings = {
+        back_button_timeout = 2000;
+        mouse = "disabled";
+      };
+
+      # 
+      applications = {
+        env = {
+          PATH = "$(PATH):/run/current-system/sw/bin";
+        };
+        apps = [
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+            prep-cmd = [
+              {
+                do = ''${sunscreen}/bin/sunscreen mode'';
+                undo = "${sunscreen}/bin/sunscreen reset";
+              }
+            ];
+            detached = [ "alacritty" ];
+            exclude-global-prep-cmd = "";
+            auto-detach = "true";
+            wait-all = "true";
+            exit-timeout = "5";
+          }
+          {
+            name = "Steam";
+            image-path = "steam.png";
+            prep-cmd = [
+              {
+                do = ''${sunscreen}/bin/sunscreen mode'';
+                undo = "${sunscreen}/bin/sunscreen reset";
+              }
+            ];
+            detached = [ "${sunscreen}/bin/sunscreen steam" ];
+            exclude-global-prep-cmd = "";
+            auto-detach = "true";
+            wait-all = "true";
+            exit-timeout = "5";
+          }
+        ];
+      };
+    };
 
     # Fix for DS4/DS5 gamepads
     boot.kernelModules = [ "uhid" ];
 
-    # Settings
-    # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
-    # services.sunshine.settings = lib.mkIf cfg.graphics.amd {
-    #   capture = "kms";
-    #   encoder = "vaapi";
-    # };
-
+    # Configure hyperland for streaming
+    environment.systemPackages = [ pkgs.hyprland sunscreen ];
     home-manager.users.${config.user.name} = {
       xdg = {
         enable = true;
-
-        # Custom sunshine desktop entry
-        desktopEntries."dev.lizardbyte.app.Sunshine" = {
-          name = "Sunshine";
-          icon = "sunshine";
-          exec = "systemctl restart --user sunshine.service";
-          comment = "Self-hosted game stream host for Moonlight";
-          categories = [ "AudioVideo" "Network" "RemoteAccess" "Game" ];
-        };
 
         configFile."hypr/hyprland.conf".text = ''
           monitor = HEADLESS-2, 1920x1080@60, auto, 1
@@ -93,43 +125,5 @@ in
       };
     };
 
-    # Apps
-    services.sunshine.applications = {
-      env = {
-        PATH = "$(PATH):/run/current-system/sw/bin";
-      };
-      apps = [
-        {
-          name = "Desktop";
-          image-path = "desktop.png";
-          prep-cmd = [
-            {
-              do = ''${sunscreen}/bin/sunscreen mode'';
-              undo = "${sunscreen}/bin/sunscreen reset";
-            }
-          ];
-          detached = [ "alacritty" ];
-          exclude-global-prep-cmd = "";
-          auto-detach = "true";
-          wait-all = "true";
-          exit-timeout = "5";
-        }
-        {
-          name = "Steam";
-          image-path = "steam.png";
-          prep-cmd = [
-            {
-              do = ''${sunscreen}/bin/sunscreen mode'';
-              undo = "${sunscreen}/bin/sunscreen reset";
-            }
-          ];
-          detached = [ "${sunscreen}/bin/sunscreen steam" ];
-          exclude-global-prep-cmd = "";
-          auto-detach = "true";
-          wait-all = "true";
-          exit-timeout = "5";
-        }
-      ];
-    };
   };
 }
