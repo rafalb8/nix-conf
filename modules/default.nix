@@ -8,6 +8,7 @@
     ./user
 
     ./packages.nix
+    ./secureboot.nix
   ];
 
   # Use latest kernel
