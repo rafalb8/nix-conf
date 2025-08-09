@@ -21,9 +21,10 @@ let
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
       "steam")
         pkill -TERM steam && pidwait steam && sleep 3
+        export MANGOHUD_CONFIG=preset=1
         exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
             --immediate-flips --force-grab-cursor --disable-color-management \
-            -e -f -- steam -gamepadui ;;
+            --mangoapp -e -f -- steam -gamepadui ;;
       *) exec "$@"
     esac
   '';
