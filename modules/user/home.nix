@@ -5,7 +5,6 @@
   home.stateVersion = config.system.stateVersion;
 
   home.sessionVariables = {
-    CGO_ENABLED = 0;
     DOCKER_BUILDKIT = 1;
 
     PATH = "$HOME/go/bin:$PATH";
