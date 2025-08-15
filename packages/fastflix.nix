@@ -11,15 +11,13 @@
 }:
 stdenv.mkDerivation (final: {
   pname = "fastflix";
-  version = "5.10.0";
+  version = "5.12.4";
 
   src = fetchzip {
     url = "https://github.com/cdgriffith/FastFlix/releases/download/${final.version}/FastFlix_${final.version}_ubuntu-24.04_x86_64.zip";
-    hash = "sha256-GrBWhhj+Gxx3dHbIx9vEwllHOVN/aOYMDU5jAFl2gS8=";
+    hash = "sha256-03NxQQT0QS6LFZEH/QKgUbrhqM/SkZ0WOQnIG/W51yM=";
     stripRoot = false;
   };
-
-  # Required. Without this fastflix won't run
   dontStrip = true;
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];

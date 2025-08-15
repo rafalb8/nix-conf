@@ -43,7 +43,6 @@
       # Custom Packages
       packages.${system} = {
         fastflix = pkgs.callPackage ./packages/fastflix.nix { };
-        vceencc = pkgs.callPackage ./packages/vceencc.nix { };
         waydroid_script = pkgs.callPackage ./packages/waydroid_script.nix { };
       };
 

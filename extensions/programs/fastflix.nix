@@ -12,7 +12,7 @@ in
 
     recommendedPackges = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = [ pkgs.custom.vceencc pkgs.hdr10plus_tool ];
+      default = [ pkgs.hdr10plus_tool ];
     };
   };
 
