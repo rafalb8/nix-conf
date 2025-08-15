@@ -61,7 +61,7 @@
 
     services.easyeffects = {
       autoload = {
-        "Clean" = [
+        "Normalize" = [
           # Monitor outputs
           "alsa_output.pci-0000_03_00.1.hdmi-stereo:hdmi-output-0"
           "alsa_output.pci-0000_03_00.1.hdmi-stereo-extra2:hdmi-output-2"
