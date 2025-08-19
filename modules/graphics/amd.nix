@@ -8,7 +8,7 @@ in
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = [ pkgs.amf ];
+      # extraPackages = [ pkgs.amf ];
     };
 
     hardware.amdgpu = {

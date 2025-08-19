@@ -15,6 +15,7 @@ in
     environment.systemPackages = with pkgs; [
       # Tools
       sgdboop
+      gamescope_git
       # protonup-qt
 
       # Wine guis
@@ -44,9 +45,6 @@ in
 
       gamemode.enable = false;
       gamemode.enableRenice = true;
-
-      gamescope.enable = true;
-      gamescope.capSysNice = false;
     };
 
     home-manager.users.${config.user.name} = {
