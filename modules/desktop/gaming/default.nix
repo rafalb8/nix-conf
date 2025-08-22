@@ -19,9 +19,9 @@ in
       # protonup-qt
 
       # Wine guis
-      # bottles
       heroic
-      lutris
+      # lutris
+      # bottles
 
       # Emulators
       rpcs3
