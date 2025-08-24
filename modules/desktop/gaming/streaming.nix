@@ -11,21 +11,26 @@ let
       exec setpriv --inh-caps -sys_admin "$0" "$@"
     fi
 
+    set -ex
+
+    export MANGOHUD_CONFIG=preset=1
+
     WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(hyprctl monitors -j | jq ".[0].width")}
     HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(hyprctl monitors -j | jq ".[0].height")}
     FPS=''${SUNSHINE_CLIENT_FPS:-$(hyprctl monitors -j | jq ".[0].refreshRate | tonumber")}
     PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
+
+    GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
+            --immediate-flips --force-grab-cursor --disable-color-management \
+            --mangoapp -f"
 
     case $1 in
       "reset") pkill -TERM gamescope ;;
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
       "steam")
         pkill -TERM steam && pidwait steam && sleep 3
-        export MANGOHUD_CONFIG=preset=1
-        exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
-            --immediate-flips --force-grab-cursor --disable-color-management \
-            --mangoapp -e -f -- steam -gamepadui ;;
-      *) exec "$@"
+        $GAMESCOPE_CMD -e -- steam -gamepadui ;;
+      *) $GAMESCOPE_CMD -- "$@"
     esac
   '';
 in
@@ -77,6 +82,21 @@ in
               }
             ];
             detached = [ "${sunscreen}/bin/sunscreen steam" ];
+            exclude-global-prep-cmd = "";
+            auto-detach = "true";
+            wait-all = "true";
+            exit-timeout = "5";
+          }
+          {
+            name = "RPCS3";
+            # image-path = "steam.png";
+            prep-cmd = [
+              {
+                do = ''${sunscreen}/bin/sunscreen mode'';
+                undo = "${sunscreen}/bin/sunscreen reset";
+              }
+            ];
+            detached = [ "${sunscreen}/bin/sunscreen rpcs3" ];
             exclude-global-prep-cmd = "";
             auto-detach = "true";
             wait-all = "true";
