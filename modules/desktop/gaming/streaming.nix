@@ -21,8 +21,7 @@ let
     PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
     GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
-            --immediate-flips --force-grab-cursor --disable-color-management \
-            --mangoapp -f"
+            --immediate-flips --force-grab-cursor --mangoapp -f"
 
     case $1 in
       "reset") pkill -TERM gamescope ;;
