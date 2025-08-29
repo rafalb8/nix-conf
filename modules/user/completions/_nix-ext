@@ -1,0 +1,39 @@
+#compdef nix-ext
+
+_nix-ext() {
+  local curcontext="$curcontext"
+  local state
+
+  # Define the main completion state machine.
+  _arguments -C \
+    '1: :->command' \
+    '*: :->args'
+
+  case $state in
+    command)
+      _alternative \
+        'commands:nix-ext commands:((
+          pull:"Pull the latest configuration from the Git repository"
+          apply:"Apply a new system configuration using nixos-rebuild"
+          boot:"Rebuild and switch to a new boot configuration"
+          upgrade:"Update flake inputs and rebuild the system"
+          code:"Open the NixOS configuration directory in VS Code"
+        ))' \
+        'nix:standard nix commands:_nix';;
+
+    args)
+      case $words[2] in
+        # These commands have no further arguments.
+        pull|upgrade|code) return;;
+
+        # Delegate to the standard _nixos-rebuild completion.
+        apply|boot) _nixos-rebuild;;
+
+        # For any other subcommand (including standard Nix ones),
+        # delegate to the standard _nix completion.
+        *) _nix;;
+      esac;;
+  esac
+}
+
+_nix-ext

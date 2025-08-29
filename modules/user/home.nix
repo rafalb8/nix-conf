@@ -23,6 +23,7 @@
     };
 
     plugins = [
+      { name = "completions"; src = ./completions; }
       {
         name = "cmdtime";
         src = pkgs.fetchFromGitHub {
@@ -45,7 +46,7 @@
 
     initContent = ''
       # Fix autocomplete for nix extension
-      compdef _nix ${config.environment.shellAliases.nix}
+      compdef _nix-ext ${config.environment.shellAliases.nix}
 
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'

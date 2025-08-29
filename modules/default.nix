@@ -78,7 +78,7 @@
           apply) nixos-rebuild switch --show-trace -L -v "$@";;
           boot) nixos-rebuild boot --show-trace -L -v "$@";;
           upgrade) eval '\nix flake update --flake $DIR && nixos-rebuild boot --show-trace -L -v "$@"';;
-          config) code $DIR "$@";;
+          code) code $DIR "$@";;
           *) \nix $CMD "$@";;
         esac
       '';
