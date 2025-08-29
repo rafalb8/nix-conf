@@ -6,12 +6,6 @@ in
   imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
 
   config = lib.mkIf cfg.gaming.enable {
-    warnings = lib.mkIf (pkgs.vintagestory.version > "1.20.12")
-      [ "Vintage Story permittedInsecurePackages might be not required" ];
-
-    # Vintage Story dep
-    nixpkgs.config.permittedInsecurePackages = [ "dotnet-runtime-7.0.20" ];
-
     environment.systemPackages = with pkgs; [
       # Tools
       sgdboop

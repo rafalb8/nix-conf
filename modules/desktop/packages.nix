@@ -4,10 +4,16 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Add reminder for jellyfin
-    warnings =
-      lib.optional (pkgs.jellyfin-media-player.version > "1.12.0")
-        "Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649";
+    # Reminders
+    warnings = lib.optional (pkgs.jellyfin-media-player.version > "1.12.0")
+      ''
+        Desktop entry may be fixed https://github.com/jellyfin/jellyfin-media-player/issues/649"
+        Also upgraded qtwebengine?
+      '';
+
+    # Insecure exceptions
+    nixpkgs.config.permittedInsecurePackages =
+      lib.optional (pkgs.jellyfin-media-player.version == "1.12.0") "qtwebengine-5.15.19";
 
     environment.systemPackages = with pkgs; [
       # Terminal
