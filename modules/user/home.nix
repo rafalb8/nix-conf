@@ -44,16 +44,11 @@
     };
 
     initContent = ''
-      # Fix autocomplete for nix alias
+      # Fix autocomplete for nix extension
       compdef _nix ${config.environment.shellAliases.nix}
 
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
-
-      # Functions
-      function localip() {
-          echo $(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-      }
     '';
   };
 

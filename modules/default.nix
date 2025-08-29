@@ -69,15 +69,17 @@
 
   environment.shellAliases =
     let
-      nix-alias = pkgs.writeShellScriptBin "nix-alias" ''
-        cmd="$1"
+      nix-ext = pkgs.writeShellScriptBin "nix-ext" ''
+        DIR="/etc/nixos"
+        CMD="$1"
         shift
-        case $cmd in
+        case $CMD in
+          pull) cd $DIR; git pull;;
           apply) nixos-rebuild switch --show-trace -L -v "$@";;
           boot) nixos-rebuild boot --show-trace -L -v "$@";;
-          upgrade) eval '\nix flake update --flake /etc/nixos && nixos-rebuild boot --show-trace -L -v "$@"';;
-          config) code /etc/nixos "$@";;
-          *) \nix $cmd "$@";;
+          upgrade) eval '\nix flake update --flake $DIR && nixos-rebuild boot --show-trace -L -v "$@"';;
+          config) code $DIR "$@";;
+          *) \nix $CMD "$@";;
         esac
       '';
     in
@@ -93,8 +95,8 @@
       certcat = "openssl x509 -text -in";
       rsync-cp = "rsync -a --info=progress2 --no-i-r";
 
-      # NixOS aliases
-      nix = "${nix-alias}/bin/nix-alias";
+      # Nix extension
+      nix = "${nix-ext}/bin/nix-ext";
 
       # Replacements
       cat = "bat";

@@ -45,6 +45,10 @@ in
         else
           echo "✔️: All pools are healthy"
         fi
+
+        # ffmpeg helper
+        # ac3 file.mkv 0 .en => file.en.ac3
+        ac3() {ffmpeg -i "$1" -map 0:a:''${2:-0} -c:a ac3 -ac 6 -b:a 640k -map_metadata -1 "''${1%.*}''${3:-.en}.ac3"}
       '';
     };
 
