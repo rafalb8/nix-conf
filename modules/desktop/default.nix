@@ -141,6 +141,10 @@ in
       fontconfig.enable = true;
     };
 
+    # Alias for rebooting to Windows
+    environment.shellAliases.win-reboot =
+      "sudo efibootmgr -n $(efibootmgr | grep Windows | awk '{print $1}' | sed 's/Boot//; s/\*//') && reboot";
+
     # Setup home for desktop
     home-manager.users.${config.user.name} = {
       # Hide folders in home
