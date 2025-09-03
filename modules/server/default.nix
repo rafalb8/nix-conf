@@ -39,8 +39,8 @@ in
     # Run cache output of zpool status
     systemd.services.zpool-status = {
       startAt = "daily";
-      environment.OUT = "/tmp/zpool-status";
       script = ''
+        OUT=/tmp/zpool-status
         STATUS=$(zpool status -x)
         DATE=$(date --rfc-3339=seconds)
 
