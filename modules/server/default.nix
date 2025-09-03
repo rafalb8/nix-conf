@@ -39,6 +39,10 @@ in
     # Run cache output of zpool status
     systemd.services.zpool-status = {
       startAt = "daily";
+      path = [
+        pkgs.zfs
+        pkgs.coreutils
+      ];
       script = ''
         OUT=/tmp/zpool-status
         STATUS=$(zpool status -x)
