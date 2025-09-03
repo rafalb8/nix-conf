@@ -36,21 +36,34 @@ in
     # Enable Tailscale `--advertise-exit-node` feature
     services.tailscale.useRoutingFeatures = "server";
 
-    # Add "motd" with ZFS status
-    home-manager.users.${config.user.name} = {
-      programs.zsh.initContent = ''
+    # Run cache output of zpool status
+    systemd.services.zpool-status = {
+      startAt = "daily";
+      environment.OUT = "/tmp/zpool-status";
+      script = ''
         STATUS=$(zpool status -x)
-        if [[ "$STATUS" != "all pools are healthy" ]]; then
-          echo "❌: $STATUS"
-        else
-          echo "✔️: All pools are healthy"
-        fi
+        DATE=$(date --rfc-3339=seconds)
 
-        # ffmpeg helper
-        # ac3 file.mkv 0 .en => file.en.ac3
-        ac3() {ffmpeg -i "$1" -map 0:a:''${2:-0} -c:a ac3 -ac 6 -b:a 640k -map_metadata -1 "''${1%.*}''${3:-.en}.ac3"}
+        if [[ "$STATUS" != "all pools are healthy" ]]; then
+          echo "❌: [$DATE]\n$STATUS" > $OUT
+        else
+          echo "✔️: All pools are healthy [$DATE]" > $OUT
+        fi
       '';
     };
+
+    home-manager.users.${config.user.name} = {
+      programs.zsh.initContent = ''
+        # Print cached zpool status
+        \cat /tmp/zpool-status
+      '';
+    };
+
+    environment.shellInit = ''
+      # ffmpeg helper
+      ## ac3 file.mkv 0 .en => file.en.ac3
+      ac3() {ffmpeg -i "$1" -map 0:a:''${2:-0} -c:a ac3 -ac 6 -b:a 640k -map_metadata -1 "''${1%.*}''${3:-.en}.ac3"}
+    '';
 
     # Add packages
     environment.systemPackages = with pkgs; [
