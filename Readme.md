@@ -12,3 +12,9 @@
  - [autoPatchElfHook](https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook)
  - [AppImage](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-appimageTools)
  - [Python](https://nixos.org/manual/nixpkgs/stable/#buildpythonpackage-function)
+
+## Github rate limit fix
+`~/.config/nix/nix.conf`
+```conf
+access-tokens = github.com=**key**
+```

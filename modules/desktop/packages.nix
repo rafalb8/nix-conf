@@ -20,7 +20,7 @@ in
       alacritty
 
       # Media
-      jellyfin-media-player
+      stable.jellyfin-media-player
       kdePackages.kdenlive
       # jellyfin-mpv-shim
       youtube-music

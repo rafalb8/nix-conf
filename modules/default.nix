@@ -70,14 +70,18 @@
   environment.shellAliases =
     let
       nix-ext = pkgs.writeShellScriptBin "nix-ext" ''
+        if (( EUID == 0 )); then
+          echo "\e[1;91mAvoid running nix as root/sudo." 
+        fi
+
         DIR="/etc/nixos"
         CMD="$1"
         shift
         case $CMD in
           pull) cd $DIR; git pull;;
-          apply) nixos-rebuild switch --show-trace -L -v "$@";;
-          boot) nixos-rebuild boot --show-trace -L -v "$@";;
-          upgrade) eval '\nix flake update --flake $DIR && nixos-rebuild boot --show-trace -L -v "$@"';;
+          apply) sudo nixos-rebuild switch --show-trace -L -v "$@";;
+          boot) sudo nixos-rebuild boot --show-trace -L -v "$@";;
+          upgrade) eval '\nix flake update --flake $DIR && sudo nixos-rebuild boot --show-trace -L -v "$@"';;
           code) code $DIR "$@";;
           *) \nix $CMD "$@";;
         esac
