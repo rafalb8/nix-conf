@@ -81,7 +81,7 @@
           pull) cd $DIR; git pull;;
           apply) sudo nixos-rebuild switch --show-trace -L -v "$@";;
           boot) sudo nixos-rebuild boot --show-trace -L -v "$@";;
-          upgrade) eval '\nix flake update --flake $DIR && sudo nixos-rebuild boot --show-trace -L -v "$@"';;
+          upgrade) eval 'sudo true && \nix flake update --flake $DIR && sudo nixos-rebuild boot --show-trace -L -v "$@"';;
           code) code $DIR "$@";;
           *) \nix $CMD "$@";;
         esac

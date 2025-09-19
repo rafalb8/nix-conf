@@ -141,6 +141,11 @@ in
 
           # Gamescope fix
           debug:full_cm_proto = true
+
+          ecosystem {
+            no_update_news = true
+            no_donation_nag = true
+          }
         '';
       };
     };
