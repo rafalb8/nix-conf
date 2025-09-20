@@ -81,7 +81,12 @@
           pull) cd $DIR; git pull;;
           apply) sudo nixos-rebuild switch --show-trace -L -v "$@";;
           boot) sudo nixos-rebuild boot --show-trace -L -v "$@";;
-          upgrade) eval 'sudo true && \nix flake update --flake $DIR && sudo nixos-rebuild boot --show-trace -L -v "$@"';;
+          upgrade)
+              sudo true # Cache password
+              cd $DIR
+              \nix flake update
+              git add flake.lock && git commit -m "Bump [$(date --rfc-3339=date)]"
+              sudo nixos-rebuild boot --show-trace -L -v "$@";;
           code) code $DIR "$@";;
           *) \nix $CMD "$@";;
         esac
