@@ -39,6 +39,7 @@ in
       imagemagick_light
       impression
       obsidian
+      deskflow
       anydesk
       szyszka
 

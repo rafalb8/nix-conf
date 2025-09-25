@@ -49,7 +49,7 @@ in
     networking.firewall = {
       enable = true;
       ports = [
-        # Barrier / Input-Leap
+        # Barrier / Input-Leap / Deskflow
         "24800"
         # Wireguard
         "51820/udp"
