@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     # Include the hardware scan.
@@ -69,6 +69,8 @@
   services.fprintd.enable = true;
 
   # MediaTek wifi fix
+  warnings = lib.optional (pkgs.linux-firmware.version > "20250917")
+    ''MediaTek wifi might be fixed'';
   hardware.firmware =
     let
       nixpkgs = pkgs.fetchFromGitHub {
