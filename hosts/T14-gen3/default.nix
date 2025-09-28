@@ -68,6 +68,18 @@
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd.enable = true;
 
+  # MediaTek wifi fix
+  hardware.firmware =
+    let
+      nixpkgs = pkgs.fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = "00b574b1ba8a352f0601c4dde4faff4b534ebb1e";
+        hash = "sha256-WrZ280bT6NzNbBo+CKeJA/NW1rhvN/RUPZczqCpu2mI=";
+      };
+    in
+    [ (import nixpkgs { inherit (pkgs) system; }).linux-firmware ];
+
   # The state version is required and should stay at the version you
   # originally installed.
   system.stateVersion = "24.05";
