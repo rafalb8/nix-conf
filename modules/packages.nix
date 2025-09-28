@@ -15,6 +15,7 @@
     lsof
     bat
     eza
+    fzf
     fd
 
     # Editors

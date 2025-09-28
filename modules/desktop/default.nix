@@ -128,13 +128,17 @@ in
     fonts = {
       packages = with pkgs; [
         noto-fonts
+        noto-fonts-emoji
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
         noto-fonts-monochrome-emoji
+
         source-code-pro
+
         source-han-mono
         source-han-sans
         source-han-serif
+
         nerd-fonts.jetbrains-mono
       ];
       fontDir.enable = true;

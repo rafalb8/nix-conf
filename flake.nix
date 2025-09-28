@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nix-colors.url = "github:misterio77/nix-colors";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
@@ -27,6 +28,7 @@
     , nixpkgs
     , nixpkgs-stable
     , chaotic
+    , nix-colors
     , lanzaboote
     , nur
     , home-manager

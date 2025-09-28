@@ -23,9 +23,16 @@
 
   config = {
     # Home-Manager extensions
-    home-manager.users.${config.user.name}.imports = [
-      ./home-manager/easyeffects
-      ./home-manager/autostart.nix
-    ];
+    home-manager.users.${config.user.name} = {
+      imports = [
+        ./home-manager/easyeffects
+        ./home-manager/autostart.nix
+      ];
+      
+      options.colorScheme = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
+      };
+    };
   };
 }
