@@ -114,6 +114,7 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "dell-7050" = { hostname = "dell-7050"; user = "core"; };
     };
