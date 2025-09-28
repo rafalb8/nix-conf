@@ -4,7 +4,8 @@ let
     let
       env = {
         "SDL_VIDEODRIVER" = "x11";
-        "MANGOHUD_CONFIGFILE" = "~/.config/MangoHud/MangoHud.conf";
+        "MANGOHUD" = "0";
+        # "MANGOHUD_CONFIGFILE" = "~/.config/MangoHud/MangoHud.conf";
       };
       args = [
         "--adaptive-sync"
