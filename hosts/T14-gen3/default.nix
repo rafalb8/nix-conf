@@ -69,7 +69,7 @@
   services.fprintd.enable = true;
 
   # MediaTek wifi fix
-  warnings = lib.optional (pkgs.linux-firmware.version > "20250917")
+  warnings = lib.optional (pkgs.linux-firmware.version > "20251011")
     ''MediaTek wifi might be fixed'';
   hardware.firmware =
     let
@@ -83,7 +83,8 @@
     [ (import nixpkgs { inherit (pkgs) system; }).linux-firmware ];
 
 
-  time.timeZone = lib.mkForce null; # allow TZ to be set by desktop user   
+  # Allow TZ to be set by user
+  time.timeZone = lib.mkForce null;
 
   # The state version is required and should stay at the version you
   # originally installed.
