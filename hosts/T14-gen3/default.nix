@@ -82,6 +82,9 @@
     in
     [ (import nixpkgs { inherit (pkgs) system; }).linux-firmware ];
 
+
+  time.timeZone = lib.mkForce null; # allow TZ to be set by desktop user   
+
   # The state version is required and should stay at the version you
   # originally installed.
   system.stateVersion = "24.05";
