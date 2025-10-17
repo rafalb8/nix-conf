@@ -63,25 +63,12 @@
     "acpi_backlight=native"
     "psmouse.synaptics_intertouch=0"
     "amd_pstate=active"
+    # MediaTek wifi fix
+    "mt7921_common.disable_clc=1"
   ];
 
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd.enable = true;
-
-  # MediaTek wifi fix
-  warnings = lib.optional (pkgs.linux-firmware.version > "20251011")
-    ''MediaTek wifi might be fixed'';
-  hardware.firmware =
-    let
-      nixpkgs = pkgs.fetchFromGitHub {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = "00b574b1ba8a352f0601c4dde4faff4b534ebb1e";
-        hash = "sha256-WrZ280bT6NzNbBo+CKeJA/NW1rhvN/RUPZczqCpu2mI=";
-      };
-    in
-    [ (import nixpkgs { inherit (pkgs) system; }).linux-firmware ];
-
 
   # Allow TZ to be set by user
   time.timeZone = lib.mkForce null;
