@@ -1,5 +1,7 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
+  cfg = config.modules.desktop;
+
   playscope =
     let
       env = {
@@ -24,13 +26,15 @@ let
     '';
 in
 {
-  environment.systemPackages = [ playscope ];
+  config = lib.mkIf cfg.gaming.enable {
+    environment.systemPackages = [ playscope ];
 
-  programs = {
-    # VR
-    # alvr = {
-    #   enable = true;
-    #   openFirewall = true;
-    # };
+    programs = {
+      # VR
+      # alvr = {
+      #   enable = true;
+      #   openFirewall = true;
+      # };
+    };
   };
 }

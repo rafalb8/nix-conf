@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
+  cfg = config.modules.desktop;
+
   configLine = key: value:
     if value == true then "${key}"
     else if value == false then "${key}=0"
@@ -32,40 +34,42 @@ let
   };
 in
 {
-  # Add package
-  environment.systemPackages = [ pkgs.mangohud ];
+  config = lib.mkIf cfg.gaming.enable {
+    # Add package
+    environment.systemPackages = [ pkgs.mangohud ];
 
-  # Config
-  home-manager.users.${config.user.name}.xdg = {
-    enable = true;
-    configFile = {
-      # Presets
-      "MangoHud/presets.conf".text = toConfig {
-        # Custom 
-        "[preset 5]" = {
-          table_columns = 3;
-          # CPU
-          ram = true;
-          cpu_temp = true;
-          # GPU
-          vram = true;
-          gpu_name = true;
-          gpu_temp = true;
-          # Info
-          wine = true;
-          device_battery = "gamepad";
-          frametime = true;
-          show_fps_limit = true;
-          resolution = true;
-          vulkan_driver = true;
+    # Config
+    home-manager.users.${config.user.name}.xdg = {
+      enable = true;
+      configFile = {
+        # Presets
+        "MangoHud/presets.conf".text = toConfig {
+          # Custom 
+          "[preset 5]" = {
+            table_columns = 3;
+            # CPU
+            ram = true;
+            cpu_temp = true;
+            # GPU
+            vram = true;
+            gpu_name = true;
+            gpu_temp = true;
+            # Info
+            wine = true;
+            device_battery = "gamepad";
+            frametime = true;
+            show_fps_limit = true;
+            resolution = true;
+            vulkan_driver = true;
+          };
         };
+
+        # Default config
+        "MangoHud/MangoHud.conf".text = toConfig MangoHud;
+
+        # App overrides
+        "MangoHud/cs2.conf".text = toConfig (MangoHud // { fps_limit = "164,0"; });
       };
-
-      # Default config
-      "MangoHud/MangoHud.conf".text = toConfig MangoHud;
-
-      # App overrides
-      "MangoHud/cs2.conf".text = toConfig (MangoHud // { fps_limit = "164,0"; });
     };
   };
 }
