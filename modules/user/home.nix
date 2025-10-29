@@ -57,9 +57,9 @@
       # Smarter completion initialization
       autoload -Uz compinit
       if [[ "$(date +'%j')" = "$(date +'%j' -r  ~/.zcompdump 2>/dev/null)" ]]; then
-        compinit -C
+        compinit -C -i
       else
-        compinit
+        compinit -i
       fi
 
       # Catch '--help' and pass it to bat
