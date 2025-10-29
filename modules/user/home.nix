@@ -22,6 +22,12 @@
       theme = "agnoster";
     };
 
+    sessionVariables = {
+      DISABLE_AUTO_UPDATE = true;
+      DISABLE_MAGIC_FUNCTIONS = true;
+      DISABLE_COMPFIX = true;
+    };
+
     plugins = [
       { name = "completions"; src = ./completions; }
       {
@@ -47,6 +53,14 @@
     initContent = ''
       # Fix autocomplete for nix extension
       compdef _nix-ext ${config.environment.shellAliases.nix}
+
+      # Smarter completion initialization
+      autoload -Uz compinit
+      if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+          compinit
+      else
+          compinit -C
+      fi
 
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
