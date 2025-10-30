@@ -48,9 +48,9 @@
   # Home module settings
   home-manager.users.${config.user.name} = { lib, ... }: {
     # Git config
-    programs.git = {
-      userName = "Rafalb8";
-      userEmail = "rafalb8@hotmail.com";
+    programs.git.settings = {
+      user.name = "Rafalb8";
+      user.email = "rafalb8@hotmail.com";
     };
 
     programs.ssh.matchBlocks."AMDC4857" = {
