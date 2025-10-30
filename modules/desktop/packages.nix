@@ -16,13 +16,10 @@ in
       lib.optional (pkgs.jellyfin-media-player.version == "1.12.0") "qtwebengine-5.15.19";
 
     environment.systemPackages = with pkgs; [
-      # Terminal
-      alacritty
-
       # Media
       stable.jellyfin-media-player
       kdePackages.kdenlive
-      # jellyfin-mpv-shim
+      jellyfin-mpv-shim
       youtube-music
       obs-studio
       audacity
@@ -37,12 +34,13 @@ in
 
       # Tools
       imagemagick_light
-      impression
+      impression # USB writer
+      alacritty
       obsidian
       deskflow
+      freerdp
       anydesk
-      szyszka
-      winboat
+      szyszka # Bulk rename
 
       # Web
       qbittorrent
