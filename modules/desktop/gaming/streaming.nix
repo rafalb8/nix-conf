@@ -1,9 +1,40 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = {
-    gaming = config.modules.desktop.gaming;
-    graphics = config.modules.graphics;
-  };
+  cfg = config.modules.desktop;
+
+  hypr-conf = pkgs.writeText "hyprland.conf" ''
+    monitor = HEADLESS-2, 1920x1080@60, auto, 1
+    monitor = WAYLAND-1, disabled
+    monitor = , preferred, auto, auto
+    # monitor = , disabled
+
+    # Create Headless monitor and disable the WAYLAND-1
+    exec-once = hyprctl output create headless HEADLESS-2
+    exec-once = hyprctl keyword monitor DP-1, disabled
+
+    # Start programs
+    # exec-once = systemctl restart --user sunshine.service
+    exec-once = ${config.systemd.user.services.sunshine.serviceConfig.ExecStart}
+
+    bind = SUPER, W, killactive
+    bind = CTRL ALT, Delete, exit
+    bind = SUPER, T, exec, alacritty
+    bind = SUPER, S, exec, sunscreen # Start Gamescope Steam
+
+    binde = SUPER, Tab, cyclenext
+    binde = SUPER, Tab, bringactivetotop
+
+    bindm = SUPER, mouse:272, movewindow
+    bindm = SUPER, mouse:273, resizewindow
+
+    # Gamescope fix
+    debug:full_cm_proto = true
+
+    ecosystem {
+      no_update_news = true
+      no_donation_nag = true
+    }
+  '';
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
     # Restart current script without CAP_SYS_ADMIN
@@ -41,7 +72,6 @@ in
       capSysAdmin = true;
       openFirewall = true;
     };
-
 
     services.sunshine = {
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
@@ -108,47 +138,21 @@ in
     # Fix for DS4/DS5 gamepads
     boot.kernelModules = [ "uhid" ];
 
-    # Configure hyperland for streaming
+    # Add custom hyprland session
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
-    home-manager.users.${config.user.name} = {
-      xdg = {
-        enable = true;
-
-        configFile."hypr/hyprland.conf".text = ''
-          monitor = HEADLESS-2, 1920x1080@60, auto, 1
-          monitor = WAYLAND-1, disabled
-          monitor = , preferred, auto, auto
-          # monitor = , disabled
-
-          # Create Headless monitor and disable the WAYLAND-1
-          exec-once = hyprctl output create headless HEADLESS-2
-          exec-once = hyprctl keyword monitor DP-1, disabled
-
-          # Start programs
-          # exec-once = systemctl restart --user sunshine.service
-          exec-once = ${config.systemd.user.services.sunshine.serviceConfig.ExecStart}
-
-          bind = SUPER, W, killactive
-          bind = CTRL ALT, Delete, exit
-          bind = SUPER, T, exec, alacritty
-          bind = SUPER, S, exec, sunscreen # Start Gamescope Steam
-
-          binde = SUPER, Tab, cyclenext
-          binde = SUPER, Tab, bringactivetotop
-
-          bindm = SUPER, mouse:272, movewindow
-          bindm = SUPER, mouse:273, resizewindow
-
-          # Gamescope fix
-          debug:full_cm_proto = true
-
-          ecosystem {
-            no_update_news = true
-            no_donation_nag = true
-          }
-        '';
-      };
-    };
-
+    services.displayManager.sessionPackages = [
+      (
+        (pkgs.writeTextDir "share/wayland-sessions/sunshine.desktop" ''
+          [Desktop Entry]
+          Version=1.0
+          Name=Sunshine on Hyprland
+          Exec=${pkgs.hyprland}/bin/Hyprland --config ${hypr-conf}
+          Type=Application
+        '').overrideAttrs
+          (_: {
+            passthru.providedSessions = [ "sunshine" ];
+          })
+      )
+    ];
   };
 }
