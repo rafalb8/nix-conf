@@ -9,7 +9,7 @@
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     nur = {
@@ -50,9 +50,11 @@
 
       # Overlays
       overlays = {
-        # Custom packages overlay
         custom = final: prev: {
+          # Custom packages overlay
           custom = self.packages.${final.system};
+          # Fixes
+          qgnomeplatform-qt6 = nixpkgs-stable.legacyPackages.${final.system}.qgnomeplatform-qt6;
         };
 
         # Stable channel overlay
