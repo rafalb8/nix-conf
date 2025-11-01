@@ -22,11 +22,9 @@ in
 
   config = lib.mkIf cfg.waydroid {
     virtualisation.waydroid.enable = true;
+    environment.systemPackages = with pkgs; [ waydroid-helper ];
 
     # Disable waydroid-container.service
     systemd.services.waydroid-container.wantedBy = lib.mkForce [ ];
-
-    # sudo waydroid-script -> Android 11 >> Install ...
-    environment.systemPackages = with pkgs; [ custom.waydroid_script ];
   };
 }
