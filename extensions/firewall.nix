@@ -2,9 +2,6 @@
 let
   cfg = config.networking.firewall;
 
-  # tail returns last element of the list
-  tail = list: builtins.elemAt list (builtins.length list - 1);
-
   # parsePort parses single port string: (port || range)[/proto]
   parsePort = str:
     let
@@ -13,8 +10,8 @@ let
       isRange = builtins.length range == 2;
 
       start = lib.toInt (builtins.head range);
-      end = if isRange then lib.toInt (tail range) else null;
-      protocol = if (builtins.length parts > 1) then tail parts else null;
+      end = if isRange then lib.toInt (lib.custom.tail range) else null;
+      protocol = if (builtins.length parts > 1) then lib.custom.tail parts else null;
     in
     {
       port = { from = start; to = end; };
