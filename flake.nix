@@ -53,9 +53,12 @@
     in
     {
       # Custom Packages
-      packages.${system} = {
-        fastflix = pkgs.callPackage ./custom/packages/fastflix.nix { };
-      };
+      packages.${system} = with nixpkgs.lib; mapAttrs'
+        (fname: _: {
+          name = removeSuffix ".nix" fname;
+          value = pkgs.callPackage ./custom/packages/${fname} { };
+        })
+        (builtins.readDir ./custom/packages);
 
       # Overlays
       overlays.default = final: prev: {
