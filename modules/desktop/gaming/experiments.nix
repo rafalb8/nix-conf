@@ -13,6 +13,7 @@ let
         "--adaptive-sync"
         "--immediate-flips"
         "--mangoapp"
+        "--force-grab-cursor"
         "--backend sdl"
         "-b"
         "-W 2305"
