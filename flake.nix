@@ -72,8 +72,7 @@
         stable = pkgs.stable;
 
         # Replace broken packages
-        qgnomeplatform-qt6 = pkgs.stable.qgnomeplatform-qt6;
-      };
+      } // lib.genAttrs [ "qgnomeplatform-qt6" ] (name: pkgs.stable.${name});
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs
