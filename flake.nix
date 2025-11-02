@@ -36,33 +36,40 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
+      pkgs = import nixpkgs
+        {
+          inherit system;
+          config.allowUnfree = true;
+        } // {
+        stable = import nixpkgs-stable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
+
+      lib = pkgs.lib // {
+        custom = import ./custom/lib { inherit (pkgs) lib; };
       };
     in
     {
       # Custom Packages
       packages.${system} = {
-        fastflix = pkgs.callPackage ./packages/fastflix.nix { };
+        fastflix = pkgs.callPackage ./custom/packages/fastflix.nix { };
       };
 
       # Overlays
-      overlays = {
-        custom = final: prev: {
-          # Custom packages overlay
-          custom = self.packages.${final.system};
-          # Fixes
-          qgnomeplatform-qt6 = nixpkgs-stable.legacyPackages.${final.system}.qgnomeplatform-qt6;
-        };
+      overlays.default = final: prev: {
+        # Custom library overlay
+        inherit lib;
+
+        # Custom packages overlay
+        custom = self.packages.${final.system};
 
         # Stable channel overlay
-        stable = final: prev: {
-          stable = import nixpkgs-stable {
-            inherit (final) system;
-            config.allowUnfree = true;
-          };
-        };
+        stable = pkgs.stable;
+
+        # Replace broken packages
+        qgnomeplatform-qt6 = pkgs.stable.qgnomeplatform-qt6;
       };
 
       # NixOS configurations
@@ -70,7 +77,7 @@
         [ "Mainframe" "T14-gen3" "Nexus" ]
         (hostname: nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs lib; };
 
           modules = [
             ./modules
@@ -81,7 +88,7 @@
             lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ self.overlays.custom self.overlays.stable nur.overlays.default ];
+              nixpkgs.overlays = [ self.overlays.default nur.overlays.default ];
 
               nix.registry.nixpkgs.flake = nixpkgs;
               home-manager.useGlobalPkgs = true;
