@@ -12,6 +12,7 @@
 
   # Enable modules
   modules = {
+    secureboot.enable = true;
     graphics.amd = true;
 
     desktop = {
