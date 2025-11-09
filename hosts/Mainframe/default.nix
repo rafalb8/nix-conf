@@ -54,7 +54,7 @@
     };
 
     programs.ssh.matchBlocks."AMDC4857" = {
-      hostname = "106.120.84.201";
+      hostname = "106.120.196.83";
       user = "r.babinski";
       proxyCommand = "nc -X 5 -x 192.168.8.12:1080 %h %p";
     };
