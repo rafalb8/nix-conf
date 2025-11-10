@@ -1,9 +1,6 @@
 { config, ... }:
 {
   imports = [
-    # Logitech keyboard and mouse support
-    ./solaar
-
     # Include the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -37,6 +34,11 @@
 
       waydroid = false;
     };
+  };
+
+  hardware.logitech.wireless = {
+    enable = true;
+    # enableGraphical = true;
   };
 
   # chaotic.mesa-git = {
