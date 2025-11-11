@@ -12,7 +12,6 @@
 
   # Enable modules
   modules = {
-    secureboot.enable = true;
     graphics.amd = true;
 
     desktop = {
@@ -22,6 +21,9 @@
       gaming.enable = false;
     };
   };
+
+  # Enable secure boot
+  boot.loader.limine.secureBoot.enable = true;
 
   # Hostname
   networking.hostName = "T14-gen3";

@@ -28,6 +28,7 @@
     dmidecode
     pciutils
     usbutils
+    sbctl # Secure Boot
     btop
 
     # Networking

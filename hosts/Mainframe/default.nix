@@ -15,8 +15,6 @@
 
   # Enable modules
   modules = {
-    secureboot.enable = true;
-
     graphics = {
       amd = true;
       overcloking = false;
@@ -35,6 +33,9 @@
       waydroid = false;
     };
   };
+
+  # Enable secure boot
+  boot.loader.limine.secureBoot.enable = true;
 
   hardware.logitech.wireless = {
     enable = true;
