@@ -18,9 +18,9 @@
   # Bootloader
   boot.loader = {
     timeout = 0;
-    systemd-boot = {
+    limine = {
       enable = true;
-      configurationLimit = 10;
+      maxGenerations = 10;
     };
     efi.canTouchEfiVariables = true;
   };

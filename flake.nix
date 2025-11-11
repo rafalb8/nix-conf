@@ -7,11 +7,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-colors.url = "github:misterio77/nix-colors";
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +24,6 @@
     , nixpkgs-stable
     , chaotic
     , nix-colors
-    , lanzaboote
     , nur
     , home-manager
     , ...
@@ -87,7 +81,6 @@
             ./hosts/${hostname}
 
             chaotic.nixosModules.default
-            lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.default nur.overlays.default ];
