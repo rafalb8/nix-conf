@@ -5,20 +5,20 @@ in
 {
   imports = [
     ./gaming
-
-    ./gnome.nix
     ./hyprland
 
+    ./boot-ext.nix
     ./browsers.nix
+    ./gnome.nix
     ./packages.nix
     ./waydroid.nix
-    ./graphical-boot.nix
   ];
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
 
-    graphicalBoot = lib.mkEnableOption "Enable graphical boot";
+    windows-boot = lib.mkEnableOption "Enable windows dualboot";
+    graphical-boot = lib.mkEnableOption "Enable graphical boot";
 
     waydroid = lib.mkEnableOption "Waydroid support";
 
@@ -143,10 +143,6 @@ in
       fontDir.enable = true;
       fontconfig.enable = true;
     };
-
-    # Alias for rebooting to Windows
-    environment.shellAliases.win-reboot =
-      "sudo efibootmgr -n $(efibootmgr | grep Windows | awk '{print $1}' | sed 's/Boot//; s/\*//') && reboot";
 
     # Setup home for desktop
     home-manager.users.${config.user.name} = {

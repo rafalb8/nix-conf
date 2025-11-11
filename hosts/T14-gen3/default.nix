@@ -16,7 +16,8 @@
 
     desktop = {
       enable = true;
-      graphicalBoot = true;
+      windows-boot = true;
+      graphical-boot = true;
       environment.gnome = true;
       gaming.enable = false;
     };

@@ -16,7 +16,7 @@
 
   # Bootloader
   boot.loader = {
-    timeout = 0;
+    timeout = 1;
 
     # Secure Boot TLDR:
     # Instructions: https://wiki.nixos.org/wiki/Limine
@@ -31,6 +31,7 @@
     limine = {
       enable = true;
       maxGenerations = 10;
+      extraConfig = "quiet: yes";
     };
     efi.canTouchEfiVariables = true;
   };
