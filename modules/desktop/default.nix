@@ -17,9 +17,6 @@ in
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
 
-    windows-boot = lib.mkEnableOption "Enable windows dualboot";
-    graphical-boot = lib.mkEnableOption "Enable graphical boot";
-
     waydroid = lib.mkEnableOption "Waydroid support";
 
     environment = {

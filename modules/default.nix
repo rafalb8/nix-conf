@@ -32,6 +32,7 @@
       enable = true;
       maxGenerations = 10;
       extraConfig = "quiet: yes";
+      enableEditor = true;
     };
     efi.canTouchEfiVariables = true;
   };

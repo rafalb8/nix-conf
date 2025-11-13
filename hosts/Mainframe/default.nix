@@ -23,9 +23,12 @@
     desktop = {
       enable = true;
 
-      windows-boot = true;
       graphical-boot = true;
-      
+      windows = {
+        dualboot = true;
+        disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
+      };
+
       environment.gnome = true;
 
       gaming = {
