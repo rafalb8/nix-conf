@@ -20,19 +20,17 @@
 
     # Secure Boot TLDR:
     # Instructions: https://wiki.nixos.org/wiki/Limine
-    # sudo sbctl create-keys
-    # [nix]: boot.loader.limine.secureBoot.enable = true; => rebuild
-    # sudo sbctl verify
     # [firmware]: Enable Secure Boot => "Reset to Setup Mode" or just remove PK keys
-    # sudo sbctl enroll-keys -m -f
+    # [os]: sudo sbctl create-keys
+    # [os]: sudo sbctl enroll-keys -m -f
     # If fails: sudo chattr -i (files printed in sbctl enroll-keys) => repeat enroll-keys
+    # [nix]: boot.loader.limine.secureBoot.enable = true; => rebuild
     # reboot
     # bootctl status
     limine = {
       enable = true;
       maxGenerations = 10;
       extraConfig = "quiet: yes";
-      enableEditor = true;
     };
     efi.canTouchEfiVariables = true;
   };
