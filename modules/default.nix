@@ -30,7 +30,6 @@
     limine = {
       enable = true;
       maxGenerations = 10;
-      extraConfig = "quiet: yes";
     };
     efi.canTouchEfiVariables = true;
   };
@@ -130,6 +129,8 @@
   nix = {
     # Enable nix-command and flakes
     settings.experimental-features = [ "nix-command" "flakes" ];
+
+    settings.download-buffer-size = 524288000; # 500M
 
     # Perform garbage collection weekly to maintain low disk usage
     gc = {

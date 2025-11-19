@@ -38,8 +38,6 @@ in
       alacritty
       obsidian
       deskflow
-      freerdp
-      anydesk
       szyszka # Bulk rename
 
       # Web
