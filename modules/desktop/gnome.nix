@@ -35,9 +35,8 @@ in
         adwaita-icon-theme
         mission-center
         gnome-firmware
-        # gnome-tweaks
+        file-roller
         adw-gtk3
-        ghex
       ]);
 
     # Set dark mode in Qt applications

@@ -31,6 +31,7 @@ in
       temurin-jre-bin
       android-tools
       vscode
+      imhex
 
       # Tools
       imagemagick_light
