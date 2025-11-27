@@ -68,7 +68,7 @@ in
   config = lib.mkIf cfg.enable {
     xdg = {
       enable = true;
-      configFile =
+      dataFile =
         # services.easyeffects.presets
         (lib.foldl' (acc: name: acc // mkPreset name) { } cfg.presets)
         // # services.easyeffects.autoload

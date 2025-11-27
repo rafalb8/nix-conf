@@ -72,11 +72,10 @@
       autoload = {
         "Normalize" = [
           # Monitor outputs
-          "alsa_output.pci-0000_03_00.1.hdmi-stereo:hdmi-output-0"
-          "alsa_output.pci-0000_03_00.1.hdmi-stereo-extra2:hdmi-output-2"
+          "alsa_output.pci-0000_03_00.1.hdmi-stereo:HDMI _ DisplayPort"
         ];
         "Dolby Headphones" = [
-          "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:analog-output"
+          "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:Analog Output"
         ];
       };
     };
