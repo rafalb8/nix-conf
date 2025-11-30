@@ -261,19 +261,18 @@ in
       gnome-shell-extensions # default ext
       gnome-contacts
       gnome-calendar
+      gnome-console # replaced with alacritty
+      gnome-music
       gnome-logs
       gnome-maps
-      gnome-music
-
-      geary # email client
-      totem # video player
-    ]) ++ (with pkgs; [
-      gnome-console # replaced with alacritty
       gnome-tour
 
+      yelp # help viewer
+      geary # email client
+      totem # video player
+      showtime # new video player
       snapshot # camera app
       epiphany # web browser
-      yelp # help viewer
     ]);
   };
 }
