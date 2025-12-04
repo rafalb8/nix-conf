@@ -177,12 +177,6 @@ in
         presets = [ "Clean" "Normalize" "Dolby Headphones" ];
       };
 
-      # Autostart
-      autostart = {
-        enable = true;
-        packages = [ pkgs.discord ];
-      };
-
       # Configure alacritty
       programs.alacritty = {
         enable = true;

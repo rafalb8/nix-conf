@@ -36,18 +36,16 @@ in
       gpuOverclock.enable = true;
     };
 
-    home-manager.users.${config.user.name} = {
-      autostart = lib.mkIf cfg.overcloking {
-        enable = true;
-        packages = [ pkgs.corectrl ];
-      };
+    autostart = lib.mkIf cfg.overcloking {
+      enable = true;
+      packages = [ pkgs.corectrl ];
+    };
 
-      # Wayland GNOME VRR (experimental)
-      dconf = lib.mkIf desktopEnv.gnome {
-        enable = true;
-        settings = {
-          "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
-        };
+    # Wayland GNOME VRR (experimental)
+    home-manager.users.${config.user.name}.dconf = lib.mkIf desktopEnv.gnome {
+      enable = true;
+      settings = {
+        "org/gnome/mutter"."experimental-features" = [ "variable-refresh-rate" ];
       };
     };
   };

@@ -48,5 +48,11 @@ in
 
     # FastFlix
     programs.fastflix.enable = true;
+
+    # Autostart
+    autostart = {
+      enable = true;
+      packages = [ pkgs.discord ];
+    };
   };
 }
