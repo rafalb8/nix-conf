@@ -42,7 +42,7 @@
       };
 
       lib = pkgs.lib // {
-        custom = import ./custom/lib { inherit (pkgs) lib; };
+        custom = import ./lib { inherit (pkgs) lib; };
       };
     in
     {
@@ -50,9 +50,9 @@
       packages.${system} = with nixpkgs.lib; mapAttrs'
         (fname: _: {
           name = removeSuffix ".nix" fname;
-          value = pkgs.callPackage ./custom/packages/${fname} { };
+          value = pkgs.callPackage ./packages/${fname} { };
         })
-        (builtins.readDir ./custom/packages);
+        (builtins.readDir ./packages);
 
       # Overlays
       overlays.default = final: prev: {
