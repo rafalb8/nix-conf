@@ -19,6 +19,7 @@ in
 
       # Emulators
       rpcs3
+      custom.eden
 
       # Games
       prismlauncher # Minecraft launcher
