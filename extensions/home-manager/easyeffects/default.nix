@@ -58,8 +58,8 @@ in
       description = "List of EasyEffects presets to be autoloaded for each device";
       example = {
         "Dolby Dynamic" = [
-          # Device_name:Profile 
-          "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:[Out] Speaker"
+          # Device_name:Route 
+          "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:Speaker"
         ];
       };
     };
