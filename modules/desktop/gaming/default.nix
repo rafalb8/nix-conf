@@ -48,6 +48,16 @@ in
       packages = [ (pkgs.steam // { env.MANGOHUD = "1"; }) ];
     };
 
+    # Enable NTSync (kernel 6.14+)
+    boot.kernelModules = [ "ntsync" ];
+    services.udev.packages = [
+      (pkgs.writeTextFile {
+        name = "ntsync-udev-rules";
+        text = ''KERNEL=="ntsync", MODE="0660", TAG+="uaccess"'';
+        destination = "/etc/udev/rules.d/70-ntsync.rules";
+      })
+    ];
+
     # SteamOS Linux optimizations
     # https://github.com/fufexan/nix-gaming/blob/master/modules/platformOptimizations.nix
     boot.kernel.sysctl = {
