@@ -38,6 +38,7 @@ in
               Restart = "on-failure";
               RestartSec = "5s";
             };
+            path = [ "/run/current-system/sw" ];
             environment = pkg.env or { };
           };
         }
