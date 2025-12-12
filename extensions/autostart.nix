@@ -35,6 +35,8 @@ in
             serviceConfig = {
               Type = "simple";
               ExecStart = pkg.exec or "${pkg}/bin/${pkg.pname}";
+              Restart = "on-failure";
+              RestartSec = "5s";
             };
             environment = pkg.env or { };
           };
