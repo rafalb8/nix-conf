@@ -76,8 +76,8 @@ in
     services.sunshine = {
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
-        back_button_timeout = 2000;
         mouse = "disabled";
+        back_button_timeout = 1000;
       };
 
       # 
@@ -86,21 +86,6 @@ in
           PATH = "$(PATH):/run/current-system/sw/bin";
         };
         apps = [
-          {
-            name = "Desktop";
-            image-path = "desktop.png";
-            prep-cmd = [
-              {
-                do = ''${sunscreen}/bin/sunscreen mode'';
-                undo = "${sunscreen}/bin/sunscreen reset";
-              }
-            ];
-            detached = [ "alacritty" ];
-            exclude-global-prep-cmd = "";
-            auto-detach = "true";
-            wait-all = "true";
-            exit-timeout = "5";
-          }
           {
             name = "Steam";
             image-path = "steam.png";
@@ -118,7 +103,7 @@ in
           }
           {
             name = "RPCS3";
-            # image-path = "steam.png";
+            image-path = "${pkgs.rpcs3}/share/icons/hicolor/48x48/apps/rpcs3.png";
             prep-cmd = [
               {
                 do = ''${sunscreen}/bin/sunscreen mode'';
@@ -131,12 +116,31 @@ in
             wait-all = "true";
             exit-timeout = "5";
           }
+          {
+            name = "Desktop";
+            image-path = "desktop.png";
+            prep-cmd = [
+              {
+                do = ''${sunscreen}/bin/sunscreen mode'';
+                undo = "${sunscreen}/bin/sunscreen reset";
+              }
+            ];
+            detached = [ "alacritty" ];
+            exclude-global-prep-cmd = "";
+            auto-detach = "true";
+            wait-all = "true";
+            exit-timeout = "5";
+          }
         ];
       };
     };
 
     # Fix for DS4/DS5 gamepads
     boot.kernelModules = [ "uhid" ];
+    services.udev.extraRules = ''
+      # sudo setfacl -m g:input:rw /dev/uhid
+      SUBSYSTEM=="misc", KERNEL=="uhid", MODE="0660", GROUP="input", TAG+="uaccess"
+    '';
 
     # Add custom hyprland session
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
