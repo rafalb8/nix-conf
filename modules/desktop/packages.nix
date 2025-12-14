@@ -30,6 +30,7 @@ in
       # Development
       temurin-jre-bin
       android-tools
+      zed-editor
       vscode
       imhex
 
