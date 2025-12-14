@@ -59,7 +59,7 @@ let
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
       "steam")
         pkill -TERM steam && pidwait steam && sleep 3
-        $GAMESCOPE_CMD -e -- steam -gamepadui ;;
+        $GAMESCOPE_CMD -e -- steam -gamepadui -steamos3 ;;
       *) $GAMESCOPE_CMD -- "$@"
     esac
   '';
