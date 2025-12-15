@@ -33,7 +33,7 @@
   environment.systemPackages = with pkgs; [ moonlight-qt ];
 
   # Home module settings
-  home-manager.users.${config.user.name} = { lib, ... }: {
+  home-manager.users.${config.user.name} = {
     # Git config
     programs.git.settings = {
       user.name = "Rafalb8";
