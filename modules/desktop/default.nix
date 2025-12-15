@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./gaming
-    ./hyprland
 
     ./boot-ext.nix
     ./browsers.nix
@@ -21,7 +20,7 @@ in
 
     environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
-      hyprland = lib.mkEnableOption "Hyprland desktop module";
+      # hyprland = lib.mkEnableOption "Hyprland desktop module";
     };
 
     gaming = {
@@ -35,7 +34,7 @@ in
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-    # Disable NetworkManager-wait-online.service 
+    # Disable NetworkManager-wait-online.service
     systemd.services.NetworkManager-wait-online.enable = false;
 
     # Use iwd as NetworkManager backend
