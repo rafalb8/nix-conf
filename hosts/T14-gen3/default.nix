@@ -29,7 +29,7 @@
   # Hostname
   networking.hostName = "T14-gen3";
 
-  # Additional packages 
+  # Additional packages
   environment.systemPackages = with pkgs; [ moonlight-qt ];
 
   # Home module settings
@@ -53,7 +53,7 @@
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"
       "Alacritty.desktop"
-      "code.desktop"
+      "dev.zed.Zed.desktop"
       "discord.desktop"
       "com.github.iwalton3.jellyfin-media-player.desktop"
     ];

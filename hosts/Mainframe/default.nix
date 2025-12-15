@@ -86,7 +86,7 @@
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"
       "Alacritty.desktop"
-      "code.desktop"
+      "dev.zed.Zed.desktop"
       "obsidian.desktop"
       "steam.desktop"
       "discord.desktop"

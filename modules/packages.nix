@@ -59,7 +59,7 @@
     gofumpt
 
     # Nix
-    nil
+    nixd
     nixpkgs-fmt
   ];
 

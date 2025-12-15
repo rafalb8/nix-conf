@@ -35,6 +35,7 @@ in
       imhex
 
       # Tools
+      onlyoffice-desktopeditors
       imagemagick_light
       impression # USB writer
       alacritty
