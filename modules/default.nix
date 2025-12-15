@@ -80,7 +80,7 @@
     let
       nix-ext = pkgs.writeShellScriptBin "nix-ext" ''
         if (( EUID == 0 )); then
-          echo "\e[1;91mAvoid running nix as root/sudo." 
+          echo "\e[1;91mAvoid running nix as root/sudo."
         fi
 
         DIR="/etc/nixos"
@@ -96,7 +96,7 @@
               \nix flake update
               git add flake.lock && git commit -m "Bump [$(date --rfc-3339=date)]"
               nixos-rebuild boot --sudo -Lv "$@";;
-          code) code $DIR "$@";;
+          code) zeditor $DIR "$@";;
           *) \nix $CMD "$@";;
         esac
       '';
