@@ -141,7 +141,7 @@ in
     };
 
     # Setup home for desktop
-    home-manager.users.${config.user.name} = {
+    home-manager.users.${config.user.name} = { config, ... }: {
       # Hide folders in home
       home.file.".hidden".text = ''
         Desktop
@@ -181,12 +181,12 @@ in
         enable = true;
         settings.window = {
           opacity = 0.9;
-          dimensions = {
-            columns = 140;
-            lines = 40;
-          };
+          dimensions = { columns = 140; lines = 40; };
         };
       };
+
+      # Zed Config
+      home.file.".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/zed.json";
     };
 
     # Enable KVM
