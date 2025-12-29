@@ -43,7 +43,7 @@
     services.easyeffects = {
       presets = [ "Dolby Dynamic" ];
       autoload = {
-        "Dolby Headphones" = [ "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:Headphones" ];
+        "Dolby Headphones" = [ "alsa_output.pci-0000_04_00.6.HiFi__Headphones__sink:Headphones" ];
         "Dolby Dynamic" = [ "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:Speaker" ];
       };
     };
@@ -55,7 +55,7 @@
       "Alacritty.desktop"
       "dev.zed.Zed.desktop"
       "discord.desktop"
-      "com.github.iwalton3.jellyfin-media-player.desktop"
+      "org.jellyfin.JellyfinDesktop.desktop"
     ];
   };
 

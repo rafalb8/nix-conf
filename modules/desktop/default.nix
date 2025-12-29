@@ -153,17 +153,6 @@ in
       # Required
       xdg.enable = true;
 
-      # Fix for jellyfin
-      xdg.desktopEntries."com.github.iwalton3.jellyfin-media-player" = {
-        name = "Jellyfin Media Player";
-        icon = "com.github.iwalton3.jellyfin-media-player";
-        exec = "jellyfinmediaplayer";
-        settings = {
-          StartupWMClass = "jellyfinmediaplayer";
-        };
-        categories = [ "AudioVideo" "Video" "Player" "TV" ];
-      };
-
       # Enable Wayland HDR for Jellyfin MPV Shim and MPV
       xdg.configFile = {
         "mpv/mpv.conf".text = ''vo=dmabuf-wayland'';

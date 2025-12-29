@@ -1,12 +1,7 @@
 { config, pkgs, ... }:
 {
-  # The state version is required and should stay at the version you
-  # originally installed.
-  home.stateVersion = config.system.stateVersion;
-
   home.sessionVariables = {
     DOCKER_BUILDKIT = 1;
-
     PATH = "$HOME/go/bin:$PATH";
 
     # Use bat for man
@@ -21,6 +16,7 @@
       plugins = [ "git" "docker" "docker-compose" "sudo" "history" "dirhistory" ];
       theme = "agnoster";
     };
+    dotDir = "${config.xdg.configHome}/zsh";
 
     sessionVariables = {
       DISABLE_AUTO_UPDATE = true;
@@ -29,7 +25,6 @@
     };
 
     plugins = [
-      { name = "completions"; src = ./completions; }
       {
         name = "cmdtime";
         src = pkgs.fetchFromGitHub {
@@ -51,9 +46,6 @@
     };
 
     initContent = ''
-      # Fix autocomplete for nix extension
-      compdef _nix-ext ${config.environment.shellAliases.nix}
-
       # Smarter completion initialization
       autoload -Uz compinit
       if [[ "$(date +'%j')" = "$(date +'%j' -r  ~/.zcompdump 2>/dev/null)" ]]; then

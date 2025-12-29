@@ -91,7 +91,7 @@
       "steam.desktop"
       "discord.desktop"
       "com.github.wwmm.easyeffects.desktop"
-      "com.github.iwalton3.jellyfin-media-player.desktop"
+      "org.jellyfin.JellyfinDesktop.desktop"
       "com.github.th_ch.youtube_music.desktop"
     ];
   };

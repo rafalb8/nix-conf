@@ -18,5 +18,13 @@
       ++ lib.optional config.modules.graphics.overcloking "corectrl";
   };
 
-  home-manager.users.${config.user.name} = import ./home.nix attrs;
+  home-manager.users.${config.user.name} = {
+    imports = [
+      ./home.nix
+      (import ./completions attrs)
+    ];
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = config.system.stateVersion;
+  };
 }
