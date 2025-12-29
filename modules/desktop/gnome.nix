@@ -219,7 +219,7 @@ in
           ## Custom keybinds definitions
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Terminal";
-            command = "alacritty";
+            command = "ghostty";
             binding = "<Super>t";
           };
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
@@ -243,7 +243,7 @@ in
     # Fix nautilus shortcut
     programs.nautilus-open-any-terminal = {
       enable = true;
-      terminal = "alacritty";
+      terminal = "ghostty";
     };
 
     environment.sessionVariables = {

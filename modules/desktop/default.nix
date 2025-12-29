@@ -165,15 +165,6 @@ in
         presets = [ "Clean" "Normalize" "Dolby Headphones" ];
       };
 
-      # Configure alacritty
-      programs.alacritty = {
-        enable = true;
-        settings.window = {
-          opacity = 0.9;
-          dimensions = { columns = 140; lines = 40; };
-        };
-      };
-
       # Zed Config
       home.file.".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/zed.json";
     };

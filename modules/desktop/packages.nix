@@ -27,6 +27,7 @@ in
       temurin-jre-bin
       android-tools
       zed-editor
+      ghostty
       vscode
       imhex
 
@@ -34,7 +35,6 @@ in
       onlyoffice-desktopeditors
       imagemagick_light
       impression # USB writer
-      alacritty
       obsidian
       deskflow
       szyszka # Bulk rename
