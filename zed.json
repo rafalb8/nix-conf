@@ -4,9 +4,11 @@
   "auto_install_extensions": {
     // Language support
     "nix": true,
+    "xml": true,
+    "make": true,
     "caddyfile": true,
     // Other
-    "material-icon-theme": true,
+    "material-icon-theme": true
   },
   // UI
   "terminal": { "dock": "right" },
@@ -27,12 +29,12 @@
   "languages": {
     "Go": {
       "formatter": {
-        "external": { "command": "gofumpt" },
-      },
+        "external": { "command": "gofumpt" }
+      }
     },
     "Nix": {
       "language_servers": ["nixd"],
-      "formatter": { "external": { "command": "nixpkgs-fmt" } },
-    },
-  },
+      "formatter": { "external": { "command": "nixpkgs-fmt" } }
+    }
+  }
 }

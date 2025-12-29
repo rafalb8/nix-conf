@@ -52,7 +52,7 @@
     dconf.settings."org/gnome/shell"."favorite-apps" = [
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"
-      "Alacritty.desktop"
+      "com.mitchellh.ghostty.desktop"
       "dev.zed.Zed.desktop"
       "discord.desktop"
       "org.jellyfin.JellyfinDesktop.desktop"
