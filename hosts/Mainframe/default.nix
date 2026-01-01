@@ -48,12 +48,6 @@
     # enableGraphical = true;
   };
 
-  # chaotic.mesa-git = {
-  #   enable = true;
-  #   fallbackSpecialisation = false;
-  #   replaceBasePackage = true;
-  # };
-
   # Home module settings
   home-manager.users.${config.user.name} = {
     # Git config

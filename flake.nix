@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nix-colors.url = "github:misterio77/nix-colors";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -22,8 +20,6 @@
     { self
     , nixpkgs
     , nixpkgs-stable
-    , chaotic
-    , nix-colors
     , nur
     , home-manager
     , ...
@@ -80,7 +76,6 @@
             ./extensions
             ./hosts/${hostname}
 
-            chaotic.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.default nur.overlays.default ];
