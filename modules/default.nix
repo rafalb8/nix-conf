@@ -144,6 +144,12 @@
     settings.auto-optimise-store = true;
   };
 
+  services.scx = {
+    enable = true;
+    package = pkgs.scx.rustscheds;
+    scheduler = "scx_lavd";
+  };
+
   # Run non-nix executables
   programs.nix-ld.enable = true;
 }
