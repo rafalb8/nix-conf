@@ -8,7 +8,7 @@
     "make": true,
     "caddyfile": true,
     // Other
-    "material-icon-theme": true
+    "material-icon-theme": true,
   },
   // UI
   "terminal": { "dock": "right" },
@@ -28,13 +28,12 @@
   // Other
   "languages": {
     "Go": {
-      "formatter": {
-        "external": { "command": "gofumpt" }
-      }
+      "inlay_hints": { "show_type_hints": false },
+      "formatter": { "external": { "command": "gofumpt" } },
     },
     "Nix": {
       "language_servers": ["nixd"],
-      "formatter": { "external": { "command": "nixpkgs-fmt" } }
-    }
-  }
+      "formatter": { "external": { "command": "nixpkgs-fmt" } },
+    },
+  },
 }
