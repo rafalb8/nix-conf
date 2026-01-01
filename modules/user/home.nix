@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   home.sessionVariables = {
     DOCKER_BUILDKIT = 1;
@@ -18,24 +18,6 @@
     };
     dotDir = "${config.xdg.configHome}/zsh";
 
-    sessionVariables = {
-      DISABLE_AUTO_UPDATE = true;
-      DISABLE_MAGIC_FUNCTIONS = true;
-      DISABLE_COMPFIX = true;
-    };
-
-    plugins = [
-      {
-        name = "cmdtime";
-        src = pkgs.fetchFromGitHub {
-          owner = "tom-auger";
-          repo = "cmdtime";
-          rev = "main";
-          sha256 = "v6wCfNoPXDD3sS6yUYE6lre8Ir1yJcLGoAW3O8sUOCg=";
-        };
-      }
-    ];
-
     localVariables = {
       HIST_STAMPS = "yyyy-mm-dd";
     };
@@ -46,14 +28,6 @@
     };
 
     initContent = ''
-      # Smarter completion initialization
-      autoload -Uz compinit
-      if [[ "$(date +'%j')" = "$(date +'%j' -r  ~/.zcompdump 2>/dev/null)" ]]; then
-        compinit -C -i
-      else
-        compinit -i
-      fi
-
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
     '';
