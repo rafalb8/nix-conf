@@ -9,7 +9,7 @@ let
         TEMP=$(sudo smartctl -a "/dev/disk/by-id/$DISK" 2>/dev/null |\
           grep -iP '^\s*\d+\s+Temperature(_Celsius)?' | awk '{print $NF}')
         echo "Disk: $DISK, Temperature: ''${TEMP:-N/A}°C"
-    done 
+    done
   '';
 in
 {
@@ -33,8 +33,11 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQ1AZR49tTS0jKf5EBXLUXkIQHolj1/+tQweqmwlzXQ u0_a447@localhost"
     ];
 
-    # Enable Tailscale `--advertise-exit-node` feature
-    services.tailscale.useRoutingFeatures = "server";
+    # Enable Tailscale with `--advertise-exit-node` feature
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "server";
+    };
 
     # Run cache output of zpool status
     systemd.services.zpool-status = {

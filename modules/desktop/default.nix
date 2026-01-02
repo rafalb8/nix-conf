@@ -34,6 +34,12 @@ in
     # Add support for running aarch64 binaries on x86_64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+    # Enable tailscale
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "client";
+    };
+
     # Disable NetworkManager-wait-online.service
     systemd.services.NetworkManager-wait-online.enable = false;
 
