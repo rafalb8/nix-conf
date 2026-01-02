@@ -91,6 +91,7 @@
     enable = true;
     enableDefaultConfig = false;
     matchBlocks = {
+      "*" = { setEnv = { "TERM" = "xterm-256color"; }; };
       "dell-7050" = { hostname = "dell-7050"; user = "core"; };
     };
   };
