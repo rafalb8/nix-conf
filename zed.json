@@ -6,6 +6,7 @@
     "nix": true,
     "xml": true,
     "make": true,
+    "toml": true,
     "caddyfile": true,
     // Other
     "material-icon-theme": true,
