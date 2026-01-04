@@ -8,8 +8,8 @@ in
   config = lib.mkIf cfg.gaming.enable {
     environment.systemPackages = with pkgs; [
       # Tools
-      sgdboop
-      gamescope_git
+      stable.sgdboop
+      gamescope
       # protonup-qt
 
       # Wine guis
