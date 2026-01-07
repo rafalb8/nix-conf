@@ -22,14 +22,13 @@
 
     desktop = {
       enable = true;
-
       graphical-boot = true;
+      environment.kde = true;
+
       windows = {
         dualboot = true;
         disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
       };
-
-      environment.gnome = true;
 
       gaming = {
         enable = true;
@@ -73,21 +72,6 @@
         ];
       };
     };
-
-
-    dconf.enable = true;
-    dconf.settings."org/gnome/shell"."favorite-apps" = [
-      "org.gnome.Nautilus.desktop"
-      "firefox.desktop"
-      "com.mitchellh.ghostty.desktop"
-      "dev.zed.Zed.desktop"
-      "obsidian.desktop"
-      "steam.desktop"
-      "discord.desktop"
-      "com.github.wwmm.easyeffects.desktop"
-      "org.jellyfin.JellyfinDesktop.desktop"
-      "com.github.th_ch.youtube_music.desktop"
-    ];
   };
 
   # The state version is required and should stay at the version you

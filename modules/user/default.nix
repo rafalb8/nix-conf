@@ -18,6 +18,7 @@
       ++ lib.optional config.modules.graphics.overcloking "corectrl";
   };
 
+  home-manager.backupFileExtension = "hm-bak";
   home-manager.users.${config.user.name} = {
     imports = [
       ./home.nix

@@ -5,7 +5,7 @@ let
   playscope =
     let
       env = {
-        "SDL_VIDEODRIVER" = "x11";
+        # "SDL_VIDEODRIVER" = "x11";
         "MANGOHUD" = "0";
         # "MANGOHUD_CONFIGFILE" = "~/.config/MangoHud/MangoHud.conf";
       };
@@ -14,7 +14,7 @@ let
         "--immediate-flips"
         "--mangoapp"
         "--force-grab-cursor"
-        "--backend sdl"
+        # "--backend sdl"
         "-b"
         "-W 2305"
         "-H 1408"
