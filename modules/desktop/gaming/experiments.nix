@@ -22,7 +22,7 @@ let
     in
     pkgs.writeShellScriptBin "playscope" ''
       ${lib.custom.toExportShellVars env}
-      gamescope ${builtins.toString args} "$@"
+      gamescope ${toString args} "$@"
     '';
 in
 {
