@@ -14,8 +14,7 @@
       ++ lib.optional config.networking.networkmanager.enable "networkmanager"
       ++ lib.optional config.virtualisation.libvirtd.enable "libvirtd"
       ++ lib.optional config.virtualisation.docker.enable "docker"
-      ++ lib.optional config.programs.gamemode.enable "gamemode"
-      ++ lib.optional config.modules.graphics.overcloking "corectrl";
+      ++ lib.optional config.programs.gamemode.enable "gamemode";
   };
 
   home-manager.backupFileExtension = "hm-bak";

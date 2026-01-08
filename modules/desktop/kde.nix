@@ -6,7 +6,6 @@ in
   config = lib.mkIf cfg.environment.kde {
     # Enable the KDE Plasma.
     services = {
-      xserver.enable = true;
       desktopManager.plasma6.enable = true;
       displayManager.sddm = {
         enable = true;

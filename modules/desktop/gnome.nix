@@ -6,7 +6,6 @@ in
   config = lib.mkIf cfg.environment.gnome {
     # Enable the GNOME Desktop Environment.
     services = {
-      xserver.enable = true;
       desktopManager.gnome.enable = true;
       displayManager = {
         defaultSession = "gnome";
@@ -106,6 +105,7 @@ in
           "org/gnome/mutter"."experimental-features" = [
             "scale-monitor-framebuffer"
             "xwayland-native-scaling"
+            "variable-refresh-rate"
           ];
 
           # TextEditor
