@@ -95,4 +95,14 @@
       "dell-7050" = { hostname = "dell-7050"; user = "core"; };
     };
   };
+
+  programs.ghostty = {
+    enable = true;
+    systemd.enable = true;
+    enableZshIntegration = false;
+    settings = {
+      window-width = 120;
+      window-height = 30;
+    };
+  };
 }
