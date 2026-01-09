@@ -18,8 +18,8 @@ let
 
   MangoHud = {
     # Keybinds
-    toggle_preset = "Shift_R+F12";
-    toggle_fps_limit = "Shift_R+F11";
+    toggle_preset = "Shift_R+F11";
+    toggle_fps_limit = "Shift_R+F10";
 
     # Disable Keybinds (Setting to "" causes bug with flickering hud and logging)
     toggle_hud = "Shift_R+F13";
@@ -30,7 +30,7 @@ let
     preset = "0,1,2,5,4";
 
     # FPS limit
-    fps_limit = "144,90,60,0";
+    fps_limit = "164,0";
   };
 in
 {
@@ -44,7 +44,7 @@ in
       configFile = {
         # Presets
         "MangoHud/presets.conf".text = toConfig {
-          # Custom 
+          # Custom
           "[preset 5]" = {
             table_columns = 3;
             # CPU
