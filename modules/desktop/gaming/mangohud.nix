@@ -5,7 +5,7 @@ let
   configLine = key: value:
     if value == true then "${key}"
     else if value == false then "${key}=0"
-    else "${key}=${builtins.toString value}";
+    else "${key}=${toString value}";
 
   toConfig = with builtins; data: concatStringsSep "\n" (map
     (k:
@@ -30,7 +30,7 @@ let
     preset = "0,1,2,5,4";
 
     # FPS limit
-    fps_limit = "164,0";
+    # fps_limit = "164,144,0";
   };
 in
 {

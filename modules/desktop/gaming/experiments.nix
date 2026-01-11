@@ -5,16 +5,16 @@ let
   playscope =
     let
       env = {
-        # "SDL_VIDEODRIVER" = "x11";
         "MANGOHUD" = "0";
         # "MANGOHUD_CONFIGFILE" = "~/.config/MangoHud/MangoHud.conf";
+        # "SDL_VIDEODRIVER" = "x11";
       };
       args = [
+        # "--backend sdl"
         "--adaptive-sync"
         "--immediate-flips"
         "--mangoapp"
         "--force-grab-cursor"
-        # "--backend sdl"
         "-b"
         "-W 2305"
         "-H 1408"
