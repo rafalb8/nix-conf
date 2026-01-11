@@ -74,6 +74,8 @@
     };
   };
 
+  services.flatpak.enable = true;
+
   # The state version is required and should stay at the version you
   # originally installed.
   system.stateVersion = "24.11";
