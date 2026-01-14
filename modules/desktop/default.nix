@@ -173,6 +173,17 @@ in
         presets = [ "Clean" "Normalize" "Dolby Headphones" ];
       };
 
+      # Terminal
+      programs.ghostty = {
+        enable = true;
+        systemd.enable = true;
+        enableZshIntegration = false;
+        settings = {
+          window-width = 120;
+          window-height = 30;
+        };
+      };
+
       # Zed Config
       home.file.".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/zed.jsonc";
     };
