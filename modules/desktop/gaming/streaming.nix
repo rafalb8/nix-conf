@@ -75,6 +75,7 @@ in
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
         mouse = "disabled";
+        system_tray = "disabled";
         back_button_timeout = 1000;
       };
 
