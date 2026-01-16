@@ -3,23 +3,21 @@ let
   cfg = config.modules.desktop;
 
   hypr-conf = pkgs.writeText "hyprland.conf" ''
-    monitor = HEADLESS-2, 1920x1080@60, auto, 1
-    monitor = WAYLAND-1, disabled
+    monitor = HEADLESS-2, 3840x2160@60, auto, 1
     monitor = , preferred, auto, auto
-    # monitor = , disabled
 
-    # Create Headless monitor and disable the WAYLAND-1
+    # Create Headless monitor and disable real display
     exec-once = hyprctl output create headless HEADLESS-2
     exec-once = hyprctl keyword monitor DP-1, disabled
 
     # Start programs
-    # exec-once = systemctl restart --user sunshine.service
-    exec-once = ${config.systemd.user.services.sunshine.serviceConfig.ExecStart}
+    exec-once = systemctl restart --user sunshine.service
 
     bind = SUPER, W, killactive
     bind = CTRL ALT, Delete, exit
-    bind = SUPER, T, exec, alacritty
-    bind = SUPER, S, exec, sunscreen # Start Gamescope Steam
+    bind = SUPER, T, exec, ghostty
+    bind = SUPER, B, exec, firefox
+    bind = SUPER, S, exec, sunscreen steam
 
     binde = SUPER, Tab, cyclenext
     binde = SUPER, Tab, bringactivetotop
@@ -28,7 +26,7 @@ let
     bindm = SUPER, mouse:273, resizewindow
 
     # Gamescope fix
-    debug:full_cm_proto = true
+    # debug:full_cm_proto = true
 
     ecosystem {
       no_update_news = true
@@ -80,7 +78,6 @@ in
         back_button_timeout = 1000;
       };
 
-      # 
       applications = {
         env = {
           PATH = "$(PATH):/run/current-system/sw/bin";
@@ -125,7 +122,7 @@ in
                 undo = "${sunscreen}/bin/sunscreen reset";
               }
             ];
-            detached = [ "alacritty" ];
+            detached = [ "ghostty" ];
             exclude-global-prep-cmd = "";
             auto-detach = "true";
             wait-all = "true";
@@ -146,15 +143,15 @@ in
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
     services.displayManager.sessionPackages = [
       (
-        (pkgs.writeTextDir "share/wayland-sessions/sunshine.desktop" ''
+        (pkgs.writeTextDir "share/wayland-sessions/hyprsun.desktop" ''
           [Desktop Entry]
           Version=1.0
           Name=Sunshine on Hyprland
-          Exec=${pkgs.hyprland}/bin/Hyprland --config ${hypr-conf}
+          Exec=${pkgs.hyprland}/bin/start-hyprland -- --config ${hypr-conf}
           Type=Application
         '').overrideAttrs
           (_: {
-            passthru.providedSessions = [ "sunshine" ];
+            passthru.providedSessions = [ "hyprsun" ];
           })
       )
     ];
