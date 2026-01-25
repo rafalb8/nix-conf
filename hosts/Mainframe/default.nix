@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     # Include the hardware scan.
@@ -74,7 +74,13 @@
     };
   };
 
+  # Additional packages
   services.flatpak.enable = true;
+  environment.systemPackages = with pkgs; [ oversteer ];
+
+  # Steering wheel support
+  hardware.new-lg4ff.enable = true;
+  services.udev.packages = with pkgs; [ oversteer rpcs3 ];
 
   # The state version is required and should stay at the version you
   # originally installed.
