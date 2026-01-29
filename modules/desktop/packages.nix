@@ -14,7 +14,7 @@ in
     environment.systemPackages = with pkgs; [
       # Media
       jellyfin-desktop
-      kdePackages.kdenlive
+      stable.kdePackages.kdenlive
       jellyfin-mpv-shim
       pear-desktop
       obs-studio
@@ -30,6 +30,7 @@ in
       ghostty
       vscode
       imhex
+      lazygit
 
       # Tools
       onlyoffice-desktopeditors
@@ -40,6 +41,7 @@ in
       szyszka # Bulk rename
 
       # Web
+      element-desktop
       qbittorrent
       discord
     ];
