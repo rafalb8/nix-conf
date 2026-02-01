@@ -30,6 +30,9 @@
     initContent = ''
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
+      # cat the alias/script
+      ccat() { local p=$(type -a "$1" 2>/dev/null | awk '/\// {print $NF; exit}' | tr -d '()'); [ -f "$p" ] && cat "$p"; }
     '';
   };
 
