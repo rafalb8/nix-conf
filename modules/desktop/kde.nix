@@ -10,6 +10,7 @@ in
       displayManager.sddm = {
         enable = true;
         wayland.enable = true;
+        settings.Users.RememberLastSession = "false";
       };
     };
 
