@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
   # Modules
   imports = [
@@ -78,6 +78,7 @@
 
   environment.shellAliases =
     let
+      repl-expr = ''let x = (builtins.getFlake \"$DIR\").nixosConfigurations.${config.networking.hostName}; in { pkgs = x.pkgs; lib = x.lib; config = x.config; }'';
       nix-ext = pkgs.writeShellScriptBin "nix-ext" ''
         if (( EUID == 0 )); then
           echo "\e[1;91mAvoid running nix as root/sudo."
@@ -97,6 +98,7 @@
               git add flake.lock && git commit -m "Bump [$(date --rfc-3339=date)]"
               nixos-rebuild boot --sudo -Lv "$@";;
           code) zeditor $DIR "$@";;
+          repl) \nix repl --expr "${repl-expr}";;
           *) \nix $CMD "$@";;
         esac
       '';
