@@ -15,9 +15,9 @@ let
 
     # If no -- was found, what we thought was 'pre' is actually the game command
     if [[ $# -eq 0 && ''${#pre[@]} -gt 0 ]]; then
-      exec gamescope ${toString args} -- env LD_PRELOAD="" "''${pre[@]}"
+      exec gamescope ${toString args} -- env LD_PRELOAD="$LD_PRELOAD" "''${pre[@]}"
     else
-      exec gamescope ${toString args} "''${pre[@]}" -- env LD_PRELOAD="" "$@"
+      exec gamescope ${toString args} "''${pre[@]}" -- env LD_PRELOAD="$LD_PRELOAD" "$@"
     fi
   '';
 
