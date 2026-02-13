@@ -14,6 +14,7 @@ in
       # protonup-qt
 
       # Wine guis
+      faugus-launcher
       heroic
       # lutris
       # bottles
