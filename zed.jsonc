@@ -6,6 +6,7 @@
     // Language support
     "nix": true,
     "xml": true,
+    "ini": true,
     "make": true,
     "toml": true,
     "caddyfile": true,
