@@ -1,0 +1,49 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 4,
+  // macOS Functional Layout
+  "modules-left": ["hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["tray", "pulseaudio", "network", "battery"],
+
+  "hyprland/window": {
+    "format": "  <b>{}</b>",
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "󰈹 Firefox",
+      "(.*) - Visual Studio Code": "󰨞 Code",
+      "": "Desktop",
+    },
+    "separate-outputs": true,
+  },
+
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+  },
+
+  "tray": {
+    "spacing": 4,
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "default": ["", "", ""],
+    },
+  },
+
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "tooltip-format": "{essid}",
+  },
+
+  "battery": {
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+  },
+}

@@ -9,6 +9,7 @@ in
     ./boot-ext.nix
     ./browsers.nix
     ./gnome.nix
+    ./hyprland.nix
     ./kde.nix
     ./packages.nix
     ./waydroid.nix
@@ -22,7 +23,7 @@ in
     environment = {
       gnome = lib.mkEnableOption "Gnome desktop module";
       kde = lib.mkEnableOption "KDE desktop module";
-      # hyprland = lib.mkEnableOption "Hyprland desktop module";
+      hyprland = lib.mkEnableOption "Hyprland desktop module";
     };
 
     gaming = {

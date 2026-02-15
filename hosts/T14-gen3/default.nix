@@ -18,7 +18,7 @@
       enable = true;
       windows.dualboot = true;
       graphical-boot = true;
-      environment.gnome = true;
+      environment.hyprland = true;
       gaming.enable = false;
     };
   };

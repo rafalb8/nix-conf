@@ -1,0 +1,23 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", Roboto, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+.modules-right {
+    margin-right: 10px;
+}
+
+#pulseaudio,
+#network,
+#battery,
+#tray {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#tray {
+    margin-right: 8px;
+}
