@@ -5,29 +5,44 @@ in
 {
   config = lib.mkIf cfg.environment.hyprland {
     programs.regreet.enable = true;
-
     programs.hyprland = {
       enable = true;
       withUWSM = true;
+      # systemd.setPath.enable = true;
     };
-    services.hypridle.enable = true;
-    programs.hyprlock.enable = true;
+
+    # Additional services/programs
     programs.waybar.enable = true;
+    programs.hyprlock.enable = true;
+    services.hypridle.enable = true;
+    services.elephant.enable = true;
+
+    # Fix apps not starting
+    systemd.user.services.elephant.path = [ "/run/current-system/sw" ];
 
     environment.systemPackages = with pkgs; [
       nwg-dock-hyprland
       nwg-drawer
-      nautilus
-      anyrun
+      walker
+
       playerctl
       brightnessctl
+
+      nautilus
     ];
+
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
 
+    # Set dark mode in Qt applications
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita-dark";
+    };
+
     home-manager.users.${config.user.name} = { config, ... }: {
-      dconf.enable = true;
       wayland.windowManager.hyprland = {
         systemd.enable = false;
       };
@@ -52,33 +67,43 @@ in
       '';
 
       # Dark mode
-      gtk.enable = true;
-      gtk.theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome-themes-extra;
-      };
-
-      gtk.gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
-      gtk.gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-      };
-
-      qt = {
+      # Set dark mode in GTK applications
+      gtk = {
         enable = true;
-        platformTheme.name = "gtk";
-        style.name = "adwaita-dark";
+        theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+        };
+
+        iconTheme = {
+          name = "Adwaita";
+          package = pkgs.adwaita-icon-theme;
+        };
+
+        font = {
+          name = "Sans";
+          size = 11;
+        };
+
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
+
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = 1;
+        };
       };
 
-      dconf.settings."org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+      dconf.enable = true;
+      dconf.settings = {
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
 
       # Cursor
-      gtk.cursorTheme = {
-        name = "Adwaita";
+      home.pointerCursor = {
+        gtk.enable = true;
         package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
         size = 24;
       };
     };
