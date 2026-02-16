@@ -31,6 +31,7 @@ in
       vscode
       imhex
       lazygit
+      opencode
 
       # Tools
       onlyoffice-desktopeditors
@@ -41,7 +42,6 @@ in
       szyszka # Bulk rename
 
       # Web
-      element-desktop
       qbittorrent
       discord
     ];
