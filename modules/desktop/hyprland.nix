@@ -24,6 +24,7 @@ in
     environment.systemPackages = with pkgs; [
       nwg-dock-hyprland
       nwg-drawer
+      hyprnome
       walker
 
       impala
