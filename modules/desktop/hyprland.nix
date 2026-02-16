@@ -18,6 +18,7 @@ in
     services.elephant.enable = true;
 
     # Fix apps not starting
+    systemd.user.services.waybar.path = [ "/run/current-system/sw" ];
     systemd.user.services.elephant.path = [ "/run/current-system/sw" ];
 
     environment.systemPackages = with pkgs; [
@@ -25,6 +26,8 @@ in
       nwg-drawer
       walker
 
+      impala
+      bluetui
       playerctl
       brightnessctl
 

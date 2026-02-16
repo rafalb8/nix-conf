@@ -6,13 +6,11 @@
   // macOS Functional Layout
   "modules-left": ["hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["tray", "pulseaudio", "network", "battery"],
+  "modules-right": ["tray", "pulseaudio", "bluetooth", "network", "battery"],
 
   "hyprland/window": {
     "format": "  <b>{}</b>",
     "rewrite": {
-      "(.*) — Mozilla Firefox": "󰈹 Firefox",
-      "(.*) - Visual Studio Code": "󰨞 Code",
       "": "Desktop",
     },
     "separate-outputs": true,
@@ -25,6 +23,8 @@
 
   "tray": {
     "spacing": 4,
+    "icon-size": 16,
+    "icon-theme": "Adwaita",
   },
 
   "pulseaudio": {
@@ -35,10 +35,20 @@
     },
   },
 
+  "bluetooth": {
+    "format": "{icon}",
+    "format-icons": {
+      "enabled": "󰂱",
+      "connected": "󰂱",
+      "disconnected": "󰂲",
+    },
+    "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e bluetui",
+  },
+
   "network": {
     "format-wifi": "",
-    "format-ethernet": "󰈀",
-    "tooltip-format": "{essid}",
+    "format-ethernet": "󰈀 {ifname}",
+    "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e impala",
   },
 
   "battery": {

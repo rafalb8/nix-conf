@@ -7,17 +7,29 @@
 }
 
 .modules-right {
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 #pulseaudio,
-#network,
-#battery,
-#tray {
-    padding: 0 10px;
+#bluetooth {
+    padding: 0 4px;
     color: #ffffff;
 }
 
-#tray {
-    margin-right: 8px;
+#bluetooth {
+    font-size: 18px;
+    padding: 0 4px;
+}
+
+#network,
+#battery,
+#tray,
+#clock {
+    padding: 0 8px;
+    color: #ffffff;
+}
+
+#window {
+    padding: 0 4px;
+    color: #ffffff;
 }
