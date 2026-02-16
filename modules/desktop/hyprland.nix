@@ -50,6 +50,9 @@ in
       xdg.configFile."hypr/hyprland.conf".source =
         config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/hyprland.conf";
 
+      xdg.configFile."hypr/hypridle.conf".source =
+        config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/hypridle.conf";
+
       xdg.configFile."waybar/config".source =
         config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/waybar/config.jsonc";
 
