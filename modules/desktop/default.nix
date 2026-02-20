@@ -182,6 +182,7 @@ in
         settings = {
           window-width = 120;
           window-height = 30;
+          background-opacity = 0.4;
         };
       };
 
