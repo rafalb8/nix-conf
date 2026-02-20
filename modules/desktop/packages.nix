@@ -42,6 +42,7 @@ in
       szyszka # Bulk rename
 
       # Web
+      signal-desktop
       qbittorrent
       discord
     ];

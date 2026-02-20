@@ -66,10 +66,7 @@
   programs = {
     git.enable = true;
     zsh.enable = true;
-    appimage = {
-      enable = true;
-      binfmt = false;
-    };
+    appimage.enable = true;
   };
 
   virtualisation.docker.enable = true;
