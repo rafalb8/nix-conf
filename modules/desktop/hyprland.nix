@@ -1,6 +1,18 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.modules.desktop;
+  prntscrn = pkgs.writeShellScriptBin "prntscrn" ''
+    set -ex
+    DIR="$HOME/Pictures/Screenshots"
+    mkdir -p "$DIR"
+    ID=$(printf '󰒅  Select Region\n▢  Active Window\n󰍹  Entire Screen' | walker -di)
+    case "''${ID:0-1}" in
+        0) hyprshot -o "$DIR" -m region -- loupe;;
+        1) hyprshot -o "$DIR" -m window -- loupe;;
+        2) hyprshot -o "$DIR" -m output -- loupe;;
+        *) exit 1;;
+    esac
+  '';
 in
 {
   config = lib.mkIf cfg.environment.hyprland {
@@ -24,7 +36,7 @@ in
     environment.systemPackages = with pkgs; [
       nwg-dock-hyprland
       nwg-drawer
-      hyprnome
+      hyprshot
       walker
 
       impala
@@ -32,7 +44,9 @@ in
       playerctl
       brightnessctl
 
+      prntscrn
       nautilus
+      loupe
     ];
 
     environment.sessionVariables = {
