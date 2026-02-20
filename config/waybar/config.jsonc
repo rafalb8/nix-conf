@@ -62,6 +62,7 @@
     "format-icons": {
       "default": ["", "", ""],
     },
+    "on-click": "/run/current-system/sw/bin/audioswitch",
   },
 
   "bluetooth": {

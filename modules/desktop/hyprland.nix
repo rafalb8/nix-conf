@@ -13,6 +13,27 @@ let
         *) exit 1;;
     esac
   '';
+
+  audioswitch = pkgs.writeShellScriptBin "audioswitch" ''
+    devices=$(wpctl status | sed -n '/Sinks:/,/Sources:/p' | grep -E '[0-9]+\.' | grep -v "Easy Effects" | sed 's/[*│]//g' | sed 's/^ *//')
+    list=""
+    while read -r line; do
+        if [[ -z "$line" ]]; then continue; fi
+        if [[ "$line" =~ [Hh]eadphone ]] || [[ "$line" =~ [Hh]eadset ]]; then icon="󰋋 "
+        elif [[ "$line" =~ [Hh][Dd][Mm][Ii] ]] || [[ "$line" =~ [Dd]isplay ]]; then icon="󰍹 "
+        else icon="󰓃 "
+        fi
+        list+="''${icon}''${line}\n"
+    done <<< "$devices"
+
+    choice=$(echo -e "$list" | walker -d)
+    if [ -n "$choice" ]; then
+        id=$(echo "$choice" | sed 's/^[^0-9]*//' | cut -d'.' -f1)
+        wpctl set-default "$id"
+        name=$(echo "$choice" | sed 's/^.*[0-9]\+\. //')
+        notify-send "Audio Output" "Switched to: $name" -a "System"
+    fi
+  '';
 in
 {
   config = lib.mkIf cfg.environment.hyprland {
@@ -37,6 +58,7 @@ in
       swaynotificationcenter
       nwg-dock-hyprland
       nwg-drawer
+      libnotify
       hyprpaper
       hyprshot
       walker
@@ -46,6 +68,7 @@ in
       playerctl
       brightnessctl
 
+      audioswitch
       prntscrn
       nautilus
       loupe
