@@ -34,6 +34,7 @@ in
     systemd.user.services.elephant.path = [ "/run/current-system/sw" ];
 
     environment.systemPackages = with pkgs; [
+      swaynotificationcenter
       nwg-dock-hyprland
       nwg-drawer
       hyprshot
