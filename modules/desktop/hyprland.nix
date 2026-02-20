@@ -37,6 +37,7 @@ in
       swaynotificationcenter
       nwg-dock-hyprland
       nwg-drawer
+      hyprpaper
       hyprshot
       walker
 
