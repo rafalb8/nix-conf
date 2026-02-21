@@ -12,7 +12,7 @@ in
           "position": "top",
           "height": 32,
           "spacing": 4,
-          "modules-left": ["hyprland/window"],
+          "modules-left": ["hyprland/workspaces", "hyprland/window"],
           "modules-center": ["clock"],
           "modules-right": [
             "tray",
@@ -23,11 +23,13 @@ in
             "battery",
           ],
 
+          "hyprland/workspaces": {
+            "format": "{id}",
+            "active-only": true,
+          },
+
           "hyprland/window": {
-            "format": "  <b>{}</b>",
-            "rewrite": {
-              "": "Desktop",
-            },
+            "format": "<b>{}</b>",
             "separate-outputs": true,
           },
 
@@ -111,6 +113,14 @@ in
             margin-right: 8px;
         }
 
+        #workspaces {
+            background-color: #383c4a;
+            margin: 0;
+            padding: 0;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         #custom-notification,
         #pulseaudio,
         #battery {
@@ -133,7 +143,7 @@ in
         }
 
         #window {
-            padding: 0 8px;
+            padding: 0 4px;
             color: #ffffff;
         }
 
