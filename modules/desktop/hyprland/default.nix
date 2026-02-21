@@ -14,13 +14,12 @@ in
   config = lib.mkIf cfg.environment.hyprland {
     programs.regreet.enable = true;
     programs.hyprlock.enable = true;
-    services.elephant.enable = true;
-    systemd.user.services.elephant.path = [ "/run/current-system/sw" ];
 
     environment.systemPackages = with pkgs; [
       swaynotificationcenter
       libnotify
       hyprpaper
+      elephant
       hyprshot
       walker
 

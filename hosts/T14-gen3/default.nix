@@ -48,9 +48,19 @@
       };
     };
 
-    xdg.configFile."hypr/monitors.conf".text = ''
-      monitor = eDP-1, preferred, auto, 1
-    '';
+    # Hyprland config
+    xdg.configFile = {
+      "hypr/custom.conf".text = ''
+        monitor = eDP-1, preferred, auto, 1
+      '';
+      "hypr/hyprpaper.conf".text = ''
+        wallpaper {
+            monitor =
+            path = ~/Pictures/Wallpapers/1.jpg
+            fit_mode = cover
+        }
+      '';
+    };
   };
 
   # More info:

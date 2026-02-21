@@ -1,11 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.desktop;
 in
 {
   config = lib.mkIf cfg.environment.hyprland {
-    programs.waybar.enable = true;
-    systemd.user.services.waybar.path = [ "/run/current-system/sw" ];
+    environment.systemPackages = with pkgs; [ waybar ];
     home-manager.users.${config.user.name} = {
       xdg.configFile."waybar/config".text = ''
         {
