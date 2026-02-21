@@ -10,7 +10,6 @@ in
       # Tools
       stable.sgdboop
       gamescope
-      ludusavi
       # protonup-qt
 
       # Wine guis
