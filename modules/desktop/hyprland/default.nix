@@ -45,10 +45,6 @@ in
     };
 
     home-manager.users.${config.user.name} = {
-      wayland.windowManager.hyprland = {
-        systemd.enable = false;
-      };
-
       # Dark mode
       # Set dark mode in GTK applications
       gtk = {

@@ -37,6 +37,8 @@ in
         firefox
         com.mitchellh.ghostty
         dev.zed.Zed
+        discord
+        org.jellyfin.JellyfinDesktop
       '';
     };
   };

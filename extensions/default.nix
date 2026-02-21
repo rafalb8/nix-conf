@@ -28,11 +28,6 @@
       imports = [
         ./home-manager/easyeffects
       ];
-
-      options.colorScheme = lib.mkOption {
-        type = lib.types.attrs;
-        default = { };
-      };
     };
   };
 }

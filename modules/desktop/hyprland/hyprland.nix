@@ -9,9 +9,11 @@ in
       withUWSM = true;
     };
 
-    home-manager.users.${config.user.name} = { config, ... }: {
-      xdg.configFile."hypr/hyprland.conf".source =
-        config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/hyprland.conf";
+    home-manager.users.${config.user.name} = {
+      xdg.configFile."hypr" = {
+        source = ../../../config/hypr;
+        recursive = true;
+      };
     };
   };
 }
