@@ -48,15 +48,9 @@
       };
     };
 
-    dconf.enable = true;
-    dconf.settings."org/gnome/shell"."favorite-apps" = [
-      "org.gnome.Nautilus.desktop"
-      "firefox.desktop"
-      "com.mitchellh.ghostty.desktop"
-      "dev.zed.Zed.desktop"
-      "discord.desktop"
-      "org.jellyfin.JellyfinDesktop.desktop"
-    ];
+    xdg.configFile."hypr/monitors.conf".text = ''
+      monitor = eDP-1, preferred, auto, 1
+    '';
   };
 
   # More info:
