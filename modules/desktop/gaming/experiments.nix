@@ -2,7 +2,23 @@
 let
   cfg = config.modules.desktop;
 
-  mkPlayscope = name: env: args: pkgs.writeShellScriptBin name ''
+  env = {
+    "MANGOHUD" = "0";
+    "SDL_VIDEODRIVER" = "x11";
+  };
+
+  args = [
+    "--adaptive-sync"
+    "--immediate-flips"
+    "--mangoapp"
+    "--force-grab-cursor"
+    "-b"
+    "-W 2503"
+    "-H 1408"
+    "--backend sdl"
+  ];
+
+  playscope = pkgs.writeShellScriptBin "playscope" ''
     ${lib.custom.toExportShellVars env}
 
     # Separate args: everything before -- is pre, everything after is post
@@ -20,31 +36,9 @@ let
       exec gamescope ${toString args} "''${pre[@]}" -- env LD_PRELOAD="$LD_PRELOAD" "$@"
     fi
   '';
-
-  env = { "MANGOHUD" = "0"; };
-  args = [
-    "--adaptive-sync"
-    "--immediate-flips"
-    "--mangoapp"
-    "--force-grab-cursor"
-    "-b"
-    "-W 2503"
-    "-H 1408"
-  ];
-
-  playscope = mkPlayscope "playscope" env args;
-  playscope-sdl = mkPlayscope "playscope-sdl" (env // { "SDL_VIDEODRIVER" = "x11"; }) (args ++ [ "--backend sdl" ]);
 in
 {
   config = lib.mkIf cfg.gaming.enable {
-    environment.systemPackages = [ playscope playscope-sdl ];
-
-    programs = {
-      # VR
-      # alvr = {
-      #   enable = true;
-      #   openFirewall = true;
-      # };
-    };
+    environment.systemPackages = [ playscope ];
   };
 }
