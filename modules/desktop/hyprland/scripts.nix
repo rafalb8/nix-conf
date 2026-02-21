@@ -34,9 +34,19 @@ let
         notify-send "Audio Output" "Switched to: $name" -a "System"
     fi
   '';
+
+  powermenu = pkgs.writeShellScriptBin "powermenu" ''
+    ID=$(echo -e "󰍃  Log Out\n󰜉  Reboot\n󰐥  Shutdown\n󰖳  Switch to Windows" | walker -di)
+    case $ID in
+        0) uwsm stop ;;
+        1) systemctl reboot ;;
+        2) systemctl poweroff ;;
+        3) win-reboot ;;
+    esac
+  '';
 in
 {
   config = lib.mkIf cfg.environment.hyprland {
-    environment.systemPackages = [ prntscrn audioswitch ];
+    environment.systemPackages = [ prntscrn audioswitch powermenu ];
   };
 }
