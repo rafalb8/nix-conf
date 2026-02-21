@@ -13,6 +13,9 @@ in
 
   config = lib.mkIf cfg.environment.hyprland {
     programs.regreet.enable = true;
+    programs.regreet.settings = {
+      GTK.application_prefer_dark_theme = true;
+    };
     programs.hyprlock.enable = true;
 
     environment.systemPackages = with pkgs; [
