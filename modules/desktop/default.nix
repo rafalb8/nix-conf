@@ -5,11 +5,11 @@ in
 {
   imports = [
     ./gaming
+    ./hyprland
 
     ./boot-ext.nix
     ./browsers.nix
     ./gnome.nix
-    ./hyprland.nix
     ./kde.nix
     ./packages.nix
     ./waydroid.nix
