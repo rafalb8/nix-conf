@@ -187,7 +187,8 @@ in
       };
 
       # Zed Config
-      home.file.".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/zed.jsonc";
+      home.file.".config/zed/settings.json".source =
+        config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed.jsonc";
     };
 
     # Enable KVM
