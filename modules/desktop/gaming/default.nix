@@ -30,7 +30,6 @@ in
     programs = {
       steam = {
         enable = true;
-        package = pkgs.steam.override { extraEnv = { MANGOHUD = true; }; };
         remotePlay.openFirewall = true;
         protontricks.enable = true;
         extraCompatPackages = with pkgs; [
@@ -46,7 +45,7 @@ in
     # Autostart
     autostart = {
       enable = true;
-      packages = [ pkgs.steam ];
+      packages = [ (pkgs.steam // { env = { MANGOHUD = "1"; }; }) ];
     };
 
     # Enable NTSync (kernel 6.14+)

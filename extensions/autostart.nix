@@ -12,8 +12,9 @@ in
       default = [ ];
       description = ''
         List of packages to be autostarted.
-        To override Exec command:
+        To override Exec Command or Environment variables:
         (pkgs.pkg // {
+          env = { ENV = "true";};
           exec = "''${pkgs.pkg}/bin/pkg";
         })
       '';
@@ -45,6 +46,7 @@ in
               RestartSec = "5s";
             };
             path = [ "/run/current-system/sw" ];
+            environment = pkg.env or { };
           };
         }
       )

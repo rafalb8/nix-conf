@@ -25,9 +25,6 @@ let
     bindm = SUPER, mouse:272, movewindow
     bindm = SUPER, mouse:273, resizewindow
 
-    # Gamescope fix
-    # debug:full_cm_proto = true
-
     ecosystem {
       no_update_news = true
       no_donation_nag = true
