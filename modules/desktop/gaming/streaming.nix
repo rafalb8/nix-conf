@@ -2,7 +2,7 @@
 let
   cfg = config.modules.desktop;
 
-  hypr-conf = pkgs.writeText "hyprland.conf" ''
+  hypr-conf = let cfg = ../../../config/hypr; in pkgs.writeText "hyprland.conf" ''
     monitor = HEADLESS-2, 3840x2160@60, auto, 1
     monitor = , preferred, auto, auto
 
@@ -13,22 +13,14 @@ let
     # Start programs
     exec-once = systemctl restart --user sunshine.service
 
-    bind = SUPER, W, killactive
+    # Hyprsun binds
     bind = CTRL ALT, Delete, exit
     bind = SUPER, T, exec, ghostty
     bind = SUPER, B, exec, firefox
-    bind = SUPER, S, exec, sunscreen steam
+    bind = SUPER, P, exec, sunscreen steam
 
-    binde = SUPER, Tab, cyclenext
-    binde = SUPER, Tab, bringactivetotop
-
-    bindm = SUPER, mouse:272, movewindow
-    bindm = SUPER, mouse:273, resizewindow
-
-    ecosystem {
-      no_update_news = true
-      no_donation_nag = true
-    }
+    ${builtins.readFile "${cfg}/binds.conf"}
+    ${builtins.readFile "${cfg}/behavior.conf"}
   '';
 
   sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
@@ -71,63 +63,42 @@ in
     services.sunshine = {
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
-        mouse = "disabled";
+        # mouse = "disabled";
         system_tray = "disabled";
         back_button_timeout = 1000;
       };
 
-      applications = {
-        env = {
-          PATH = "$(PATH):/run/current-system/sw/bin";
-        };
-        apps = [
-          {
+      applications.env = { PATH = "$(PATH):/run/current-system/sw/bin"; };
+      applications.apps =
+        let
+          default = {
+            exclude-global-prep-cmd = "";
+            prep-cmd = [{
+              do = ''${sunscreen}/bin/sunscreen mode'';
+              undo = "${sunscreen}/bin/sunscreen reset";
+            }];
+            auto-detach = "true";
+            exit-timeout = "5";
+            wait-all = "true";
+          };
+        in
+        [
+          (default // {
             name = "Steam";
             image-path = "steam.png";
-            prep-cmd = [
-              {
-                do = ''${sunscreen}/bin/sunscreen mode'';
-                undo = "${sunscreen}/bin/sunscreen reset";
-              }
-            ];
             detached = [ "${sunscreen}/bin/sunscreen steam" ];
-            exclude-global-prep-cmd = "";
-            auto-detach = "true";
-            wait-all = "true";
-            exit-timeout = "5";
-          }
-          {
-            name = "RPCS3";
-            image-path = "${pkgs.rpcs3}/share/icons/hicolor/48x48/apps/rpcs3.png";
-            prep-cmd = [
-              {
-                do = ''${sunscreen}/bin/sunscreen mode'';
-                undo = "${sunscreen}/bin/sunscreen reset";
-              }
-            ];
-            detached = [ "${sunscreen}/bin/sunscreen rpcs3" ];
-            exclude-global-prep-cmd = "";
-            auto-detach = "true";
-            wait-all = "true";
-            exit-timeout = "5";
-          }
-          {
+          })
+          (default // {
             name = "Desktop";
             image-path = "desktop.png";
-            prep-cmd = [
-              {
-                do = ''${sunscreen}/bin/sunscreen mode'';
-                undo = "${sunscreen}/bin/sunscreen reset";
-              }
-            ];
             detached = [ "ghostty" ];
-            exclude-global-prep-cmd = "";
-            auto-detach = "true";
-            wait-all = "true";
-            exit-timeout = "5";
-          }
+          })
+          # (default // {
+          #   name = "RPCS3";
+          #   image-path = "${pkgs.rpcs3}/share/icons/hicolor/48x48/apps/rpcs3.png";
+          #   detached = [ "${sunscreen}/bin/sunscreen rpcs3" ];
+          # })
         ];
-      };
     };
 
     # Fix for DS4/DS5 gamepads
@@ -139,19 +110,24 @@ in
 
     # Add custom hyprland session
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
-    services.displayManager.sessionPackages = [
-      (
-        (pkgs.writeTextDir "share/wayland-sessions/hyprsun.desktop" ''
-          [Desktop Entry]
-          Version=1.0
-          Name=Sunshine on Hyprland
-          Exec=${pkgs.hyprland}/bin/start-hyprland -- --config ${hypr-conf}
-          Type=Application
-        '').overrideAttrs
-          (_: {
-            passthru.providedSessions = [ "hyprsun" ];
-          })
-      )
-    ];
+    services.displayManager.sessionPackages =
+      let
+        launcher = pkgs.writeShellScript "launcher" ''
+          export SUNSHINE=true
+          systemctl --user import-environment SUNSHINE
+          exec ${pkgs.hyprland}/bin/start-hyprland -- --config ${hypr-conf}
+        '';
+      in
+      [
+        (
+          (pkgs.writeTextDir "share/wayland-sessions/hyprsun.desktop" ''
+            [Desktop Entry]
+            Version=1.0
+            Name=Sunshine on Hyprland
+            Exec=${launcher}
+            Type=Application
+          '').overrideAttrs (_: { passthru.providedSessions = [ "hyprsun" ]; })
+        )
+      ];
   };
 }

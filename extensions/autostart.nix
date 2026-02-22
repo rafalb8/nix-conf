@@ -35,7 +35,7 @@ in
             wants = [ "graphical-session.target" ];
             after = [ "graphical-session.target" ];
 
-            # unitConfig = { ConditionEnvironment = [ "!XDG_CURRENT_DESKTOP=Hyprland" ]; };
+            unitConfig = { ConditionEnvironment = [ "!SUNSHINE" ]; };
 
             startLimitIntervalSec = 500;
             startLimitBurst = 5;
