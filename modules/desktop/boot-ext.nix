@@ -1,6 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.modules.desktop;
+  win-reboot = lib.custom.wrapScriptBin "win-reboot"
+    "efibootmgr -n $(efibootmgr | grep Windows | awk '{print $1}' | sed 's/Boot//; s/\*//') && reboot";
 in
 {
   options.modules.desktop = {
@@ -17,9 +19,12 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.windows.dualboot {
-      # Alias for rebooting to Windows
-      environment.shellAliases.win-reboot =
-        "sudo efibootmgr -n $(efibootmgr | grep Windows | awk '{print $1}' | sed 's/Boot//; s/\*//') && reboot";
+      security.wrappers.win-reboot = {
+        setuid = true;
+        owner = "root";
+        group = "root";
+        source = "${win-reboot}/bin/win-reboot";
+      };
 
       boot.loader.limine.extraEntries = ''
         /Windows
