@@ -39,6 +39,14 @@ in
       NIXOS_OZONE_WL = "1";
     };
 
+    # Allow sharing wifi connection
+    security.wrappers.impala = {
+      setuid = true;
+      owner = "root";
+      group = "root";
+      source = "${pkgs.impala}/bin/impala";
+    };
+
     # Set dark mode in Qt applications
     qt = {
       enable = true;
