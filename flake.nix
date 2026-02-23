@@ -38,7 +38,7 @@
       };
 
       lib = pkgs.lib // {
-        custom = import ./lib { inherit (pkgs) lib; };
+        custom = import ./lib { inherit pkgs; };
       };
     in
     {
