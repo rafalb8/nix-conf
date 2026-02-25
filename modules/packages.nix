@@ -48,8 +48,9 @@
 
     # Development
     jq
-    gcc
+    clang
     gnumake
+    clang-tools
 
     # Golang
     go
