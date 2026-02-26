@@ -75,13 +75,7 @@ in
 
     # Setup desktop services
     services = {
-      xserver = {
-        # Configure keymap in X11
-        xkb = {
-          layout = "pl";
-          variant = "";
-        };
-      };
+      xserver.xkb.layout = "pl";
 
       printing = {
         enable = true;
@@ -145,7 +139,7 @@ in
 
         nerd-fonts.jetbrains-mono
       ];
-      fontDir.enable = true;
+
       fontconfig.enable = true;
     };
 
