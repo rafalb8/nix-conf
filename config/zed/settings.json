@@ -42,5 +42,11 @@
       "language_servers": ["nixd"],
       "formatter": { "external": { "command": "nixpkgs-fmt" } },
     },
+    "C": { "tab_size": 2, "format_on_save": "on" },
+    "C++": { "tab_size": 2, "format_on_save": "on" },
+  },
+
+  "lsp": {
+    "clangd": { "binary": { "arguments": ["--fallback-style=Google"] } },
   },
 }
