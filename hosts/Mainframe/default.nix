@@ -10,6 +10,9 @@
     description = "Rafal Babinski";
   };
 
+  # Enable secure boot
+  boot.loader.limine.secureBoot.enable = true;
+
   # Hostname
   networking.hostName = "Mainframe";
 
@@ -38,14 +41,7 @@
       waydroid = false;
     };
   };
-
-  # Enable secure boot
-  boot.loader.limine.secureBoot.enable = true;
-
-  hardware.logitech.wireless = {
-    enable = true;
-    # enableGraphical = true;
-  };
+  hardware.logitech.wireless.enable = true;
 
   # Home module settings
   home-manager.users.${config.user.name} = {
@@ -61,16 +57,9 @@
       proxyCommand = "nc -X 5 -x 192.168.8.12:1080 %h %p";
     };
 
-    services.easyeffects = {
-      autoload = {
-        "Normalize" = [
-          # Monitor outputs
-          "alsa_output.pci-0000_03_00.1.hdmi-stereo:HDMI _ DisplayPort"
-        ];
-        "Dolby Headphones" = [
-          "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:Analog Output"
-        ];
-      };
+    services.easyeffects.autoload = {
+      "Normalize" = [ "alsa_output.pci-0000_03_00.1.hdmi-stereo:HDMI _ DisplayPort" ];
+      "Dolby Headphones" = [ "alsa_output.usb-SteelSeries_Arctis_Nova_7-00.analog-stereo:Analog Output" ];
     };
   };
 
