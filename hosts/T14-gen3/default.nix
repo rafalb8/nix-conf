@@ -65,7 +65,7 @@
     "psmouse.synaptics_intertouch=0"
     "amd_pstate=active"
     # MediaTek wifi fix
-    "mt7921_common.disable_clc=1"
+    # "mt7921_common.disable_clc=1"
   ];
 
   # Fingerprint (Synaptics [06cb:00f9])
