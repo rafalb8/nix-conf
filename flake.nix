@@ -5,11 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,26 +15,13 @@
     { self
     , nixpkgs
     , nixpkgs-stable
-    , nur
     , home-manager
     , ...
     }@inputs:
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs
-        {
-          inherit system;
-          config.allowUnfree = true;
-        } // {
-        stable = import nixpkgs-stable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
-
-      lib = pkgs.lib // {
-        custom = import ./lib { inherit pkgs; };
-      };
+      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+      lib = pkgs.lib // { custom = import ./lib { inherit pkgs; }; };
     in
     {
       # Custom Packages
@@ -59,10 +41,10 @@
         custom = self.packages.${final.system};
 
         # Stable channel overlay
-        stable = pkgs.stable;
+        stable = import nixpkgs-stable { inherit (final) system; config.allowUnfree = true; };
 
         # Replace broken packages
-      } // lib.genAttrs [ ] (name: pkgs.stable.${name});
+      } // prev.lib.genAttrs [ "sunshine" ] (name: final.stable.${name});
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs
@@ -78,7 +60,7 @@
 
             home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ self.overlays.default nur.overlays.default ];
+              nixpkgs.overlays = [ self.overlays.default ];
 
               nix.registry.nixpkgs.flake = nixpkgs;
               home-manager.useGlobalPkgs = true;

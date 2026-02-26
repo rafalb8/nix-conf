@@ -19,7 +19,6 @@ in
       pear-desktop
       obs-studio
       audacity
-      calibre
       gimp
       mpv
 
