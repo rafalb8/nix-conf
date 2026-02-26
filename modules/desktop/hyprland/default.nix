@@ -6,37 +6,42 @@ in
   imports = [
     ./dock.nix
     ./hypridle.nix
-    ./hyprland.nix
     ./scripts.nix
     ./waybar.nix
   ];
 
   config = lib.mkIf cfg.environment.hyprland {
-    programs.regreet.enable = true;
-    programs.regreet.settings = {
-      GTK.application_prefer_dark_theme = true;
+    # Display Manager
+    programs.regreet = {
+      enable = true;
+      settings.GTK.application_prefer_dark_theme = true;
     };
-    programs.hyprlock.enable = true;
 
+    # Compositor
+    programs.hyprland = { enable = true; withUWSM = true; };
+
+    # Components
+    programs.hyprlock.enable = true;
     environment.systemPackages = with pkgs; [
       swaynotificationcenter
       libnotify
       hyprpaper
       elephant
-      hyprshot
       walker
 
+      # TUI/CLI tools
       impala
       bluetui
       playerctl
       brightnessctl
 
-      nautilus
+      # Basic apps
       loupe
+      nautilus
     ];
 
     environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1";
+      NIXOS_OZONE_WL = "1"; # Run apps without Xwayland
     };
 
     # Allow sharing wifi connection
@@ -50,11 +55,16 @@ in
     # Set dark mode in Qt applications
     qt = {
       enable = true;
-      platformTheme = "gnome";
       style = "adwaita-dark";
+      platformTheme = "gnome";
     };
 
     home-manager.users.${config.user.name} = {
+      xdg.configFile."hypr" = {
+        source = ../../../config/hypr;
+        recursive = true;
+      };
+
       # Dark mode
       # Set dark mode in GTK applications
       gtk = {
