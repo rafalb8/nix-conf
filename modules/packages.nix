@@ -48,6 +48,7 @@
 
     # Development
     jq
+    gcc
     clang
     gnumake
     clang-tools
