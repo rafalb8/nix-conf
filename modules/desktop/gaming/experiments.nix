@@ -21,7 +21,6 @@ let
   playscope = pkgs.writeShellScriptBin "playscope" ''
     ${lib.custom.toExportShellVars env}
 
-    # Separate args: everything before -- is pre, everything after is post
     pre=()
     while [[ $# -gt 0 ]]; do
       [[ "$1" == "--" ]] && { shift; break; }
@@ -29,11 +28,10 @@ let
       shift
     done
 
-    # If no -- was found, what we thought was 'pre' is actually the game command
     if [[ $# -eq 0 && ''${#pre[@]} -gt 0 ]]; then
-      exec gamescope ${toString args} -- env LD_PRELOAD="$LD_PRELOAD" "''${pre[@]}"
+      exec gamescope ${toString args} -- "''${pre[@]}"
     else
-      exec gamescope ${toString args} "''${pre[@]}" -- env LD_PRELOAD="$LD_PRELOAD" "$@"
+      exec gamescope ${toString args} "''${pre[@]}" -- "$@"
     fi
   '';
 in
