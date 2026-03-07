@@ -91,7 +91,7 @@ in
               "interface": "wlan*",
               "format-wifi": "",
               "format-disconnected": "",
-              "tooltip-format": "{ifname} via {gwaddr} ",
+              "tooltip-format": "{essid}: {ipaddr}",
               "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e impala"
           },
 
@@ -99,7 +99,7 @@ in
               "interface": "enp*",
               "format-ethernet": "󰈀",
               "format-disconnected": "",
-              "tooltip-format": "{ifname} via {gwaddr} ",
+              "tooltip-format": "{ifname}: {ipaddr}",
           },
 
           "battery": {

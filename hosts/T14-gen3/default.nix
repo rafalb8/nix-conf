@@ -19,10 +19,13 @@
       gaming.enable = false;
       graphical-boot = true;
       windows.dualboot = true;
-      environment.hyprland.enable = true;
-      environment.hyprland.custom = ''
-        monitor = eDP-1, preferred, auto, 1
-      '';
+      environment.hyprland = {
+        enable = true;
+        wallpaper = "~/Pictures/Wallpapers/1.jpg";
+        custom = ''
+          monitor = eDP-1, preferred, auto, 1
+        '';
+      };
     };
   };
 
