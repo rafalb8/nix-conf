@@ -30,9 +30,9 @@
         disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
       };
 
-      # environment.kde.enable = true;
+      environment.kde.enable = true;
       environment.hyprland = {
-        enable = true;
+        enable = false;
         wallpaper = "~/Pictures/Wallpapers/Mountain Light.jpg";
         custom = ''
           monitorv2 {
