@@ -30,8 +30,9 @@
         disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
       };
 
-      environment.kde.enable = true;
+      # environment.kde.enable = true;
       environment.hyprland = {
+        enable = true;
         wallpaper = "~/Pictures/Wallpapers/Mountain Light.jpg";
         custom = ''
           monitorv2 {
@@ -39,17 +40,17 @@
             mode = 3440x1440@164.90
             scale = 1
             bitdepth = 10
-            cm = hdr
-            # sdr_max_luminance = 0
-            sdr_max_luminance = 400
-            # min_luminance = 0
-            max_luminance = 400
+            cm = srgb
             vrr = true
-            sdrbrightness = 0.8
-            sdrsaturation = 1
+            # SDR to HDR
+            sdr_min_luminance = 0.005
+            sdr_max_luminance = 200
+            sdrbrightness = 1.0
+            sdrsaturation = 1.0
+            # HDR
+            max_luminance = 400
           }
-
-          render:cm_fs_passthrough = true
+          render:cm_fs_passthrough = 2
         '';
       };
     };
