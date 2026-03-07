@@ -19,7 +19,8 @@ in
             "custom/notification",
             "pulseaudio",
             "bluetooth",
-            "network",
+            "network#wifi",
+            "network#ethernet",
             "battery",
           ],
 
@@ -66,8 +67,8 @@ in
           },
 
           "pulseaudio": {
-            "format": "{icon} {volume}% {format_source}",
-            "format-muted": "󰝟 {format_source}",
+            "format": "{icon} {volume}%",
+            "format-muted": "󰝟",
             "format-source": "",
             "format-source-muted": "",
             "format-icons": {
@@ -86,10 +87,19 @@ in
             "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e bluetui",
           },
 
-          "network": {
-            "format-wifi": "",
-            "format-ethernet": "󰈀 {ifname}",
-            "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e impala",
+          "network#wifi": {
+              "interface": "wlan*",
+              "format-wifi": "",
+              "format-disconnected": "",
+              "tooltip-format": "{ifname} via {gwaddr} ",
+              "on-click": "ghostty --class=waybar.popup --confirm-close-surface=false -e impala"
+          },
+
+          "network#ethernet": {
+              "interface": "enp*",
+              "format-ethernet": "󰈀",
+              "format-disconnected": "",
+              "tooltip-format": "{ifname} via {gwaddr} ",
           },
 
           "battery": {
@@ -101,54 +111,79 @@ in
       '';
 
       xdg.configFile."waybar/style.css".text = ''
-        * {
-            border: none;
-            border-radius: 0;
-            font-family: "JetBrainsMono Nerd Font", Roboto, Arial, sans-serif;
-            font-size: 14px;
-            min-height: 0;
+        window#waybar {
+            background-color: #000000;
+            transition-duration: 0.5s;
+            transition-property: background-color;
         }
 
-        .modules-right {
-            margin-right: 8px;
+        /* Base styles for all modules */
+        * {
+            min-height: 0;
+            border: none;
+            border-radius: 0;
+            color: #ffffff;
+            font-size: 14px;
+            font-family: "JetBrainsMono Nerd Font", Roboto, Arial, sans-serif;
         }
 
         #workspaces {
-            background-color: #383c4a;
-            margin: 0;
+            margin: 4px 4px;
+            padding: 0 6px;
+            border-radius: 8px;
+
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+            box-shadow:
+                inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+                0 2px 4px rgba(0, 0, 0, 0.5);
+
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #workspaces button {
+            background: transparent;
             padding: 0;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        #custom-notification,
-        #pulseaudio,
-        #battery {
-            font-size: 16px;
-            padding: 0 4px;
+        #workspaces button.active label {
             color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+            font-weight: 900;
         }
 
+        /* Font Size */
+        #tray,
         #bluetooth {
             font-size: 18px;
-            padding: 0 4px;
-            color: #ffffff;
         }
 
-        #network,
-        #tray,
-        #clock {
-            padding: 0 8px;
-            color: #ffffff;
-        }
-
-        #window {
-            padding: 0 4px;
-            color: #ffffff;
-        }
-
+        #battery,
+        #pulseaudio,
+        #network.wifi,
+        #network.ethernet,
         #custom-notification {
-            margin-right: 2px;
+            font-size: 16px;
+        }
+
+        /* Margins */
+        #pulseaudio,
+        #custom-notification {
+            margin: 2px;
+        }
+
+        #network.wifi,
+        #network.ethernet {
+            margin-right: 8px;
         }
       '';
     };
