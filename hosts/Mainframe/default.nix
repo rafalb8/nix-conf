@@ -18,30 +18,42 @@
 
   # Enable modules
   modules = {
-    graphics = {
-      amd = true;
-      overclocking = true;
-    };
+    graphics = { amd = true; overclocking = true; };
 
     desktop = {
       enable = true;
+      waydroid = false;
       graphical-boot = true;
-      environment.kde = true;
-
+      gaming = { enable = true; streaming = true; };
       windows = {
         dualboot = true;
         disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
       };
 
-      gaming = {
-        enable = true;
-        streaming = true;
-      };
+      environment.kde.enable = true;
+      environment.hyprland = {
+        wallpaper = "~/Pictures/Wallpapers/Mountain Light.jpg";
+        custom = ''
+          monitorv2 {
+            output = DP-1
+            mode = 3440x1440@164.90
+            scale = 1
+            bitdepth = 10
+            cm = hdr
+            # sdr_max_luminance = 0
+            sdr_max_luminance = 400
+            # min_luminance = 0
+            max_luminance = 400
+            vrr = true
+            sdrbrightness = 0.8
+            sdrsaturation = 1
+          }
 
-      waydroid = false;
+          render:cm_fs_passthrough = true
+        '';
+      };
     };
   };
-  hardware.logitech.wireless.enable = true;
 
   # Home module settings
   home-manager.users.${config.user.name} = {
@@ -65,12 +77,13 @@
 
   # Additional packages
   services.flatpak.enable = true;
-  environment.systemPackages = with pkgs; [ oversteer ];
+  environment.systemPackages = with pkgs; [ oversteer lmstudio ];
 
   # Steering wheel support
   hardware.new-lg4ff.enable = true;
   services.udev.packages = with pkgs; [ oversteer rpcs3 ];
 
+  hardware.logitech.wireless.enable = true;
   # The state version is required and should stay at the version you
   # originally installed.
   system.stateVersion = "24.11";

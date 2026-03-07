@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.desktop.environment.hyprland;
 in
 {
-  config = lib.mkIf cfg.environment.hyprland {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ waybar ];
     home-manager.users.${config.user.name} = {
       xdg.configFile."waybar/config".text = ''

@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.desktop.environment.hyprland;
 in
 {
   imports = [
@@ -10,7 +10,21 @@ in
     ./waybar.nix
   ];
 
-  config = lib.mkIf cfg.environment.hyprland {
+  options.modules.desktop.environment.hyprland = {
+    enable = lib.mkEnableOption "Hyprland desktop module";
+
+    custom = lib.mkOption {
+      type = lib.types.str;
+      description = "custom hyprland settings";
+    };
+
+    wallpaper = lib.mkOption {
+      type = lib.types.str;
+      description = "set hyprpaper wallpaper";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
     # Display Manager
     programs.regreet = {
       enable = true;
@@ -61,10 +75,18 @@ in
     };
 
     home-manager.users.${config.user.name} = {
+      xdg.configFile."hypr/custom.conf".text = cfg.custom;
       xdg.configFile."hypr" = {
         source = ../../../config/hypr;
         recursive = true;
       };
+      xdg.configFile."hypr/hyprpaper.conf".text = ''
+        wallpaper {
+            monitor =
+            path = ${cfg.wallpaper}
+            fit_mode = cover
+        }
+      '';
 
       # Dark mode
       # Set dark mode in GTK applications

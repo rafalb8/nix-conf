@@ -5,6 +5,11 @@ in
 {
   imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
 
+  options.modules.desktop.gaming = {
+    enable = lib.mkEnableOption "Gaming";
+    streaming = lib.mkEnableOption "Enable streaming with Sunshine";
+  };
+
   config = lib.mkIf cfg.gaming.enable {
     environment.systemPackages = with pkgs; [
       # Tools

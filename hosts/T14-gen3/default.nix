@@ -16,10 +16,13 @@
 
     desktop = {
       enable = true;
-      windows.dualboot = true;
-      graphical-boot = true;
-      environment.hyprland = true;
       gaming.enable = false;
+      graphical-boot = true;
+      windows.dualboot = true;
+      environment.hyprland.enable = true;
+      environment.hyprland.custom = ''
+        monitor = eDP-1, preferred, auto, 1
+      '';
     };
   };
 
@@ -46,13 +49,6 @@
         "Dolby Headphones" = [ "alsa_output.pci-0000_04_00.6.HiFi__Headphones__sink:Headphones" ];
         "Dolby Dynamic" = [ "alsa_output.pci-0000_04_00.6.HiFi__Speaker__sink:Speaker" ];
       };
-    };
-
-    # Hyprland config
-    xdg.configFile = {
-      "hypr/custom.conf".text = ''
-        monitor = eDP-1, preferred, auto, 1
-      '';
     };
   };
 

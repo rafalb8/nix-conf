@@ -1,9 +1,13 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.desktop.environment.gnome;
 in
 {
-  config = lib.mkIf cfg.environment.gnome {
+  options.modules.desktop.environment.gnome = {
+    enable = lib.mkEnableOption "Gnome desktop module";
+  };
+
+  config = lib.mkIf cfg.enable {
     # Enable the GNOME Desktop Environment.
     services = {
       desktopManager.gnome.enable = true;

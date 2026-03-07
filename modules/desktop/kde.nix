@@ -1,9 +1,13 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.desktop.environment.kde;
 in
 {
-  config = lib.mkIf cfg.environment.kde {
+  options.modules.desktop.environment.kde = {
+    enable = lib.mkEnableOption "KDE desktop module";
+  };
+
+  config = lib.mkIf cfg.enable {
     # Enable the KDE Plasma.
     services = {
       desktopManager.plasma6.enable = true;

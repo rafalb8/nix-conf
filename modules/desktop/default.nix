@@ -17,19 +17,7 @@ in
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
-
     waydroid = lib.mkEnableOption "Waydroid support";
-
-    environment = {
-      gnome = lib.mkEnableOption "Gnome desktop module";
-      kde = lib.mkEnableOption "KDE desktop module";
-      hyprland = lib.mkEnableOption "Hyprland desktop module";
-    };
-
-    gaming = {
-      enable = lib.mkEnableOption "Gaming";
-      streaming = lib.mkEnableOption "Enable streaming with Sunshine";
-    };
   };
 
   # Common desktop configuration
