@@ -53,6 +53,7 @@ in
       # Basic apps
       loupe
       nautilus
+      pavucontrol
     ];
 
     environment.sessionVariables = {
