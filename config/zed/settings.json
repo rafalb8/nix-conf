@@ -11,6 +11,7 @@
     "make": true,
     "toml": true,
     "caddyfile": true,
+    "dockerfile": true,
     // Other
     "material-icon-theme": true,
   },
