@@ -38,6 +38,7 @@ in
     services.gvfs.enable = true;
     programs.hyprlock.enable = true;
     environment.systemPackages = with pkgs; [
+      sway-audio-idle-inhibit
       swaynotificationcenter
       libnotify
       hyprpaper
