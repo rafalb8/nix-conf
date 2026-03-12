@@ -41,6 +41,8 @@
     # Archivers
     p7zip
     lz4
+    zip
+    unzip
 
     # Media
     ffmpeg-full
