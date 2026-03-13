@@ -11,7 +11,7 @@ in
           "layer": "top",
           "position": "top",
           "height": 32,
-          "spacing": 4,
+          "spacing": 0,
           "modules-left": ["hyprland/workspaces", "hyprland/window"],
           "modules-center": ["clock"],
           "modules-right": [
@@ -30,8 +30,11 @@ in
           },
 
           "hyprland/window": {
-            "format": "<b>{}</b>",
+            "format": "{}",
             "separate-outputs": true,
+            "rewrite": {
+              "": "Desktop",
+            },
           },
 
           "clock": {
@@ -42,7 +45,6 @@ in
           "tray": {
             "spacing": 4,
             "icon-size": 16,
-            "icon-theme": "Adwaita",
           },
 
           "custom/notification": {
@@ -112,78 +114,99 @@ in
 
       xdg.configFile."waybar/style.css".text = ''
         window#waybar {
-            background-color: #000000;
-            transition-duration: 0.5s;
-            transition-property: background-color;
+            background-color: rgba(0, 0, 0, 0);
         }
 
-        /* Base styles for all modules */
         * {
             min-height: 0;
             border: none;
             border-radius: 0;
+            padding: 0;
+            margin: 0;
             color: #ffffff;
-            font-size: 14px;
             font-family: "JetBrainsMono Nerd Font", Roboto, Arial, sans-serif;
         }
 
-        #workspaces {
-            margin: 4px 4px;
-            padding: 0 6px;
-            border-radius: 8px;
-
+        #workspaces,
+        #window,
+        #clock,
+        #tray,
+        #custom-notification,
+        #pulseaudio,
+        #bluetooth,
+        #network,
+        #battery {
             background: linear-gradient(
                 180deg,
-                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.15) 0%,
                 rgba(255, 255, 255, 0.05) 50%,
                 rgba(255, 255, 255, 0.1) 100%
             );
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow:
-                inset 0 1px 1px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.4),
-                0 2px 4px rgba(0, 0, 0, 0.5);
+                inset 0 1px 1px rgba(255, 255, 255, 0.1),
+                0 1px 2px rgba(0, 0, 0, 0.2);
 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 3px;
+            margin-bottom: 3px;
         }
 
-        #workspaces button {
-            background: transparent;
-            padding: 0;
+        #workspaces,
+        #window,
+        #clock,
+        #tray {
+            margin-left: 4px;
+            margin-right: 4px;
+            padding: 0 10px;
+            border-radius: 8px;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        #workspaces button.active label {
-            color: #ffffff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-            font-weight: 900;
+        #custom-notification,
+        #pulseaudio,
+        #bluetooth,
+        #battery {
+            padding: 0 4px;
         }
 
-        /* Font Size */
+        #network {
+            padding-left: 4px;
+            padding-right: 10px;
+        }
+
+        #custom-notification {
+            border-radius: 8px 0 0 8px;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            margin-left: 6px;
+        }
+
+        #battery {
+            border-radius: 0 8px 8px 0;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            margin-right: 6px;
+        }
+
         #tray,
         #bluetooth {
-            font-size: 18px;
-        }
-
-        #battery,
-        #pulseaudio,
-        #network.wifi,
-        #network.ethernet,
-        #custom-notification {
             font-size: 16px;
         }
 
-        /* Margins */
+        #clock,
+        #battery,
         #pulseaudio,
+        #network,
         #custom-notification {
-            margin: 2px;
+            font-size: 14px;
         }
 
-        #network.wifi,
-        #network.ethernet {
-            margin-right: 8px;
+        #workspaces button {
+            font-size: 14px;
+        }
+
+        #window {
+            font-size: 14px;
         }
       '';
     };
