@@ -18,6 +18,7 @@ in
             "tray",
             "custom/notification",
             "pulseaudio",
+            "pulseaudio#source",
             "bluetooth",
             "network#wifi",
             "network#ethernet",
@@ -71,12 +72,17 @@ in
           "pulseaudio": {
             "format": "{icon} {volume}%",
             "format-muted": "󰝟",
+            "format-icons": {
+              "default": ["", "", ""]
+            },
+            "on-click": "/run/current-system/sw/bin/audioswitch"
+          },
+
+          "pulseaudio#source": {
+            "format": "{format_source}",
             "format-source": "",
             "format-source-muted": "",
-            "format-icons": {
-              "default": ["", "", ""],
-            },
-            "on-click": "/run/current-system/sw/bin/audioswitch",
+            "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
           },
 
           "bluetooth": {
