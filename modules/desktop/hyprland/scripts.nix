@@ -12,9 +12,9 @@ in
           mkdir -p "$DIR"
           ID=$(printf '󰒅  Select Region\n▢  Active Window\n󰍹  Entire Screen' | walker -di)
           case "''${ID:0-1}" in
-              0) ${pkgs.hyprshot} -o "$DIR" -m region -- loupe;;
-              1) ${pkgs.hyprshot} -o "$DIR" -m window -- loupe;;
-              2) ${pkgs.hyprshot} -o "$DIR" -m output -- loupe;;
+              0) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m region -- loupe;;
+              1) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m window -- loupe;;
+              2) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m output -- loupe;;
               *) exit 1;;
           esac
         '';
