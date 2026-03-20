@@ -44,7 +44,7 @@
         stable = import nixpkgs-stable { inherit (final) system; config.allowUnfree = true; };
 
         # Replace broken packages
-      } // prev.lib.genAttrs [ "sunshine" ] (name: final.stable.${name});
+      } // prev.lib.genAttrs [ ] (name: final.stable.${name});
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs
@@ -63,6 +63,7 @@
               nixpkgs.overlays = [ self.overlays.default ];
 
               nix.registry.nixpkgs.flake = nixpkgs;
+              nix.registry.nixpkgs-stable.flake = nixpkgs-stable;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
             }
