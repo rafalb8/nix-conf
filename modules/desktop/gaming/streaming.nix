@@ -15,8 +15,6 @@ let
 
     # Hyprsun binds
     bind = CTRL ALT, Delete, exit
-    bind = SUPER, T, exec, ghostty
-    bind = SUPER, B, exec, firefox
     bind = SUPER, P, exec, sunscreen steam
 
     ${builtins.readFile "${cfg}/binds.conf"}
