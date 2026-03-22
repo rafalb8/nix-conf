@@ -15,7 +15,7 @@ in
       # Tools
       stable.sgdboop
       gamescope
-      # protonup-qt
+      protonplus
 
       # Wine guis
       heroic
