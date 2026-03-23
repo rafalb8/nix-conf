@@ -37,6 +37,7 @@
   };
 
   programs.git.enable = true;
+  programs.git.signing.format = "openpgp";
   programs.git.settings = {
     aliases = {
       s = "status";
