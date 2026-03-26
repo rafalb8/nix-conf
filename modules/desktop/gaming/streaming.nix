@@ -91,19 +91,15 @@ in
             image-path = "desktop.png";
             detached = [ "ghostty" ];
           })
-          # (default // {
-          #   name = "RPCS3";
-          #   image-path = "${pkgs.rpcs3}/share/icons/hicolor/48x48/apps/rpcs3.png";
-          #   detached = [ "${sunscreen}/bin/sunscreen rpcs3" ];
-          # })
         ];
     };
 
-    # Fix for DS4/DS5 gamepads
+    # Fix for DS4/DualSense gamepads
     boot.kernelModules = [ "uhid" ];
     services.udev.extraRules = ''
-      # sudo setfacl -m g:input:rw /dev/uhid
-      SUBSYSTEM=="misc", KERNEL=="uhid", MODE="0660", GROUP="input", TAG+="uaccess"
+      # Disable DS4/DualSense touchpad
+      ATTRS{name}=="*Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+      ATTRS{name}=="Sunshine PS5 (virtual) pad Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
     '';
 
     # Add custom hyprland session
