@@ -58,7 +58,12 @@ in
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Run electron apps without Xwayland
+      NAUTILUS_4_EXTENSION_DIR = "${pkgs.nautilus-python}/lib/nautilus/extensions-4";
     };
+
+    environment.pathsToLink = [
+      "/share/nautilus-python/extensions"
+    ];
 
     # Allow sharing wifi connection
     security.wrappers.impala = {
