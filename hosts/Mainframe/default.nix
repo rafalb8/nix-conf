@@ -41,7 +41,7 @@
             scale = 1
             bitdepth = 10
             cm = srgb
-            vrr = true
+            vrr = 2
             # SDR to HDR
             sdr_min_luminance = 0.005
             sdr_max_luminance = 200
