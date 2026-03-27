@@ -31,9 +31,10 @@ let
 
     export MANGOHUD_CONFIG=preset=1
 
-    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(hyprctl monitors -j | jq ".[0].width")}
-    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(hyprctl monitors -j | jq ".[0].height")}
-    FPS=''${SUNSHINE_CLIENT_FPS:-$(hyprctl monitors -j | jq ".[0].refreshRate | tonumber")}
+    MONITORS=$(hyprctl monitors -j)
+    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(jq ".[-1].width" <<< "$MONITORS")}
+    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(jq ".[-1].height" <<< "$MONITORS")}
+    FPS=''${SUNSHINE_CLIENT_FPS:-$(jq ".[-1].refreshRate | tonumber" <<< "$MONITORS")}
     PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
     GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
@@ -42,12 +43,44 @@ let
     case $1 in
       "reset") pkill -TERM gamescope ;;
       "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
+      "monitor")
+        POSITION=$(jq -r --arg w "$WIDTH" '.[0] | "\((.width - ($w|tonumber)) / 2)x\(.height)"' <<< "$MONITORS")
+        hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, ''${POSITION}, 1 ;;
       "steam")
         pkill -TERM steam && pidwait steam && sleep 3
         $GAMESCOPE_CMD -e -- steam -gamepadui -steamos3 ;;
       *) $GAMESCOPE_CMD -- "$@"
     esac
   '';
+
+
+  hyprvs = pkgs.writeShellScriptBin "hyprvs" ''
+    hyprctl output create headless HEADLESS-2
+
+    cat >/tmp/sunshine.conf <<EOF
+    file_apps=/tmp/sunshine_apps.json
+    stream_audio=disabled
+    system_tray=disabled
+    output_name=1
+    EOF
+
+    cat >/tmp/sunshine_apps.json <<EOF
+    {
+      "env": {},
+      "apps": [
+        {
+          "name": "Desktop",
+          "image-path": "desktop.png",
+          "prep-cmd": [{"do": "${sunscreen}/bin/sunscreen monitor"}]
+        }
+      ]
+    }
+    EOF
+
+    sunshine /tmp/sunshine.conf
+    hyprctl output remove headless HEADLESS-2
+  '';
+
 in
 {
   config = lib.mkIf (cfg.gaming.enable && cfg.gaming.streaming) {
@@ -105,7 +138,7 @@ in
     '';
 
     # Add custom hyprland session
-    environment.systemPackages = [ pkgs.hyprland sunscreen ];
+    environment.systemPackages = [ pkgs.hyprland sunscreen hyprvs ];
     services.displayManager.sessionPackages =
       let
         launcher = pkgs.writeShellScript "launcher" ''
