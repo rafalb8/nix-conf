@@ -30,9 +30,9 @@
         disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
       };
 
-      environment.kde.enable = true;
+      # environment.kde.enable = true;
       environment.hyprland = {
-        enable = false;
+        enable = true;
         wallpaper = "~/Pictures/Wallpapers/Mountain Light.jpg";
         custom = ''
           monitorv2 {
@@ -48,7 +48,7 @@
             sdrbrightness = 1.0
             sdrsaturation = 1.0
             # HDR
-            max_luminance = 400
+            max_luminance = 430
           }
           render:cm_fs_passthrough = 2
         '';
