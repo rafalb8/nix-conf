@@ -97,6 +97,8 @@ in
     # Fix for DS4/DualSense gamepads
     boot.kernelModules = [ "uhid" ];
     services.udev.extraRules = ''
+      # sudo setfacl -m g:input:rw /dev/uhid
+      SUBSYSTEM=="misc", KERNEL=="uhid", MODE="0660", GROUP="input", TAG+="uaccess"
       # Disable DS4/DualSense touchpad
       ATTRS{name}=="*Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
       ATTRS{name}=="Sunshine PS5 (virtual) pad Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
