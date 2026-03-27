@@ -94,39 +94,19 @@ in
         }
       '';
 
-      # Dark mode
-      # Set dark mode in GTK applications
-      gtk = {
-        enable = true;
-
-        theme = {
-          name = "Adwaita-dark";
-          package = pkgs.gnome-themes-extra;
+      gtk =
+        let
+          theme = { name = "Adwaita-dark"; package = pkgs.gnome-themes-extra; };
+          extraConfig = { gtk-application-prefer-dark-theme = 1; };
+        in
+        {
+          enable = true;
+          inherit theme;
+          gtk3 = { inherit theme extraConfig; };
+          gtk4 = { inherit theme extraConfig; };
+          iconTheme = { name = "Adwaita"; package = pkgs.adwaita-icon-theme; };
+          font = { name = "Sans"; size = 11; };
         };
-
-        gtk4.theme = {
-          name = "Adwaita-dark";
-          package = pkgs.gnome-themes-extra;
-        };
-
-        iconTheme = {
-          name = "Adwaita";
-          package = pkgs.adwaita-icon-theme;
-        };
-
-        font = {
-          name = "Sans";
-          size = 11;
-        };
-
-        gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-        };
-
-        gtk4.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-        };
-      };
 
       dconf.enable = true;
       dconf.settings = {
