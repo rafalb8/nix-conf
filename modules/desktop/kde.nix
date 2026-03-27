@@ -18,10 +18,8 @@ in
       };
     };
 
-    # Add essentials
-    # environment.systemPackages = with pkgs; [
-    #   # mission-center
-    # ];
+    # Additional packages
+    # environment.systemPackages = with pkgs; [ mission-center ];
 
     # Exclude KDE default packages
     environment.plasma6.excludePackages = with pkgs.kdePackages; [
