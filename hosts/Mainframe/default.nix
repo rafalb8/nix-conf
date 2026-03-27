@@ -33,7 +33,7 @@
       # environment.kde.enable = true;
       environment.hyprland = {
         enable = true;
-        wallpaper = "~/Pictures/Wallpapers/Mountain Light.jpg";
+        wallpaper = "~/Pictures/Wallpapers/Interstellar.png";
         custom = ''
           monitorv2 {
             output = DP-1
