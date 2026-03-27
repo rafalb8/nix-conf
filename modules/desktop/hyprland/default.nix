@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ./dock.nix
     ./hypridle.nix
     ./scripts.nix
     ./waybar.nix
@@ -58,7 +57,7 @@ in
     ];
 
     environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1"; # Run apps without Xwayland
+      NIXOS_OZONE_WL = "1"; # Run electron apps without Xwayland
     };
 
     # Allow sharing wifi connection
