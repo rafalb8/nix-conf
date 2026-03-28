@@ -78,7 +78,7 @@
 
   # Additional packages
   services.flatpak.enable = true;
-  environment.systemPackages = with pkgs; [ oversteer lmstudio ];
+  environment.systemPackages = with pkgs; [ oversteer custom.tsmuxer ];
 
   # Steering wheel support
   hardware.new-lg4ff.enable = true;
