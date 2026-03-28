@@ -14,13 +14,6 @@ in
             after_sleep_cmd = hyprctl dispatch dpms on
         }
 
-        # Screen
-        listener {
-            timeout = 60
-            on-timeout = brightnessctl -s set 10
-            on-resume = brightnessctl -r
-        }
-
         # Keyboard backlight
         listener {
             timeout = 30
@@ -29,15 +22,24 @@ in
             ignore_inhibit = true
         }
 
+        # Screen dim
+        listener {
+            timeout = 60
+            on-timeout = brightnessctl -s set 10
+            on-resume = brightnessctl -r
+        }
+
+        # Screen off
+        listener {
+            timeout = 120
+            on-timeout = hyprctl dispatch dpms off
+            on-resume = hyprctl dispatch dpms on
+        }
+
+        # Lock
         listener {
             timeout = 300
             on-timeout = loginctl lock-session
-        }
-
-        listener {
-            timeout = 330
-            on-timeout = hyprctl dispatch dpms off
-            on-resume = hyprctl dispatch dpms on && brightnessctl -r
         }
 
         # Suspend
