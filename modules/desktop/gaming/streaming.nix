@@ -56,13 +56,7 @@ let
 
   hyprvs = pkgs.writeShellScriptBin "hyprvs" ''
     hyprctl output create headless HEADLESS-2
-
-    cat >/tmp/sunshine.conf <<EOF
-    file_apps=/tmp/sunshine_apps.json
-    stream_audio=disabled
-    system_tray=disabled
-    output_name=1
-    EOF
+    hyprctl keyword workspace 9, monitor:HEADLESS-2
 
     cat >/tmp/sunshine_apps.json <<EOF
     {
@@ -77,7 +71,12 @@ let
     }
     EOF
 
-    sunshine /tmp/sunshine.conf
+    sunshine /tmp/sunshine.conf \
+            file_apps=/tmp/sunshine_apps.json \
+            stream_audio=disabled \
+            system_tray=disabled \
+            output_name=1
+
     hyprctl output remove headless HEADLESS-2
   '';
 
