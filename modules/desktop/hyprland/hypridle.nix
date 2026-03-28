@@ -5,6 +5,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ hypridle ];
+    systemd.user.services."hypridle".enable = false;
     home-manager.users.${config.user.name} = {
       xdg.configFile."hypr/hypridle.conf".text = ''
         general {
