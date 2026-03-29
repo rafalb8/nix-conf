@@ -5,11 +5,11 @@ let
     set -ex
     DIR="$HOME/Pictures/Screenshots"
     mkdir -p "$DIR"
-    ID=$(printf '󰒅  Select Region\n▢  Active Window\n󰍹  Entire Screen' | walker -di)
+    ID=''${1:-$(printf '󰒅  Select Region\n▢  Active Window\n󰍹  Entire Screen' | walker -di)}
     case "''${ID:0-1}" in
-        0) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m region -- loupe;;
-        1) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m window -- loupe;;
-        2) ${pkgs.hyprshot}/bin/hyprshot -o "$DIR" -m output -- loupe;;
+        0) hyprshot -o "$DIR" -m region -- loupe;;
+        1) hyprshot -o "$DIR" -m window -- loupe;;
+        2) hyprshot -o "$DIR" -m output -- loupe;;
         *) exit 1;;
     esac
   '';
@@ -31,7 +31,6 @@ let
         id=$(echo "$choice" | sed 's/^[^0-9]*//' | cut -d'.' -f1)
         wpctl set-default "$id"
         name=$(echo "$choice" | sed 's/^.*[0-9]\+\. //')
-        notify-send "Audio Output" "Switched to: $name" -a "System"
     fi
   '';
 

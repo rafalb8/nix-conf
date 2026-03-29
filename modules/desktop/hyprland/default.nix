@@ -41,6 +41,7 @@ in
       swaynotificationcenter
       libnotify
       hyprpaper
+      hyprshot
       elephant
       walker
 
