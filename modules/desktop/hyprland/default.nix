@@ -53,7 +53,8 @@ in
       # Basic apps
       loupe
       nautilus
-      pavucontrol
+      file-roller
+      gnome-disk-utility
     ];
 
     environment.sessionVariables = {
