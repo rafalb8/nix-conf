@@ -53,6 +53,7 @@
     gcc
     clang
     gnumake
+    man-pages
     clang-tools
 
     # Golang
