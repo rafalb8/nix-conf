@@ -19,7 +19,7 @@ in
       pear-desktop
       obs-studio
       audacity
-      gimp
+      krita
       mpv
 
       # Development
