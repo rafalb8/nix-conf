@@ -35,19 +35,17 @@
 
   // Other
   "languages": {
-    "Go": {
-      "inlay_hints": { "show_type_hints": false },
-      "formatter": { "external": { "command": "gofumpt" } },
-    },
     "Nix": {
       "language_servers": ["nixd"],
       "formatter": { "external": { "command": "nixpkgs-fmt" } },
     },
+    "Go": { "inlay_hints": { "show_type_hints": false } },
     "C": { "tab_size": 2, "format_on_save": "on" },
     "C++": { "tab_size": 2, "format_on_save": "on" },
   },
 
   "lsp": {
+    "gopls": { "initialization_options": { "gofumpt": true } },
     "clangd": { "binary": { "arguments": ["--fallback-style=Google"] } },
   },
 }
