@@ -35,12 +35,13 @@ let
   '';
 
   powermenu = pkgs.writeShellScriptBin "powermenu" ''
-    ID=$(echo -e "󰍃  Log Out\n󰜉  Reboot\n󰐥  Shutdown\n󰖳  Switch to Windows" | walker -di)
+    ID=$(echo -e "󰍃  Log Out\n󰤄  Suspend\n󰜉  Reboot\n󰐥  Shutdown\n󰖳  Switch to Windows" | walker -di)
     case $ID in
         0) loginctl terminate-user $(whoami) ;;
-        1) systemctl reboot ;;
-        2) systemctl poweroff ;;
-        3) win-reboot ;;
+        1) systemctl suspend ;;
+        2) systemctl reboot ;;
+        3) systemctl poweroff ;;
+        4) win-reboot ;;
     esac
   '';
 in
