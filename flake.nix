@@ -22,6 +22,7 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
       lib = pkgs.lib // { custom = import ./lib { inherit pkgs; }; };
+      paths = import ./config/paths.nix { inherit lib; };
     in
     {
       # Custom Packages
@@ -51,9 +52,10 @@
         [ "Mainframe" "T14-gen3" "Nexus" ]
         (hostname: nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs lib; };
+          specialArgs = { inherit inputs lib paths; };
 
           modules = [
+            ./core
             ./modules
             ./extensions
             ./hosts/${hostname}

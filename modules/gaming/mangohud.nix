@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.gaming;
 
   configLine = key: value:
     if value == true then "${key}"
@@ -34,12 +34,12 @@ let
   };
 in
 {
-  config = lib.mkIf cfg.gaming.enable {
+  config = lib.mkIf cfg.enable {
     # Add package
     environment.systemPackages = [ pkgs.mangohud ];
 
     # Config
-    home-manager.users.${config.user.name}.xdg = {
+    home-manager.users."rafalb8".xdg = {
       enable = true;
       configFile = {
         # Presets

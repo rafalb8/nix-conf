@@ -1,15 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, paths, ... }:
 let
-  cfg = config.modules.desktop.environment.hyprland;
+  cfg = config.modules.hyprland;
 in
 {
-  imports = [
-    ./hypridle.nix
-    ./scripts.nix
-    ./waybar.nix
-  ];
+  imports = lib.custom.importAll ./.;
 
-  options.modules.desktop.environment.hyprland = {
+  options.modules.hyprland = {
     enable = lib.mkEnableOption "Hyprland desktop module";
 
     custom = lib.mkOption {
@@ -82,10 +78,10 @@ in
       platformTheme = "gnome";
     };
 
-    home-manager.users.${config.user.name} = {
+    home-manager.users."rafalb8" = {
       xdg.configFile."hypr/custom.conf".text = cfg.custom;
       xdg.configFile."hypr" = {
-        source = ../../../config/hypr;
+        source = paths.hypr;
         recursive = true;
       };
       xdg.configFile."hypr/hyprpaper.conf".text = ''

@@ -1,51 +1,35 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 {
   imports = [
     # Include the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  user = {
-    name = "rafalb8";
-    description = "Rafal Babinski";
-  };
-
-  # Enable modules
-  modules = {
-    graphics.amd = true;
-
-    desktop = {
-      enable = true;
-      gaming.enable = false;
-      graphical-boot = true;
-      windows.dualboot = true;
-      environment.hyprland = {
-        enable = true;
-        wallpaper = "~/Pictures/Wallpapers/1.jpg";
-        custom = ''
-          monitor = eDP-1, preferred, auto, 1
-        '';
-      };
-    };
-  };
+  # Hostname
+  networking.hostName = "T14-gen3";
 
   # Enable secure boot
   boot.loader.limine.secureBoot.enable = true;
 
-  # Hostname
-  networking.hostName = "T14-gen3";
+  # Enable modules
+  modules = {
+    graphics.amd = true;
+    desktop.enable = true;
+    windows.dualboot = true;
+    hyprland = {
+      enable = true;
+      wallpaper = "~/Pictures/Wallpapers/1.jpg";
+      custom = ''
+        monitor = eDP-1, preferred, auto, 1
+      '';
+    };
+  };
 
   # Additional packages
-  environment.systemPackages = with pkgs; [ moonlight-qt ];
+  # environment.systemPackages = with pkgs; [ ];
 
   # Home module settings
-  home-manager.users.${config.user.name} = {
-    # Git config
-    programs.git.settings = {
-      user.name = "Rafalb8";
-      user.email = "rafalb8@hotmail.com";
-    };
-
+  home-manager.users."rafalb8" = {
     services.easyeffects = {
       presets = [ "Dolby Dynamic" ];
       autoload = {

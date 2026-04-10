@@ -11,34 +11,26 @@
 
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
+    localVariables.HIST_STAMPS = "yyyy-mm-dd";
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "docker" "docker-compose" "sudo" "history" "dirhistory" ];
       theme = "agnoster";
     };
-    dotDir = "${config.xdg.configHome}/zsh";
-
-    localVariables = {
-      HIST_STAMPS = "yyyy-mm-dd";
-    };
-
-    shellAliases = {
-      mkdir = "mkdir -p";
-      dmesg = "sudo dmesg";
-    };
-
     initContent = ''
       # Catch '--help' and pass it to bat
       alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
-
-      # cat the alias/script
-      ccat() { local p=$(type -a "$1" 2>/dev/null | awk '/\// {print $NF; exit}' | tr -d '()'); [ -f "$p" ] && cat "$p"; }
     '';
   };
 
   programs.git.enable = true;
+  programs.git.package = null;
   programs.git.signing.format = "openpgp";
   programs.git.settings = {
+    user.name = "Rafalb8";
+    user.email = "rafalb8@hotmail.com";
+
     aliases = {
       s = "status";
       b = "branch -avv";

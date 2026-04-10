@@ -4,13 +4,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Reminders
-    # warnings = lib.optional (pkgs.jellyfin-media-player.version > "1.12.0") '''';
-
-    # Insecure exceptions
-    # nixpkgs.config.permittedInsecurePackages =
-    #   lib.optional (pkgs.jellyfin-media-player.version == "1.12.0") "qtwebengine-5.15.19";
-
     environment.systemPackages = with pkgs; [
       # Media
       jellyfin-desktop
@@ -45,9 +38,6 @@ in
       qbittorrent
       discord
     ];
-
-    # FastFlix
-    programs.fastflix.enable = true;
 
     # Autostart
     autostart = {

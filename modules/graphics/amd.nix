@@ -9,8 +9,8 @@ in
     hardware.amdgpu.initrd.enable = true;
 
     # Overclocking with lact
-    services.lact.enable = cfg.overclocking;
-    hardware.amdgpu.overdrive.enable = cfg.overclocking;
+    services.lact.enable = cfg.overclocking.enable;
+    hardware.amdgpu.overdrive.enable = cfg.overclocking.enable;
 
     # Default to RADV
     environment.variables.AMD_VULKAN_ICD = "RADV";

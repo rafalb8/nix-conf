@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.modules.desktop.environment.hyprland;
+  cfg = config.modules.hyprland;
 in
 {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ hypridle ];
     systemd.user.services."hypridle".enable = false;
-    home-manager.users.${config.user.name} = {
+    home-manager.users."rafalb8" = {
       xdg.configFile."hypr/hypridle.conf".text = ''
         general {
             lock_cmd = pidof hyprlock || hyprlock

@@ -1,8 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, paths, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.gaming;
+  sunscreen = pkgs.custom.sunscreen;
 
-  hypr-conf = let cfg = ../../../config/hypr; in pkgs.writeText "hyprland.conf" ''
+  hypr-conf = pkgs.writeText "hyprland.conf" ''
     monitor = HEADLESS-2, 3840x2160@60, auto, 1
     monitor = , preferred, auto, auto
 
@@ -17,72 +18,12 @@ let
     bind = CTRL ALT, Delete, exit
     bind = SUPER, P, exec, sunscreen steam
 
-    ${builtins.readFile "${cfg}/binds.conf"}
-    ${builtins.readFile "${cfg}/behavior.conf"}
+    ${builtins.readFile "${paths.hypr}/binds.conf"}
+    ${builtins.readFile "${paths.hypr}/behavior.conf"}
   '';
-
-  sunscreen = pkgs.writeShellScriptBin "sunscreen" ''
-    # Restart current script without CAP_SYS_ADMIN
-    if getpcaps $$ | grep -q "cap_sys_admin"; then
-      exec setpriv --inh-caps -sys_admin "$0" "$@"
-    fi
-
-    set -ex
-
-    export MANGOHUD_CONFIG=preset=1
-
-    MONITORS=$(hyprctl monitors -j)
-    WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(jq ".[-1].width" <<< "$MONITORS")}
-    HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(jq ".[-1].height" <<< "$MONITORS")}
-    FPS=''${SUNSHINE_CLIENT_FPS:-$(jq ".[-1].refreshRate | tonumber" <<< "$MONITORS")}
-    PROFILE="''${WIDTH}x''${HEIGHT}@''${FPS}"
-
-    GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
-            --immediate-flips --force-grab-cursor --mangoapp -f"
-
-    case $1 in
-      "reset") pkill -TERM gamescope ;;
-      "mode") hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, auto, 1 ;;
-      "monitor")
-        POSITION=$(jq -r --arg w "$WIDTH" '.[0] | "\((.width - ($w|tonumber)) / 2)x\(.height)"' <<< "$MONITORS")
-        hyprctl keyword monitor HEADLESS-2, ''${PROFILE}, ''${POSITION}, 1 ;;
-      "steam")
-        pkill -TERM steam && pidwait steam && sleep 3
-        $GAMESCOPE_CMD -e -- steam -gamepadui -steamos3 ;;
-      *) $GAMESCOPE_CMD -- "$@"
-    esac
-  '';
-
-
-  hyprvs = pkgs.writeShellScriptBin "hyprvs" ''
-    hyprctl output create headless HEADLESS-2
-    hyprctl keyword workspace 9, monitor:HEADLESS-2
-
-    cat >/tmp/sunshine_apps.json <<EOF
-    {
-      "env": {},
-      "apps": [
-        {
-          "name": "Desktop",
-          "image-path": "desktop.png",
-          "prep-cmd": [{"do": "${sunscreen}/bin/sunscreen monitor"}]
-        }
-      ]
-    }
-    EOF
-
-    sunshine /tmp/sunshine.conf \
-            file_apps=/tmp/sunshine_apps.json \
-            stream_audio=disabled \
-            system_tray=disabled \
-            output_name=1
-
-    hyprctl output remove headless HEADLESS-2
-  '';
-
 in
 {
-  config = lib.mkIf (cfg.gaming.enable && cfg.gaming.streaming) {
+  config = lib.mkIf (cfg.enable && cfg.streaming.enable) {
     services.sunshine = {
       enable = true;
       autoStart = false;
@@ -137,7 +78,7 @@ in
     '';
 
     # Add custom hyprland session
-    environment.systemPackages = [ pkgs.hyprland sunscreen hyprvs ];
+    environment.systemPackages = [ pkgs.hyprland sunscreen ];
     services.displayManager.sessionPackages =
       let
         launcher = pkgs.writeShellScript "launcher" ''

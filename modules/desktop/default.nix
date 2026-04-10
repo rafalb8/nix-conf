@@ -3,27 +3,27 @@ let
   cfg = config.modules.desktop;
 in
 {
-  imports = [
-    ./gaming
-    ./hyprland
-
-    ./boot-ext.nix
-    ./browsers.nix
-    ./gnome.nix
-    ./kde.nix
-    ./packages.nix
-    ./waydroid.nix
-  ];
+  imports = lib.custom.importAll ./.;
 
   options.modules.desktop = {
     enable = lib.mkEnableOption "Desktop module";
-    waydroid = lib.mkEnableOption "Waydroid support";
   };
 
   # Common desktop configuration
   config = lib.mkIf cfg.enable {
-    # Add support for running aarch64 binaries on x86_64
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    # Enable boot splash screen
+    boot.plymouth.enable = true;
+
+    # Enable "Silent boot"
+    boot.consoleLogLevel = 3;
+    boot.initrd.verbose = false;
+    boot.kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
 
     # Enable tailscale
     services.tailscale = {
@@ -63,13 +63,6 @@ in
 
     # Setup desktop services
     services = {
-      xserver.xkb.layout = "pl";
-
-      printing = {
-        enable = true;
-        drivers = with pkgs; [ splix ];
-      };
-
       udisks2.enable = true;
 
       # Auto nice deamon
@@ -80,10 +73,13 @@ in
       };
     };
 
+    # Hardware
     services.fwupd.enable = true;
-    hardware = {
-      bluetooth.enable = true;
-      sane.enable = true; # Scanners
+    hardware.bluetooth.enable = true;
+    hardware.sane.enable = true; # Scanners
+    services.printing = {
+      enable = true;
+      drivers = with pkgs; [ splix ];
     };
 
     # Enable sound with pipewire.
@@ -95,82 +91,26 @@ in
       pulse.enable = true;
     };
 
-    # Raise memlock limits
-    security.pam.loginLimits = [
-      {
-        domain = "*";
-        type = "soft";
-        item = "memlock";
-        value = "unlimited";
-      }
-      {
-        domain = "*";
-        type = "hard";
-        item = "memlock";
-        value = "unlimited";
-      }
+    # Fonts
+    fonts.fontconfig.enable = true;
+    fonts.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      noto-fonts-monochrome-emoji
+
+      source-code-pro
+
+      source-han-mono
+      source-han-sans
+      source-han-serif
+
+      nerd-fonts.jetbrains-mono
     ];
 
-    # Fonts
-    fonts = {
-      packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-color-emoji
-        noto-fonts-monochrome-emoji
-
-        source-code-pro
-
-        source-han-mono
-        source-han-sans
-        source-han-serif
-
-        nerd-fonts.jetbrains-mono
-      ];
-
-      fontconfig.enable = true;
-    };
-
-    # Setup home for desktop
-    home-manager.users.${config.user.name} = { config, ... }: {
-      # Hide folders in home
-      home.file.".hidden".text = ''
-        Desktop
-        Public
-        Templates
-        go
-      '';
-
-      # Required
-      xdg.enable = true;
-
-      # Enable Wayland HDR for Jellyfin MPV Shim and MPV
-      xdg.configFile = {
-        "mpv/mpv.conf".text = ''vo=dmabuf-wayland'';
-        "jellyfin-mpv-shim/mpv.conf".text = ''vo=dmabuf-wayland'';
-      };
-
-      # Easyeffects service
-      services.easyeffects = {
-        enable = true;
-        presets = [ "Clean" "Normalize" "Dolby Headphones" ];
-      };
-
-      # Terminal
-      programs.ghostty = {
-        enable = true;
-        systemd.enable = true;
-        enableZshIntegration = false;
-        settings = {
-          window-width = 120;
-          window-height = 30;
-          background-opacity = 0.8;
-        };
-      };
-
-      # Zed Config
-      home.file.".config/zed".source =
-        config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed";
+    # Home-Manager for desktop
+    home-manager.users."rafalb8" = {
+      imports = [ ./home.nix ];
     };
 
     # Enable KVM

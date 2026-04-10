@@ -1,4 +1,13 @@
 { pkgs, lib ? pkgs.lib }: {
+
+  # Generate array to be used with imports
+  importAll = path:
+    map (x: path + "/${x}")
+      (
+        builtins.filter (x: !(builtins.elem x [ "default.nix" "home.nix" "completions" ]))
+          (builtins.attrNames (builtins.readDir path))
+      );
+
   # Return last element of the list
   tail = list: builtins.elemAt list (builtins.length list - 1);
 

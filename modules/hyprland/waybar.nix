@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.modules.desktop.environment.hyprland;
+  cfg = config.modules.hyprland;
 in
 {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ waybar ];
-    home-manager.users.${config.user.name} = {
+    home-manager.users."rafalb8" = {
       xdg.configFile."waybar/config".text = ''
         {
           "layer": "top",

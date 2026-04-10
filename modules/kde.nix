@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop.environment.kde;
+  cfg = config.modules.kde;
 in
 {
-  options.modules.desktop.environment.kde = {
-    enable = lib.mkEnableOption "KDE desktop module";
+  options.modules.kde = {
+    enable = lib.mkEnableOption "Enable KDE";
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,9 +17,6 @@ in
         settings.Users.RememberLastSession = "false";
       };
     };
-
-    # Additional packages
-    # environment.systemPackages = with pkgs; [ mission-center ];
 
     # Exclude KDE default packages
     environment.plasma6.excludePackages = with pkgs.kdePackages; [

@@ -1,19 +1,18 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.modules.desktop;
+  cfg = config.modules.gaming;
 in
 {
-  imports = [ ./streaming.nix ./mangohud.nix ./experiments.nix ];
+  imports = lib.custom.importAll ./.;
 
-  options.modules.desktop.gaming = {
+  options.modules.gaming = {
     enable = lib.mkEnableOption "Gaming";
-    streaming = lib.mkEnableOption "Enable streaming with Sunshine";
+    streaming.enable = lib.mkEnableOption "Enable streaming with Sunshine";
   };
 
-  config = lib.mkIf cfg.gaming.enable {
+  config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # Tools
-      stable.sgdboop
       gamescope
       protonplus
 
@@ -37,14 +36,7 @@ in
         enable = true;
         remotePlay.openFirewall = true;
         protontricks.enable = true;
-        extraCompatPackages = with pkgs; [
-          steamtinkerlaunch
-          proton-ge-bin
-        ];
       };
-
-      gamemode.enable = false;
-      gamemode.enableRenice = true;
     };
 
     # Autostart
