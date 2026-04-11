@@ -50,7 +50,10 @@ in
       # Basic apps
       loupe
       nautilus
+      gnome-frog
       file-roller
+      gnome-firmware
+      gnome-calculator
       gnome-disk-utility
     ];
 
