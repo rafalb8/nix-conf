@@ -21,10 +21,14 @@ in
 
   config = lib.mkIf cfg.enable {
     # Display Manager
-    programs.regreet = {
-      enable = true;
-      settings.GTK.application_prefer_dark_theme = true;
+    services.displayManager = {
+      gdm.enable = true;
+      gdm.wayland = true;
+      defaultSession = "hyprland-uwsm";
     };
+
+    # Fix gdm
+    systemd.services.display-manager.path = [ pkgs.uwsm ];
 
     # Compositor
     programs.hyprland = { enable = true; withUWSM = true; };
