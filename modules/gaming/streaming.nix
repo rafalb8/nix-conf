@@ -92,7 +92,7 @@ in
           (pkgs.writeTextDir "share/wayland-sessions/hyprsun.desktop" ''
             [Desktop Entry]
             Version=1.0
-            Name=Sunshine on Hyprland
+            Name=Hyprsun
             Exec=${launcher}
             Type=Application
           '').overrideAttrs (_: { passthru.providedSessions = [ "hyprsun" ]; })
