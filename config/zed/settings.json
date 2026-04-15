@@ -10,6 +10,7 @@
     "ini": true,
     "make": true,
     "toml": true,
+    "hyprlang": true,
     "caddyfile": true,
     "dockerfile": true,
     // Other
