@@ -18,8 +18,21 @@ let
     bind = CTRL ALT, Delete, exit
     bind = SUPER, P, exec, sunscreen steam
 
+    # Binds
     ${builtins.readFile "${paths.hypr}/binds.conf"}
+
+    # Behaviour
     ${builtins.readFile "${paths.hypr}/behavior.conf"}
+
+    # Override games window rule
+    windowrule {
+        name = games
+        match:content = 3 # game
+        immediate = on
+        no_blur = on
+        no_shadow = on
+        rounding = 0
+    }
   '';
 in
 {
