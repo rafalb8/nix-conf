@@ -23,6 +23,12 @@
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
       lib = pkgs.lib // { custom = import ./lib { inherit pkgs; }; };
       paths = import ./config/paths.nix { inherit lib; };
+
+      pinnedPkgs =
+        let
+          pkgs = [ "rpcs3" "yt-dlp" "jellyfin-mpv-shim" ];
+        in
+        lib.warnIf (pkgs != [ ]) "Pinned to stable: ${toString pkgs}" pkgs;
     in
     {
       # Custom Packages
@@ -44,8 +50,8 @@
         # Stable channel overlay
         stable = import nixpkgs-stable { inherit (final) system; config.allowUnfree = true; };
 
-        # Replace broken packages
-      } // prev.lib.genAttrs [ ] (name: final.stable.${name});
+        # Pin broken packages
+      } // prev.lib.genAttrs pinnedPkgs (name: final.stable.${name});
 
       # NixOS configurations
       nixosConfigurations = nixpkgs.lib.genAttrs

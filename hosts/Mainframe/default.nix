@@ -67,7 +67,7 @@
 
   # Steering wheel support
   hardware.new-lg4ff.enable = true;
-  services.udev.packages = with pkgs; [ oversteer rpcs3 ];
+  services.udev.packages = with pkgs; [ oversteer ];
 
   hardware.logitech.wireless.enable = true;
   # The state version is required and should stay at the version you

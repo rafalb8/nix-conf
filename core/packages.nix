@@ -9,6 +9,7 @@
     # Tools
     # appimage-run
     hydra-check
+    nix-tree
     ripgrep
     xclip
     file
