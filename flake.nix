@@ -26,7 +26,7 @@
 
       pinnedPkgs =
         let
-          pkgs = [ "rpcs3" "yt-dlp" "jellyfin-mpv-shim" ];
+          pkgs = [ "rpcs3" ];
         in
         lib.warnIf (pkgs != [ ]) "Pinned to stable: ${toString pkgs}" pkgs;
     in
