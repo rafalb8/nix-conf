@@ -8,12 +8,10 @@ in
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        intel-media-sdk # For QSV (Quick Sync Video) support.
         intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
       ];
     };
 
-    nixpkgs.config.permittedInsecurePackages = with pkgs; [ intel-media-sdk.name ];
     environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
   };
 }
