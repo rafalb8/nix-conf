@@ -54,6 +54,7 @@
     gcc
     clang
     gnumake
+    lazygit
     man-pages
     clang-tools
 

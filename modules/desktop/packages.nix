@@ -19,11 +19,10 @@ in
       temurin-jre-bin
       android-tools
       zed-editor
+      opencode
       ghostty
       vscode
       imhex
-      lazygit
-      opencode
 
       # Tools
       onlyoffice-desktopeditors
