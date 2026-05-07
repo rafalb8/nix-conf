@@ -7,9 +7,9 @@ let
     mkdir -p "$DIR"
     ID=''${1:-$(printf '󰒅  Select Region\n▢  Active Window\n󰍹  Entire Screen' | walker -di)}
     case "''${ID:0-1}" in
-        0) hyprshot -o "$DIR" -m region -- loupe;;
-        1) hyprshot -o "$DIR" -m window -- loupe;;
-        2) hyprshot -o "$DIR" -m output -- loupe;;
+        0) hyprshot -so "$DIR" -m region -- loupe;;
+        1) hyprshot -so "$DIR" -m window -- loupe;;
+        2) hyprshot -so "$DIR" -m output -- loupe;;
         *) exit 1;;
     esac
   '';
