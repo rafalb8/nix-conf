@@ -26,7 +26,7 @@ in
 
       # Tools
       onlyoffice-desktopeditors
-      imagemagick_light
+      imagemagick
       impression # USB writer
       obsidian
       deskflow
