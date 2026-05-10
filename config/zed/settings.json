@@ -2,6 +2,7 @@
 {
   "disable_ai": true,
   "title_bar": { "show_sign_in": false },
+  "cli_default_open_behavior": "new_window",
   "telemetry": { "diagnostics": false, "metrics": false },
   "auto_install_extensions": {
     // Language support
