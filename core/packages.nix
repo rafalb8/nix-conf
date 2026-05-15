@@ -37,6 +37,7 @@
     wget
     rsync
     rclone
+    openssl
     arp-scan
 
     # Archivers
