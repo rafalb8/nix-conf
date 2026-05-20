@@ -1,11 +1,11 @@
 { stdenv, fetchurl, makeDesktopItem }:
 stdenv.mkDerivation (final: {
   pname = "eden";
-  version = "0.2.0-rc2";
+  version = "0.2.0";
 
   src = fetchurl {
     url = "https://git.eden-emu.dev/eden-emu/eden/releases/download/v${final.version}/Eden-Linux-v${final.version}-amd64-clang-pgo.AppImage";
-    sha256 = "01c83a21cb82myrsjjnxz9hffjg1s6f00qk9j8jxjfzdvq9r52pz"; # nix-prefetch-url <url>
+    sha256 = "0ps662qgl89f8yd5rbh6rvd0hixqd2chhxrwlwb00avpx6nbbj38"; # nix-prefetch-url <url>
   };
 
   desktopItem = makeDesktopItem {
