@@ -68,6 +68,7 @@ in
 
     environment.pathsToLink = [
       "/share/nautilus-python/extensions"
+      "/share/hypr" # lua stub: /run/current-system/sw/share/hypr/stubs
     ];
 
     # Allow sharing wifi connection
@@ -86,7 +87,7 @@ in
     };
 
     home-manager.users."rafalb8" = {
-      xdg.configFile."hypr/custom.conf".text = cfg.custom;
+      xdg.configFile."hypr/custom.lua".text = cfg.custom;
       xdg.configFile."hypr" = {
         source = paths.hypr;
         recursive = true;

@@ -3,36 +3,52 @@ let
   cfg = config.modules.gaming;
   sunscreen = pkgs.custom.sunscreen;
 
-  hypr-conf = pkgs.writeText "hyprland.conf" ''
-    monitor = HEADLESS-2, 3840x2160@60, auto, 1
-    monitor = , preferred, auto, auto
+  hypr-conf = pkgs.writeText "hyprland.lua" ''
+    -- Monitors
+    hl.monitor({
+        output = "HEADLESS-2",
+        mode = "3840x2160@60",
+        position = "auto",
+        scale = 1,
+    })
 
-    # Create Headless monitor and disable real display
-    exec-once = hyprctl output create headless HEADLESS-2
-    exec-once = hyprctl keyword monitor DP-1, disabled
+    hl.monitor({
+        output = "",
+        mode = "preferred",
+        position = "auto",
+        scale = "auto",
+    })
 
-    # Start programs
-    exec-once = systemctl restart --user sunshine.service
+    hl.on("hyprland.start", function()
+        -- Create Headless monitor and disable real display
+        hl.exec_cmd("hyprctl output create headless HEADLESS-2")
+        hl.exec_cmd("hyprctl keyword monitor DP-1, disabled")
 
-    # Hyprsun binds
-    bind = CTRL ALT, Delete, exit
-    bind = SUPER, P, exec, sunscreen steam
+        -- Start programs
+        hl.exec_cmd("systemctl restart --user sunshine.service")
+    end)
 
-    # Binds
-    ${builtins.readFile "${paths.hypr}/binds.conf"}
+    -- Hyprsun binds
+    hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
+    hl.bind("SUPER + P", hl.dsp.exec_cmd("sunscreen steam"))
 
-    # Behaviour
-    ${builtins.readFile "${paths.hypr}/behavior.conf"}
+    -- Binds
+    ${builtins.readFile "${paths.hypr}/binds.lua"}
 
-    # Override games window rule
-    windowrule {
-        name = games
-        match:content = 3 # game
-        immediate = on
-        no_blur = on
-        no_shadow = on
-        rounding = 0
-    }
+    -- Behaviour
+    ${builtins.readFile "${paths.hypr}/behavior.lua"}
+
+    -- Override games window rule
+    hl.window_rule({
+        name = "games",
+        match = {
+            content = "game",
+        },
+        immediate = "on",
+        no_blur = "on",
+        no_shadow = "on",
+        rounding = 0,
+    })
   '';
 in
 {

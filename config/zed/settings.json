@@ -9,9 +9,9 @@
     "nix": true,
     "xml": true,
     "ini": true,
+    "lua": true,
     "make": true,
     "toml": true,
-    "hyprlang": true,
     "caddyfile": true,
     "dockerfile": true,
     // Other
