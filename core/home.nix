@@ -86,9 +86,9 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
-      "*" = { setEnv = { "TERM" = "xterm-256color"; }; };
-      "dell-7050" = { hostname = "dell-7050"; user = "core"; };
+    settings = {
+      "*" = { SetEnv = { "TERM" = "xterm-256color"; }; };
+      "dell-7050" = { Hostname = "dell-7050"; User = "core"; };
     };
   };
 }

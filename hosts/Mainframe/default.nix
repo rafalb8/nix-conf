@@ -50,10 +50,10 @@
   # Home module settings
   home-manager.users."rafalb8" = {
     # Git config
-    programs.ssh.matchBlocks."AMDC4857" = {
-      hostname = "106.120.196.83";
-      user = "r.babinski";
-      proxyCommand = "nc -X 5 -x 192.168.8.12:1080 %h %p";
+    programs.ssh.settings."AMDC4857" = {
+      Hostname = "106.120.196.83";
+      User = "r.babinski";
+      ProxyCommand = "nc -X 5 -x 192.168.8.12:1080 %h %p";
     };
 
     services.easyeffects.autoload = {
