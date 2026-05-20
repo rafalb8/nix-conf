@@ -41,7 +41,7 @@
           # HDR
           max_luminance = 430
         }
-        render:cm_fs_passthrough = 2
+        render:cm_auto_hdr = 1
       '';
     };
   };
