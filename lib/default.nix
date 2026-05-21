@@ -1,5 +1,5 @@
-{ pkgs, lib ? pkgs.lib }: {
-
+{ pkgs, lib ? pkgs.lib }:
+rec {
   # Generate array to be used with imports
   importAll = path:
     map (x: path + "/${x}")
@@ -11,8 +11,20 @@
   # Return last element of the list
   tail = list: builtins.elemAt list (builtins.length list - 1);
 
-  # Translate a Nix value into a shell exported variable declaration.
-  toExportShellVars = vars: lib.concatStringsSep "\n" (lib.mapAttrsToList (k: v: "export ${k}=${lib.escapeShellArg v}") vars);
+  # Escape and map an attribute set into a list of "KEY=VALUE" strings
+  mapShellVars = vars: lib.mapAttrsToList (k: v: "${k}=${lib.escapeShellArg v}") vars;
+
+  # Translate a Nix value into shell exported variable declarations separated by newlines.
+  toExportShellVars = vars:
+    if vars == { }
+    then ""
+    else "export " + (lib.concatStringsSep "\nexport " (mapShellVars vars));
+
+  # Turn an attribute set of environment variables into an inline single-line "env K=V " string.
+  toEnvPrefix = env:
+    if env == { }
+    then ""
+    else "env " + (lib.concatStringsSep " " (mapShellVars env)) + " ";
 
   # Create C wrapper for script
   wrapScriptBin = name: script: pkgs.stdenv.mkDerivation {
