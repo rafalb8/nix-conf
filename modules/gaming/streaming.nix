@@ -6,26 +6,36 @@ let
   hypr-conf = pkgs.writeText "hyprland.lua" ''
     -- Monitors
     hl.monitor({
+        output = "",
+        mode = "preferred",
+        position = "auto",
+        scale = 1,
+    })
+
+    hl.monitor({
         output = "HEADLESS-2",
         mode = "3840x2160@60",
         position = "auto",
         scale = 1,
     })
 
-    hl.monitor({
-        output = "",
-        mode = "preferred",
-        position = "auto",
-        scale = "auto",
+    hl.workspace_rule({
+      workspace = "1",
+      monitor = "HEADLESS-2",
+      default = true,
     })
 
     hl.on("hyprland.start", function()
         -- Create Headless monitor and disable real display
         hl.exec_cmd("hyprctl output create headless HEADLESS-2")
-        hl.exec_cmd("hyprctl keyword monitor DP-1, disabled")
+        hl.monitor({output = "", disabled = true})
 
         -- Start programs
         hl.exec_cmd("systemctl restart --user sunshine.service")
+
+        -- Walker + Elephant for SUPER bind
+        hl.exec_cmd("walker --gapplication-service")
+        hl.exec_cmd("elephant")
     end)
 
     -- Hyprsun binds
@@ -44,9 +54,9 @@ let
         match = {
             content = "game",
         },
-        immediate = "on",
-        no_blur = "on",
-        no_shadow = "on",
+        immediate = true,
+        no_blur = true,
+        no_shadow = true,
         rounding = 0,
     })
   '';
