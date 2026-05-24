@@ -52,8 +52,7 @@
     "acpi_backlight=native"
     "psmouse.synaptics_intertouch=0"
     "amd_pstate=active"
-    # MediaTek wifi fix
-    "mt7921_common.disable_clc=1"
+    "cfg80211.ieee80211_regdom=PL" # Wi-Fi region
   ];
 
   # Fingerprint (Synaptics [06cb:00f9])
