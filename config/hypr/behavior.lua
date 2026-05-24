@@ -105,8 +105,8 @@ hl.window_rule({
     },
     workspace = "special:magic silent",
     float = true,
-    size = "monitor_w/3 monitor_h-32",
-    move = "2*monitor_w/3 32",
+    size = "monitor_w*45/100 monitor_h-32",
+    move = "monitor_w*55/100 32",
 })
 
 -- Media
