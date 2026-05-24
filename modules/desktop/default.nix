@@ -35,8 +35,11 @@ in
     systemd.services.NetworkManager-wait-online.enable = false;
 
     # Use iwd as NetworkManager backend
-    networking.wireless.iwd.enable = true;
     networking.networkmanager.wifi.backend = "iwd";
+    networking.wireless.iwd = {
+      enable = true;
+      settings.Settings.AutoConnect = true;
+    };
 
     # Firewall
     networking.firewall = {
