@@ -19,6 +19,7 @@
   },
 
   // UI
+  "minimap": { "show": "auto" },
   "terminal": { "dock": "right" },
   "base_keymap": "VSCode",
   "icon_theme": "Material Icon Theme",
