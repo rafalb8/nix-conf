@@ -100,19 +100,13 @@ in
         }
       '';
 
-      gtk =
-        let
-          theme = { name = "Adwaita-dark"; package = pkgs.gnome-themes-extra; };
-          extraConfig = { gtk-application-prefer-dark-theme = 1; };
-        in
-        {
-          enable = true;
-          inherit theme;
-          gtk3 = { inherit theme extraConfig; };
-          gtk4 = { inherit theme extraConfig; };
-          iconTheme = { name = "Adwaita"; package = pkgs.adwaita-icon-theme; };
-          font = { name = "Sans"; size = 11; };
-        };
+      gtk = {
+        enable = true;
+        font.name = "Sans";
+        theme.name = "Adwaita-dark";
+        gtk4.theme.name = "Adwaita";
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      };
 
       dconf.enable = true;
       dconf.settings = {
