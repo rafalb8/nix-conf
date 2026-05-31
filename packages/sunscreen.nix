@@ -7,8 +7,6 @@ writeShellScriptBin "sunscreen" ''
 
   set -ex
 
-  export MANGOHUD_CONFIG=preset=1
-
   MONITORS=$(hyprctl monitors -j)
   WIDTH=''${SUNSHINE_CLIENT_WIDTH:-$(jq ".[-1].width" <<< "$MONITORS")}
   HEIGHT=''${SUNSHINE_CLIENT_HEIGHT:-$(jq ".[-1].height" <<< "$MONITORS")}
@@ -17,6 +15,8 @@ writeShellScriptBin "sunscreen" ''
 
   GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
           --immediate-flips --force-grab-cursor --mangoapp -f"
+
+  export MANGOHUD_CONFIG=fps_only
 
   case $1 in
   "reset") pkill -TERM gamescope ;;
