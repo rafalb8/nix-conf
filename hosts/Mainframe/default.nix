@@ -62,6 +62,9 @@
     };
   };
 
+  # Disable IPv6
+  networking.enableIPv6 = false;
+
   # Additional packages
   # services.flatpak.enable = true;
   environment.systemPackages = with pkgs; [ oversteer custom.tsmuxer ];
