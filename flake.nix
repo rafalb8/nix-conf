@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -24,10 +24,7 @@
       lib = pkgs.lib // { custom = import ./lib { inherit pkgs; }; };
       paths = import ./config/paths.nix { inherit lib; };
 
-      pinnedPkgs =
-        let
-          pkgs = [ "rpcs3" ];
-        in
+      pinnedPkgs = let pkgs = [ ]; in
         lib.warnIf (pkgs != [ ]) "Pinned to stable: ${toString pkgs}" pkgs;
     in
     {
