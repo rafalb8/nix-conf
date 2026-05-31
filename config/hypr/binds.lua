@@ -1,16 +1,17 @@
 -- Apps
 local term = "ghostty"
-hl.bind("SUPER + T", hl.dsp.exec_cmd(term))
-hl.bind("SUPER + B", hl.dsp.exec_cmd("firefox"))
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd("walker"), { release = true })
+local uwsm = "uwsm-app -- "
+hl.bind("SUPER + T", hl.dsp.exec_cmd(uwsm .. term))
+hl.bind("SUPER + B", hl.dsp.exec_cmd(uwsm .. "firefox"))
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(uwsm .. "walker"), { release = true })
 
 -- Basic binds
-hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind("Print", hl.dsp.exec_cmd("prntscrn"))
-hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd("prntscrn 0"))
-hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(term .. " -e btop"))
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("powermenu"))
-hl.bind("XF86Calculator", hl.dsp.exec_cmd("gnome-calculator"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd(uwsm .. "hyprlock"))
+hl.bind("Print", hl.dsp.exec_cmd(uwsm .. "prntscrn"))
+hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd(uwsm .. "prntscrn 0"))
+hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(uwsm .. term .. " -e btop"))
+hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(uwsm .. "powermenu"))
+hl.bind("XF86Calculator", hl.dsp.exec_cmd(uwsm .. "gnome-calculator"))
 
 -- Window binds
 hl.bind("SUPER + Return", hl.dsp.window.fullscreen({ mode = 0 })) -- Fullscreen
