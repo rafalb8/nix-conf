@@ -23,12 +23,30 @@ in
     # Display Manager
     services.displayManager = {
       gdm.enable = true;
-      gdm.wayland = true;
       defaultSession = "hyprland-uwsm";
     };
 
     # Fix gdm
     systemd.services.display-manager.path = [ pkgs.uwsm ];
+    environment.sessionVariables.XDG_DATA_DIRS = [ "${pkgs.gdm}/share" ];
+    ## Issue: https://github.com/NixOS/nixpkgs/issues/523332
+    ## PR: https://github.com/NixOS/nixpkgs/pull/523948
+    security.pam.services.gdm-launch-environment.rules.session.env-greeter = {
+      control = "required";
+      order = config.security.pam.services.gdm-launch-environment.rules.session.env.order + 50;
+      modulePath = "${config.security.pam.package}/lib/security/pam_env.so";
+      settings.conffile =
+        let
+          env = config.services.displayManager.generic.environment;
+        in
+        pkgs.writeText "gdm-launch-environment-env-conf"
+          ''
+            PATH                    DEFAULT="''${PATH}:${pkgs.gnome-session}/bin"
+            XDG_DATA_DIRS           DEFAULT="''${XDG_DATA_DIRS}:${env.XDG_DATA_DIRS}"
+            GDM_X_SERVER_EXTRA_ARGS DEFAULT="${env.GDM_X_SERVER_EXTRA_ARGS}"
+          '';
+      settings.readenv = 0;
+    };
 
     # Compositor
     programs.hyprland = { enable = true; withUWSM = true; };
