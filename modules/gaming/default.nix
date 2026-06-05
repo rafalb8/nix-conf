@@ -22,7 +22,7 @@ in
       # bottles
 
       # Emulators
-      rpcs3
+      # rpcs3
       custom.eden
 
       # Games
