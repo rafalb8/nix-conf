@@ -67,11 +67,11 @@
 
   # Additional packages
   # services.flatpak.enable = true;
-  environment.systemPackages = with pkgs; [ oversteer custom.tsmuxer ];
+  environment.systemPackages = with pkgs; [ oversteer qFlipper custom.tsmuxer ];
 
   # Steering wheel support
   hardware.new-lg4ff.enable = true;
-  services.udev.packages = with pkgs; [ oversteer ];
+  services.udev.packages = with pkgs; [ oversteer qFlipper ];
 
   hardware.logitech.wireless.enable = true;
   # The state version is required and should stay at the version you
