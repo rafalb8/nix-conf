@@ -11,8 +11,8 @@
   # Enable Wayland HDR for Jellyfin MPV Shim and MPV
   xdg.enable = true;
   xdg.configFile = {
-    "mpv/mpv.conf".text = ''vo=dmabuf-wayland'';
-    "jellyfin-mpv-shim/mpv.conf".text = ''vo=dmabuf-wayland'';
+    "mpv/mpv.conf".text = ''target-colorspace-hint-mode=source'';
+    "jellyfin-mpv-shim/mpv.conf".text = ''target-colorspace-hint-mode=source'';
   };
 
   # Easyeffects service
