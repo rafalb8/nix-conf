@@ -16,7 +16,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "docker" "docker-compose" "sudo" "history" "dirhistory" ];
-      theme = "agnoster";
+      theme = "bureau";
     };
     initContent = ''
       # Catch '--help' and pass it to bat
