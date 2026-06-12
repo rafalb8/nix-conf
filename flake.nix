@@ -42,10 +42,10 @@
         inherit lib;
 
         # Custom packages overlay
-        custom = self.packages.${final.system};
+        custom = self.packages.${final.stdenv.hostPlatform.system};
 
         # Stable channel overlay
-        stable = import nixpkgs-stable { inherit (final) system; config.allowUnfree = true; };
+        stable = import nixpkgs-stable { inherit (final.stdenv.hostPlatform) system; config.allowUnfree = true; };
 
         # Pin broken packages
       } // prev.lib.genAttrs pinnedPkgs (name: final.stable.${name});
