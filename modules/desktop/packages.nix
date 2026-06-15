@@ -1,6 +1,16 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.modules.desktop;
+
+  jellyfin-desktop = pkgs.symlinkJoin {
+    name = "jellyfin-desktop-${pkgs.jellyfin-desktop.version}";
+    paths = [ pkgs.jellyfin-desktop ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/jellyfin-desktop \
+        --set QTWEBENGINE_FORCE_USE_GBM 0
+    '';
+  };
 in
 {
   config = lib.mkIf cfg.enable {
