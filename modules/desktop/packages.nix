@@ -31,7 +31,6 @@ in
       zed-editor
       opencode
       ghostty
-      vscode
       imhex
 
       # Tools
