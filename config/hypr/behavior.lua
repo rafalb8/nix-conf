@@ -119,6 +119,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "mpv",
+    match = {
+        class = "^(mpv)$",
+    },
+    content = "video",
+    float = true,
+})
+
+hl.window_rule({
     name = "firefox-pip",
     match = {
         title = "^(Picture-in-Picture)$",
