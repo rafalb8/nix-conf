@@ -67,7 +67,7 @@
 
   # Additional packages
   # services.flatpak.enable = true;
-  environment.systemPackages = with pkgs; [ oversteer qFlipper custom.tsmuxer ];
+  environment.systemPackages = with pkgs; [ oversteer qFlipper custom.tsmuxer custom.audio-offset-finder ];
 
   # Steering wheel support
   hardware.new-lg4ff.enable = true;
