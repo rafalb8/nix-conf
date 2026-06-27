@@ -17,8 +17,8 @@ in
     environment.systemPackages = with pkgs; [
       # Media
       jellyfin-desktop
-      stable.kdePackages.kdenlive
-      jellyfin-mpv-shim
+      kdePackages.kdenlive
+      stable.jellyfin-mpv-shim
       pear-desktop
       obs-studio
       audacity

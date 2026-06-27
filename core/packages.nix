@@ -45,6 +45,7 @@
     lz4
     zip
     unzip
+    unrar
 
     # Media
     ffmpeg-full
