@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.windows;
   win-reboot = lib.custom.wrapScriptBin "win-reboot"
@@ -27,5 +27,17 @@ in
         protocol: efi
         path: ${cfg.disk}:/EFI/Microsoft/Boot/bootmgfw.efi
     '';
+
+    services.displayManager.sessionPackages = [
+      (
+        (pkgs.writeTextDir "share/wayland-sessions/windows.desktop" ''
+          [Desktop Entry]
+          Version=1.0
+          Name=Windows
+          Exec=/run/wrappers/bin/win-reboot
+          Type=Application
+        '').overrideAttrs (_: { passthru.providedSessions = [ "windows" ]; })
+      )
+    ];
   };
 }
