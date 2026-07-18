@@ -11,6 +11,9 @@
   # Enable secure boot
   boot.loader.limine.secureBoot.enable = true;
 
+  # Disable IPv6
+  networking.enableIPv6 = false;
+
   # Enable modules
   modules = {
     desktop.enable = true;
@@ -24,7 +27,12 @@
 
     hyprland = {
       enable = true;
-      wallpaper = "~/Pictures/Wallpapers/Interstellar.png";
+      wallpaper = toString (pkgs.fetchurl {
+        # https://www.reddit.com/r/WidescreenWallpaper/comments/1uzneby/golden_gate_at_dusk_5120x2160
+        url = "https://i.redd.it/5sgzlnurexdh1.png";
+        # nix-prefetch-url {url}
+        sha256 = "1ak621w9llcmpr4p4vzrgfifn098aj785f29hx3c6r4paqp1ds93";
+      });
       custom = ''
         hl.monitor({
             output = "DP-1",
@@ -47,6 +55,21 @@
     };
   };
 
+  # Additional packages
+  # services.flatpak.enable = true;
+  environment.systemPackages = with pkgs; [
+    slack
+    qFlipper
+    oversteer
+    custom.tsmuxer
+    custom.audio-offset-finder
+  ];
+
+  # Hardware
+  hardware.new-lg4ff.enable = true;
+  hardware.logitech.wireless.enable = true;
+  services.udev.packages = with pkgs; [ oversteer qFlipper ];
+
   # Home module settings
   home-manager.users."rafalb8" = {
     # Git config
@@ -62,18 +85,6 @@
     };
   };
 
-  # Disable IPv6
-  networking.enableIPv6 = false;
-
-  # Additional packages
-  # services.flatpak.enable = true;
-  environment.systemPackages = with pkgs; [ oversteer qFlipper custom.tsmuxer custom.audio-offset-finder ];
-
-  # Steering wheel support
-  hardware.new-lg4ff.enable = true;
-  services.udev.packages = with pkgs; [ oversteer qFlipper ];
-
-  hardware.logitech.wireless.enable = true;
   # The state version is required and should stay at the version you
   # originally installed.
   system.stateVersion = "24.11";
