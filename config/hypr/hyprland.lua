@@ -6,6 +6,7 @@ hl.monitor({
 })
 
 require("custom")
-require("behavior")
-require("binds")
 require("exec")
+require("binds")
+require("config")
+require("rules")

@@ -29,6 +29,7 @@ let
         -- Create Headless monitor and disable real display
         hl.exec_cmd("hyprctl output create headless HEADLESS-2")
         hl.monitor({output = "", disabled = true})
+        hl.dispatch(hl.dsp.focus({ workspace = 1 }))
 
         -- Start programs
         hl.exec_cmd("systemctl restart --user sunshine.service")
@@ -45,10 +46,10 @@ let
     -- Binds
     ${builtins.readFile "${paths.hypr}/binds.lua"}
 
-    -- Behaviour
-    ${builtins.readFile "${paths.hypr}/behavior.lua"}
+    -- Config
+    ${builtins.readFile "${paths.hypr}/config.lua"}
 
-    -- Override games window rule
+    -- Window rule
     hl.window_rule({
         name = "games",
         match = {
