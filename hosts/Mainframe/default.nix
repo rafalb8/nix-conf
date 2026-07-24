@@ -59,6 +59,12 @@
   # services.flatpak.enable = true;
   environment.systemPackages = with pkgs; [
     slack
+
+    nodejs-slim
+    claude-code
+    llama-cpp-rocm
+    lmstudio
+
     qFlipper
     oversteer
     custom.tsmuxer

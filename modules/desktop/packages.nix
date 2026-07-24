@@ -29,7 +29,6 @@ in
       temurin-jre-bin
       android-tools
       zed-editor
-      opencode
       ghostty
       imhex
 
