@@ -13,6 +13,7 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
     settings.download-buffer-size = 524288000; # 500M
     settings.auto-optimise-store = true;
+    settings.trusted-users = ["root" "@wheel"];
   };
 
   # Use latest kernel
