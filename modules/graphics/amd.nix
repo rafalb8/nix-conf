@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.modules.graphics;
 in
@@ -7,6 +7,7 @@ in
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
     hardware.amdgpu.initrd.enable = true;
+    hardware.amdgpu.opencl.enable = true;
 
     # Overclocking with lact
     services.lact.enable = cfg.overclocking.enable;
@@ -14,5 +15,9 @@ in
 
     # Default to RADV
     environment.variables.AMD_VULKAN_ICD = "RADV";
+
+    environment.systemPackages = with pkgs; [
+      nvtopPackages.amd
+    ];
   };
 }
