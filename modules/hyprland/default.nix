@@ -35,6 +35,7 @@ in
     environment.systemPackages = with pkgs; [
       sway-audio-idle-inhibit
       swaynotificationcenter
+      gnome-themes-extra
       libnotify
       hyprpaper
       hyprshot
@@ -96,17 +97,13 @@ in
         }
       '';
 
-      gtk = {
-        enable = true;
-        font.name = "Sans";
-        theme.name = "Adwaita-dark";
-        gtk4.theme.name = "Adwaita";
-        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-      };
-
       dconf.enable = true;
       dconf.settings = {
-        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+        "org/gnome/desktop/interface" = {
+          gtk-theme = "Adwaita-dark";
+          font-name = "Adwaita Sans 11";
+          color-scheme = "prefer-dark";
+        };
         "org/gnome/desktop/wm/preferences".button-layout = ":";
       };
 
