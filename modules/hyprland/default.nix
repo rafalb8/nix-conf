@@ -116,5 +116,18 @@ in
         size = 24;
       };
     };
+
+    services.displayManager.sessionPackages = [
+      (
+        (pkgs.writeTextDir "share/wayland-sessions/uwsm-default.desktop" ''
+          [Desktop Entry]
+          Version=1.0
+          Name=UWSM (default)
+          Exec=${pkgs.uwsm}/bin/uwsm start default
+          Type=Application
+        '').overrideAttrs (_: { passthru.providedSessions = [ "uwsm-default" ]; })
+      )
+    ];
+
   };
 }
