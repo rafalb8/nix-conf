@@ -15,7 +15,7 @@
   modules = {
     graphics.amd = true;
     desktop.enable = true;
-    windows.dualboot = true;
+    windows.enable = true;
     hyprland = {
       enable = true;
       wallpaper = "~/Pictures/Wallpapers/1.jpg";

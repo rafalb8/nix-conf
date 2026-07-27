@@ -6,15 +6,10 @@ let
 in
 {
   options.modules.windows = {
-    dualboot = lib.mkEnableOption "Enable windows dualboot";
-    disk = lib.mkOption {
-      type = lib.types.str;
-      description = "Limine path. https://codeberg.org/Limine/Limine/src/branch/trunk/CONFIG.md#paths";
-      default = "boot()";
-    };
+    enable = lib.mkEnableOption "Enable windows dualboot";
   };
 
-  config = lib.mkIf cfg.dualboot {
+  config = lib.mkIf cfg.enable {
     security.wrappers.win-reboot = {
       setuid = true;
       owner = "root";
@@ -24,8 +19,8 @@ in
 
     boot.loader.limine.extraEntries = ''
       /Windows
-        protocol: efi
-        path: ${cfg.disk}:/EFI/Microsoft/Boot/bootmgfw.efi
+        protocol: efi_boot_entry
+        entry: Windows Boot Manager
     '';
 
     services.displayManager.sessionPackages = [

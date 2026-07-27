@@ -20,10 +20,7 @@
     gaming = { enable = true; streaming.enable = true; };
     graphics = { amd = true; overclocking.enable = true; };
 
-    windows = {
-      dualboot = true;
-      disk = "guid(16f1dd3d-e30e-408d-9404-13bdd6c6951e)";
-    };
+    windows.enable = true;
 
     hyprland = {
       enable = true;
