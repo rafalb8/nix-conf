@@ -18,9 +18,17 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = "gamescope",
+    match = {
+        class = "^.*gamescope.*$",
+    },
+    content = "game",
+})
+
+hl.window_rule({
     name = "game-content",
     match = {
-        class = "^(gamescope|steam_app_.*|cs2)$",
+        class = "^(steam_app_.*|cs2)$",
     },
     content = "game",
 })

@@ -13,7 +13,7 @@ let
     })
 
     hl.monitor({
-        output = "HEADLESS-2",
+        output = "HEADLESS-1",
         mode = "3840x2160@60",
         position = "auto",
         scale = 1,
@@ -21,13 +21,13 @@ let
 
     hl.workspace_rule({
       workspace = "1",
-      monitor = "HEADLESS-2",
+      monitor = "HEADLESS-1",
       default = true,
     })
 
     hl.on("hyprland.start", function()
         -- Create Headless monitor and disable real display
-        hl.exec_cmd("hyprctl output create headless HEADLESS-2")
+        hl.exec_cmd("hyprctl output create headless HEADLESS-1")
         hl.monitor({output = "", disabled = true})
         hl.dispatch(hl.dsp.focus({ workspace = 1 }))
 
@@ -49,16 +49,24 @@ let
     -- Config
     ${builtins.readFile "${paths.hypr}/config.lua"}
 
+    hl.config({
+      render = {
+          direct_scanout = 1,
+      },
+    })
+
     -- Window rule
     hl.window_rule({
         name = "games",
         match = {
-            content = "game",
+            class = "^.*gamescope.*$",
         },
+        content = "game",
         immediate = true,
         no_blur = true,
         no_shadow = true,
         rounding = 0,
+        center = true,
     })
   '';
 in
@@ -129,13 +137,13 @@ in
       in
       [
         (
-          (pkgs.writeTextDir "share/wayland-sessions/hyprsun.desktop" ''
+          (pkgs.writeTextDir "share/wayland-sessions/sunshine.desktop" ''
             [Desktop Entry]
             Version=1.0
-            Name=Hyprsun
+            Name=Sunshine
             Exec=${launcher}
             Type=Application
-          '').overrideAttrs (_: { passthru.providedSessions = [ "hyprsun" ]; })
+          '').overrideAttrs (_: { passthru.providedSessions = [ "sunshine" ]; })
         )
       ];
   };

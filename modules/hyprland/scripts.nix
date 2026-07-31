@@ -44,31 +44,5 @@ let
         4) win-reboot ;;
     esac
   '';
-
-  hyprvs = lib.mkIf (config.services.sunshine.enable) (pkgs.writeShellScriptBin "hyprvs" ''
-    hyprctl output create headless HEADLESS-2
-    hyprctl keyword workspace 9, monitor:HEADLESS-2
-
-    cat >/tmp/sunshine_apps.json <<EOF
-    {
-      "env": {},
-      "apps": [
-        {
-          "name": "Desktop",
-          "image-path": "desktop.png",
-          "prep-cmd": [{"do": "${pkgs.custom.sunscreen}/bin/sunscreen monitor"}]
-        }
-      ]
-    }
-    EOF
-
-    sunshine /tmp/sunshine.conf \
-            file_apps=/tmp/sunshine_apps.json \
-            stream_audio=disabled \
-            system_tray=disabled \
-            output_name=1
-
-    hyprctl output remove headless HEADLESS-2
-  '');
 in
-{ config.environment.systemPackages = lib.mkIf cfg.enable [ prntscrn audioswitch powermenu hyprvs ]; }
+{ config.environment.systemPackages = lib.mkIf cfg.enable [ prntscrn audioswitch powermenu ]; }
