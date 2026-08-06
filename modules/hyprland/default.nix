@@ -33,7 +33,7 @@ in
     services.gvfs.enable = true;
     programs.hyprlock.enable = true;
     environment.systemPackages = with pkgs; [
-      sway-audio-idle-inhibit
+      wayland-pipewire-idle-inhibit
       swaynotificationcenter
       gnome-themes-extra
       libnotify

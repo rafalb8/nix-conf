@@ -6,7 +6,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd(uwsm_session .. "swaync")
     hl.exec_cmd(uwsm_session .. "elephant")
     hl.exec_cmd(uwsm_session .. "hypridle")
-    hl.exec_cmd(uwsm_session .. "sway-audio-idle-inhibit")
+    hl.exec_cmd(uwsm_session .. "wayland-pipewire-idle-inhibit")
     hl.exec_cmd(uwsm_session .. "walker --gapplication-service")
 
     hl.exec_cmd(uwsm_background .. "hyprpaper")
