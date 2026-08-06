@@ -1,19 +1,25 @@
--- Apps
 local term = "ghostty"
 local uwsm = "uwsm-app -- "
+local ipc = "noctalia msg "
+
+-- Core
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+hl.bind("SUPER + COMMA", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+
+-- Apps
 hl.bind("SUPER + T", hl.dsp.exec_cmd(uwsm .. term))
 hl.bind("SUPER + B", hl.dsp.exec_cmd(uwsm .. "firefox"))
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(uwsm .. "walker"), { release = true })
 
 -- Basic binds
-hl.bind("SUPER + L", hl.dsp.exec_cmd(uwsm .. "hyprlock"))
-hl.bind("Print", hl.dsp.exec_cmd(uwsm .. "prntscrn"))
-hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd(uwsm .. "prntscrn 0"))
+hl.bind("SUPER + L", hl.dsp.exec_cmd(ipc .. "session lock"))
+hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))
+hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd(uwsm .. term .. " -e btop"))
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(uwsm .. "powermenu"))
+hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(ipc .. "panel-open session"))
 hl.bind("XF86Calculator", hl.dsp.exec_cmd(uwsm .. "gnome-calculator"))
 
 -- Window binds
+hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
 hl.bind("SUPER + Return", hl.dsp.window.fullscreen({ mode = 0 })) -- Fullscreen
 hl.bind("SUPER + W", hl.dsp.window.close())
 hl.bind("SUPER + F", function()
@@ -61,19 +67,17 @@ hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Volume Control
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"),
-    { repeating = true, locked = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-    { repeating = true, locked = true })
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
-hl.bind("SUPER + V", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(ipc .. "mic-mute"), { locked = true })
+hl.bind("SUPER + V", hl.dsp.exec_cmd(ipc .. "mic-mute"), { locked = true })
 
 -- Media Control
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ipc .. "media next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ipc .. "media previous"), { locked = true })
 
 -- Brightness
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(uwsm .. "brightnessctl set 5%+"), { repeating = true, locked = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(uwsm .. "brightnessctl set 5%-"), { repeating = true, locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))

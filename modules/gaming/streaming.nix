@@ -31,12 +31,8 @@ let
         hl.monitor({output = "", disabled = true})
         hl.dispatch(hl.dsp.focus({ workspace = 1 }))
 
-        -- Start programs
+        -- Start Sunshine
         hl.exec_cmd("systemctl restart --user sunshine.service")
-
-        -- Walker + Elephant for SUPER bind
-        hl.exec_cmd("walker --gapplication-service")
-        hl.exec_cmd("elephant")
     end)
 
     -- Hyprsun binds

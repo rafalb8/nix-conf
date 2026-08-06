@@ -26,27 +26,12 @@ in
       defaultSession = "hyprland-uwsm";
     };
 
-    # Compositor
     programs.hyprland = { enable = true; withUWSM = true; };
-
-    # Components
     services.gvfs.enable = true;
-    programs.hyprlock.enable = true;
-    environment.systemPackages = with pkgs; [
-      wayland-pipewire-idle-inhibit
-      swaynotificationcenter
-      gnome-themes-extra
-      libnotify
-      hyprpaper
-      hyprshot
-      elephant
-      walker
 
-      # TUI/CLI tools
-      impala
-      bluetui
-      playerctl
-      brightnessctl
+    environment.systemPackages = with pkgs; [
+      # Tools
+      ddcutil
 
       # Basic apps
       loupe
@@ -68,15 +53,6 @@ in
       "/share/hypr" # lua stub: /run/current-system/sw/share/hypr/stubs
     ];
 
-    # Allow sharing wifi connection
-    security.wrappers.impala = {
-      setuid = true;
-      owner = "root";
-      group = "root";
-      source = "${pkgs.impala}/bin/impala";
-    };
-
-    # Set dark mode in Qt applications
     qt = {
       enable = true;
       style = "adwaita-dark";
@@ -89,22 +65,11 @@ in
         source = paths.hypr;
         recursive = true;
       };
-      xdg.configFile."hypr/hyprpaper.conf".text = ''
-        wallpaper {
-            monitor =
-            path = ${cfg.wallpaper}
-            fit_mode = cover
-        }
-      '';
 
       dconf.enable = true;
       dconf.settings = {
-        "org/gnome/desktop/interface" = {
-          gtk-theme = "Adwaita-dark";
-          font-name = "Adwaita Sans 11";
-          color-scheme = "prefer-dark";
-        };
         "org/gnome/desktop/wm/preferences".button-layout = ":";
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
 
       # Cursor
@@ -116,18 +81,5 @@ in
         size = 24;
       };
     };
-
-    services.displayManager.sessionPackages = [
-      (
-        (pkgs.writeTextDir "share/wayland-sessions/uwsm-default.desktop" ''
-          [Desktop Entry]
-          Version=1.0
-          Name=UWSM (default)
-          Exec=${pkgs.uwsm}/bin/uwsm start default
-          Type=Application
-        '').overrideAttrs (_: { passthru.providedSessions = [ "uwsm-default" ]; })
-      )
-    ];
-
   };
 }

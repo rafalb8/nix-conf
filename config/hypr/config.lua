@@ -21,27 +21,31 @@ hl.config({
     general = {
         layout = "dwindle",
 
-        gaps_in = 4,
-        gaps_out = 4,
+        gaps_in = 5,
+        gaps_out = 5,
         border_size = 1,
         allow_tearing = true,
         col = {
-            active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border = { colors = { "rgba(77A8D9ff)", "rgba(1F2430ff)" }, angle = 45 },
+            inactive_border = "rgba(1F2430ff)",
         },
-    },
-
-    dwindle = {
-        smart_split = true,
     },
 
     decoration = {
         rounding = 5,
+
+        shadow = {
+            enabled = true,
+            range = 4,
+            render_power = 3,
+            color = "0xee1a1a1a",
+        },
+
         blur = {
             enabled = true,
             size = 3,
-            passes = 1,
+            passes = 2,
+            vibrancy = 0.1696,
         },
-        dim_special = 0.5,
     },
 })

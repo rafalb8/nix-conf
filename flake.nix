@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    noctalia.url = "github:noctalia-dev/noctalia";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -11,11 +12,17 @@
     };
   };
 
+  nixConfig = {
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+  };
+
   outputs =
     { self
     , nixpkgs
     , nixpkgs-stable
     , home-manager
+    , noctalia
     , ...
     }@inputs:
     let
@@ -63,6 +70,7 @@
             ./extensions
             ./hosts/${hostname}
 
+            noctalia.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               nixpkgs.overlays = [ self.overlays.default ];

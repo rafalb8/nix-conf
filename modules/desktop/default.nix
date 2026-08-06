@@ -66,6 +66,8 @@ in
 
     # Setup desktop services
     services = {
+      tuned.enable = true;
+      upower.enable = true;
       udisks2.enable = true;
 
       # Auto nice deamon
