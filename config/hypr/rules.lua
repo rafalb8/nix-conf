@@ -52,7 +52,7 @@ hl.window_rule({
 hl.window_rule({
     name = "game-content",
     match = {
-        class = "^(steam_app_.*|cs2)$",
+        class = "^(steam_app_.*|cs2|bg3)$",
     },
     content = "game",
 })
