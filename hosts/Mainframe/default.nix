@@ -37,18 +37,14 @@
             position = "auto",
             scale = 1,
             bitdepth = 10,
-            cm = "dp3",
+            cm = "hdr",
             vrr = 2,
             -- SDR to HDR
             sdr_eotf = "gamma22",
             sdr_min_luminance = 0.0,
             sdr_max_luminance = 250,
-            sdrbrightness = 0.5,
+            sdrbrightness = 0.4,
             sdrsaturation = 1.0,
-            -- HDR
-            min_luminance = 0.0,
-            max_luminance = 400,
-            max_avg_luminance = 250,
         })
         hl.config({render = {cm_auto_hdr = 1}})
       '';
