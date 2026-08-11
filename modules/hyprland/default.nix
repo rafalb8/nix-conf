@@ -68,7 +68,7 @@ in
 
       dconf.enable = true;
       dconf.settings = {
-        "org/gnome/desktop/wm/preferences".button-layout = ":";
+        "org/gnome/desktop/wm/preferences".button-layout = ":close";
         "org/gnome/desktop/interface".color-scheme = "prefer-dark";
       };
 
