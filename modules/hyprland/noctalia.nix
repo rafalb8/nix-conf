@@ -73,13 +73,12 @@ in
         ];
 
         idle = {
-          behavior_order = [ "Keyboard Off" "screen-off" "lock" "lock-and-suspend" ];
-          behavior."Keyboard Off" = {
-            action = "command";
-            command = "noctalia msg keyboard-backlight-down";
+          behavior_order = [ "screen-off" "lock" "lock-and-suspend" ];
+
+          behavior.screen-off = {
+            action = "screen_off";
             enabled = true;
-            resume_command = "noctalia msg keyboard-backlight-up";
-            timeout = 30.0;
+            timeout = 120.0;
           };
 
           behavior.lock = {
@@ -92,12 +91,6 @@ in
             action = "lock_and_suspend";
             enabled = true;
             timeout = 1800.0;
-          };
-
-          behavior.screen-off = {
-            action = "screen_off";
-            enabled = true;
-            timeout = 120.0;
           };
         };
 
