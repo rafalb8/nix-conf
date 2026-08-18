@@ -42,7 +42,7 @@ in
     # Autostart
     autostart = {
       enable = true;
-      packages = [ (pkgs.steam // { env = { MANGOHUD = "1"; }; }) ];
+      packages = [ (pkgs.steam // { environment = { MANGOHUD = "1"; }; }) ];
     };
 
     # Enable NTSync (kernel 6.14+)

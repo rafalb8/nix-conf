@@ -3,11 +3,11 @@
 let
   cfg = config.autostart;
 
-  mkAutostartItem = { name, exec, env ? { } }:
+  mkAutostartItem = { name, exec, environment }:
     pkgs.makeDesktopItem {
       inherit name;
       desktopName = name;
-      exec = "${lib.custom.toEnvPrefix env}${exec}";
+      exec = "${lib.custom.toEnvPrefix environment}${exec}";
       type = "Application";
       noDisplay = true;
     };
@@ -21,10 +21,10 @@ in
       default = [ ];
       description = ''
         List of packages to be autostarted.
-        Supports overrides for 'exec' and 'env' e.g.:
+        Supports overrides for 'exec' and 'environment' e.g.:
         (pkgs.pkg // {
-          env = { ENV = "true";};
           exec = "''${pkgs.pkg}/bin/pkg";
+          environment = { ENV = "true";};
         })
       '';
     };
@@ -37,15 +37,13 @@ in
           name = pkg.pname or pkg.name;
           autostartItem = mkAutostartItem {
             inherit name;
-            env = pkg.env or { };
             exec = pkg.exec or "${pkg}/bin/${name}";
+            environment = pkg.environment or { };
           };
         in
         {
           name = "xdg/autostart/${name}.desktop";
-          value = {
-            source = "${autostartItem}/share/applications/${name}.desktop";
-          };
+          value.source = "${autostartItem}/share/applications/${name}.desktop";
         }
       )
       cfg.packages);
