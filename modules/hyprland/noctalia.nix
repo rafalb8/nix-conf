@@ -110,6 +110,7 @@ in
             "network"
             "bluetooth"
             "volume"
+            "input_volume"
             "brightness"
             "battery"
             "control-center"
@@ -119,6 +120,7 @@ in
         widget.active_window.min_length = 0;
         widget.active_window.max_length = 500;
         widget.media.hide_when_no_media = true;
+        widget.input_volume.show_label = false;
       };
     };
 
