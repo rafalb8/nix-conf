@@ -29,7 +29,7 @@ writeShellScriptBin "sunscreen" ''
             timeout 5 pidwait -x steam || pkill -9 -x steam || true
             sleep 2
         fi
-        $GAMESCOPE_CMD -e -- steam -gamepadui -steamos3 ;;
+        $GAMESCOPE_CMD -e -- steam -gamepadui ;;
     *) $GAMESCOPE_CMD -- "$@"
   esac
 ''
