@@ -37,7 +37,7 @@
             position = "auto",
             scale = 1,
             bitdepth = 10,
-            cm = "dcip3",
+            cm = "dp3",
             vrr = 2,
             -- SDR to HDR
             sdr_eotf = "gamma22",
@@ -63,10 +63,10 @@
   environment.systemPackages = with pkgs; [
     slack
 
+    lmstudio
     nodejs-slim
     claude-code
     llama-cpp-rocm
-    lmstudio
 
     qFlipper
     oversteer
