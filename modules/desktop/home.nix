@@ -8,11 +8,14 @@
     go
   '';
 
-  # Enable Wayland HDR for Jellyfin MPV Shim and MPV
   xdg.enable = true;
   xdg.configFile = {
+    # Enable Wayland HDR for Jellyfin MPV Shim and MPV
     "mpv/mpv.conf".text = ''target-colorspace-hint-mode=source'';
     "jellyfin-mpv-shim/mpv.conf".text = ''target-colorspace-hint-mode=source'';
+
+    # Zed Config
+    "zed".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed";
   };
 
   # Easyeffects service
@@ -32,7 +35,4 @@
       background-opacity = 0.8;
     };
   };
-
-  # Zed Config
-  home.file.".config/zed".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed";
 }
