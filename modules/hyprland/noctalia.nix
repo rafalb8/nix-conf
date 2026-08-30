@@ -1,4 +1,4 @@
-{ config, lib, inputs, ... }:
+{ config, lib, ... }:
 let
   cfg = config.modules.hyprland;
 in
@@ -6,8 +6,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.noctalia.enable = true;
     home-manager.users."rafalb8" = {
-      imports = [ inputs.noctalia.homeModules.default ];
-
       programs.noctalia.enable = true;
       programs.noctalia.settings = {
         location.auto_locate = true;
