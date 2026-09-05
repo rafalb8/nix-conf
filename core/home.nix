@@ -2,7 +2,7 @@
 {
   home.sessionVariables = {
     DOCKER_BUILDKIT = 1;
-    PATH = "$HOME/go/bin:$PATH";
+    PATH = "$HOME/go/bin:$HOME/.local/bin:$PATH";
 
     # Use bat for man
     # https://github.com/sharkdp/bat?tab=readme-ov-file#man

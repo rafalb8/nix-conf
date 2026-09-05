@@ -11,7 +11,6 @@
     hydra-check
     nix-tree
     ripgrep
-    xclip
     file
     lsof
     bat
@@ -35,6 +34,7 @@
     # Networking
     nmap
     wget
+    socat
     rsync
     rclone
     openssl

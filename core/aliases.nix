@@ -39,7 +39,6 @@ in
     du = "du -h";
     df = "df -h";
     lzg = "lazygit";
-    xclip = "xclip -selection clipboard";
     fgkill = "jobs -p | grep -o -E ' [0-9]+ ' | xargs -r -n1 pkill -SIGINT -g";
     certcat = "openssl x509 -text -in";
     rsync-cp = "rsync -a --info=progress2 --no-i-r";

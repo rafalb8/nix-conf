@@ -34,6 +34,7 @@ in
 
       # Tools
       onlyoffice-desktopeditors
+      wl-clipboard
       imagemagick
       impression # USB writer
       obsidian
