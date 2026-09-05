@@ -68,6 +68,7 @@
     claude-code
     llama-cpp-rocm
 
+    makemkv
     qFlipper
     oversteer
     custom.tsmuxer
@@ -75,6 +76,7 @@
   ];
 
   # Hardware
+  boot.kernelModules = [ "sg" ];
   hardware.new-lg4ff.enable = true;
   hardware.logitech.wireless.enable = true;
   services.udev.packages = with pkgs; [ oversteer qFlipper ];
