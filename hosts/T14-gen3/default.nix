@@ -55,6 +55,12 @@
     "cfg80211.ieee80211_regdom=PL" # Wi-Fi region
   ];
 
+  # Wifi fix
+  systemd.services.iwd = {
+    after = [ "sys-subsystem-net-devices-wlan0.device" ];
+    wants = [ "sys-subsystem-net-devices-wlan0.device" ];
+  };
+
   # Fingerprint (Synaptics [06cb:00f9])
   services.fprintd.enable = true;
 
