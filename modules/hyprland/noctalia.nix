@@ -72,6 +72,7 @@ in
 
         idle = {
           behavior_order = [ "screen-off" "lock" "lock-and-suspend" ];
+          pre_action_fade_seconds = 10;
 
           behavior.screen-off = {
             action = "screen_off";
