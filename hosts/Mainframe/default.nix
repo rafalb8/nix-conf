@@ -37,7 +37,7 @@
             position = "auto",
             scale = 1,
             bitdepth = 10,
-            cm = "dp3",
+            cm = "srgb",
             vrr = 2,
             -- SDR to HDR
             sdr_eotf = "gamma22",
@@ -53,6 +53,7 @@
         hl.config({
           render = {cm_auto_hdr = 1},
           quirks = {prefer_hdr = 1},
+          cursor = {no_hardware_cursors = 1}
         })
       '';
     };
