@@ -37,7 +37,7 @@
             position = "auto",
             scale = 1,
             bitdepth = 10,
-            cm = "srgb",
+            cm = "hdr",
             vrr = 2,
             -- SDR to HDR
             sdr_eotf = "gamma22",

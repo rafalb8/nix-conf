@@ -10,9 +10,9 @@
 
   xdg.enable = true;
   xdg.configFile = {
-    # Enable Wayland HDR for Jellyfin MPV Shim and MPV
-    "mpv/mpv.conf".text = ''target-colorspace-hint-mode=source'';
-    "jellyfin-mpv-shim/mpv.conf".text = ''target-colorspace-hint-mode=source'';
+    # Fix hyprland bug, while watching SDR content
+    "mpv/mpv.conf".text = ''target-colorspace-hint-mode=no'';
+    "jellyfin-mpv-shim/mpv.conf".text = ''target-colorspace-hint-mode=no'';
 
     # Zed Config
     "zed".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed";
