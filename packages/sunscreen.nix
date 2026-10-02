@@ -15,21 +15,28 @@ writeShellScriptBin "sunscreen" ''
   FPS=''${SUNSHINE_CLIENT_FPS:-$(jq -r '.refreshRate | tonumber | round' <<< "$MONITOR")}
   MODE="''${WIDTH}x''${HEIGHT}@''${FPS}"
 
-  GAMESCOPE_CMD="exec gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} \
-          --immediate-flips --force-grab-cursor --mangoapp -f"
+  GAMESCOPE_CMD="gamescope -W ''${WIDTH} -H ''${HEIGHT} -r ''${FPS} --immediate-flips --mangoapp --grab --force-grab-cursor -f"
+
+  kill_steam() {
+      if pgrep -x steam >/dev/null; then
+          pkill -TERM -x steam || true
+          timeout 5 pidwait -x steam || pkill -9 -x steam || true
+          sleep 2
+      fi
+  }
 
   export MANGOHUD_CONFIG=fps_only
 
   case $1 in
     "reset") pkill -TERM gamescope ;;
     "mode") hyprctl eval "hl.monitor({output = '$DISPLAY', mode = '$MODE'})" ;;
+    "headless"|"steam-headless")
+        kill_steam
+        exec $GAMESCOPE_CMD --backend headless -e -- steam -gamepadui -pipewire-dmabuf ;;
     "steam")
-        if pgrep -x steam >/dev/null; then
-            pkill -TERM -x steam || true
-            timeout 5 pidwait -x steam || pkill -9 -x steam || true
-            sleep 2
-        fi
-        $GAMESCOPE_CMD -e -- steam -gamepadui ;;
-    *) $GAMESCOPE_CMD -- "$@"
+        kill_steam
+        export STEAM_MULTIPLE_XWAYLANDS=1
+        exec $GAMESCOPE_CMD --xwayland-count 2 -e -- steam -gamepadui -pipewire-dmabuf ;;
+    *) exec $GAMESCOPE_CMD -- "$@" ;;
   esac
 ''

@@ -5,12 +5,9 @@ let
 
   hypr-conf = pkgs.writeText "hyprland.lua" ''
     -- Monitors
-    hl.monitor({
-        output = "",
-        mode = "preferred",
-        position = "auto",
-        scale = 1,
-    })
+    local monitor_on = { output = "", mode = "preferred", position = "auto", scale = 1 }
+    local monitor_off = {output = "", disabled = true}
+    hl.monitor(monitor_on)
 
     hl.monitor({
         output = "HEADLESS-1",
@@ -28,16 +25,17 @@ let
     hl.on("hyprland.start", function()
         -- Create Headless monitor and disable real display
         hl.exec_cmd("hyprctl output create headless HEADLESS-1")
-        hl.monitor({output = "", disabled = true})
+        hl.monitor(monitor_off)
         hl.dispatch(hl.dsp.focus({ workspace = 1 }))
 
         -- Start Sunshine
         hl.exec_cmd("systemctl restart --user sunshine.service")
     end)
 
-    -- Hyprsun binds
+    -- Sunshine on Hyprland binds
     hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
     hl.bind("SUPER + P", hl.dsp.exec_cmd("sunscreen steam"))
+    hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd("sunscreen headless"))
 
     -- Binds
     ${builtins.readFile "${paths.hypr}/binds.lua"}
@@ -45,11 +43,7 @@ let
     -- Config
     ${builtins.readFile "${paths.hypr}/config.lua"}
 
-    hl.config({
-      render = {
-          direct_scanout = 1,
-      },
-    })
+    hl.config({ render = { direct_scanout = 1 } })
 
     -- Window rule
     hl.window_rule({
@@ -78,9 +72,9 @@ in
     services.sunshine = {
       # https://docs.lizardbyte.dev/projects/sunshine/latest/md_docs_2configuration.html
       settings = {
-        # mouse = "disabled";
+        capture = "wlr";
         system_tray = "disabled";
-        back_button_timeout = 1000;
+        back_button_timeout = 0;
       };
 
       applications.env = { PATH = "$(PATH):/run/current-system/sw/bin"; };
@@ -124,20 +118,13 @@ in
     # Add custom hyprland session
     environment.systemPackages = [ pkgs.hyprland sunscreen ];
     services.displayManager.sessionPackages =
-      let
-        launcher = pkgs.writeShellScript "launcher" ''
-          export SUNSHINE=true
-          systemctl --user import-environment SUNSHINE
-          exec ${pkgs.hyprland}/bin/start-hyprland -- --config ${hypr-conf}
-        '';
-      in
       [
         (
           (pkgs.writeTextDir "share/wayland-sessions/sunshine.desktop" ''
             [Desktop Entry]
             Version=1.0
             Name=Sunshine
-            Exec=${launcher}
+            Exec=${pkgs.hyprland}/bin/start-hyprland -- --config ${hypr-conf}
             Type=Application
           '').overrideAttrs (_: { passthru.providedSessions = [ "sunshine" ]; })
         )
