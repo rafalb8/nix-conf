@@ -64,6 +64,7 @@
   environment.systemPackages = with pkgs; [
     slack
 
+    codex
     lmstudio
     nodejs-slim
     claude-code
