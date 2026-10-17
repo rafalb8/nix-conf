@@ -31,8 +31,7 @@ writeShellScriptBin "sunscreen" ''
     "reset") pkill -TERM gamescope ;;
     "mode") hyprctl eval "hl.monitor({output = '$DISPLAY', mode = '$MODE'})" ;;
     "headless"|"steam-headless")
-        kill_steam
-        exec $GAMESCOPE_CMD --backend headless -e -- steam -gamepadui -pipewire-dmabuf ;;
+        GAMESCOPE_CMD="$GAMESCOPE_CMD --backend headless" ;&
     "steam")
         kill_steam
         export STEAM_MULTIPLE_XWAYLANDS=1

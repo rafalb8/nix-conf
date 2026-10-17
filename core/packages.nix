@@ -55,6 +55,7 @@
     jq
     gcc
     clang
+    python3
     gnumake
     lazygit
     man-pages

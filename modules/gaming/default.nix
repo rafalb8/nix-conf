@@ -15,6 +15,7 @@ in
       # Tools
       gamescope
       protonplus
+      umu-launcher
 
       # Wine guis
       heroic
