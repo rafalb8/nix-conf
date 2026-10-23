@@ -66,21 +66,26 @@
 
     lmstudio
     nodejs-slim
-    claude-code
-    llama-cpp-rocm
+    custom.strata
+    (pkgs.symlinkJoin {
+      name = "pi-coding-agent";
+      buildInputs = [ pkgs.makeWrapper ];
+      paths = [ pkgs.pi-coding-agent ];
+      postBuild = ''
+        wrapProgram $out/bin/pi \
+          --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.nodejs_latest]}
+      '';
+    })
 
     makemkv
-    qFlipper
-    oversteer
     custom.tsmuxer
     custom.audio-offset-finder
   ];
 
   # Hardware
   boot.kernelModules = [ "sg" ];
-  hardware.new-lg4ff.enable = true;
   hardware.logitech.wireless.enable = true;
-  services.udev.packages = with pkgs; [ oversteer qFlipper ];
+  services.udev.packages = with pkgs; [ qFlipper ];
 
   # Home module settings
   home-manager.users."rafalb8" = {
