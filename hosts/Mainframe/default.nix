@@ -64,23 +64,20 @@
   environment.systemPackages = with pkgs; [
     slack
 
+    crush
     lmstudio
     nodejs-slim
-    claude-code
-    llama-cpp-rocm
+    custom.strata
 
     makemkv
-    qFlipper
-    oversteer
     custom.tsmuxer
     custom.audio-offset-finder
   ];
 
   # Hardware
   boot.kernelModules = [ "sg" ];
-  hardware.new-lg4ff.enable = true;
   hardware.logitech.wireless.enable = true;
-  services.udev.packages = with pkgs; [ oversteer qFlipper ];
+  services.udev.packages = with pkgs; [ qFlipper ];
 
   # Home module settings
   home-manager.users."rafalb8" = {
