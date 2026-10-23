@@ -21,7 +21,7 @@ in
       stable.jellyfin-mpv-shim
       pear-desktop
       obs-studio
-      audacity
+      stable.audacity
       krita
       mpv
 
