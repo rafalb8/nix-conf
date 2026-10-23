@@ -30,7 +30,6 @@ in
     programs.chromium = {
       enable = true;
       extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
       extraOpts = {
