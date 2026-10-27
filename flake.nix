@@ -58,7 +58,6 @@
           specialArgs = { inherit inputs lib paths; };
 
           modules = [
-            ./core
             ./modules
             ./extensions
             ./hosts/${hostname}
