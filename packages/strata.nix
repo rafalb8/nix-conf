@@ -6,11 +6,11 @@
 }:
 let
   pname = "strata-desktop";
-  version = "0.2.7";
+  version = "0.2.9";
 
   src = fetchurl {
     url = "https://github.com/Niko1221/Strata/releases/download/v${version}/Strata-${version}-linux-x86_64.AppImage";
-    hash = "sha256-cBoDJXKbvnXrJMd67h5FuPwuRqdO8dJUdc/vKj7xsoE=";
+    hash = "sha256-xSgxE8Mg5Ve/eWjZreYm3WHOowD8sbi2LvTV435tLak=";
   };
 
   appRun = writeShellScript "strata-AppRun" ''
@@ -43,6 +43,10 @@ appimageTools.wrapAppImage {
   src = contents;
 
   nativeBuildInputs = [ makeWrapper ];
+
+  extraPkgs = pkgs: [
+    pkgs.libgpg-error
+  ];
 
   profile = ''
     export SSL_CERT_FILE="/etc/ssl/certs/ca-bundle.crt"

@@ -65,7 +65,7 @@
     slack
 
     lmstudio
-    nodejs-slim
+    nodejs_latest
     custom.strata
 
     makemkv
