@@ -17,7 +17,8 @@ let
           sudo true # Cache password
           cd $DIR
           \nix flake update
-          git add flake.lock && git commit -m "Bump [$(date --rfc-3339=date)]"
+          git add flake.lock
+          git diff --quiet HEAD -- flake.lock || git commit -m "Bump [$(date --rfc-3339=date)]"
           nixos-rebuild boot --sudo -Lv "$@";;
       code) zeditor $DIR "$@";;
       repl) \nix repl --expr "${repl-expr}";;
