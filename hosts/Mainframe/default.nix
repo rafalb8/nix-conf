@@ -67,15 +67,6 @@
     lmstudio
     nodejs-slim
     custom.strata
-    (pkgs.symlinkJoin {
-      name = "pi-coding-agent";
-      buildInputs = [ pkgs.makeWrapper ];
-      paths = [ pkgs.pi-coding-agent ];
-      postBuild = ''
-        wrapProgram $out/bin/pi \
-          --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.nodejs_latest]}
-      '';
-    })
 
     makemkv
     custom.tsmuxer

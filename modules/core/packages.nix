@@ -60,6 +60,7 @@
     lazygit
     man-pages
     clang-tools
+    pi-coding-agent
 
     # Golang
     go
