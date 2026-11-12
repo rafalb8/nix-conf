@@ -93,6 +93,12 @@ in
       pulse.enable = true;
     };
 
+    # Extra
+    services.udev.extraRules = ''
+      # Disable USB autosuspend for Samsung uSD card reader
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="61fd", TEST=="power/control", ATTR{power/control}="on"
+    '';
+
     # Fonts
     fonts.fontconfig.enable = true;
     fonts.packages = with pkgs; [
