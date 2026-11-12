@@ -33,6 +33,7 @@
       window-width = 120;
       window-height = 30;
       background-opacity = 0.8;
+      font-family = "IoskeleyMonoTerm Nerd Font Mono";
     };
   };
 }

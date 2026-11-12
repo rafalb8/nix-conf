@@ -113,6 +113,8 @@ in
       source-han-sans
       source-han-serif
 
+      ioskeley-mono.nf
+      ioskeley-mono.term-nf
       nerd-fonts.jetbrains-mono
     ];
 
