@@ -102,6 +102,11 @@ in
             image-path = "desktop.png";
             detached = [ "ghostty" ];
           })
+          (default // {
+            name = "Lichii";
+            image-path = "${pkgs.custom.lichii}/share/icons/hicolor/256x256/apps/io.github.zortos293.lichii.png";
+            detached = [ "${sunscreen}/bin/sunscreen lichii" ];
+          })
         ];
     };
 

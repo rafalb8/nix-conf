@@ -25,6 +25,7 @@ in
       # Emulators
       # rpcs3
       eden
+      custom.lichii
 
       # Games
       prismlauncher # Minecraft launcher
