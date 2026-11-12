@@ -6,11 +6,11 @@
 }:
 let
   pname = "strata-desktop";
-  version = "0.2.9";
+  version = "0.2.13";
 
   src = fetchurl {
     url = "https://github.com/Niko1221/Strata/releases/download/v${version}/Strata-${version}-linux-x86_64.AppImage";
-    hash = "sha256-xSgxE8Mg5Ve/eWjZreYm3WHOowD8sbi2LvTV435tLak=";
+    hash = "sha256-UoTjwfYnBpXIz4pgyX5oZJXVKZWp1f9dxKlLvTOt7sk=";
   };
 
   appRun = writeShellScript "strata-AppRun" ''
@@ -53,14 +53,17 @@ appimageTools.wrapAppImage {
   '';
 
   extraInstallCommands = ''
-    makeWrapper "$out/bin/strata-desktop" "$out/bin/strata" \
-      --add-flags "--cli"
+    makeWrapper "$out/bin/strata-desktop" "$out/bin/strata" --add-flags "--cli"
 
     mkdir -p "$out/share"
     cp -r ${desktopItem}/share/applications "$out/share/"
-
-    if [ -d "${contents}/usr/share/icons" ]; then
-      cp -r ${contents}/usr/share/icons "$out/share/"
-    fi
+    cp -r ${contents}/usr/share/icons "$out/share/"
   '';
+
+  meta = {
+    description = "Inference engine";
+    homepage = "https://github.com/Niko1221/Strata";
+    platforms = [ "x86_64-linux" ];
+    mainProgram = "strata-desktop";
+  };
 }

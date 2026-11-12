@@ -36,7 +36,7 @@ in
       onlyoffice-desktopeditors
       wl-clipboard
       imagemagick
-      impression # USB writer
+      caligula # USB writer
       obsidian
       deskflow
       szyszka # Bulk rename

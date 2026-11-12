@@ -3,7 +3,7 @@ local uwsm = "uwsm-app -- "
 local ipc = "noctalia msg "
 
 -- Core
-hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
+hl.bind("SUPER + SUPER_L", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"), { release = true })
 hl.bind("SUPER + COMMA", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
 
 -- Apps

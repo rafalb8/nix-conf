@@ -24,7 +24,7 @@ in
     };
 
     # Chromium browsers
-    environment.systemPackages = with pkgs; [ brave ];
+    environment.systemPackages = with pkgs; [ brave-origin ];
 
     # Policies for chromium browsers
     programs.chromium = {
