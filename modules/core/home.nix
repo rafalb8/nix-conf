@@ -42,6 +42,7 @@
       lg = "log --graph";
       log-graph = "log --graph --all --oneline --decorate";
       sps = "!git stash && git pull && git stash pop";
+      paste = "!wl-paste | git apply";
     };
 
     column.ui = "auto";
