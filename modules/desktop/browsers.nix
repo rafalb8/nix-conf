@@ -24,7 +24,11 @@ in
     };
 
     # Chromium browsers
-    environment.systemPackages = with pkgs; [ brave-origin ];
+    environment.systemPackages = with pkgs; [
+      (brave-origin.override {
+        commandLineArgs = "--disable-features=OutdatedBuildDetector,WaylandWpColorManagerV1";
+      })
+    ];
 
     # Policies for chromium browsers
     programs.chromium = {

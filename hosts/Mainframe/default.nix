@@ -62,7 +62,9 @@
   # Additional packages
   # services.flatpak.enable = true;
   environment.systemPackages = with pkgs; [
-    slack
+    (slack.overrideAttrs (_: {
+      postInstall = ''wrapProgram $out/bin/slack --add-flags "--disable-features=WaylandWpColorManagerV1"'';
+    }))
 
     lmstudio
     nodejs_latest
