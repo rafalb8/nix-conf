@@ -7,9 +7,6 @@
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     # Tools
-    # appimage-run
-    hydra-check
-    nix-tree
     ripgrep
     file
     lsof
@@ -71,7 +68,10 @@
 
     # Nix
     nixd
+    nix-tree
+    nix-update
     nixpkgs-fmt
+    hydra-check
   ];
 
   programs = {

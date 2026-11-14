@@ -39,8 +39,7 @@ let
   };
 in
 appimageTools.wrapAppImage {
-  inherit pname version;
-  src = contents;
+  inherit pname version src contents;
 
   nativeBuildInputs = [ makeWrapper ];
 
