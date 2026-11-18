@@ -10,10 +10,6 @@
 
   xdg.enable = true;
   xdg.configFile = {
-    # Fix hyprland bug, while watching SDR content
-    "mpv/mpv.conf".text = ''target-colorspace-hint-mode=no'';
-    "jellyfin-mpv-shim/mpv.conf".text = ''target-colorspace-hint-mode=no'';
-
     # Zed Config
     "zed".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/config/zed";
   };
