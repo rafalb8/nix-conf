@@ -1,12 +1,12 @@
 { appimageTools, fetchurl }:
 let
   pname = "lichii";
-  version = "build-228";
+  version = "build-341";
   desktopId = "io.github.zortos293.lichii";
 
   src = fetchurl {
     url = "https://github.com/zortos293/Lichii/releases/download/${version}/lichii-linux-x86_64-pgo.AppImage";
-    hash = "sha256-AGEDbmhrwFN3tF3fvGmvcfwt9KgBfD/Srw1mThXOcDo=";
+    hash = "sha256-kYcpeK4uNUWLEUCPllYg3KbTmknUUFdB2OpHeRcxYMY=";
   };
 
   contents = appimageTools.extract { inherit pname version src; };
